@@ -9,7 +9,7 @@ MySQL WorkBench or Xaamp to create DB to store user data.
 Make sure to import all correct packages in eclipse prior to working on project. 
 
 
-Users Class
+# Users Class
 
 Staff, Student and Guest. 
 
@@ -17,19 +17,19 @@ Student: Can create account, login and reserve a parking space. No discounts and
 Staff: Can create account, login and reserve a parking space. Eligible for staff discount.
 Guest: Sponsored access only. Able to view available spaces. Cannot reserve. 
 
-Reservation Class
+# Reservation Class
 
 Reserve parking space for: 1 hour, 2 hours or ALL day (24 hours) 
 Filter spaces by category: Student or Staff (Colour coded, blue for staff, green for student)
 Calls LiveCounter class to display parking space counter in real-time (refresh interval of 1 second)
 
-LiveCounter Class
+# LiveCounter Class
 
 Display current available spaces.
 
 Counts available spaces by counting ALL Spaces offered - taken spaces = available spaces - store in int.
 
-Penalty Class
+# Penalty Class
 
 Count no-shows and add infraction to user in database e.g NAME: Ashutosh, EMAIL:XYZ@XYZ.com, PENALTYCOUNT: 1
 
@@ -38,7 +38,7 @@ If penaltyCount>3 && in 1 week
         
 Apply penalty if space not available within designated time and apply monetary fee of 2 euro and store in penaltyAmount(int)
 
-Payment class
+# Payment class
 
 Pass 3 fields
 
