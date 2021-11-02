@@ -29,17 +29,19 @@ public class Users implements ActionListener {
     JTextField emailTextField=new JTextField();
     JButton registerButton=new JButton("Register");
     JButton resetButton=new JButton("Reset");
+    JButton loginButton=new JButton("Login");
 
 
-    Users()
-    {
+    Users(){
+    	
         createWindow();
         setLocationAndSize();
         addComponentsToFrame();
         actionEvent();
     }
-    public void createWindow()
-    {
+    
+    public void createWindow(){
+    	
         frame=new JFrame();
         frame.setTitle("User Registration");
         frame.setBounds(40,40,380,600);
@@ -49,8 +51,9 @@ public class Users implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
     }
-    public void setLocationAndSize()
-    {
+    
+    public void setLocationAndSize(){
+    	
         nameLabel.setBounds(20,20,40,70);
         university_statusLabel.setBounds(20,70,80,70);
         passwordLabel.setBounds(20,170,100,70);
@@ -61,11 +64,13 @@ public class Users implements ActionListener {
         passwordField.setBounds(180,193,165,23);
         confirmPasswordField.setBounds(180,243,165,23);
         emailTextField.setBounds(180,343,165,23);
-        registerButton.setBounds(70,400,100,35);
-        resetButton.setBounds(220,400,100,35);
+        registerButton.setBounds(25,400,100,35);
+        resetButton.setBounds(250,400,100,35);
+        loginButton.setBounds(137,400,100,35);
     }
-    public void addComponentsToFrame()
-    {
+    
+    public void addComponentsToFrame(){
+    	
         frame.add(nameLabel);
         frame.add(university_statusLabel);
         frame.add(passwordLabel);
@@ -78,9 +83,11 @@ public class Users implements ActionListener {
         frame.add(emailTextField);
         frame.add(registerButton);
         frame.add(resetButton);
+        frame.add(loginButton);
     }
-    public void actionEvent()
-    {
+    
+    public void actionEvent(){
+    	
         registerButton.addActionListener(this);
         resetButton.addActionListener(this);
     }
@@ -89,8 +96,11 @@ public class Users implements ActionListener {
     @SuppressWarnings("deprecation")
 	@Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==registerButton)
-        {
+    	
+    	/*Create Database before using */
+    	
+        if(e.getSource()==registerButton){
+        	
             try {
                 //Creating Connection Object
                 Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/myDatabase","root","root");
@@ -103,14 +113,14 @@ public class Users implements ActionListener {
                 Pstatement.setString(4,confirmPasswordField.getText());
                 Pstatement.setString(5,emailTextField.getText());
                 //Checking for the Password match
-                if(passwordField.getText().equalsIgnoreCase(confirmPasswordField.getText()))
-                {
+                if(passwordField.getText().equalsIgnoreCase(confirmPasswordField.getText())){
+                	
                     //Executing query
                     Pstatement.executeUpdate();
                     JOptionPane.showMessageDialog(null,"Data Registered Successfully");
                 }
-                else
-                {
+                else{
+                	
                     JOptionPane.showMessageDialog(null,"password did not match");
                 }
 
@@ -120,13 +130,19 @@ public class Users implements ActionListener {
 
 
         }
-        if(e.getSource()==resetButton)
-        {
+        if(e.getSource()==resetButton){
+        	
             nameTextField.setText("");
             uniComboBox.setSelectedItem("Student");
             passwordField.setText("");
             confirmPasswordField.setText("");
             emailTextField.setText("");
+        }
+        
+        if(e.getSource()==loginButton){
+        	
+        	/* Go to Login page */
+        	
         }
 
     }
