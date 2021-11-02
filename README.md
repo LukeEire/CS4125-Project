@@ -17,6 +17,14 @@ Student: Can create account, login and reserve a parking space. No discounts and
 Staff: Can create account, login and reserve a parking space. Eligible for staff discount.
 Guest: Sponsored access only. Able to view available spaces. Cannot reserve. 
 
+# Login Class
+
+Facilitates login and reset password
+
+Passes user credentials from Users class that are stored in DB during registration
+
+Reset password button calls Reset Password function to email a reset link to email used to register.
+
 # Reservation Class
 
 Reserve parking space for: 1 hour, 2 hours or ALL day (24 hours) 
