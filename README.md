@@ -48,4 +48,12 @@ Expiry date as string
 
 Penalty amount: Call penaltyAmount(int) and display. 
 
+# Added value
+
+Create mobile application 
+
+Add security aspect (2FA) Conall and Ash - verify user registration by sending an OTP via Email. 
+
+
+
 
