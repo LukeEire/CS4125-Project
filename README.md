@@ -14,7 +14,9 @@ Make sure to import all correct packages in eclipse prior to working on project.
 Staff, Student and Guest. 
 
 Student: Can create account, login and reserve a parking space. No discounts and eligible for penalty due to no-show.
+
 Staff: Can create account, login and reserve a parking space. Eligible for staff discount.
+
 Guest: Sponsored access only. Able to view available spaces. Cannot reserve. 
 
 # Login Class
