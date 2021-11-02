@@ -19,7 +19,7 @@ public class LoginFunction extends JFrame implements ActionListener {
     JLabel passwordLabel = new JLabel("Password");
     JTextField userTextField = new JTextField();
     JPasswordField passwordField = new JPasswordField();
-    JButton loginButton = new JButton("Login");
+    JButton signInButton = new JButton("Sign In");
     JButton resetPWButton = new JButton("Forgot Password");
     JCheckBox showPassword = new JCheckBox("Show Password");
 
@@ -42,7 +42,7 @@ public class LoginFunction extends JFrame implements ActionListener {
         userTextField.setBounds(150, 150, 150, 30);
         passwordField.setBounds(150, 220, 150, 30);
         showPassword.setBounds(150, 250, 150, 30);
-        loginButton.setBounds(150, 300, 100, 30);
+        signInButton.setBounds(150, 300, 100, 30);
         resetPWButton.setBounds(125, 350, 150, 30);
 
 
@@ -54,12 +54,12 @@ public class LoginFunction extends JFrame implements ActionListener {
         container.add(userTextField);
         container.add(passwordField);
         container.add(showPassword);
-        container.add(loginButton);
+        container.add(signInButton);
         container.add(resetPWButton);
     }
 
     public void addActionEvent() {
-        loginButton.addActionListener(this);
+        signInButton.addActionListener(this);
         resetPWButton.addActionListener(this);
         showPassword.addActionListener(this);
     }
@@ -68,7 +68,7 @@ public class LoginFunction extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         //Coding Part of LOGIN button
-        if (e.getSource() == loginButton) {
+        if (e.getSource() == signInButton) {
             String userText;
             String pwdText;
             userText = userTextField.getText();
