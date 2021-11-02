@@ -14,7 +14,7 @@ import java.sql.*;
 
 public class Users implements ActionListener {
     JFrame frame;
-    String[] uniStatus={"Student","Staff","Guest"};
+    String[] uniStatus={"Student","Staff","Guest"}; //also known as rank from our analysis class diagram
     JLabel nameLabel=new JLabel("Name");
     JLabel university_statusLabel=new JLabel("Status");
     JLabel passwordLabel=new JLabel("Password");
