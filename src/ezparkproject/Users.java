@@ -5,10 +5,11 @@ import java.awt.event.*;
 import java.awt.*;
 import java.sql.*;
 
+
 /* Author: Ashutosh Yadav 
  * Student ID: 18249094
  * Date: 02/11/2021
- * Version 1.01
+ * Version 1.02
  * */
 
 
@@ -140,8 +141,8 @@ public class Users implements ActionListener {
         }
         
         if(e.getSource()==loginButton){
-        	
-        	/* Go to Login page */
+                
+        	/* Link Login.java and dispose of current frame */
         	
         }
 
