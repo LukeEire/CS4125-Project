@@ -64,6 +64,12 @@ Create mobile application
 
 Add security aspect (2FA) Conall and Ash - verify user registration by sending an OTP via Email. 
 
+# Added Link 
+https://dev.mysql.com/downloads/connector/j/
+https://dev.mysql.com/downloads/file/?id=507327
+
+This .jar file is needed to access the DB 
+
 
 
 
