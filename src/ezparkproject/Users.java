@@ -103,9 +103,9 @@ public class Users implements ActionListener {
             
             try {
                 //Creating Connection Object
-                Connection connection=DriverManager.getConnection("jdbc:mysql://sql4.freemysqlhosting.net:3306/sql4448569","sql4448569","rs5fNh4D5f");
+                Connection con=DriverManager.getConnection("jdbc:mysql://sql4.freemysqlhosting.net:3306/sql4448569","sql4448569","rs5fNh4D5f");
                 //Prepared Statement
-                PreparedStatement Pstatement=connection.prepareStatement("insert into student values(?,?,?,?,?)");
+                PreparedStatement Pstatement=con.prepareStatement("insert into student values(?,?,?,?,?)");
                 //Specifying the values of it's parameter
                 Pstatement.setString(1,nameTextField.getText());
                 Pstatement.setString(2,uniComboBox.getSelectedItem().toString());
