@@ -9,6 +9,15 @@ MySQL WorkBench or Xaamp to create DB to store user data.
 Make sure to import all correct packages in eclipse prior to working on project. 
 
 
+
+# Added Link 
+
+https://dev.mysql.com/downloads/connector/j/
+
+https://dev.mysql.com/downloads/file/?id=507327
+
+This .jar file is needed to access the DB. Needs to be inserted inside the build path inside Eclipse. 
+
 # Users Class
 
 Staff, Student and Guest. 
@@ -64,11 +73,6 @@ Create mobile application
 
 Add security aspect (2FA) Conall and Ash - verify user registration by sending an OTP via Email. 
 
-# Added Link 
-https://dev.mysql.com/downloads/connector/j/
-https://dev.mysql.com/downloads/file/?id=507327
-
-This .jar file is needed to access the DB 
 
 
 
