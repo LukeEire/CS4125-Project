@@ -26,7 +26,6 @@ public class Users implements ActionListener {
     JComboBox uniComboBox=new JComboBox(uniStatus);
     JPasswordField passwordField=new JPasswordField();
     JPasswordField confirmPasswordField=new JPasswordField();
-    JTextField cityTextField=new JTextField();
     JTextField emailTextField=new JTextField();
     JButton registerButton=new JButton("Register");
     JButton resetButton=new JButton("Reset");
@@ -106,7 +105,7 @@ public class Users implements ActionListener {
                 //Creating Connection Object
                 Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/myDatabase","root","root");
                 //Prepared Statement
-                PreparedStatement Pstatement=connection.prepareStatement("insert into student values(?,?,?,?,?,?,?)");
+                PreparedStatement Pstatement=connection.prepareStatement("insert into student values(?,?,?,?,?)");
                 //Specifying the values of it's parameter
                 Pstatement.setString(1,nameTextField.getText());
                 Pstatement.setString(2,uniComboBox.getSelectedItem().toString());
