@@ -8,6 +8,8 @@ MySQL WorkBench or Xaamp to create DB to store user data.
 
 Make sure to import all correct packages in eclipse prior to working on project. 
 
+Trello Board: https://trello.com/b/GJmps0Ds/sprint-week-9
+
 
 
 # Added Link 
@@ -41,12 +43,6 @@ Reset password button calls Reset Password function to email a reset link to ema
 Reserve parking space for: 1 hour, 2 hours or ALL day (24 hours) 
 Filter spaces by category: Student or Staff (Colour coded, blue for staff, green for student)
 Calls LiveCounter class to display parking space counter in real-time (refresh interval of 1 second)
-
-# LiveCounter Class
-
-Display current available spaces.
-
-Counts available spaces by counting ALL Spaces offered - taken spaces = available spaces - store in int.
 
 # Penalty Class
 
