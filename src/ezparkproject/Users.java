@@ -122,10 +122,11 @@ public class Users implements ActionListener {
 
 		registerButton.addActionListener(this);
 		resetButton.addActionListener(this);
+		loginButton.addActionListener(this);
 	}
+	
 
 	@SuppressWarnings("deprecation")
-	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		/* Create Database before using */
@@ -137,6 +138,9 @@ public class Users implements ActionListener {
 				/* Create Connection Object */
 				
 				Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freemysqlhosting.net:3306/sql4448569","sql4448569", "rs5fNh4D5f");
+				
+				/* Pass values into Database */
+				
 				PreparedStatement Pstatement = con.prepareStatement("insert into ParkingDB values(?,?,?,?,?,?,?,?,?)");
 
 				/* Specifying values */
@@ -151,22 +155,31 @@ public class Users implements ActionListener {
 				Pstatement.setInt(8, 0);
 				Pstatement.setInt(9, 0);
 				
+				/* Check to see if name field was left blank */
+				
+				if (nameTextField.getText().isEmpty()){
+					JOptionPane.showMessageDialog(null, "The field cannot be left blank. You must enter in a name");
+				} else {
+				
 				/* Checking for the Password match */
 				
 				if (passwordField.getText().equalsIgnoreCase(confirmPasswordField.getText())) {
 
 					Pstatement.executeUpdate();
-					JOptionPane.showMessageDialog(null, "User Successfully Registered");
+					JOptionPane.showMessageDialog(null, "You have successfully registered");
 				} else {
 
-					JOptionPane.showMessageDialog(null, "Please check you entered the password correctly");
+					JOptionPane.showMessageDialog(null, "Please check your passwords match");
 				}
+			}
 
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 
 		}
+			
+		
 		if (e.getSource() == resetButton) {
 
 			nameTextField.setText("");
@@ -178,9 +191,23 @@ public class Users implements ActionListener {
 
 		if (e.getSource() == loginButton) {
 
-			/* Create Login.java and close current window */
-
+			/* Close current window */
+			
+			
+			frame.dispose();
+			
+			/* Create new Login form */
+			LoginFunction frame = new LoginFunction();
+	        frame.setTitle("Login Form");
+	        frame.setVisible(true);
+	        frame.setBounds(10, 10, 370, 600);
+	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        frame.setResizable(false);
+	        
+	        
 		}
+		
+		
 
 	}
 }
