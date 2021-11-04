@@ -13,9 +13,11 @@ import java.sql.*;
 
 public class Users implements ActionListener {
 	JFrame frame;
-	String[] uniStatus = { "Student", "Staff", "Guest" }; // also known as rank from our analysis class diagram
-	String[] accessibilityStatus = { "Yes", "No" };
-	String[] EVStatus = { "Yes", "No" };
+	String[] uniStatus = { "Student", "Staff", "Guest" }; /* also known as rank from our analysis class diagram */
+	String[] accessibilityStatus = { "Yes", "No" }; /* When checking for disabled spaces, they will show in reservations */
+	String[] EVStatus = { "Yes", "No" }; /* Electric vehicle status - needs to be set to yes to show EV parking spaces */
+	
+	/* Labels */
 	
 	JLabel nameLabel = new JLabel("Name");
 	JLabel university_statusLabel = new JLabel("Status");
@@ -25,15 +27,21 @@ public class Users implements ActionListener {
 	JLabel EVLabel = new JLabel("Electric Vehicle?");
 	JLabel accessibilityLabel = new JLabel("Disabled Permit");
 	
+	/* Text fields for labels */
+	
 	JTextField nameTextField = new JTextField();
 	JComboBox uniComboBox = new JComboBox(uniStatus);
 	JPasswordField passwordField = new JPasswordField();
 	JPasswordField confirmPasswordField = new JPasswordField();
 	JTextField emailTextField = new JTextField();
 	
+	/* Drop down menus */
+	
 	
 	JComboBox accessibilityComboBox = new JComboBox(accessibilityStatus);
 	JComboBox EVComboBox = new JComboBox(EVStatus);
+	
+	/* Buttons */
 	
 	
 	JButton registerButton = new JButton("Register");

@@ -20,7 +20,7 @@ public class LoginFunction extends JFrame implements ActionListener {
     JTextField userTextField = new JTextField();
     JPasswordField passwordField = new JPasswordField();
     JButton signInButton = new JButton("Sign In");
-    JButton resetPWButton = new JButton("Forgot Password");
+    JButton registerButton = new JButton("Register");
     JCheckBox showPassword = new JCheckBox("Show Password");
 
 
@@ -43,7 +43,7 @@ public class LoginFunction extends JFrame implements ActionListener {
         passwordField.setBounds(150, 220, 150, 30);
         showPassword.setBounds(150, 250, 150, 30);
         signInButton.setBounds(150, 300, 100, 30);
-        resetPWButton.setBounds(125, 350, 150, 30);
+        registerButton.setBounds(150, 350, 100, 30);
 
 
     }
@@ -55,19 +55,21 @@ public class LoginFunction extends JFrame implements ActionListener {
         container.add(passwordField);
         container.add(showPassword);
         container.add(signInButton);
-        container.add(resetPWButton);
+        container.add(registerButton);
     }
 
     public void addActionEvent() {
         signInButton.addActionListener(this);
-        resetPWButton.addActionListener(this);
+        registerButton.addActionListener(this);
         showPassword.addActionListener(this);
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //Coding Part of LOGIN button
+        
+    	/* Sign in Button functions */
+    	
         if (e.getSource() == signInButton) {
             String userText;
             String pwdText;
@@ -75,6 +77,7 @@ public class LoginFunction extends JFrame implements ActionListener {
             pwdText = passwordField.getText();
             
             /* Test case to check if the authentication works, needs to be linked to DB */
+            
             if (userText.equalsIgnoreCase("Ashutosh") && pwdText.equalsIgnoreCase("pleasehelpme")) {
                 JOptionPane.showMessageDialog(this, "Login Successful");
             } else {
@@ -83,10 +86,17 @@ public class LoginFunction extends JFrame implements ActionListener {
 
         }
         
-        /* Calls reset password class */
-        if (e.getSource() == resetPWButton) {
+        /* Calls Users class to register */
+        
+        if (e.getSource() == registerButton) {
             
-        	/* Code goes here */
+        	/* Close current window */
+			
+        	this.dispose();
+			
+			/* Create new Register form */
+			Users frame = new Users();
+	        
         }
         
         /* Show Password Function */
