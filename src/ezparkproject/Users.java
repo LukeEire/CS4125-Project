@@ -32,26 +32,6 @@ public class Users implements ActionListener {
     JButton loginButton=new JButton("Login");
     
     
-    /* Returns Name */
-    public String getName() {
-    	
-    	return null;
-    }
-    
-    /* Returns email */
-    public String getEmail() {
-		
-    	return null;
-    	
-    }
-    
-    /* Gets Status of User (Student, Staff or Guest) */
-    public String getStatus() {
-    	
-    	return null;
-    }
-    
-    
     /* Verifies if user is already registered and banned */
     public String verifyUser() {
     	
