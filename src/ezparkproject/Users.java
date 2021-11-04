@@ -30,32 +30,6 @@ public class Users implements ActionListener {
     JButton registerButton=new JButton("Register");
     JButton resetButton=new JButton("Reset");
     JButton loginButton=new JButton("Login");
-    
-    
-    /* Returns Name */
-    public String getName() {
-    	
-    	return null;
-    }
-    
-    /* Returns email */
-    public String getEmail() {
-		return null;
-    	
-    }
-    
-    /* Gets Status of User (Student, Staff or Guest) */
-    public String getStatus() {
-    	
-    	return null;
-    }
-    
-    
-    /* Verifies if user is already registered and banned */
-    public String verifyUser() {
-    	
-    	return null;
-    }
 
 
     Users(){
@@ -117,20 +91,19 @@ public class Users implements ActionListener {
         registerButton.addActionListener(this);
         resetButton.addActionListener(this);
     }
-    
-    
+
 
     @SuppressWarnings("deprecation")
 	@Override
-    public void actionPerformed(ActionEvent e) {
-    	
-    	/*Create Database before using */
-    	
+     public void actionPerformed(ActionEvent e) {
+        
+        /*Create Database before using */
+        
         if(e.getSource()==registerButton){
-        	
+            
             try {
                 //Creating Connection Object
-                Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/myDatabase","root","root");
+                Connection connection=DriverManager.getConnection("jdbc:mysql://sql4.freemysqlhosting.net:3306/sql4448569","sql4448569","rs5fNh4D5f");
                 //Prepared Statement
                 PreparedStatement Pstatement=connection.prepareStatement("insert into student values(?,?,?,?,?)");
                 //Specifying the values of it's parameter
@@ -141,13 +114,13 @@ public class Users implements ActionListener {
                 Pstatement.setString(5,emailTextField.getText());
                 //Checking for the Password match
                 if(passwordField.getText().equalsIgnoreCase(confirmPasswordField.getText())){
-                	
+                    
                     //Executing query
                     Pstatement.executeUpdate();
                     JOptionPane.showMessageDialog(null,"Data Registered Successfully");
                 }
                 else{
-                	
+                    
                     JOptionPane.showMessageDialog(null,"password did not match");
                 }
 
@@ -158,7 +131,7 @@ public class Users implements ActionListener {
 
         }
         if(e.getSource()==resetButton){
-        	
+            
             nameTextField.setText("");
             uniComboBox.setSelectedItem("Student");
             passwordField.setText("");
@@ -168,8 +141,8 @@ public class Users implements ActionListener {
         
         if(e.getSource()==loginButton){
                 
-        	/* Link Login.java and dispose of current frame */
-        	
+            /* Link Login.java and dispose of current frame */
+            
         }
 
     }
