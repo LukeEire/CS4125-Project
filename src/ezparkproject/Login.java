@@ -8,6 +8,8 @@ import javax.swing.JFrame;
  * Version 1.0.1
  * */
 
+/* This class is no longer in use */
+
 
 public class Login {
     public static void main(String[] a) {
