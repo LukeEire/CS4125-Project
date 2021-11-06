@@ -1,117 +1,132 @@
 package ezparkproject;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-/* Author: Ashutosh Yadav 
- * Student ID: 18249094
- * Date: 02/11/2021
- * Version 1.01
- * */
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
+public class LoginFunction extends JFrame {
 
-public class LoginFunction extends JFrame implements ActionListener {
+    private static final long serialVersionUID = 1L;
+    private JTextField textField;
+    private JPasswordField passwordField;
+    private JButton btnNewButton;
+    private JLabel label;
+    private JPanel contentPane;
 
-    Container container = getContentPane();
-    JLabel nameLabel = new JLabel("Name");
-    JLabel passwordLabel = new JLabel("Password");
-    JTextField userTextField = new JTextField();
-    JPasswordField passwordField = new JPasswordField();
-    JButton signInButton = new JButton("Sign In");
-    JButton registerButton = new JButton("Register");
-    JCheckBox showPassword = new JCheckBox("Show Password");
-
-
-    LoginFunction() {
-        setLayoutManager();
-        setLocationAndSize();
-        addComponentsToContainer();
-        addActionEvent();
-
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    LoginFunction frame = new LoginFunction();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
-    public void setLayoutManager() {
-        container.setLayout(null);
-    }
-
-    public void setLocationAndSize() {
-        nameLabel.setBounds(50, 150, 100, 30);
-        passwordLabel.setBounds(50, 220, 100, 30);
-        userTextField.setBounds(150, 150, 150, 30);
-        passwordField.setBounds(150, 220, 150, 30);
-        showPassword.setBounds(150, 250, 150, 30);
-        signInButton.setBounds(150, 300, 100, 30);
-        registerButton.setBounds(150, 350, 100, 30);
-
-
-    }
-
-    public void addComponentsToContainer() {
-        container.add(nameLabel);
-        container.add(passwordLabel);
-        container.add(userTextField);
-        container.add(passwordField);
-        container.add(showPassword);
-        container.add(signInButton);
-        container.add(registerButton);
-    }
-
-    public void addActionEvent() {
-        signInButton.addActionListener(this);
-        registerButton.addActionListener(this);
-        showPassword.addActionListener(this);
-    }
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        
-    	/* Sign in Button functions */
+    /**
+     * Create the frame.
+     */
+    public LoginFunction() {
     	
-        if (e.getSource() == signInButton) {
-            String userText;
-            String pwdText;
-            userText = userTextField.getText();
-            pwdText = passwordField.getText();
-            
-            /* Test case to check if the authentication works, needs to be linked to DB */
-            
-            if (userText.equalsIgnoreCase("Ashutosh") && pwdText.equalsIgnoreCase("pleasehelpme")) {
-                JOptionPane.showMessageDialog(this, "Login Successful");
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid Username or Password");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(450, 190, 1014, 597);
+        setResizable(false);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JLabel lblNewLabel = new JLabel("Login");
+        lblNewLabel.setForeground(Color.BLACK);
+        lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 46));
+        lblNewLabel.setBounds(423, 13, 273, 93);
+        contentPane.add(lblNewLabel);
+
+        textField = new JTextField();
+        textField.setFont(new Font("Tahoma", Font.PLAIN, 32));
+        textField.setBounds(481, 170, 281, 68);
+        contentPane.add(textField);
+        textField.setColumns(10);
+
+        passwordField = new JPasswordField();
+        passwordField.setFont(new Font("Tahoma", Font.PLAIN, 32));
+        passwordField.setBounds(481, 286, 281, 68);
+        contentPane.add(passwordField);
+
+        JLabel lblUsername = new JLabel("Username");
+        lblUsername.setBackground(Color.BLACK);
+        lblUsername.setForeground(Color.BLACK);
+        lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 31));
+        lblUsername.setBounds(250, 166, 193, 52);
+        contentPane.add(lblUsername);
+
+        JLabel lblPassword = new JLabel("Password");
+        lblPassword.setForeground(Color.BLACK);
+        lblPassword.setBackground(Color.CYAN);
+        lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 31));
+        lblPassword.setBounds(250, 286, 193, 52);
+        contentPane.add(lblPassword);
+
+        btnNewButton = new JButton("Login");
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        btnNewButton.setBounds(545, 392, 162, 73);
+        btnNewButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                String userName = textField.getText();
+                String password = passwordField.getText();
+                try {
+                	Connection connection = DriverManager.getConnection("jdbc:mysql://sql4.freemysqlhosting.net:3306/sql4448569","sql4448569", "rs5fNh4D5f");
+
+                    PreparedStatement st = (PreparedStatement) connection
+                        .prepareStatement("Select Username, Userpassword from ParkingDB where Username=? and Userpassword=?");
+
+                    st.setString(1, userName);
+                    st.setString(2, password);
+                    ResultSet rs = st.executeQuery();
+                    if (rs.next()) {
+                        dispose();
+                        LoginFunction ah = new LoginFunction();
+                        ah.setTitle("Welcome");
+                        ah.setVisible(true);
+                        JOptionPane.showMessageDialog(btnNewButton, "You have successfully logged in");
+                    } else {
+                        JOptionPane.showMessageDialog(btnNewButton, "Wrong Username & Password");
+                    }
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
             }
+        });
 
-        }
-        
-        /* Calls Users class to register */
-        
-        if (e.getSource() == registerButton) {
-            
-        	/* Close current window */
-			
-        	this.dispose();
-			
-			/* Create new Register form */
-			Users frame = new Users();
-	        
-        }
-        
-        /* Show Password Function */
-      
-        if (e.getSource() == showPassword) {
-            if (showPassword.isSelected()) {
-                passwordField.setEchoChar((char) 0);
-            } else {
-                passwordField.setEchoChar('*');
-            }
+        contentPane.add(btnNewButton);
 
-
-        }
+        label = new JLabel("");
+        label.setBounds(0, 0, 1008, 562);
+        contentPane.add(label);
     }
-
 }
 
-
+//Login function just needs to be linked to new page. SQL is working and links with existing users and passwords in the DB

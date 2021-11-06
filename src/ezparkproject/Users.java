@@ -5,11 +5,6 @@ import java.awt.event.*;
 import java.awt.*;
 import java.sql.*;
 
-/* Author: Ashutosh Yadav 
- * Student ID: 18249094
- * Date: 02/11/2021
- * Version 1.04
- * */
 
 public class Users implements ActionListener {
 	JFrame frame;
@@ -225,7 +220,7 @@ public class Users implements ActionListener {
 			LoginFunction frame = new LoginFunction();
 	        frame.setTitle("Login Form");
 	        frame.setVisible(true);
-	        frame.setBounds(10, 10, 370, 600);
+	        frame.setBounds(500, 200, 1100, 600);
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        frame.setResizable(false);
 	        
