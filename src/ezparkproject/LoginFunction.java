@@ -1,6 +1,7 @@
 package ezparkproject;
 
 import java.awt.Color;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -19,6 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+// Author : Conall McAteer
 
 public class LoginFunction extends JFrame {
 
