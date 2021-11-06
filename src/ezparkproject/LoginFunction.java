@@ -129,3 +129,4 @@ public class LoginFunction extends JFrame {
     }
 }
 
+//Login function just needs to be linked to new page. SQL is working and links with existing users and passwords in the DB
