@@ -7,6 +7,42 @@ import java.sql.*;
 
 
 public class Users implements ActionListener {
+	
+	String name;
+	String email;
+	String status;
+	Boolean disability;
+	Boolean electric;
+	
+	/*public Users() {
+		
+	}*/
+	
+	public Users(String name, String email, String status, Boolean disability, Boolean electric) {
+		
+		this.name = name;
+		this.email = email;
+		this.status = status;
+		this.disability = disability;
+		this.electric = electric;
+		
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public String getStatus() {
+		return this.status;
+	}
+	
+	
+	
+	
 	JFrame frame;
 	String[] uniStatus = { "Student", "Staff", "Guest" }; /* also known as rank from our analysis class diagram */
 	String[] accessibilityStatus = { "Yes", "No" }; /* When checking for disabled spaces, they will show in reservations */
