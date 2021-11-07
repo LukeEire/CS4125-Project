@@ -2,17 +2,17 @@ package ezparkproject;
 
 import java.sql.Date;
 
-public class lot {
+public class Lot {
 	
 	String lotName;
 	int spaces;
 	int disabilitySpaces;
 	int chargingSpaces;
 	
-	public lot() {
+	public Lot() {
 	}
 	
-	public lot(String name, int spaces, int disabilitySpaces, int chargingSpaces) {
+	public Lot(String name, int spaces, int disabilitySpaces, int chargingSpaces) {
 		this.lotName = name;
 		this.spaces = spaces;
 		this.disabilitySpaces = disabilitySpaces;
