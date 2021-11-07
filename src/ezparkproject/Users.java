@@ -40,7 +40,13 @@ public class Users implements ActionListener {
 		return this.status;
 	}
 	
+	public void setName(String newName) {
+		this.name = newName;
+	}
 	
+	public void setEmail(String newEmail) {
+		this.email = newEmail;
+	}
 	
 	
 	JFrame frame;
