@@ -1,81 +1,64 @@
 package ezparkproject;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.*;
 
 public class Penalty {
 
-	/* Code here */
-
-	/*
-	 * Count no-shows and add infraction to user in database e.g NAME: Ashutosh,
-	 * EMAIL:XYZ@XYZ.com, PENALTYCOUNT: 1
-	 */
-
-	/*
-	 * If penaltyCount>3then LogoutUser with message
-	 * ("Too many no-shows this week, please come back in 1 week")
-	 */
-
-	/*
-	 * Apply penalty if space not available within designated time and apply
-	 * monetary fee of 2 euro and store in penaltyAmount(int)
-	 */
-
-	// lmk if anyone tests this class
-	
-   // Connection con = db.connect();
-
-	try
-	{
-		Database db = new Database();
-		Connection con = db.connect();
-
-	}catch(
-	ClassNotFoundException e)
-	{
-
-		System.out.println("Could not find the database driver " + e.getMessage());
-
-	}catch(
-	SQLException e1)
-	{
-
-		System.out.println("Could not connect to the database " + e1.getMessage());
-
-	}
-	
-}
-
+    Database db;
+    Connection con = null;
 	int updateCount = 0;
-	int Port_number = 3306;
+    int Port_number = 3306;
+    
+    public Penalty(){
+    
+        db = new Database();
 
-	public void penaliseNoShows(String username) {
+        try{
+
+            con = db.connect();
+
+        } catch(ClassNotFoundException e){
+
+            System.out.println("Could not find the database driver " + e.getMessage());
+
+        } catch(SQLException e1){
+
+            System.out.println("Could not connect to the database " + e1.getMessage());
+
+        }
+
+    }
+
+	public void penaliseNoShows(int id) {
         
         //Logout functionality here
         //getTime() + 1 week
 		try {
-		db.banUser(username);
-        System.out.println("Too many no-shows this week, please come back in 1 week");
-		} catch()
+
+            db.banUser(id);
+            System.out.println("Too many no-shows this week, please come back in 1 week");
+        
+        } catch (SQLException e) {
+
+            System.out.println("SQL exception: " + e.getMessage());
+        
+        }
     }
 
-	public int getInfractions(String username) {
+	public int getInfractions(int id) {
         
-        String user_name = username;
+        int user_id = id;
         int penalties = 0;
 
         try {
             
-            String query = "SELECT PENALTY FROM ParkingDB WHERE USERNAME = ?";
+            String query = "SELECT penalties FROM useers WHERE id = ?";
             PreparedStatement p = con.prepareStatement(query);
             
-            p.setString(1, user_name);
+            p.setInt(1, user_id);
             ResultSet rs = p.executeQuery();
             
               while (rs.next()){
@@ -95,23 +78,23 @@ public class Penalty {
         
         if(penalties >= 3) {
             
-            penaliseNoShows(user_name);
+            penaliseNoShows(user_id);
             
         }
         
         return penalties;
     }
 
-	public void addInfraction(String username){
+	public void addInfraction(int id){
         
-        String user_name = username;
-        int currentPenalties = getInfractions(user_name);
+        int user_id = id;
+        int currentPenalties = getInfractions(user_id);
         
         try {
 
-            PreparedStatement p = con.prepareStatement("UPDATE ParkingDB SET PENALTY=? WHERE USERNAME = ?");
+            PreparedStatement p = con.prepareStatement("UPDATE ParkingDB SET PENALTY=? WHERE user_id = ?");
             p.setInt(1, currentPenalties+1);
-            p.setString(2, user_name);
+            p.setInt(2, user_id);
              
             // updateCount contains the number of updated rows
             updateCount = p.executeUpdate();

@@ -2,11 +2,13 @@ package ezparkproject;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class Database {
 		String name = "sql4448569";
 		String username = "sql4448569";
 		String password = "rs5fNh4D5f";
-		String db = "ParkingDB";
+		String db = "users";
 		String url = "jdbc:mysql://" + server +  "/" + db;
 		String driverName = "jdbc:mysql://sql4.freemysqlhosting.net";
 	}
@@ -69,32 +71,29 @@ public class Database {
 	public void fetchData() throws Exception{
 		try {
 			//Getting all DB data
-			String query = "select * from ParkingDB";
+			String query = "select * from users";
 	        PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			List<String> users = new ArrayList<String>();
 
 			while(rs.next()){
-//				USERNAME
-//				UNISTATUS
-//				USERPASSWORD
-//				CONFIRMPASSWORD
-//				EMAIL
-//				ELECTRIC
-//				ACCESSIBILITY
-//				BANNED
-//				PENALTY
 
 				int i = 0;
 				System.out.println("------------------------User: "+i+"----------------------------");
-				System.out.println("Username: " + rs.getString("USERNAME"));
-				System.out.println("Status: " + rs.getString("UNISTATUS"));
-				System.out.println("Password: " + rs.getString("USERPASSWORD"));
-				System.out.println("Email: " + rs.getString("EMAIL"));
-				System.out.println("Electric Car? [Y/N]: " + rs.getString("ELECTRIC"));
-				System.out.println("Assistance Required? [Y/N]: " + rs.getString("ACCESSIBILITY"));
-				System.out.println("Banned Status: " + rs.getInt("BANNED"));
-				System.out.println("Penalty Points: " + rs.getInt("PENALTY"));
+				System.out.println("User ID: " + rs.getInt("id"));
+				System.out.println("Firs name: " + rs.getString("firstName"));
+				System.out.println("Last name: " + rs.getString("lastName"));
+				System.out.println("Status: " + rs.getInt("status"));
+				System.out.println("Password: " + rs.getString("password"));
+				System.out.println("Email: " + rs.getString("email_address"));
+				System.out.println("Electric Car? [Y/N]: " + rs.getString("electric"));
+				System.out.println("Assistance Required? [Y/N]: " + rs.getString("accessibility"));
+				System.out.println("Banned Status: " + rs.getInt("ban_status"));
+				System.out.println("Penalty Points: " + rs.getInt("penalties"));
+				System.out.println("Created on: " + rs.getDate("created_on"));
+				System.out.println("D.O.B: " + rs.getDate("dob"));
+				System.out.println("Penalty Points: " + rs.getInt("penalties"));
+
 				System.out.println("-----------------------------END-------------------------------");
 				i++;
 				
@@ -112,34 +111,73 @@ public class Database {
 			
 	}
 	
-	public void newUser(String username, String status, String password, String email, int ev, int accessibility) throws SQLException {
+	public void newUser(int id, String firstName, String lastName, String password, String status, int electric, int accessibility, String sdob) throws SQLException {
 		
+		java.util.Date dob = new Date(2000);
+		try {
+			dob = new SimpleDateFormat("dd/MM/yyyy").parse(sdob);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		} 
+
+		LocalDate ca = LocalDate.now();
+		Date created_at = Date.valueOf(ca);
+
+
+		String email;
+		if(status == "Student"){
+			email = id + "@studentmail.ul.ie";
+		} else if (status == "Staff") {
+			email = id + "@ul.ie";
+		} else {
+			email = "N/A";
+		}
+
 		try {
 			
-			if(username!=null && status!=null && password!=null && email!=null){
-        	
-	            String query = "INSERT INTO ParkingDB(USERNAME, UNISTATUS, USERPASSWORD, CONFIRMPASSWORD, EMAIL, ELECTRIC, ACCESSIBILITY, BANNED, PENALTY) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?)";
-		        PreparedStatement p = con.prepareStatement(query);
-		        p.setString(1, username);
-		        p.setString(2, status);
-		        p.setString(3, password);
-		        p.setString(4, password); 
-		        p.setString(5, email);
+			if(firstName!=null && status!=null && password!=null){
+				
+				//DB attributes
+				// id
+				// firstName 
+				// firstName 
+				// password
+				// email_address 
+				// status 
+				// electric
+				// penalties 
+				// ban_status 
+				// accessibility 
+				// created_on 
+				// dob
+
+				String query = "INSERT INTO usser(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob ) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
+				
+				PreparedStatement p = con.prepareStatement(query);
+				p.setInt(1, id);
+				p.setString(2, firstName);
+				p.setString(3, lastName);
+				p.setString(4, password);
+				p.setString(5, email);
+				p.setString(6, status);
+				// p.setInt(7, electric);
+				p.setInt(8, 0);
+				p.setInt(9, 0);
+				// p.setInt(10, accessibility);
+				p.setDate(11, created_at);
+				p.setDate(12, (Date) dob);
 		        
-		        if(ev >= 1) {
-		        	p.setInt(6, 1);
-		        } else {
-		        	p.setInt(6, 0);
-		        }
-		        
-		        if(accessibility >= 1) {
+		        if(electric >= 1) {
 		        	p.setInt(7, 1);
 		        } else {
 		        	p.setInt(7, 0);
 		        }
 		        
-		        p.setInt(8, 0);
-		        p.setInt(9, 0);
+		        if(accessibility >= 1) {
+		        	p.setInt(10, 1);
+		        } else {
+		        	p.setInt(10, 0);
+		        }
 		        
 	            int insert = p.executeUpdate(query);
 	
@@ -149,7 +187,7 @@ public class Database {
 	            }
 	            else
 	            {
-	                System.out.println("Update Failed");
+	                System.out.println("Insert Failed");
 	            }
 			}
 		} catch (SQLException e){
@@ -159,11 +197,11 @@ public class Database {
 		}
     }
 	
-    public void deleteUser(String username) throws Exception {
+    public void deleteUser(int id) throws Exception {
     	
     	try {
     		
-    		String query = "DELETE FROM ParkingDB WHERE USERNAME = \""+username+"\"";
+    		String query = "DELETE FROM users WHERE id = \""+id+"\"";
 	        PreparedStatement p = con.prepareStatement(query);
 	        int delete = p.executeUpdate(query);
 	
@@ -182,19 +220,19 @@ public class Database {
         
     }
     
-    public void banUser(String username) throws SQLException{
+    public void banUser(int id) throws SQLException{
     	
     	try {
     		
-    		String query = "UPDATE ParkingDB SET BANNED = 1 WHERE USERNAME = \""+username+"\"";
+    		String query = "UPDATE users SET ban_status = 1 WHERE id = \""+id+"\"";
 	        PreparedStatement p = con.prepareStatement(query);
 	        int ban = p.executeUpdate(query);
 	
 	        if(ban == 1){
-	        	System.out.println("User removed");
+	        	System.out.println("User Banned");
 	        }
 	        else{
-	            System.out.println("deletion Failed");
+	            System.out.println("Ban Failed");
 	        }
 	        
     	} catch (SQLException e){
@@ -205,19 +243,19 @@ public class Database {
     	
     }
     
-	public void unBanUser(String username) throws SQLException{
+	public void unBanUser(int id) throws SQLException{
     	
     	try {
     		
-    		String query = "UPDATE ParkingDB SET BANNED = 0 WHERE USERNAME = \""+username+"\"";
+    		String query = "UPDATE users SET ban_status = 0 WHERE id = \""+id+"\"";
             PreparedStatement p = con.prepareStatement(query);
             int unBan = p.executeUpdate(query);
 
             if(unBan == 1){
-            	System.out.println("User removed");
+            	System.out.println("User unbanned");
             }
             else{
-                System.out.println("deletion Failed");
+                System.out.println("unban Failed");
             }
 	        
     	} catch (SQLException e){
@@ -227,27 +265,27 @@ public class Database {
     	}
     }
 	
-	public void verifyUser(String username, String password) throws SQLException {
+	public void verifyUser(int id, String password) throws SQLException {
 		
-		String checkUser = username;
+		int checkUser = id;
 		String checkPass = password;
 		
 		try {
 			
-			String query = "SELECT * FROM ParkingDB WHERE USERNAME = "+checkUser+" AND USERPASSWORD = "+checkPass;
+			String query = "SELECT * FROM users WHERE id = "+checkUser+" AND password = "+checkPass;
 			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			
 			while (rs.next()) {
-				String foundUser = rs.getString("USERNAME");
-				String foundPass = rs.getString("USERPASSWORD");
+				int foundUser = rs.getInt("id");
+				String foundPass = rs.getString("password");
 				System.out.println("Found User: "+foundUser);
 				System.out.println("User Password: "+foundPass);
 			}
 			
 		} catch(SQLException e) {
 			
-			System.out.println("User OR password may be inccorect");
+			System.out.println("UserID OR password may be inccorect");
 			System.out.println("User: "+ checkUser);
 			System.out.println("Password: " + checkPass);
 			System.out.println("Error locating data entered: " + e.getMessage());
@@ -256,13 +294,13 @@ public class Database {
 	}
 	
 	//Returns 0 for student, 1 for staff, 2 for guest
-	public int getUserStatus(String username) throws SQLException{
+	public int getUserStatus(int id) throws SQLException{
 		
 		try {
 			
-			String query = "SELECT UNISTATUS FROM ParkingDB WHERE USERNAME = ?";
+			String query = "SELECT status FROM users WHERE id = ?";
 			PreparedStatement p = con.prepareStatement(query);
-			p.setString(1, username);
+			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
 			
 			if(rs.getString(1) == "Student") {
@@ -285,7 +323,7 @@ public class Database {
 		} catch (SQLException e) {
 			
 			System.out.println("SQL error: " + e.getMessage());
-			
+			return 3;
 		}
 	}
 }
