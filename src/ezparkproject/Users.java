@@ -203,13 +203,13 @@ public class Users implements ActionListener {
 				/* Check to see if name field was left blank */
 				
 				if (nameTextField.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, "The field cannot be left blank. You must enter in a name");
+					JOptionPane.showMessageDialog(null, "You must enter in a name");
 				} else {
 					
 				/* Check to see if email field was left blank */
 					
 				if (emailTextField.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, "The field cannot be left blank. You must enter in an email");
+					JOptionPane.showMessageDialog(null, "You must enter in an email");
 				} else {
 					
 				
@@ -230,7 +230,7 @@ public class Users implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Please check your passwords match");
 				}
 				
-				
+				// If user is banned already - Don't allow them to register 
 			}
 		}
 	}
