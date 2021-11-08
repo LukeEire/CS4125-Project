@@ -17,41 +17,51 @@ import java.util.List;
  */
 public class Database {
 	
-	Connection conn = null;
+	Connection conn;
 	
-	Users u = new Users();
+	int Port_number;
 	
-	int no_shows = u.no_shows;
-	int updateCount = 0;
-	int Port_number = 3306;
+	String server;
+	String name;
+	String username;
+	String password;
+	String db;
+	String url;
+	String driverName;
 	
-	String server = "sql4.freemysqlhosting.net";
-	String name = "sql4448569";
-	String username = "sql4448569";
-	String password = "rs5fNh4D5f";
-	String db = "ParkingDB";
-	String url = "jdbc:mysql://" + server +  "/" + db;
-	String driverName = "jdbc:mysql://sql4.freemysqlhosting.net";
+	public Database() {
+		
+		Connection conn = null;
+		
+		int Port_number = 3306;
+		
+		String server = "sql4.freemysqlhosting.net";
+		String name = "sql4448569";
+		String username = "sql4448569";
+		String password = "rs5fNh4D5f";
+		String db = "ParkingDB";
+		String url = "jdbc:mysql://" + server +  "/" + db;
+		String driverName = "jdbc:mysql://sql4.freemysqlhosting.net";
+	}
 	
-	public boolean connect() throws SQLException , ClassNotFoundException {
+	public Connection connect() throws SQLException , ClassNotFoundException {
 		//Creates connection
 		 try {
 		    	
 			  Class.forName(driverName);
 			  conn = DriverManager.getConnection(url, username, password);
 			  System.out.println("Successfully Connected to the database!");
-			  return true;
+			  return conn;
 			  
 		    } catch (ClassNotFoundException e) {
 		    	
 		    	System.out.println("Could not find the database driver " + e.getMessage());
-		    	return false;
+		    	return null;
 		    		
 		    } catch (SQLException e) {
 		    	
 		    	System.out.println("Could not connect to the database " + e.getMessage());
-		    	return false;
-		    		
+		    	return null;
 			}
 	}
 	
@@ -262,7 +272,7 @@ public class Database {
 				
 				return 1;
 				
-			} else if(rs.getString(1) == "Guest") {
+			} else if (rs.getString(1) == "Guest") {
 				
 				return 2;
 				
