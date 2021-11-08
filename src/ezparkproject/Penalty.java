@@ -22,7 +22,8 @@ public class Penalty {
     /*Apply penalty if space not available within designated time 
      * and apply monetary fee of 2 euro and store in penaltyAmount(int)
      */
-
+	
+	//lmk if anyone tests this class
     Database db = new Database();
 //    Connection conn = db.connect();
 

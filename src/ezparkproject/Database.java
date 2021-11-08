@@ -14,6 +14,7 @@ import java.util.List;
  * @author ayoubjdair
  *For easily accessing the DB and reducing duplicate code
  *maybe delete the query from ResultSet rs = p.executeQuery(query);
+ *lmk if anyone tests this class
  */
 public class Database {
 	
