@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class Database {
 	
-	Connection conn;
+	Connection con;
 	
 	int Port_number;
 	
@@ -32,7 +32,7 @@ public class Database {
 	
 	public Database() {
 		
-		Connection conn = null;
+		Connection con = null;
 		
 		int Port_number = 3306;
 		
@@ -50,9 +50,9 @@ public class Database {
 		 try {
 		    	
 			  Class.forName(driverName);
-			  conn = DriverManager.getConnection(url, username, password);
+			  con = DriverManager.getConnection(url, username, password);
 			  System.out.println("Successfully Connected to the database!");
-			  return conn;
+			  return con;
 			  
 		    } catch (ClassNotFoundException e) {
 		    	
@@ -70,7 +70,7 @@ public class Database {
 		try {
 			//Getting all DB data
 			String query = "select * from ParkingDB";
-	        PreparedStatement p = conn.prepareStatement(query);
+	        PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			List<String> users = new ArrayList<String>();
 
@@ -119,7 +119,7 @@ public class Database {
 			if(username!=null && status!=null && password!=null && email!=null){
         	
 	            String query = "INSERT INTO ParkingDB(USERNAME, UNISTATUS, USERPASSWORD, CONFIRMPASSWORD, EMAIL, ELECTRIC, ACCESSIBILITY, BANNED, PENALTY) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?)";
-		        PreparedStatement p = conn.prepareStatement(query);
+		        PreparedStatement p = con.prepareStatement(query);
 		        p.setString(1, username);
 		        p.setString(2, status);
 		        p.setString(3, password);
@@ -164,7 +164,7 @@ public class Database {
     	try {
     		
     		String query = "DELETE FROM ParkingDB WHERE USERNAME = \""+username+"\"";
-	        PreparedStatement p = conn.prepareStatement(query);
+	        PreparedStatement p = con.prepareStatement(query);
 	        int delete = p.executeUpdate(query);
 	
 	        if(delete == 1){
@@ -187,7 +187,7 @@ public class Database {
     	try {
     		
     		String query = "UPDATE ParkingDB SET BANNED = 1 WHERE USERNAME = \""+username+"\"";
-	        PreparedStatement p = conn.prepareStatement(query);
+	        PreparedStatement p = con.prepareStatement(query);
 	        int ban = p.executeUpdate(query);
 	
 	        if(ban == 1){
@@ -210,7 +210,7 @@ public class Database {
     	try {
     		
     		String query = "UPDATE ParkingDB SET BANNED = 0 WHERE USERNAME = \""+username+"\"";
-            PreparedStatement p = conn.prepareStatement(query);
+            PreparedStatement p = con.prepareStatement(query);
             int unBan = p.executeUpdate(query);
 
             if(unBan == 1){
@@ -235,7 +235,7 @@ public class Database {
 		try {
 			
 			String query = "SELECT * FROM ParkingDB WHERE USERNAME = "+checkUser+" AND USERPASSWORD = "+checkPass;
-			PreparedStatement p = conn.prepareStatement(query);
+			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			
 			while (rs.next()) {
@@ -261,7 +261,7 @@ public class Database {
 		try {
 			
 			String query = "SELECT UNISTATUS FROM ParkingDB WHERE USERNAME = ?";
-			PreparedStatement p = conn.prepareStatement(query);
+			PreparedStatement p = con.prepareStatement(query);
 			p.setString(1, username);
 			ResultSet rs = p.executeQuery();
 			
@@ -279,9 +279,8 @@ public class Database {
 				
 			} else {
 				
-				return 3;
 				System.out.println("Query returned: " + rs.getString(1));
-				
+				return 3;
 			}
 		} catch (SQLException e) {
 			
