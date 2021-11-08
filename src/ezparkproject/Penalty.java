@@ -25,34 +25,32 @@ public class Penalty {
 	
 //	Reservation r = new Reservation();
 //	int no_shows = r.no_shows;
+	
+	Connection conn = null;
+	
 	Users u = new Users();
+	
 	int no_shows = u.no_shows;
+	int updateCount = 0;
+	int Port_number = 3306;
+	
+	String Server = "sql4.freemysqlhosting.net";
+	String Name = "sql4448569";
+	String Username = "sql4448569";
+	String Password = "rs5fNh4D5f";
+	String db = "ParkingDB";
+	String url = "jdbc:mysql://" + Server +  "/" + db;
+	String driverName = "jdbc:mysql://sql4.freemysqlhosting.net";
 
 	public void addInfraction(String username, int penaltyAmount1){
 			
 		String user_name = username;
 		int penaltyAmount = penaltyAmount1;
-		//New DB connection
-		Connection conn= null;
-		int updateCount = 0;
 		
 	    try {
-
-		  String driverName = "jdbc:mysql://sql4.freemysqlhosting.net";
-		  
+	    	
 		  Class.forName(driverName);
-		 
-		  // Create a connection to the database
-		 
-		  String Server = "sql4.freemysqlhosting.net";
-		  String Name = "sql4448569";
-		  String Username = "sql4448569";
-		  String Password = "rs5fNh4D5f";
-		  int Port_number = 3306;
-		  String db = "ParkingDB";
-		  String url = "jdbc:mysql://" + Server +  "/" + db;
 		  conn= DriverManager.getConnection(url, Username, Password);
-		 
 		  System.out.println("Successfully Connected to the database!");
 		  
 	    } catch (ClassNotFoundException e) {
@@ -78,39 +76,28 @@ public class Penalty {
 	}
 	
 	public int getInfractions(String username) {
+		
 		String user_name = username;
 		int penalties = 0;
 		
-		//New DB connection
-		Connection conn= null;
-		
 	    try {
 	 
-
-		  String driverName = "jdbc:mysql://sql4.freemysqlhosting.net";
-		  
 		  Class.forName(driverName);
-		 
-		  // Create a connection to the database
-		 
-		  String Server = "sql4.freemysqlhosting.net";
-		  String Name = "sql4448569";
-		  String Username = "sql4448569";
-		  String Password = "rs5fNh4D5f";
-		  int Port_number = 3306;
-		  String db = "ParkingDB";
-		  String url = "jdbc:mysql://" + Server +  "/" + db;
 		  conn = DriverManager.getConnection(url, Username, Password);
-		 
 		  System.out.println("Successfully Connected to the database!");
 		  
 	    } catch (ClassNotFoundException e) {
+	    	
 	    		System.out.println("Could not find the database driver " + e.getMessage());
+	    		
 	    	} catch (SQLException e) {
+	    		
 	    		System.out.println("Could not connect to the database " + e.getMessage());
+	    		
 		}
 	    
 	    try {
+	    	
 		    String query = "SELECT PENALTY FROM ParkingDB WHERE USERNAME = ?";
 		    //Creating the PreparedStatement object
 		    PreparedStatement p = conn.prepareStatement(query);
@@ -121,7 +108,7 @@ public class Penalty {
 		    // iterate through the java resultset
 		      while (rs.next())
 		      {
-		    	  	penalties += rs.getInt("PENALTY");
+		    	penalties += rs.getInt("PENALTY");
 		        // print the results
 		        System.out.format("Penalties = ... " + penalties);
 		      }
@@ -129,13 +116,16 @@ public class Penalty {
 		      p.close();
 		      
 	    } catch (SQLException e) {
+	    	
 			System.out.println("Could query the database " + e.getMessage());
+			
 		}
 		
 		return penalties;
 	}
 	
 	public void verifyInfractions(String username) {
+		
 		String user_name = username;
 		int penaltyCount = getInfractions(user_name);
 		
