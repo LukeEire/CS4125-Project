@@ -8,45 +8,96 @@ import java.sql.*;
 
 public class Users implements ActionListener {
 	
-	String name;
-	String email;
-	String status;
-	Boolean disability;
-	Boolean electric;
+	// String name;
+	// String email;
+	// String status;
+	// Boolean disability;
+	// Boolean electric;
 	
 	/*public Users() {
 		
 	}*/
 	
-	public Users(String name, String email, String status, Boolean disability, Boolean electric) {
+	// public Users(String name, String email, String status, Boolean disability, Boolean electric) {
 		
-		this.name = name;
-		this.email = email;
+	// 	this.name = name;
+	// 	this.email = email;
+	// 	this.status = status;
+	// 	this.disability = disability;
+	// 	this.electric = electric;
+		
+	// }
+	//Ayoub- testing
+	int id;
+	String firstName;
+	String lastName;
+	String password;
+	String status;
+	int electric;
+	int accessibility; 
+	String dob;
+	Database db;
+	Connection con;
+
+
+	public Users(int id, String firstName, String lastName, String password, String status, int electric, int accessibility, String sdob) {
+		
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
 		this.status = status;
-		this.disability = disability;
 		this.electric = electric;
+		this.accessibility = accessibility;
+		this.dob = sdob;
+
+		Database db = new Database();
+
+		try{
+
+            con = db.connect();
+
+        } catch(ClassNotFoundException e){
+
+            System.out.println("Could not find the database driver " + e.getMessage());
+
+        } catch(SQLException e1){
+
+            System.out.println("Could not connect to the database " + e1.getMessage());
+
+		}
+
+		try {
+
+			db.newUser(id, firstName, lastName, password, status, electric, accessibility, sdob);
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		}
 		
 	}
 	
-	public String getName() {
-		return name;
-	}
+	// public String getName() {
+	// 	return name;
+	// }
 	
-	public String getEmail() {
-		return email;
-	}
+	// public String getEmail() {
+	// 	return email;
+	// }
 	
-	public String getStatus() {
-		return this.status;
-	}
+	// public String getStatus() {
+	// 	return this.status;
+	// }
 	
-	public void setName(String newName) {
-		this.name = newName;
-	}
+	// public void setName(String newName) {
+	// 	this.name = newName;
+	// }
 	
-	public void setEmail(String newEmail) {
-		this.email = newEmail;
-	}
+	// public void setEmail(String newEmail) {
+	// 	this.email = newEmail;
+	// }
 	
 	
 	JFrame frame;
