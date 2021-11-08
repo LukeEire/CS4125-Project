@@ -50,7 +50,7 @@ public class Penalty {
 	    try {
 	    	
 		  Class.forName(driverName);
-		  conn= DriverManager.getConnection(url, Username, Password);
+		  conn = DriverManager.getConnection(url, Username, Password);
 		  System.out.println("Successfully Connected to the database!");
 		  
 	    } catch (ClassNotFoundException e) {
@@ -132,6 +132,8 @@ public class Penalty {
 		if(penaltyCount >= 3) {
 			//Logout functionality here
 			//getTime() + 1 week
+			Database db = new Database();
+			db.banUser(user_name);
  			System.out.println("Too many no-shows this week, please come back in 1 week");
 		} else {
 			System.out.println("No Penalty points");
