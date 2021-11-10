@@ -1,9 +1,9 @@
 package ezparkproject;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class ScheduleManagement {
 	//Get this to handle changes to bookings
@@ -14,10 +14,13 @@ public class ScheduleManagement {
 	Lot LotC = new Lot ("LotC", 300, 15, 5);
 	Lot LotD = new Lot ("LotD", 400, 20, 10);
 	
+	Database db;
+	Connection con;
 	
-	public void newDateForBooking(Date date,  ) {
+	
+	/*public void newDateForBooking(Date date,  ) {
 		
-	}
+	}*/
 	
 	public void connectToDB() {
 		try {
@@ -26,6 +29,57 @@ public class ScheduleManagement {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public void makeBooking(Reservation res) {
+		LocalDateTime date = res.checkInDate;
+		Users owner = res.getUser();
+		int stayLength = res.duration;
+		String lotOwner;
+		
+		LocalDateTime expCheckout = date.plusHours(stayLength);
+		
+		//Do we need a section where they select the Lot or is it randomly assigned
+		int tempS = 0;
+		if (LotA.spaces < LotB.spaces) {
+			tempS = LotB.spaces;
+		}
+		if (tempS < LotC.spaces) {
+			tempS = LotC.spaces;
+		}
+		if (tempS < LotD.spaces) {
+			tempS = LotD.spaces;
+		}
+		
+		//Connect to DB here
+		Database db = new Database();
+
+		try{
+
+            con = db.connect();
+
+        } catch(ClassNotFoundException e){
+
+            System.out.println("Could not find the database driver " + e.getMessage());
+
+        } catch(SQLException e1){
+
+            System.out.println("Could not connect to the database " + e1.getMessage());
+
+		}
+
+		try {
+
+			//db.(id, firstName, lastName, password, status, electric, accessibility, sdob);
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		}
+		
+		
 		
 	}
 }
