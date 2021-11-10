@@ -326,4 +326,94 @@ public class Database {
 			return 3;
 		}
 	}
+	
+	//Luke Testing here
+	//Probably need to update reservation object to have ID
+	//Get list of booking requirements before messing with this
+public void newBooking(int id, String firstName, String lastName, String password, String status, int electric, int accessibility, String sdob) throws SQLException {
+		
+		java.util.Date dob = new Date(2000);
+		try {
+			dob = new SimpleDateFormat("dd/MM/yyyy").parse(sdob);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		} 
+
+		LocalDate ca = LocalDate.now();
+		Date created_at = Date.valueOf(ca);
+
+
+		String email;
+		if(status == "Student"){
+			email = id + "@studentmail.ul.ie";
+		} else if (status == "Staff") {
+			email = id + "@ul.ie";
+		} else {
+			email = "N/A";
+		}
+
+		try {
+			
+			if(firstName!=null && status!=null && password!=null){
+				
+				//DB attributes
+				// id
+				// firstName 
+				// firstName 
+				// password
+				// email_address 
+				// status 
+				// electric
+				// penalties 
+				// ban_status 
+				// accessibility 
+				// created_on 
+				// dob
+
+				String query = "INSERT INTO usser(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob ) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
+				
+				PreparedStatement p = con.prepareStatement(query);
+				p.setInt(1, id);
+				p.setString(2, firstName);
+				p.setString(3, lastName);
+				p.setString(4, password);
+				p.setString(5, email);
+				p.setString(6, status);
+				// p.setInt(7, electric);
+				p.setInt(8, 0);
+				p.setInt(9, 0);
+				// p.setInt(10, accessibility);
+				p.setDate(11, created_at);
+				p.setDate(12, (Date) dob);
+		        
+		        if(electric >= 1) {
+		        	p.setInt(7, 1);
+		        } else {
+		        	p.setInt(7, 0);
+		        }
+		        
+		        if(accessibility >= 1) {
+		        	p.setInt(10, 1);
+		        } else {
+		        	p.setInt(10, 0);
+		        }
+		        
+	            int insert = p.executeUpdate(query);
+	
+	            if(insert == 1)
+	            {
+	                System.out.println("New user added successful");
+	            }
+	            else
+	            {
+	                System.out.println("Insert Failed");
+	            }
+			}
+		} catch (SQLException e){
+			
+	    	System.out.println("Error registering new user: " + e.getMessage());
+			
+		}
+    }
+	
 }
