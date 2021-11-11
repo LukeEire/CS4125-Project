@@ -38,10 +38,10 @@ public class Database {
 		
 		int Port_number = 3306;
 		
-		String server = "sql4.freemysqlhosting.net";
-		String name = "sql4448569";
-		String username = "sql4448569";
-		String password = "rs5fNh4D5f";
+		String server = "sql4.freesqldatabase.com";
+		String name = "sql4450358";
+		String username = "sql4450358";
+		String password = "dcCxqbDW1K";
 		String db = "users";
 		String url = "jdbc:mysql://" + server +  "/" + db;
 		String driverName = "jdbc:mysql://sql4.freemysqlhosting.net";
