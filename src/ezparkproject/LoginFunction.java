@@ -26,6 +26,7 @@ public class LoginFunction extends JFrame {
     private JTextField textField;
     private JPasswordField passwordField;
     private JButton btnNewButton;
+    private JButton logoutButton;
     private JLabel label;
     private JPanel contentPane;
 
@@ -61,7 +62,7 @@ public class LoginFunction extends JFrame {
         JLabel lblNewLabel = new JLabel("Login");
         lblNewLabel.setForeground(Color.BLACK);
         lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 46));
-        lblNewLabel.setBounds(423, 13, 273, 93);
+        lblNewLabel.setBounds(503, 13, 273, 93);
         contentPane.add(lblNewLabel);
 
         textField = new JTextField();
@@ -108,7 +109,7 @@ public class LoginFunction extends JFrame {
                     ResultSet rs = st.executeQuery();
                     if (rs.next()) {
                         dispose();
-                        LoginFunction ah = new LoginFunction();
+                        Dashboard ah = new Dashboard();
                         ah.setTitle("Welcome");
                         ah.setVisible(true);
                         JOptionPane.showMessageDialog(btnNewButton, "You have successfully logged in");
@@ -120,12 +121,20 @@ public class LoginFunction extends JFrame {
                 }
             }
         });
+        
+        logoutButton = new JButton("Quit");
+        logoutButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        logoutButton.setBounds(970, 2, 200, 73);
+        logoutButton.setSize(100,50);
+        logoutButton.addActionListener(new ActionListener() {
+
+        	public void actionPerformed(ActionEvent e) {
+        		System.exit(0);
+            }
+        });
 
         contentPane.add(btnNewButton);
-
-        label = new JLabel("");
-        label.setBounds(0, 0, 1008, 562);
-        contentPane.add(label);
+        contentPane.add(logoutButton);
     }
 }
 
