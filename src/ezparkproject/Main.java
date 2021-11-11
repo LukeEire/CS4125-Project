@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args)
     {
         //creating object of class Users, Login etc
-        new Users();
+        new RegFrame();
         //Users Ayoub = new Users(19266401, "ayoub", "jdair", "12345", "Student", 1, 0, "15/12/2000");
         //new LoginFrame();
         //new Login();
