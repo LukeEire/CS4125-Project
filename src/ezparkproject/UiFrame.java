@@ -9,12 +9,62 @@ public class UiFrame implements ActionListener{
 
 	JFrame frame;
 	
+	/* Labels */
+	
+	JLabel Home = new JLabel("Home");
+	
 	
 	
 	/* Buttons */
 	JButton newBookButton = new JButton("New Booking");
 	JButton cancelBookButton = new JButton("Cancel Booking");
 	JButton exitButton = new JButton("Exit");
+	
+	UiFrame() {
+
+		createWindow();
+		setLocationAndSize();
+		addComponentsToFrame();
+		actionEvent();
+	}
+	
+	public void createWindow() {
+
+		frame = new JFrame();
+		frame.setTitle("Booking Home");
+		frame.setBounds(40, 40, 1200, 720);
+		frame.getContentPane().setBackground(Color.white);
+		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+	}
+
+	public void setLocationAndSize() {
+		
+		/* Label Bounds */
+
+		Home.setBounds(20, 20, 40, 70);
+        
+        /* Button Bounds */
+        
+        newBookButton.setBounds(25, 500, 100, 35);
+        cancelBookButton.setBounds(250, 500, 100, 35);
+        exitButton.setBounds(137, 500, 100, 35);
+	}
+
+	public void addComponentsToFrame() {
+		
+		/* Labels */
+
+		frame.add(Home);
+		
+		/* Buttons */
+		
+		frame.add(newBookButton);
+		frame.add(cancelBookButton);
+		frame.add(exitButton);
+	}
 	
 	
 	
