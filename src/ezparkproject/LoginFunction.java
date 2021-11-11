@@ -94,14 +94,14 @@ public class LoginFunction extends JFrame {
         btnNewButton.setBounds(545, 392, 162, 73);
         btnNewButton.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e) {
+        	public void actionPerformed(ActionEvent e) {
                 String userName = textField.getText();
                 String password = passwordField.getText();
                 try {
-                	Connection connection = DriverManager.getConnection("jdbc:mysql://sql4.freemysqlhosting.net:3306/sql4448569","sql4448569", "rs5fNh4D5f");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358", "dcCxqbDW1K"); //Updated connection
 
-                    PreparedStatement st = (PreparedStatement) connection
-                        .prepareStatement("Select Username, Userpassword from ParkingDB where Username=? and Userpassword=?");
+                    PreparedStatement st = (PreparedStatement) con
+                        .prepareStatement("Select Username, Userpassword from Register where Username=? and Userpassword=?");
 
                     st.setString(1, userName);
                     st.setString(2, password);

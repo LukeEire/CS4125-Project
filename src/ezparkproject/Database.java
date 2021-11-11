@@ -44,7 +44,7 @@ public class Database {
 		String password = "dcCxqbDW1K";
 		String db = "users";
 		String url = "jdbc:mysql://" + server +  "/" + db;
-		String driverName = "jdbc:mysql://sql4.freemysqlhosting.net";
+		String driverName = "jdbc:mysql://sql4.freesqldatabase.com";
 	}
 	
 	public Connection connect() throws SQLException , ClassNotFoundException {
@@ -151,7 +151,7 @@ public class Database {
 				// created_on 
 				// dob
 
-				String query = "INSERT INTO usser(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob ) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
+				String query = "INSERT INTO user(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob ) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
 				
 				PreparedStatement p = con.prepareStatement(query);
 				p.setInt(1, id);

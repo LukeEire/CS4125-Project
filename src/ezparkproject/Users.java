@@ -233,11 +233,11 @@ public class Users implements ActionListener {
 				
 				/* Create Connection Object */
 				
-				Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freemysqlhosting.net:3306/sql4448569","sql4448569", "rs5fNh4D5f");
+				Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358","dcCxqbDW1K");
 				
 				/* Pass values into Database */
 				
-				PreparedStatement Pstatement = con.prepareStatement("insert into ParkingDB values(?,?,?,?,?,?,?,?,?)");
+				PreparedStatement Pstatement = con.prepareStatement("insert into Register values(?,?,?,?,?,?,?,?,?)");
 
 				/* Specifying values */
 				
@@ -251,7 +251,7 @@ public class Users implements ActionListener {
 				Pstatement.setInt(8, 0);
 				Pstatement.setInt(9, 0);
 				
-				/* Check to see if name field was left blank */
+				//Check to see if name field was left blank 
 				
 				if (nameTextField.getText().isEmpty()){
 					JOptionPane.showMessageDialog(null, "You must enter in a name");
