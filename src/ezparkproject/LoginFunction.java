@@ -75,17 +75,17 @@ public class LoginFunction extends JFrame {
         passwordField.setBounds(481, 286, 281, 68);
         contentPane.add(passwordField);
 
-        JLabel lblUsername = new JLabel("Username");
+        JLabel lblUsername = new JLabel("Your ID Number");
         lblUsername.setBackground(Color.BLACK);
         lblUsername.setForeground(Color.BLACK);
-        lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 31));
+        lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 16));
         lblUsername.setBounds(250, 166, 193, 52);
         contentPane.add(lblUsername);
 
         JLabel lblPassword = new JLabel("Password");
         lblPassword.setForeground(Color.BLACK);
         lblPassword.setBackground(Color.CYAN);
-        lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 31));
+        lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
         lblPassword.setBounds(250, 286, 193, 52);
         contentPane.add(lblPassword);
 
@@ -95,15 +95,15 @@ public class LoginFunction extends JFrame {
         btnNewButton.addActionListener(new ActionListener() {
 
         	public void actionPerformed(ActionEvent e) {
-                String userName = textField.getText();
+                String userID = textField.getText();
                 String password = passwordField.getText();
                 try {
                     Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358", "dcCxqbDW1K"); //Updated connection
 
                     PreparedStatement st = (PreparedStatement) con
-                        .prepareStatement("Select Username, Userpassword from Register where Username=? and Userpassword=?");
+                        .prepareStatement("Select id, password from ParkingDB where id=? and password=?");
 
-                    st.setString(1, userName);
+                    st.setString(1, userID);
                     st.setString(2, password);
                     ResultSet rs = st.executeQuery();
                     if (rs.next()) {
