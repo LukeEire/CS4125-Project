@@ -69,15 +69,18 @@ public class ScheduleManagement {
 
 		}
 
-		try {
-
-			//db.(id, firstName, lastName, password, status, electric, accessibility, sdob);
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-			
-		}
+		/*
+		 * try {
+		 * 
+		 * //db.(id, firstName, lastName, password, status, electric, accessibility,
+		 * sdob);
+		 * 
+		 * } catch (SQLException e) {
+		 * 
+		 * e.printStackTrace();
+		 * 
+		 * }
+		 */
 		
 		
 		
