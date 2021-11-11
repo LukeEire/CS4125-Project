@@ -42,7 +42,7 @@ public class Database {
 		String name = "sql4450358";
 		String username = "sql4450358";
 		String password = "dcCxqbDW1K";
-		String db = "users";
+		String db = "ParkingDB";
 		String url = "jdbc:mysql://" + server +  "/" + db;
 		String driverName = "jdbc:mysql://sql4.freesqldatabase.com";
 	}
@@ -71,7 +71,7 @@ public class Database {
 	public void fetchData() throws Exception{
 		try {
 			//Getting all DB data
-			String query = "select * from users";
+			String query = "select * from ParkingDB";
 	        PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			List<String> users = new ArrayList<String>();
@@ -101,7 +101,7 @@ public class Database {
 			}
 			
 			System.out.println("Users Arraylist");
-			System.out.println(users);
+			System.out.println(ParkingDB);
 			
 		} catch (Exception e) {
 			

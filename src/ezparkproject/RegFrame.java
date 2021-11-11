@@ -157,12 +157,11 @@ public class RegFrame implements ActionListener{
 			try {
 				
 				/* Create Connection Object */
-				
 				Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358","dcCxqbDW1K");
 				
 				/* Pass values into Database */
 				
-				PreparedStatement Pstatement = con.prepareStatement("insert into ParkingDB values(?,?,?,?,?,?,?,?,?,?,?,?,)");
+				PreparedStatement Pstatement = con.prepareStatement("insert into ParkingDB values(?,?,?,?,?,?,?,?,?,?,?,?)");
 
 				/* Specifying values */
 				
@@ -179,39 +178,26 @@ public class RegFrame implements ActionListener{
 				Pstatement.setInt(11, 0); // Needs to get current date 
 				Pstatement.setString(12, dobField.getText()); // Needs to get DOB this is TBD at the moment
 				
-				
 				//Check to see if name field was left blank 
-				
 				if (firstNameField.getText().isEmpty()){
+					
 					JOptionPane.showMessageDialog(null, "You must enter in a name");
 				} else {
 					
-				/* Check to see if email field was left blank */
-					
-				if (emailTextField.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, "You must enter in an email");
-				} else {
-					
-				
-				/* Check to see if password field was left blank */
-					
-				if (passwordField.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, "You must enter a password");
-				} else {
-							
+					Pstatement.executeUpdate();
 
 					JOptionPane.showMessageDialog(null, "You have successfully registered");
 				}
 				
-				// If user is banned already - Don't allow them to register 
-			}
-		}
+			
+		
 	
 
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 		}
 
+		}
 		
 			
 		
@@ -246,4 +232,4 @@ public class RegFrame implements ActionListener{
 
 	}
 	}
-}
+
