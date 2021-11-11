@@ -185,13 +185,18 @@ public class RegFrame implements ActionListener{
 				} else {
 					
 					Pstatement.executeUpdate();
-
+					firstNameField.setText("");
+					universityID.setText("");
+					dobField.setText("");
+					lastNameField.setText("");
+					uniComboBox.setSelectedItem("Student");
+					EVComboBox.setSelectedItem("Yes");
+					accessibilityComboBox.setSelectedItem("Yes");
+					passwordField.setText("");
+					confirmPasswordField.setText("");
+					emailTextField.setText("");
 					JOptionPane.showMessageDialog(null, "You have successfully registered");
-				}
-				
-			
-		
-	
+				}	
 
 			} catch (SQLException e1) {
 				e1.printStackTrace();
@@ -200,11 +205,15 @@ public class RegFrame implements ActionListener{
 		}
 		
 			
-		
 		if (e.getSource() == resetButton) {
 
 			firstNameField.setText("");
+			universityID.setText("ID");
+			dobField.setText("");
+			lastNameField.setText("");
 			uniComboBox.setSelectedItem("Student");
+			EVComboBox.setSelectedItem("Yes");
+			accessibilityComboBox.setSelectedItem("Yes");
 			passwordField.setText("");
 			confirmPasswordField.setText("");
 			emailTextField.setText("");
