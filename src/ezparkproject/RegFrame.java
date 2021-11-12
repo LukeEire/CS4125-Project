@@ -8,6 +8,10 @@ java.sql.*;
 
 public class RegFrame implements ActionListener{
 	
+	/*Required timestamp to pass during registration and DOB */
+	
+	java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+	
 	JFrame frame;
 	String[] uniStatus = { "Student", "Staff", "Guest" }; /* also known as rank from our analysis class diagram */
 	String[] accessibilityStatus = { "Yes", "No" }; /* When checking for disabled spaces, they will show in reservations */
@@ -162,6 +166,7 @@ public class RegFrame implements ActionListener{
 				/* Pass values into Database */
 				
 				PreparedStatement Pstatement = con.prepareStatement("insert into ParkingDB values(?,?,?,?,?,?,?,?,?,?,?,?)");
+				
 
 				/* Specifying values */
 				
@@ -175,7 +180,7 @@ public class RegFrame implements ActionListener{
 				Pstatement.setInt(8, 0);
 				Pstatement.setInt(9, 0);
 				Pstatement.setString(10, accessibilityComboBox.getSelectedItem().toString());
-				Pstatement.setInt(11, 0); // Needs to get current date 
+				Pstatement.setTimestamp(11, date); // Needs to get current date 
 				Pstatement.setString(12, dobField.getText()); // Needs to get DOB this is TBD at the moment
 				
 				//Check to see if name field was left blank 
