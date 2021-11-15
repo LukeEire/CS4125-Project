@@ -101,7 +101,12 @@ public class Database {
 			}
 			
 			System.out.println("Users Arraylist");
-			System.out.println(ParkingDB);
+			
+			/*What is the purpose of this line?
+			
+			
+			
+			System.out.println(ParkingDB);*/
 			
 		} catch (Exception e) {
 			

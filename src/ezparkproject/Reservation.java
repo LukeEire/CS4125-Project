@@ -49,25 +49,22 @@ public class Reservation {
         this.checkOutDate = checkOutDate;
     }
 
-    public void makeReservation(Users user, Spaces space, int duration){
-    	space.setAvailablity(false); //may be redundant, could pass false into method below
-    	space.bookSpace(user, checkInDate, checkOutDate);
+    //This may be handled by ScheduleManagement
+    public void makeReservation(Users user, int duration){
+    	
     }
     
-    public boolean checkAvailability(Spaces space) {
-    	if(!space.isAvailable()) {
-    		System.out.println("Spave unavailable");
-    		return false;
-    	} else {
-    		return true;
-    	}
+    public boolean checkAvailability() {
+    	
+		return false;
+    	
     }
     
     public void checkOut(LocalDateTime checkOut) {
     	if(checkOut.isAfter(checkOutDate)) {
     		System.out.println("You overstayed your welcome!");
     		Penalty p = new Penalty();
-    		p.addInfraction(user.toString(), 1);
+    		p.addInfraction(user.id);
     	} else {
     		System.out.println("See you next time!");
     	}
