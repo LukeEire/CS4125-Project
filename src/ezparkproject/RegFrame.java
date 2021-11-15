@@ -8,6 +8,10 @@ java.sql.*;
 
 public class RegFrame implements ActionListener{
 	
+	/*Required timestamp to pass during registration and DOB */
+	
+	java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+	
 	JFrame frame;
 	String[] uniStatus = { "Student", "Staff", "Guest" }; /* also known as rank from our analysis class diagram */
 	String[] accessibilityStatus = { "Yes", "No" }; /* When checking for disabled spaces, they will show in reservations */
@@ -157,12 +161,12 @@ public class RegFrame implements ActionListener{
 			try {
 				
 				/* Create Connection Object */
-				
 				Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358","dcCxqbDW1K");
 				
 				/* Pass values into Database */
 				
-				PreparedStatement Pstatement = con.prepareStatement("insert into ParkingDB values(?,?,?,?,?,?,?,?,?,?,?,?,)");
+				PreparedStatement Pstatement = con.prepareStatement("insert into ParkingDB values(?,?,?,?,?,?,?,?,?,?,?,?)");
+				
 
 				/* Specifying values */
 				
@@ -176,49 +180,45 @@ public class RegFrame implements ActionListener{
 				Pstatement.setInt(8, 0);
 				Pstatement.setInt(9, 0);
 				Pstatement.setString(10, accessibilityComboBox.getSelectedItem().toString());
-				Pstatement.setInt(11, 0); // Needs to get current date 
+				Pstatement.setTimestamp(11, date); // Needs to get current date 
 				Pstatement.setString(12, dobField.getText()); // Needs to get DOB this is TBD at the moment
 				
-				
 				//Check to see if name field was left blank 
-				
 				if (firstNameField.getText().isEmpty()){
+					
 					JOptionPane.showMessageDialog(null, "You must enter in a name");
 				} else {
 					
-				/* Check to see if email field was left blank */
-					
-				if (emailTextField.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, "You must enter in an email");
-				} else {
-					
-				
-				/* Check to see if password field was left blank */
-					
-				if (passwordField.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, "You must enter a password");
-				} else {
-							
-
+					Pstatement.executeUpdate();
+					firstNameField.setText("");
+					universityID.setText("");
+					dobField.setText("");
+					lastNameField.setText("");
+					uniComboBox.setSelectedItem("Student");
+					EVComboBox.setSelectedItem("Yes");
+					accessibilityComboBox.setSelectedItem("Yes");
+					passwordField.setText("");
+					confirmPasswordField.setText("");
+					emailTextField.setText("");
 					JOptionPane.showMessageDialog(null, "You have successfully registered");
-				}
-				
-				// If user is banned already - Don't allow them to register 
-			}
-		}
-	
+				}	
 
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 		}
 
+		}
 		
 			
-		
 		if (e.getSource() == resetButton) {
 
 			firstNameField.setText("");
+			universityID.setText("ID");
+			dobField.setText("");
+			lastNameField.setText("");
 			uniComboBox.setSelectedItem("Student");
+			EVComboBox.setSelectedItem("Yes");
+			accessibilityComboBox.setSelectedItem("Yes");
 			passwordField.setText("");
 			confirmPasswordField.setText("");
 			emailTextField.setText("");
@@ -246,4 +246,4 @@ public class RegFrame implements ActionListener{
 
 	}
 	}
-}
+
