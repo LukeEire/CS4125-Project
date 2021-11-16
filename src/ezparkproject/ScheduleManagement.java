@@ -1,7 +1,9 @@
 package ezparkproject;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
@@ -33,12 +35,12 @@ public class ScheduleManagement {
 	}
 	
 	public void makeBooking(Reservation res) {
-		LocalDateTime date = res.checkInDate;
+		//LocalDateTime date = res.checkInDate;
 		Users owner = res.getUser();
 		int stayLength = res.duration;
 		String lotOwner;
 		
-		LocalDateTime expCheckout = date.plusHours(stayLength);
+		//LocalDateTime expCheckout = date.plusHours(stayLength);
 		
 		//Do we need a section where they select the Lot or is it randomly assigned
 		int tempS = 0;
@@ -69,18 +71,24 @@ public class ScheduleManagement {
 
 		}
 
-		/*
-		 * try {
-		 * 
-		 * //db.(id, firstName, lastName, password, status, electric, accessibility,
-		 * sdob);
-		 * 
-		 * } catch (SQLException e) {
-		 * 
-		 * e.printStackTrace();
-		 * 
-		 * }
-		 */
+		try {
+			String query = "INSERT INTO reservations(id, duration, checkInDate, checkOutDate, disability, electric ) VALUES (?, ?, ?, ?, ?, ?)";
+			
+			PreparedStatement p = con.prepareStatement(query);
+			p.setInt(1, (res.getUser()).id);
+			p.setInt(2, res.duration);
+			p.setDate(3, res.checkInDate);
+			p.setDate(4, res.checkOutDate);
+			p.setInt(5, res.getUser().accessibility);
+			p.setInt(6, res.getUser().electric);
+			  
+			  } catch (SQLException e) {
+			  
+			  e.printStackTrace();
+			  
+			  }
+		  
+		 
 		
 		
 		
