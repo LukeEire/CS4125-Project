@@ -65,7 +65,7 @@ public class LoginFunction extends JFrame {
         /* Adding an Image logo to the start of the login screen */
         
         label = new JLabel("");
-        Image img = new ImageIcon(this.getClass().getResource("logo.png")).getImage();
+        Image img = new ImageIcon(this.getClass().getResource("/ezparkproject/images/logo.png")).getImage();
         label.setIcon(new ImageIcon(img));
         label.setBounds(503, 13, 273, 93);
         label.setSize(100,100);
