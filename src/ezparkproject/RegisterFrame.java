@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.awt.*; 
 import java.sql.*;
 
-public class UiFrame implements ActionListener{
+public class RegisterFrame implements ActionListener{
 
 	JFrame frame;
 	
@@ -20,7 +20,7 @@ public class UiFrame implements ActionListener{
 	JButton cancelBookButton = new JButton("Cancel Booking");
 	JButton exitButton = new JButton("Exit");
 	
-	UiFrame() {
+	RegisterFrame() {
 
 		createWindow();
 		setLocationAndSize();
