@@ -4,6 +4,7 @@ import ezparkproject.Users;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.Calendar;
 
 
 public class Reservation {
@@ -13,16 +14,17 @@ public class Reservation {
     //private Lot lot ;
     //private Spaces space;
     int duration; //in minutes
-    LocalDateTime checkInDate;
-    LocalDateTime checkOutDate;
+    Date checkInDate;
+    Date checkOutDate;
 
 
     public Reservation(Users user, int duration) {
         this.user = user;
         //this.space = space;
         this.duration = duration;
-        checkInDate = LocalDateTime.now();
-        checkOutDate = checkInDate.plusMinutes(duration);
+        //Review these two lines of code
+        checkInDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        //checkOutDate = checkInDate.plusMinutes(duration);
     }
 
     public Users getUser() {
@@ -33,19 +35,19 @@ public class Reservation {
         this.user = user;
     }
 
-    public LocalDateTime getcheckInDate() {
+    public Date getcheckInDate() {
         return checkInDate;
     }
 
-    public void setcheckInDate(LocalDateTime checkInDate) {
+    public void setcheckInDate(Date checkInDate) {
         this.checkInDate = checkInDate;
     }
     
-    public LocalDateTime getcheckOutDate() {
+    public Date getcheckOutDate() {
         return checkOutDate;
     }
 
-    public void setcheckOutDate(LocalDateTime checkOutDate) {
+    public void setcheckOutDate(Date checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
 
