@@ -62,13 +62,24 @@ public class Reservation {
     	
     }
     
-    public void checkOut(LocalDateTime checkOut) {
-    	if(checkOut.isAfter(checkOutDate)) {
-    		System.out.println("You overstayed your welcome!");
-    		Penalty p = new Penalty();
-    		p.addInfraction(user.id);
-    	} else {
+    //Move the penalty part to the ScheduleManagement?
+//    public void checkOut(LocalDateTime checkOut) {
+//    	if(checkOut.isAfter(checkOutDate)) {
+//    		System.out.println("You overstayed your welcome!");
+//    		Penalty p = new Penalty();
+//    		p.addInfraction(user.id);
+//    	} else {
+//    		System.out.println("See you next time!");
+//    	}
+//    }
+    
+    public void checkOut(Date checkOut) {
+    		this.setcheckOutDate(checkOutDate);
     		System.out.println("See you next time!");
     	}
-    }
+    
+    
+    
+    
+    
 }
