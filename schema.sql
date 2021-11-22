@@ -19,3 +19,15 @@ accessibility TINYINT(1),
 created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 dob DATE
 );
+
+CREATE TABLE IF NOT EXISTS reservations (
+id int NOT NULL AUTO_INCREMENT,
+userID VARCHAR(255) NOT NULL,
+lot varchar(255) NOT NULL,
+electric TINYINT(1),
+accessibility TINYINT(1),
+created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+expiry DATE,
+FOREIGN KEY (userID) REFERENCES users(id),
+PRIMARY KEY (id)
+);

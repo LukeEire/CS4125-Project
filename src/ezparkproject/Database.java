@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * @author ayoubjdair
  *For easily accessing the DB and reducing duplicate code
@@ -20,65 +21,57 @@ import java.util.List;
  */
 public class Database {
 	
-	Connection con;
-	
-	int Port_number;
-	
-	String server;
-	String name;
-	String username;
-	String password;
-	String db;
-	String url;
-	String driverName;
-	
-	/* Commented out as using static method for DB connection - subject to review with team - Ash */
-	
-	/* public Database() {
-		
-		Connection con = null;
-		
-		int Port_number = 3306;
-		
-		String server = "sql4.freesqldatabase.com";
-		String name = "sql4450358";
-		String username = "sql4450358";
-		String password = "dcCxqbDW1K";
-		String db = "ParkingDB";
-		String url = "jdbc:mysql://" + server +  "/" + db;
-		String driverName = "jdbc:mysql://sql4.freesqldatabase.com";
+	protected Connection con;
+	protected String server;
+	protected String name;
+	protected String username;
+	protected String password;
+	protected String db;
+	protected String reservations_db;
+	protected String url;
+	protected String driverName;
+	protected int Port_number;
+
+	public Database() throws SQLException{
+		//creates a DB object and connects to the DB
+		Port_number = 3306;
+		server = "sql4.freesqldatabase.com";
+		// name = "sql4450358";
+		username = "sql4450358";
+		password = "dcCxqbDW1K";
+		db = "ParkingDB";
+		reservations_db = "reservations";
+		// url = "jdbc:mysql://" + server +  "/" + db;
+		driverName = "jdbc:mysql://sql4.freesqldatabase.com";
+
+		try {
+			
+			con = DriverManager.getConnection(driverName, username, password);
+			System.out.println("Successfully Connected to the database!");
+				  
+		} catch (SQLException e) {
+			  
+			System.out.println("Could not connect to the database " + e.getMessage());
+
+		}
+
 	}
 	
-	public Connection connect() throws SQLException , ClassNotFoundException {
-		//Creates connection
-		 try {
-		    	
-			  Class.forName(driverName);
-			  con = DriverManager.getConnection(url, username, password);
-			  System.out.println("Successfully Connected to the database!");
-			  return con;
-			  
-		    } catch (ClassNotFoundException e) {
-		    	
-		    	System.out.println("Could not find the database driver " + e.getMessage());
-		    	return null;
-		    		
-		    } catch (SQLException e) {
-		    	
-		    	System.out.println("Could not connect to the database " + e.getMessage());
-		    	return null;
-			}
-	} */
-	
-	public static Connection getConnection() throws SQLException {
-    	Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358","dcCxqbDW1K");
+	public Connection connect(){
+		//returns connection
+		System.out.println("Sever: " + server);
+		System.out.println("Name: " + name);
+		System.out.println("Password: " + password);
+		System.out.println("DB: " + db);
+		System.out.println("URL: " + driverName);
 		return con;
-    }
+	}
+
 	
 	public void fetchData() throws Exception{
 		try {
 			//Getting all DB data
-			String query = "select * from ParkingDB";
+			String query = "select * from " + db;
 	        PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			List<String> users = new ArrayList<String>();
@@ -107,13 +100,8 @@ public class Database {
 				users.add(rs.getString(1));
 			}
 			
-			System.out.println("Users Arraylist");
-			
-			/*What is the purpose of this line?
-			
-			
-			
-			System.out.println(ParkingDB);*/
+			System.out.println("Users Arraylist: ");
+			System.out.println(users);
 			
 		} catch (Exception e) {
 			
@@ -163,7 +151,7 @@ public class Database {
 				// created_on 
 				// dob
 
-				String query = "INSERT INTO user(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob ) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
+				String query = "INSERT INTO " + db + "(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob ) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
 				
 				PreparedStatement p = con.prepareStatement(query);
 				p.setInt(1, id);
@@ -213,7 +201,7 @@ public class Database {
     	
     	try {
     		
-    		String query = "DELETE FROM users WHERE id = \""+id+"\"";
+    		String query = "DELETE FROM " + db + " WHERE id = \""+id+"\"";
 	        PreparedStatement p = con.prepareStatement(query);
 	        int delete = p.executeUpdate(query);
 	
@@ -236,7 +224,7 @@ public class Database {
     	
     	try {
     		
-    		String query = "UPDATE users SET ban_status = 1 WHERE id = \""+id+"\"";
+    		String query = "UPDATE " + db + " SET ban_status = 1 WHERE id = \""+id+"\"";
 	        PreparedStatement p = con.prepareStatement(query);
 	        int ban = p.executeUpdate(query);
 	
@@ -259,7 +247,7 @@ public class Database {
     	
     	try {
     		
-    		String query = "UPDATE users SET ban_status = 0 WHERE id = \""+id+"\"";
+    		String query = "UPDATE " + db + " SET ban_status = 0 WHERE id = \""+id+"\"";
             PreparedStatement p = con.prepareStatement(query);
             int unBan = p.executeUpdate(query);
 
@@ -284,7 +272,7 @@ public class Database {
 		
 		try {
 			
-			String query = "SELECT * FROM users WHERE id = "+checkUser+" AND password = "+checkPass;
+			String query = "SELECT * FROM " + db + " WHERE id = "+checkUser+" AND password = "+checkPass;
 			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			
@@ -296,11 +284,11 @@ public class Database {
 			}
 			
 		} catch(SQLException e) {
-			
-			System.out.println("UserID OR password may be inccorect");
+									
+			System.out.println("Error locating data entered: " + e.getMessage());
+			System.out.println("UserID OR password may be incorrect");
 			System.out.println("User: "+ checkUser);
 			System.out.println("Password: " + checkPass);
-			System.out.println("Error locating data entered: " + e.getMessage());
 			
 		}
 	}
@@ -310,7 +298,7 @@ public class Database {
 		
 		try {
 			
-			String query = "SELECT status FROM users WHERE id = ?";
+			String query = "SELECT status FROM " + db + " WHERE id = ?";
 			PreparedStatement p = con.prepareStatement(query);
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
@@ -382,7 +370,7 @@ public void newBooking(int id, String firstName, String lastName, String passwor
 				// created_on 
 				// dob
 
-				String query = "INSERT INTO usser(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob ) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
+				String query = "INSERT INTO " + db + "(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob ) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
 				
 				PreparedStatement p = con.prepareStatement(query);
 				p.setInt(1, id);
@@ -428,4 +416,107 @@ public void newBooking(int id, String firstName, String lastName, String passwor
 		}
     }
 	
+
+
+//Ayoub
+	//Preliminary List of booking requirements (for reservations table): 
+	//lmk if you wanna talk about adding or removing any
+	// - USER ID
+	// - Reservation ID
+	// - Lot?
+	// - Electric?
+	// - Accessability?
+	// - Expiry (Date entered for user to check out of parking space)
+	public void reserve(int id, String lot, int electric, int accessibility, String sexpiry) throws SQLException {
+
+		LocalDate ca = LocalDate.now();
+		Date created_at = Date.valueOf(ca);
+
+		java.util.Date expiry = new Date(2000);
+		try {
+			expiry = new SimpleDateFormat("dd/MM/yyyy").parse(sexpiry);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		} 
+
+		try {
+			
+			if(id > 0 && lot!=null){
+				
+				String query = "INSERT INTO " + reservations_db + "(id, lot, electric, accessability, created_on, expiry) VALUES (?, ?, ?, ?, ?, ?)";
+				
+				PreparedStatement p = con.prepareStatement(query);
+				p.setInt(1, id);
+				p.setString(2, lot);
+				p.setInt(3, electric);
+				p.setInt(4, accessibility);
+				p.setDate(5, created_at);
+				p.setDate(6, (Date) expiry);
+
+		        if(electric >= 1) {
+		        	p.setInt(3, 1);
+		        } else {
+		        	p.setInt(3, 0);
+		        }
+		        
+		        if(accessibility >= 1) {
+		        	p.setInt(4, 1);
+		        } else {
+		        	p.setInt(4, 0);
+		        }
+		        
+	            int insert = p.executeUpdate(query);
+	
+	            if(insert == 1)
+	            {
+	                System.out.println("Reservation made successfully");
+	            }
+	            else
+	            {
+	                System.out.println("Reservation Failed");
+	            }
+			}
+		} catch (SQLException e){
+			
+	    	System.out.println("Error reserving a spot: " + e.getMessage());
+			
+		}
+    }
+	
+
+
+	public void fetchReservationData() throws Exception{
+		try {
+			//Getting all DB data
+			String query = "select * from " + reservations_db;
+			PreparedStatement p = con.prepareStatement(query);
+			ResultSet rs = p.executeQuery(query);
+			List<String> reservations = new ArrayList<String>();
+
+			while(rs.next()){
+
+				int i = 0;
+				System.out.println("------------------------Reservation: "+i+"----------------------------");
+				System.out.println("Reservations ID: " + rs.getInt("id"));
+				System.out.println("User ID: " + rs.getInt("userID"));
+				System.out.println("Electric Car? [Y/N]: " + rs.getString("electric"));
+				System.out.println("Assistance Required? [Y/N]: " + rs.getString("accessibility"));
+				System.out.println("Reservation Data: " + rs.getDate("created_on"));
+				System.out.println("Reserved until: " + rs.getDate("expiry"));
+				System.out.println("-----------------------------END-------------------------------");
+				i++;
+				
+				reservations.add(rs.getString(1));
+			}
+			
+			System.out.println("Reservations Arraylist: ");
+			System.out.println(reservations);
+			
+		} catch (Exception e) {
+			
+			System.out.println("Error fetching data: " + e.getMessage());
+			
+		}
+			
+	}
 }
