@@ -113,9 +113,10 @@ public class LoginFunction extends JFrame {
 
         	public void actionPerformed(ActionEvent e) {
                 String userID = textField.getText();
-                String password = passwordField.getText();
+                @SuppressWarnings("deprecation")
+				String password = passwordField.getText();
                 try {
-                    Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358", "dcCxqbDW1K"); //Updated connection
+                	Connection con = DatabaseConnection.getConnection(); //Updated connection
 
                     PreparedStatement st = (PreparedStatement) con
                         .prepareStatement("Select id, password from ParkingDB where id=? and password=?");
