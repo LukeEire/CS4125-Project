@@ -19,3 +19,24 @@ accessibility TINYINT(1),
 created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 dob DATE
 );
+
+--Ayoub - new reservations class
+-- // Preliminary List of booking requirements (for reservations table): 
+-- // lmk if you wanna talk about adding or removing any attributes
+-- // - USER ID
+-- // - Reservation ID
+-- // - Lot?
+-- // - Electric?
+-- // - Accessability?
+-- // - Expiry (Date entered for user to check out of parking space)
+CREATE TABLE IF NOT EXISTS reservations (
+id int NOT NULL AUTO_INCREMENT,
+userID VARCHAR(255) NOT NULL,
+lot varchar(255) NOT NULL,
+electric TINYINT(1),
+accessibility TINYINT(1),
+created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+expiry DATE,
+FOREIGN KEY (userID) REFERENCES users(id),
+PRIMARY KEY (id)
+);
