@@ -6,12 +6,9 @@ import java.awt.*;
 import
 java.sql.*;
 
-public class RegFrame implements ActionListener{
+public class RegFrame_old implements ActionListener{
 	
 	/*Required timestamp to pass during registration and DOB */
-	
-	
-
 	
 	java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
 	
@@ -60,7 +57,7 @@ public class RegFrame implements ActionListener{
 	JButton resetButton = new JButton("Reset");
 	JButton loginButton = new JButton("Login");
 
-	RegFrame() {
+	RegFrame_old() {
 
 		createWindow();
 		setLocationAndSize();
@@ -162,55 +159,57 @@ public class RegFrame implements ActionListener{
 		if (e.getSource() == registerButton) {
 
 			try {
-					
-					Connection con = DatabaseConnection.getConnection();
-					PreparedStatement Pstatement = con.prepareStatement("insert into ParkingDB values(?,?,?,?,?,?,?,?,?,?,?,?)");
-					
-					/* Specifying values */
-					
-					Pstatement.setString(1, universityIDField.getText());
-					Pstatement.setString(2, firstNameField.getText());
-					Pstatement.setString(3, lastNameField.getText());				
-					Pstatement.setString(4, passwordField.getText());
-					Pstatement.setString(5, emailTextField.getText());
-					Pstatement.setString(6, uniComboBox.getSelectedItem().toString());
-					Pstatement.setString(7, EVComboBox.getSelectedItem().toString());				
-					Pstatement.setInt(8, 0);
-					Pstatement.setInt(9, 0);
-					Pstatement.setString(10, accessibilityComboBox.getSelectedItem().toString());
-					Pstatement.setTimestamp(11, date); // Needs to get current date 
-					Pstatement.setString(12, dobField.getText()); // Needs to get DOB this is TBD at the moment
-					
-					//Check to see if name field was left blank 
-					if (firstNameField.getText().isEmpty()){
-						
-						JOptionPane.showMessageDialog(null, "You must enter in a name");
-					} else {
-						
-						Pstatement.executeUpdate();
-						firstNameField.setText("");
-						universityID.setText("");
-						dobField.setText("");
-						lastNameField.setText("");
-						uniComboBox.setSelectedItem("Student");
-						EVComboBox.setSelectedItem("Yes");
-						accessibilityComboBox.setSelectedItem("Yes");
-						passwordField.setText("");
-						confirmPasswordField.setText("");
-						emailTextField.setText("");
-						JOptionPane.showMessageDialog(null, "You have successfully registered");
-					}	
-					
-					
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		
-		
 				
 				
+				
+				/* Create Connection Object */
+				Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358","dcCxqbDW1K");
+				
+				/* Pass values into Database */
+				
+				PreparedStatement Pstatement = con.prepareStatement("insert into ParkingDB values(?,?,?,?,?,?,?,?,?,?,?,?)");
+				
+
+				/* Specifying values */
+				
+				Pstatement.setString(1, universityIDField.getText());
+				Pstatement.setString(2, firstNameField.getText());
+				Pstatement.setString(3, lastNameField.getText());				
+				Pstatement.setString(4, passwordField.getText());
+				Pstatement.setString(5, emailTextField.getText());
+				Pstatement.setString(6, uniComboBox.getSelectedItem().toString());
+				Pstatement.setString(7, EVComboBox.getSelectedItem().toString());				
+				Pstatement.setInt(8, 0);
+				Pstatement.setInt(9, 0);
+				Pstatement.setString(10, accessibilityComboBox.getSelectedItem().toString());
+				Pstatement.setTimestamp(11, date); // Needs to get current date 
+				Pstatement.setString(12, dobField.getText()); // Needs to get DOB this is TBD at the moment
+				
+				//Check to see if name field was left blank 
+				if (firstNameField.getText().isEmpty()){
+					
+					JOptionPane.showMessageDialog(null, "You must enter in a name");
+				} else {
+					
+					Pstatement.executeUpdate();
+					firstNameField.setText("");
+					universityID.setText("");
+					dobField.setText("");
+					lastNameField.setText("");
+					uniComboBox.setSelectedItem("Student");
+					EVComboBox.setSelectedItem("Yes");
+					accessibilityComboBox.setSelectedItem("Yes");
+					passwordField.setText("");
+					confirmPasswordField.setText("");
+					emailTextField.setText("");
+					JOptionPane.showMessageDialog(null, "You have successfully registered");
+				}	
+
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+		}
+
+		}
 		
 			
 		if (e.getSource() == resetButton) {
