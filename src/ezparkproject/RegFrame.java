@@ -163,7 +163,7 @@ public class RegFrame implements ActionListener{
 
 			try {
 					
-					Connection con = DatabaseConnection.getConnection();
+					Connection con = Database.getConnection();
 					PreparedStatement Pstatement = con.prepareStatement("insert into ParkingDB values(?,?,?,?,?,?,?,?,?,?,?,?)");
 					
 					/* Specifying values */

@@ -116,7 +116,7 @@ public class LoginFunction extends JFrame {
                 @SuppressWarnings("deprecation")
 				String password = passwordField.getText();
                 try {
-                	Connection con = DatabaseConnection.getConnection(); //Updated connection
+                	Connection con = Database.getConnection(); //Updated connection
 
                     PreparedStatement st = (PreparedStatement) con
                         .prepareStatement("Select id, password from ParkingDB where id=? and password=?");

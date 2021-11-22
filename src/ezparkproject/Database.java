@@ -32,7 +32,9 @@ public class Database {
 	String url;
 	String driverName;
 	
-	public Database() {
+	/* Commented out as using static method for DB connection - subject to review with team - Ash */
+	
+	/* public Database() {
 		
 		Connection con = null;
 		
@@ -66,7 +68,12 @@ public class Database {
 		    	System.out.println("Could not connect to the database " + e.getMessage());
 		    	return null;
 			}
-	}
+	} */
+	
+	public static Connection getConnection() throws SQLException {
+    	Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358","dcCxqbDW1K");
+		return con;
+    }
 	
 	public void fetchData() throws Exception{
 		try {
