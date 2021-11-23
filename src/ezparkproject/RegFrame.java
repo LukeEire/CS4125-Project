@@ -169,7 +169,8 @@ public class RegFrame implements ActionListener{
 				int electric = Integer.parseInt(EVComboBox.getSelectedItem().toString());
 				int accessibility = Integer.parseInt(accessibilityComboBox.getSelectedItem().toString());
 				String dob = dobField.getText();
-				//db.newUser(id, firstName, lastName, password, status, electric, accessibility, dob);
+				String reg = plate.getText();
+				db.newUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg);
 
 			} catch (SQLException error) {
 
