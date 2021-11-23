@@ -39,7 +39,7 @@ public class Database {
 		// name = "sql4450358";
 		username = "sql4450358";
 		password = "dcCxqbDW1K";
-		db = "ParkingDB";
+		db = "users";
 		reservations_db = "reservations";
 		// url = "jdbc:mysql://" + server +  "/" + db;
 		driverName = "jdbc:mysql://sql4.freesqldatabase.com";
