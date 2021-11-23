@@ -50,7 +50,8 @@ public class RegFrame implements ActionListener{
 	JCheckBox EVCheckBox = new JCheckBox("Disabled Permit?");
 	JCheckBox disabledCheckBox = new JCheckBox("Electric Vehicle?");
 	
-	int checkBox =0;
+	int electricCheckBoxVal = 0;
+	int disabledCheckBoxVal = 0;
 	
 	public void itemStateChanged(ItemEvent e)
     {
@@ -59,12 +60,12 @@ public class RegFrame implements ActionListener{
             if (e.getStateChange() == 1)
                 // Set to 1 
             	// AYOUBS FUNCTION TO CHANGE TO 1
-            	
+            	electricCheckBoxVal = 1;
             	System.out.println("Set to 1");
-            else
+        } else {
                 // Set to 0
             	// AYOUBS FUNCTION TO CHANGE TO 0
-            	
+            	electricCheckBoxVal = 0;
             	System.out.println("Set to 0");
         }
         
@@ -72,12 +73,12 @@ public class RegFrame implements ActionListener{
             if (e.getStateChange() == 1)
                 // Set to 1             	
             	// AYOUBS FUNCTION TO CHANGE TO 1
-            	
+            	disabledCheckBoxVal = 1;
             	System.out.println("Set to 1");
-            else
+        } else {
                 // Set to 0
             	// AYOUBS FUNCTION TO CHANGE TO 0
-            	
+        		disabledCheckBoxVal = 0;
             	System.out.println("Set to 0");
         }
   
@@ -220,8 +221,8 @@ public class RegFrame implements ActionListener{
 				String lastName = lastNameField.getText();				
 				String password = passwordField.getText();
 				String status = uniComboBox.getSelectedItem().toString();
-				int electric = Integer.parseInt(EVComboBox.getSelectedItem().toString());
-				int accessibility = Integer.parseInt(accessibilityComboBox.getSelectedItem().toString());
+				int electric = electricCheckBoxVal;
+				int accessibility = disabledCheckBoxVal;
 				String dob = dobField.getText();
 				String reg = plate.getText();
 				db.newUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg);
@@ -239,9 +240,7 @@ public class RegFrame implements ActionListener{
 			universityID.setText("ID");
 			dobField.setText("");
 			lastNameField.setText("");
-			uniComboBox.setSelectedItem("Student");
-			EVComboBox.setSelectedItem("Yes");
-			accessibilityComboBox.setSelectedItem("Yes");
+			uniComboBox.setSelectedItem("Student");			
 			passwordField.setText("");
 			confirmPasswordField.setText("");
 			emailTextField.setText("");
