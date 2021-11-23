@@ -29,6 +29,7 @@ public class RegFrame implements ActionListener{
 	JLabel EVLabel = new JLabel("Electric Vehicle?");
 	JLabel dobLabel = new JLabel("Date of Birth");
 	JLabel accessibilityLabel = new JLabel("Disabled Permit");
+	JLabel plateLabel = new JLabel("Car Registration");
 	
 	/* Text fields for labels */
 	
@@ -39,6 +40,9 @@ public class RegFrame implements ActionListener{
 	JTextField emailTextField = new JTextField();
 	JComboBox uniComboBox = new JComboBox(uniStatus);
 	JTextField dobField = new JTextField();
+	JTextField plate = new JTextField();
+
+	
 	
 	
 	JPasswordField confirmPasswordField = new JPasswordField();
@@ -61,6 +65,7 @@ public class RegFrame implements ActionListener{
 
 		createWindow();
 		setLocationAndSize();
+		frame.getContentPane().setBackground(Color.CYAN);
 		addComponentsToFrame();
 		actionEvent();
 	}
@@ -69,7 +74,7 @@ public class RegFrame implements ActionListener{
 
 		frame = new JFrame();
 		frame.setTitle("User Registration");
-		frame.setBounds(40, 40, 400, 600);
+		frame.setBounds(40, 40, 400, 700);
 		frame.getContentPane().setBackground(Color.white);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
@@ -90,6 +95,7 @@ public class RegFrame implements ActionListener{
         EVLabel.setBounds(20, 330, 100, 70);
         accessibilityLabel.setBounds(20, 380, 100, 70);
         dobLabel.setBounds(20, 430, 100, 70);
+        plateLabel.setBounds(20, 480, 100, 70);
         
         /* Text fields and drop downs bounds */
         
@@ -102,12 +108,13 @@ public class RegFrame implements ActionListener{
         EVComboBox.setBounds(180, 350, 165, 23);
         accessibilityComboBox.setBounds(180, 400, 165, 23);
         dobField.setBounds(180, 450, 165, 23);
+        plate.setBounds(180, 500, 165, 23);
         
         /* Button Bounds */
         
-        registerButton.setBounds(25, 500, 100, 35);
-        resetButton.setBounds(250, 500, 100, 35);
-        loginButton.setBounds(137, 500, 100, 35);
+        registerButton.setBounds(25, 550, 100, 35);
+        resetButton.setBounds(250, 550, 100, 35);
+        loginButton.setBounds(137, 550, 100, 35);
 	}
 
 	public void addComponentsToFrame() {
@@ -123,6 +130,7 @@ public class RegFrame implements ActionListener{
 		frame.add(EVLabel);
 		frame.add(accessibilityLabel);
 		frame.add(dobLabel);
+		frame.add(plateLabel);
 		
 		/* Text fields and drop downs */
 		
@@ -135,6 +143,7 @@ public class RegFrame implements ActionListener{
 		frame.add(accessibilityComboBox);
 		frame.add(EVComboBox);
 		frame.add(dobField);
+		frame.add(plate);
 		
 		/* Buttons */
 		
