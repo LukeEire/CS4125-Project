@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
+
 
 
 /**
@@ -173,12 +175,12 @@ public class Database {
 				p.setString(4, password);
 				p.setString(5, email);
 				p.setString(6, status);
-				// p.setInt(7, electric);
+				p.setInt(7, electric);
 				p.setInt(8, 0);
 				p.setInt(9, 0);
-				// p.setInt(10, accessibility);
+				p.setInt(10, accessibility);
 				p.setDate(11, created_at);
-				p.setDate(12, (Date) dob);
+				//p.setDate(12, (Date) dob);
 				p.setString(13, reg);
 		        
 		        if(electric >= 1) {
