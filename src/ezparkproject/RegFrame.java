@@ -14,8 +14,8 @@ public class RegFrame implements ActionListener{
 	
 	JFrame frame;
 	String[] uniStatus = { "Student", "Staff", "Guest" }; /* also known as rank from our analysis class diagram */
-	String[] accessibilityStatus = { "Yes", "No" }; /* When checking for disabled spaces, they will show in reservations */
-	String[] EVStatus = { "Yes", "No" }; /* Electric vehicle status - needs to be set to yes to show EV parking spaces */
+	//String[] accessibilityStatus = { "Yes", "No" }; /* When checking for disabled spaces, they will show in reservations */
+	//String[] EVStatus = { "Yes", "No" }; /* Electric vehicle status - needs to be set to yes to show EV parking spaces */
 	
 	/* Labels */
 	
@@ -41,8 +41,51 @@ public class RegFrame implements ActionListener{
 	JComboBox uniComboBox = new JComboBox(uniStatus);
 	JTextField dobField = new JTextField();
 	JTextField plate = new JTextField();
-
 	
+	
+	
+	
+	/* JCheckbox for accessibility and EV status */
+	
+	JCheckBox EVCheckBox = new JCheckBox("Disabled Permit?");
+	JCheckBox disabledCheckBox = new JCheckBox("Electric Vehicle?");
+	
+	int checkBox =0;
+	
+	public void itemStateChanged(ItemEvent e)
+    {
+        // if the state of checkbox1 is changed
+        if (e.getSource() == EVCheckBox) {
+            if (e.getStateChange() == 1)
+                // Set to 1 
+            	// AYOUBS FUNCTION TO CHANGE TO 1
+            	
+            	System.out.println("Set to 1");
+            else
+                // Set to 0
+            	// AYOUBS FUNCTION TO CHANGE TO 0
+            	
+            	System.out.println("Set to 0");
+        }
+        
+        if (e.getSource() == disabledCheckBox) {
+            if (e.getStateChange() == 1)
+                // Set to 1             	
+            	// AYOUBS FUNCTION TO CHANGE TO 1
+            	
+            	System.out.println("Set to 1");
+            else
+                // Set to 0
+            	// AYOUBS FUNCTION TO CHANGE TO 0
+            	
+            	System.out.println("Set to 0");
+        }
+  
+        
+    }
+	
+
+	/* End of CheckBox function */
 	
 	
 	JPasswordField confirmPasswordField = new JPasswordField();
@@ -51,8 +94,8 @@ public class RegFrame implements ActionListener{
 	/* Drop down menus */
 	
 	
-	JComboBox accessibilityComboBox = new JComboBox(accessibilityStatus);
-	JComboBox EVComboBox = new JComboBox(EVStatus);
+	//JComboBox accessibilityComboBox = new JComboBox(accessibilityStatus);
+	//JComboBox EVComboBox = new JComboBox(EVStatus);
 	
 	/* Buttons */
 	
@@ -69,6 +112,8 @@ public class RegFrame implements ActionListener{
 		addComponentsToFrame();
 		actionEvent();
 	}
+	
+	
 
 	public void createWindow() {
 
@@ -92,10 +137,8 @@ public class RegFrame implements ActionListener{
         passwordLabel.setBounds(20, 180, 140, 70);
         emailLabel.setBounds(20, 225, 100, 70);
         university_statusLabel.setBounds(20, 280, 100, 70);
-        EVLabel.setBounds(20, 330, 100, 70);
-        accessibilityLabel.setBounds(20, 380, 100, 70);
-        dobLabel.setBounds(20, 430, 100, 70);
-        plateLabel.setBounds(20, 480, 100, 70);
+        dobLabel.setBounds(20, 330, 100, 70);
+        plateLabel.setBounds(20, 380, 100, 70);
         
         /* Text fields and drop downs bounds */
         
@@ -105,10 +148,10 @@ public class RegFrame implements ActionListener{
         passwordField.setBounds(180, 205, 165, 23);
         emailTextField.setBounds(180, 250, 165, 23);
         uniComboBox.setBounds(180, 300, 165, 23);
-        EVComboBox.setBounds(180, 350, 165, 23);
-        accessibilityComboBox.setBounds(180, 400, 165, 23);
-        dobField.setBounds(180, 450, 165, 23);
-        plate.setBounds(180, 500, 165, 23);
+        EVCheckBox.setBounds(180, 450, 165, 23);
+        disabledCheckBox.setBounds(180, 500, 165, 23);
+        dobField.setBounds (180, 350, 165, 23);
+        plate.setBounds (180, 400, 165, 23);
         
         /* Button Bounds */
         
@@ -140,8 +183,8 @@ public class RegFrame implements ActionListener{
 		frame.add(passwordField);
 		frame.add(emailTextField);
 		frame.add(uniComboBox);
-		frame.add(accessibilityComboBox);
-		frame.add(EVComboBox);
+		frame.add(disabledCheckBox);
+		frame.add(EVCheckBox);
 		frame.add(dobField);
 		frame.add(plate);
 		
@@ -151,6 +194,8 @@ public class RegFrame implements ActionListener{
 		frame.add(resetButton);
 		frame.add(loginButton);
 	}
+	
+	
 
 	public void actionEvent() {
 
