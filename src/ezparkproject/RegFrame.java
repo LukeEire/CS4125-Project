@@ -3,12 +3,14 @@ package ezparkproject;
 import javax.swing.*; 
 import java.awt.event.*; 
 import java.awt.*; 
-import
-java.sql.*;
+import java.sql.*;
 
 public class RegFrame implements ActionListener{
 	
 	/*Required timestamp to pass during registration and DOB */
+	
+	
+
 	
 	java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
 	
@@ -159,24 +161,70 @@ public class RegFrame implements ActionListener{
 		if (e.getSource() == registerButton) {
 
 			try {
-
-				Database db = new Database();
-				int id = Integer.parseInt(universityIDField.getText());
-				String firstName = firstNameField.getText();
-				String lastName = lastNameField.getText();				
-				String password = passwordField.getText();
-				String status = uniComboBox.getSelectedItem().toString();
-				int electric = Integer.parseInt(EVComboBox.getSelectedItem().toString());
-				int accessibility = Integer.parseInt(accessibilityComboBox.getSelectedItem().toString());
-				String dob = dobField.getText();
-				db.newUser(id, firstName, lastName, password, status, electric, accessibility, dob);
-
-			} catch (SQLException error) {
-
-				System.out.println("Could not connect to the database " + error.getMessage());
-
+					
+					Connection con = Database.getConnection();
+					PreparedStatement Pstatement = con.prepareStatement("insert into ParkingDB values(?,?,?,?,?,?,?,?,?,?,?,?,)");
+					
+					/* Specifying values */
+					
+					Pstatement.setString(1, universityIDField.getText());
+					Pstatement.setString(2, firstNameField.getText());
+					Pstatement.setString(3, lastNameField.getText());				
+					Pstatement.setString(4, passwordField.getText());
+					Pstatement.setString(5, emailTextField.getText());
+					Pstatement.setString(6, uniComboBox.getSelectedItem().toString());
+					Pstatement.setString(7, EVComboBox.getSelectedItem().toString());				
+					Pstatement.setInt(8, 0);
+					Pstatement.setInt(9, 0);
+					Pstatement.setString(10, accessibilityComboBox.getSelectedItem().toString());
+					Pstatement.setTimestamp(11, date); // Needs to get current date 
+					Pstatement.setString(12, dobField.getText()); // Needs to get DOB this is TBD at the moment
+					
+					//Check to see if name field was left blank 
+					if (universityIDField.getText().isEmpty()){
+						JOptionPane.showMessageDialog(null, "You must enter a Student ID");
+					} else 
+						
+					if (firstNameField.getText().isEmpty()){
+						JOptionPane.showMessageDialog(null, "You must enter a First Name");
+					} else
+						
+					if (lastNameField.getText().isEmpty()){
+							JOptionPane.showMessageDialog(null, "You must enter a Last Name");
+					} else
+					if (emailTextField.getText().isEmpty()){
+							JOptionPane.showMessageDialog(null, "You must fill in an Email Address");
+					} else
+								
+					if (dobField.getText().isEmpty()){
+							JOptionPane.showMessageDialog(null, "Please Enter a valid Date of Birth");
+					} else
+					{
+						
+						Pstatement.executeUpdate();
+						firstNameField.setText("");
+						universityID.setText("");
+						dobField.setText("");
+						lastNameField.setText("");
+						uniComboBox.setSelectedItem("Student");
+						EVComboBox.setSelectedItem("Yes");
+						accessibilityComboBox.setSelectedItem("Yes");
+						passwordField.setText("");
+						confirmPasswordField.setText("");
+						emailTextField.setText("");
+						JOptionPane.showMessageDialog(null, "You have successfully registered");
+					}	
+					
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
-		}	
+
+				
+				
+		
 			
 		if (e.getSource() == resetButton) {
 
