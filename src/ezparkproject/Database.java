@@ -93,6 +93,7 @@ public class Database {
 				System.out.println("Created on: " + rs.getDate("created_on"));
 				System.out.println("D.O.B: " + rs.getDate("dob"));
 				System.out.println("Penalty Points: " + rs.getInt("penalties"));
+				System.out.println("Defualt Registration Plate: " + rs.getString("reg"));
 
 				System.out.println("-----------------------------END-------------------------------");
 				i++;
@@ -111,7 +112,7 @@ public class Database {
 			
 	}
 	
-	public void newUser(int id, String firstName, String lastName, String password, String status, int electric, int accessibility, String sdob) throws SQLException {
+	public void newUser(int id, String firstName, String lastName, String password, String status, int electric, int accessibility, String sdob, String reg) throws SQLException {
 		
 		java.util.Date dob = new Date(2000);
 		try {
@@ -150,8 +151,9 @@ public class Database {
 				// accessibility 
 				// created_on 
 				// dob
+				// reg
 
-				String query = "INSERT INTO " + db + "(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob ) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
+				String query = "INSERT INTO " + db + "(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob, reg ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
 				
 				PreparedStatement p = con.prepareStatement(query);
 				p.setInt(1, id);
@@ -166,6 +168,7 @@ public class Database {
 				// p.setInt(10, accessibility);
 				p.setDate(11, created_at);
 				p.setDate(12, (Date) dob);
+				p.setString(13, reg);
 		        
 		        if(electric >= 1) {
 		        	p.setInt(7, 1);
@@ -427,7 +430,7 @@ public void newBooking(int id, String firstName, String lastName, String passwor
 	// - Electric?
 	// - Accessability?
 	// - Expiry (Date entered for user to check out of parking space)
-	public void reserve(int id, String lot, int electric, int accessibility, String sexpiry) throws SQLException {
+	public void reserve(int id, String reg, String lot, int electric, int accessibility, String sexpiry) throws SQLException {
 
 		LocalDate ca = LocalDate.now();
 		Date created_at = Date.valueOf(ca);
@@ -443,26 +446,27 @@ public void newBooking(int id, String firstName, String lastName, String passwor
 			
 			if(id > 0 && lot!=null){
 				
-				String query = "INSERT INTO " + reservations_db + "(id, lot, electric, accessability, created_on, expiry) VALUES (?, ?, ?, ?, ?, ?)";
+				String query = "INSERT INTO " + reservations_db + "(id, reg, lot, electric, accessability, created_on, expiry) VALUES (?, ?, ?, ?, ?, ?, ?)";
 				
 				PreparedStatement p = con.prepareStatement(query);
 				p.setInt(1, id);
-				p.setString(2, lot);
-				p.setInt(3, electric);
-				p.setInt(4, accessibility);
-				p.setDate(5, created_at);
-				p.setDate(6, (Date) expiry);
+				p.setString(2, reg);
+				p.setString(3, lot);
+				p.setInt(4, electric);
+				p.setInt(5, accessibility);
+				p.setDate(6, created_at);
+				p.setDate(7, (Date) expiry);
 
 		        if(electric >= 1) {
-		        	p.setInt(3, 1);
-		        } else {
-		        	p.setInt(3, 0);
-		        }
-		        
-		        if(accessibility >= 1) {
 		        	p.setInt(4, 1);
 		        } else {
 		        	p.setInt(4, 0);
+		        }
+		        
+		        if(accessibility >= 1) {
+		        	p.setInt(5, 1);
+		        } else {
+		        	p.setInt(5, 0);
 		        }
 		        
 	            int insert = p.executeUpdate(query);
@@ -491,7 +495,7 @@ public void newBooking(int id, String firstName, String lastName, String passwor
 			String query = "select * from " + reservations_db;
 			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
-			List<String> reservations = new ArrayList<String>();
+			ArrayList<String> reservations = new ArrayList<String>();
 
 			while(rs.next()){
 
@@ -499,6 +503,7 @@ public void newBooking(int id, String firstName, String lastName, String passwor
 				System.out.println("------------------------Reservation: "+i+"----------------------------");
 				System.out.println("Reservations ID: " + rs.getInt("id"));
 				System.out.println("User ID: " + rs.getInt("userID"));
+				System.out.println("Registration Plate: " + rs.getString("reg"));
 				System.out.println("Electric Car? [Y/N]: " + rs.getString("electric"));
 				System.out.println("Assistance Required? [Y/N]: " + rs.getString("accessibility"));
 				System.out.println("Reservation Data: " + rs.getDate("created_on"));

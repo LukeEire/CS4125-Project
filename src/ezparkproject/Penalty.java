@@ -14,21 +14,28 @@ public class Penalty {
     
     public Penalty(){
     
-        db = new Database();
+        
 
         try{
-
+            
+            db = new Database();
             con = db.connect();
-
-        } catch(ClassNotFoundException e){
-
-            System.out.println("Could not find the database driver " + e.getMessage());
 
         } catch(SQLException e1){
 
             System.out.println("Could not connect to the database " + e1.getMessage());
 
         }
+
+        // catch(ClassNotFoundException e){
+
+        //     System.out.println("Could not find the database driver " + e.getMessage());
+
+        // } catch(SQLException e1){
+
+        //     System.out.println("Could not connect to the database " + e1.getMessage());
+
+        // }
 
     }
 
