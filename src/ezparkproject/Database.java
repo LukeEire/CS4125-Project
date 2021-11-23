@@ -57,6 +57,17 @@ public class Database {
 
 	}
 	
+	public Database getConnection() throws SQLException {
+		try {
+			con = DriverManager.getConnection(driverName, username, password);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		System.out.println("Successfully Connected to the database!");
+		return null;
+	}
+	
 	public Connection connect(){
 		//returns connection
 		System.out.println("Sever: " + server);
@@ -524,4 +535,6 @@ public void newBooking(int id, String firstName, String lastName, String passwor
 		}
 			
 	}
+
+	
 }
