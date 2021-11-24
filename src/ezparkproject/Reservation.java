@@ -41,12 +41,15 @@ public class Reservation {
     // Ayoub - new Reservation constructor
     // Adds reservation to DB
     public Reservation(Users user, String lot, /* has to be of format HH:mm */String sduration) {
-        
+
         this.user = user;
         this.id = user.id;
         this.accessibility = user.accessibility;
         this.electric = user.electric;
         this.reg = user.getDefultPlate();
+
+        this.lot = lot;
+        
         this.reservationTime = LocalDateTime.now();
         this.duration = LocalTime.parse(sduration);
         System.out.println("Testing time: Duration = " + duration );
