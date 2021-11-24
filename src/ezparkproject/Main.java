@@ -14,18 +14,19 @@ public class Main {
     {
         //creating object of class Users, Login etc
         
-    	//new RegFrame();
+    	new RegFrame();
       	
-    	//Ayoub testing
-		Database db = new Database();
+    	//Ayoub testing - the following has been tested and all works
+		//Database db = new Database();
 		//db.getConnection();
 		//db.connect();
-		db.fetchData();
+		//db.newUser(18266401, "Ayoub", "Jdair", "Password123", "Student", 1, 0, "2000-12-15", "222LH1445");
+		//db.newUser(18266403, "Ayoub2", "Jdair", "Password123", "Staff", 0, 0, "2001-12-15", "123HG654");
+		//db.newUser(18266404, "Ayoub3", "Jdair", "Password123", "Guest", 1, 1, "2010-12-15", "12HFD234");
+		//db.newUser(18266405, "Ayoub4", "Jdair", "Password123", "Student", 0, 1, "1999-12-15", "99CE1234");
+		//db.fetchData();
 		//db.test();
-		
-    	//Users Ayoub = new Users(19266401, "ayoub", "jdair", "12345", "Student", 1, 0, "15/12/2000");
-        //new LoginFrame();
-        //new Login();
+
        
     }
 }

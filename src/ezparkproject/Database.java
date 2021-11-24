@@ -37,31 +37,35 @@ public class Database {
 	protected String url2;
 	protected String driverName;
 	protected int Port_number;
+	protected String testVal;
 
 	public Database() throws SQLException{
 		//creates a DB object and connects to the DB
 		this.Port_number = 3306;
-		this.server = "sql4.freesqldatabase.com";
+		//this.server = "sql4.freesqldatabase.com";
+		this.server = "sql4.freesqldatabase.com:3306/sql4450358";
 		// name = "sql4450358";
 		this.username = "sql4450358";
 		//this.username = "sql4450358@ec2-52-8-112-233.us-west-1.compute.amazonaws.com";
 		this.password = "dcCxqbDW1K";
 		this.db = "users";
 		this.reservations_db = "reservations";
-		this.url = "jdbc:mysql://" + server +  "/" + db;
+		this.url = "jdbc:mysql://" + this.server +  "/" + this.db;
 		this.url2 = "jdbc:mysql://" + server +  "/" + reservations_db;
 		this.driverName = "jdbc:mysql://sql4.freemysqlhosting.net";
-
-		try {
+		this.testVal = "jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358";
+		this.con = DriverManager.getConnection(this.testVal, this.username, this.password);
+		//jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358","dcCxqbDW1K"
+		
+		/*try {
 			
-			con = DriverManager.getConnection(url, username, password);
+			this.con = DriverManager.getConnection(this.url, this.username, this.password);
 			System.out.println("Successfully Connected to the database!");
 				  
 		} catch (SQLException e) {
-			  
 			System.out.println("Could not connect to the database " + e.getMessage());
 
-		}
+		}*/
 
 	}
 	
@@ -84,12 +88,13 @@ public class Database {
 		System.out.println("Password: " + password);
 		System.out.println("DB: " + db);
 		System.out.println("URL: " + url);
+		System.out.println("Connection obj: " + con);
 		return con;
 	}
 	
 	public void test() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358","dcCxqbDW1K");
-		String query = "select * from users";
+		String query = "select * from ParkingDB";
         PreparedStatement p = conn.prepareStatement(query);
 		ResultSet rs = p.executeQuery(query);
 		while(rs.next()) {
@@ -109,11 +114,11 @@ public class Database {
 			while(rs.next()){
 
 				int i = 0;
-				System.out.println("------------------------User: "+i+"----------------------------");
+				System.out.println("--------------------------User: "+i+"------------------------------");
 				System.out.println("User ID: " + rs.getInt("id"));
 				System.out.println("Firs name: " + rs.getString("firstName"));
 				System.out.println("Last name: " + rs.getString("lastName"));
-				System.out.println("Status: " + rs.getInt("status"));
+				System.out.println("Status: " + rs.getString("status"));
 				System.out.println("Password: " + rs.getString("password"));
 				System.out.println("Email: " + rs.getString("email_address"));
 				System.out.println("Electric Car? [Y/N]: " + rs.getString("electric"));
@@ -178,7 +183,7 @@ public class Database {
 		Date created_at = Date.valueOf(ld);
 
 
-		String email;
+		String email = "NULL";
 		if(status == "Student"){
 			email = id + "@studentmail.ul.ie";
 		} else if (status == "Staff") {
@@ -207,7 +212,8 @@ public class Database {
 				// reg
 
 				String query = "INSERT INTO " + db + "(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob, reg ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
-				
+				//String query = "INSERT INTO " + db + "(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, reg ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?)";
+
 				PreparedStatement p = con.prepareStatement(query);
 				p.setInt(1, id);
 				p.setString(2, firstName);
@@ -215,31 +221,43 @@ public class Database {
 				p.setString(4, password);
 				p.setString(5, email);
 				p.setString(6, status);
-				p.setInt(7, electric);
-				p.setInt(8, 0);
-				p.setInt(9, 0);
-				p.setInt(10, accessibility);
-				p.setDate(11, created_at);
-				p.setDate(12, dob);
-				p.setString(13, reg);
-		        
-		        if(electric >= 1) {
+				//p.setInt(7, electric);
+				if(electric >= 1) {
 		        	p.setInt(7, 1);
 		        } else {
 		        	p.setInt(7, 0);
 		        }
-		        
-		        if(accessibility >= 1) {
+				p.setInt(8, 0);
+				p.setInt(9, 0);
+				//p.setInt(10, accessibility);
+				if(accessibility >= 1) {
 		        	p.setInt(10, 1);
 		        } else {
 		        	p.setInt(10, 0);
 		        }
+				p.setDate(11, created_at);
+				p.setDate(12, dob);
+				p.setString(13, reg);
 		        
-	            int insert = p.executeUpdate(query);
+				/*p.setInt(1, 12345);
+				p.setString(2, "tegdfb");
+				p.setString(3, "srfdgfh");
+				p.setString(4, "srfdgfh");
+				p.setString(5, "srfdgfh");
+				p.setString(6, "srfdgfh");
+				p.setInt(7, 1);
+				p.setInt(8, 0);
+				p.setInt(9, 0);
+				p.setInt(10, 0);
+				//p.setDate(11, created_at);
+				//p.setDate(12, dob);
+				p.setString(11, "wertgh");*/
+				
+	            int insert = p.executeUpdate();
 	
 	            if(insert == 1)
 	            {
-	                System.out.println("New user added successful");
+	                System.out.println("New user added successfully");
 	            }
 	            else
 	            {
