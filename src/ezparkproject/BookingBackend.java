@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
-public class ScheduleManagement {
+public class BookingBackend {
 	//Get this to handle changes to bookings
 	
 	
@@ -24,7 +24,7 @@ public class ScheduleManagement {
 		
 	}*/
 	
-	public void connectToDB() {
+	/*public void connectToDB() {
 		try {
 			Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freemysqlhosting.net:3306/sql4448569","sql4448569", "rs5fNh4D5f");
 		} catch (SQLException e) {
@@ -32,9 +32,9 @@ public class ScheduleManagement {
 			e.printStackTrace();
 		}
 		
-	}
+	}*/
 	
-	public void makeBooking(Reservation res) {
+	/*public void makeBooking(Reservation res) {
 		//LocalDateTime date = res.checkInDate;
 		Users owner = res.getUser();
 		int stayLength = res.duration;
@@ -87,10 +87,7 @@ public class ScheduleManagement {
 			  e.printStackTrace();
 			  
 			  }
-		  
-		 
-		
-		
-		
-	}
+	}*/
+	
+	
 }
