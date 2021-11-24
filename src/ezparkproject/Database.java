@@ -141,16 +141,23 @@ public class Database {
 		// 	e1.printStackTrace();
 		// } 
 
-		try {
-			System.out.println("Date of birth entered:" + sdob);
-            SimpleDateFormat format = new SimpleDateFormat("ddMMyyyy");
-			java.util.Date pdob = format.parse(sdob);
-			System.out.println("Date parsed:" + pdob);
-			java.sql.Date dob = new java.sql.Date(pdob.getTime());
-			System.out.println("Formatted D.O.B: " + dob); // 2011-01-18
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		} 
+		// try {
+		// 	System.out.println("Date of birth entered:" + sdob);
+        //     SimpleDateFormat format = new SimpleDateFormat("ddMMyyyy");
+		// 	java.util.Date pdob = format.parse(sdob);
+		// 	System.out.println("Date parsed:" + pdob);
+		// 	java.sql.Date dob = new java.sql.Date(pdob.getTime());
+		// 	System.out.println("Formatted D.O.B: " + dob); // 2011-01-18
+		// } catch (ParseException e1) {
+		// 	e1.printStackTrace();
+		// 	String str = sdob;  
+		// 	Date date = Date.valueOf(str);//converting string into sql date  
+		// 	System.out.println(date);  
+		// } 
+
+		Date dob = Date.valueOf(sdob);//converting string into sql date  
+		System.out.println("Final date of birth: " + dob);  
+
 
 		LocalDate ld = LocalDate.now();
 		Date created_at = Date.valueOf(ld);
