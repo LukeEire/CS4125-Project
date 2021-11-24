@@ -10,6 +10,8 @@ public class BookingFrame implements ActionListener{
 	private JButton makeButton;
 	private JButton cancelButton;
 	private JButton changeButton;
+	private JButton quitButton;
+	private JTextField heading;
 	
 	java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
 	
@@ -43,58 +45,6 @@ public class BookingFrame implements ActionListener{
 	
 	
 	
-	/* JCheckbox for accessibility and EV status */
-	
-	JCheckBox EVCheckBox = new JCheckBox("Disabled Permit?");
-	JCheckBox disabledCheckBox = new JCheckBox("Electric Vehicle?");
-	
-	int electricCheckBoxVal;
-	int disabledCheckBoxVal;
-	
-	public void itemStateChanged(ItemEvent e)
-    {
-        // if the state of checkbox1 is changed
-        if (e.getSource() == EVCheckBox) {
-            if (e.getStateChange() == 1)
-                // Set to 1 
-            	// AYOUBS FUNCTION TO CHANGE TO 1
-            	electricCheckBoxVal = 1;
-            	System.out.println("Set to 1");
-        } else {
-                // Set to 0
-            	// AYOUBS FUNCTION TO CHANGE TO 0
-            	electricCheckBoxVal = 0;
-            	System.out.println("Set to 0");
-        }
-        
-        if (e.getSource() == disabledCheckBox) {
-            if (e.getStateChange() == 1)
-                // Set to 1             	
-            	// AYOUBS FUNCTION TO CHANGE TO 1
-            	disabledCheckBoxVal = 1;
-            	System.out.println("Set to 1");
-        } else {
-                // Set to 0
-            	// AYOUBS FUNCTION TO CHANGE TO 0
-        		disabledCheckBoxVal = 0;
-            	System.out.println("Set to 0");
-        }
-  
-        
-    }
-	
-
-	/* End of CheckBox function */
-	
-	
-	JPasswordField confirmPasswordField = new JPasswordField();
-	
-	
-	/* Drop down menus */
-	
-	
-	//JComboBox accessibilityComboBox = new JComboBox(accessibilityStatus);
-	//JComboBox EVComboBox = new JComboBox(EVStatus);
 	
 	/* Buttons */
 	
@@ -118,7 +68,7 @@ public class BookingFrame implements ActionListener{
 
 		frame = new JFrame();
 		frame.setTitle("User Registration");
-		frame.setBounds(40, 40, 400, 700);
+		frame.setBounds(40, 40, 1280, 720);
 		frame.getContentPane().setBackground(Color.white);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
@@ -147,8 +97,6 @@ public class BookingFrame implements ActionListener{
         passwordField.setBounds(180, 205, 165, 23);
         emailTextField.setBounds(180, 250, 165, 23);
         uniComboBox.setBounds(180, 300, 165, 23);
-        EVCheckBox.setBounds(180, 450, 165, 23);
-        disabledCheckBox.setBounds(180, 500, 165, 23);
         dobField.setBounds (180, 350, 165, 23);
         plate.setBounds (180, 400, 165, 23);
         
@@ -182,8 +130,6 @@ public class BookingFrame implements ActionListener{
 		frame.add(passwordField);
 		frame.add(emailTextField);
 		frame.add(uniComboBox);
-		frame.add(disabledCheckBox);
-		frame.add(EVCheckBox);
 		frame.add(dobField);
 		frame.add(plate);
 		
@@ -211,25 +157,6 @@ public class BookingFrame implements ActionListener{
 
 		if (e.getSource() == registerButton) {
 
-			try {
-
-				Database db = new Database();
-				int id = Integer.parseInt(universityIDField.getText());
-				String firstName = firstNameField.getText();
-				String lastName = lastNameField.getText();				
-				String password = passwordField.getText();
-				String status = uniComboBox.getSelectedItem().toString();
-				int electric = electricCheckBoxVal;
-				int accessibility = disabledCheckBoxVal;
-				String dob = dobField.getText();
-				String reg = plate.getText();
-				db.newUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg);
-
-			} catch (SQLException error) {
-
-				System.out.println("Could not connect to the database " + error.getMessage());
-
-			}
 		}	
 			
 		if (e.getSource() == resetButton) {
@@ -240,7 +167,6 @@ public class BookingFrame implements ActionListener{
 			lastNameField.setText("");
 			uniComboBox.setSelectedItem("Student");			
 			passwordField.setText("");
-			confirmPasswordField.setText("");
 			emailTextField.setText("");
 		}
 
