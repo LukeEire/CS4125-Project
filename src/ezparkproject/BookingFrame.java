@@ -10,6 +10,7 @@ public class BookingFrame implements ActionListener{
 	private JButton makeButton;
 	private JButton cancelButton;
 	private JButton changeButton;
+	private int test = 1;
 	
 	java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
 	
