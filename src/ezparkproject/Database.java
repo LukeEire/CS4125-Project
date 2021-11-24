@@ -11,8 +11,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
-
+//import java.sql.Date;
+// import java.text.ParseException;
+// import java.text.SimpleDateFormat;
+// import java.util.Date;
 
 
 /**
@@ -127,15 +129,31 @@ public class Database {
 	
 	public void newUser(int id, String firstName, String lastName, String password, String status, int electric, int accessibility, String sdob, String reg) throws SQLException {
 		
-		java.util.Date dob = new Date(2000);
+		//java.util.Date dob;
+		// try {
+		// 	System.out.println("Date of birth entered:" + sdob);
+		// 	java.util.Date unformattedDob = new SimpleDateFormat("dd/MM/yyyy").parse(sdob);
+		// 	System.out.println("Date parsed:" + unformattedDob);
+	    // 	String dob = new SimpleDateFormat("dd/MM/yyyy").format(unformattedDob);
+		// 	System.out.println("Formatted D.O.B: " + dob); // 2011-01-18
+		// 	java.sql.Date sql = new java.sql.Date(dob.getTime());
+		// } catch (ParseException e1) {
+		// 	e1.printStackTrace();
+		// } 
+
 		try {
-			dob = new SimpleDateFormat("dd/MM/yyyy").parse(sdob);
+			System.out.println("Date of birth entered:" + sdob);
+            SimpleDateFormat format = new SimpleDateFormat("ddMMyyyy");
+			java.util.Date pdob = format.parse(sdob);
+			System.out.println("Date parsed:" + pdob);
+			java.sql.Date dob = new java.sql.Date(pdob.getTime());
+			System.out.println("Formatted D.O.B: " + dob); // 2011-01-18
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		} 
 
-		LocalDate ca = LocalDate.now();
-		Date created_at = Date.valueOf(ca);
+		LocalDate ld = LocalDate.now();
+		Date created_at = Date.valueOf(ld);
 
 
 		String email;
@@ -180,7 +198,7 @@ public class Database {
 				p.setInt(9, 0);
 				p.setInt(10, accessibility);
 				p.setDate(11, created_at);
-				//p.setDate(12, (Date) dob);
+				p.setDate(12, dob);
 				p.setString(13, reg);
 		        
 		        if(electric >= 1) {
