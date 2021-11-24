@@ -22,10 +22,6 @@ public class Users {
 	//Car reg plates list for the user, relating methods below
 	ArrayList<String> plates = new ArrayList<String>();
 
-	
-	public Users() {
-		
-	}
 
 	public Users(int id, String firstName, String lastName, String password, String email, String status, int electric, int accessibility, String sdob, String reg) {
 		
