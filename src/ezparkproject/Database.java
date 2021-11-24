@@ -339,30 +339,40 @@ public class Database {
     	}
     }
 	
-	public void verifyUser(int id, String password) throws SQLException {
+	public boolean verifyUser(int id, String password) throws SQLException {
 		
 		int checkUser = id;
 		String checkPass = password;
+		boolean result;
 		
 		try {
 			
-			String query = "SELECT * FROM " + db + " WHERE id = "+checkUser+" AND password = "+checkPass;
+			String query = "SELECT * FROM " + db + " WHERE id = "+checkUser+" AND password = " + "\"" + checkPass + "\"";
+			//String query = "SELECT * FROM users WHERE id = 18266404 AND password = \"Password123\"";
 			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			
-			while (rs.next()) {
-				int foundUser = rs.getInt("id");
-				String foundPass = rs.getString("password");
-				System.out.println("Found User: "+foundUser);
-				System.out.println("User Password: "+foundPass);
+			if(!rs.isBeforeFirst()) {
+				System.out.println("UserID OR password may be incorrect");
+				System.out.println("User: "+ checkUser);
+				System.out.println("Password: " + checkPass);
+				result = false;
+			} else {
+				while (rs.next()) {
+					int foundUser = rs.getInt("id");
+					String foundPass = rs.getString("password");
+					System.out.println("Found User: "+foundUser);
+					System.out.println("User Password: "+foundPass);
+				}
+				result = true;
 			}
+			return result;
 			
 		} catch(SQLException e) {
 									
 			System.out.println("Error locating data entered: " + e.getMessage());
-			System.out.println("UserID OR password may be incorrect");
-			System.out.println("User: "+ checkUser);
-			System.out.println("Password: " + checkPass);
+			result = false;
+			return result;
 			
 		}
 	}
