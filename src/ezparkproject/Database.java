@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 //import java.sql.Date;
 // import java.text.ParseException;
 // import java.text.SimpleDateFormat;
@@ -33,24 +34,27 @@ public class Database {
 	protected String db;
 	protected String reservations_db;
 	protected String url;
+	protected String url2;
 	protected String driverName;
 	protected int Port_number;
 
 	public Database() throws SQLException{
 		//creates a DB object and connects to the DB
-		Port_number = 3306;
-		server = "sql4.freesqldatabase.com";
+		this.Port_number = 3306;
+		this.server = "sql4.freesqldatabase.com";
 		// name = "sql4450358";
-		username = "sql4450358";
-		password = "dcCxqbDW1K";
-		db = "users";
-		reservations_db = "reservations";
-		// url = "jdbc:mysql://" + server +  "/" + db;
-		driverName = "jdbc:mysql://sql4.freesqldatabase.com";
+		this.username = "sql4450358";
+		//this.username = "sql4450358@ec2-52-8-112-233.us-west-1.compute.amazonaws.com";
+		this.password = "dcCxqbDW1K";
+		this.db = "users";
+		this.reservations_db = "reservations";
+		this.url = "jdbc:mysql://" + server +  "/" + db;
+		this.url2 = "jdbc:mysql://" + server +  "/" + reservations_db;
+		this.driverName = "jdbc:mysql://sql4.freemysqlhosting.net";
 
 		try {
 			
-			con = DriverManager.getConnection(driverName, username, password);
+			con = DriverManager.getConnection(url, username, password);
 			System.out.println("Successfully Connected to the database!");
 				  
 		} catch (SQLException e) {
@@ -76,17 +80,28 @@ public class Database {
 		//returns connection
 		System.out.println("Sever: " + server);
 		System.out.println("Name: " + name);
+		System.out.println("usernam: " + username);
 		System.out.println("Password: " + password);
 		System.out.println("DB: " + db);
-		System.out.println("URL: " + driverName);
+		System.out.println("URL: " + url);
 		return con;
+	}
+	
+	public void test() throws SQLException {
+        Connection conn = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358","dcCxqbDW1K");
+		String query = "select * from users";
+        PreparedStatement p = conn.prepareStatement(query);
+		ResultSet rs = p.executeQuery(query);
+		while(rs.next()) {
+			System.out.println(rs.getString("firstName"));
+		}
 	}
 
 	
 	public void fetchData() throws Exception{
 		try {
 			//Getting all DB data
-			String query = "select * from " + db;
+			String query = "select * from users";
 	        PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			List<String> users = new ArrayList<String>();
