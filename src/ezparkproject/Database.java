@@ -233,7 +233,7 @@ public class Database {
     	
     	try {
     		
-    		String query = "UPDATE " + db + " SET ban_status = 1 WHERE id = \""+id+"\"";
+    		String query = "UPDATE " + users_db + " SET ban_status = 1 WHERE id = \""+id+"\"";
 	        PreparedStatement p = con.prepareStatement(query);
 	        int ban = p.executeUpdate(query);
 	
