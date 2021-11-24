@@ -41,3 +41,7 @@ created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 expiry DATE,
 FOREIGN KEY (userID) REFERENCES users(id)
 );
+
+INSERT INTO users (id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob, reg ) VALUES (18266401, "Ayoub", "Jdair", "Password123", "Student", 1, 0, "2000-12-15", "222LH1445");
+
+INSERT INTO users (id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob, reg ) VALUES (18266401, "Ayoub", "Jdair", "Password123","email@email.com", "Student", 1, 0, 0, 1, DATE '2015-12-17', "2000-12-15", "222LH1445")
