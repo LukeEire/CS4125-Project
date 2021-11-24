@@ -379,8 +379,9 @@ public class Database {
 			
 			if(id > 0 && lot!=null){
 				
-				String query = "INSERT INTO " + reservations_db + "(id, reg, lot, electric, accessability, created_on, expiry) VALUES (?, ?, ?, ?, ?, ?, ?)";
-				
+				String query = "INSERT INTO " + reservations_db + "(userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	
+
 				PreparedStatement p = con.prepareStatement(query);
 				p.setInt(1, id);
 				p.setString(2, reg);
