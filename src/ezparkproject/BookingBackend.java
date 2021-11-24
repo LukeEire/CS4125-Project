@@ -19,8 +19,6 @@ public class BookingBackend {
 	Database db;
 	Connection con;
 	
-	int test = 1;
-	
 	
 	/*public void newDateForBooking(Date date,  ) {
 		
