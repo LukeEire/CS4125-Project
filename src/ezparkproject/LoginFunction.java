@@ -65,7 +65,7 @@ public class LoginFunction extends JFrame {
         /* Adding an Image logo to the start of the login screen */
         
         label = new JLabel("");
-        Image img = new ImageIcon(this.getClass().getResource("/ezparkproject/images/logo.png")).getImage();
+        Image img = new ImageIcon(this.getClass().getResource("images/logo.png")).getImage();
         label.setIcon(new ImageIcon(img));
         label.setBounds(503, 13, 273, 93);
         label.setSize(100,100);
@@ -116,10 +116,10 @@ public class LoginFunction extends JFrame {
                 @SuppressWarnings("deprecation")
 				String password = passwordField.getText();
                 try {
-                	Database db = new Database(); //Updated connection
+                    Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358", "dcCxqbDW1K"); //Updated connection
 
                     PreparedStatement st = (PreparedStatement) con
-                        .prepareStatement("Select id, password from ParkingDB where id=? and password=?");
+                        .prepareStatement("Select id, password from users where id=? and password=?");
 
                     st.setString(1, userID);
                     st.setString(2, password);

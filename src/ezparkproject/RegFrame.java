@@ -50,8 +50,8 @@ public class RegFrame implements ActionListener{
 	JCheckBox EVCheckBox = new JCheckBox("Disabled Permit?");
 	JCheckBox disabledCheckBox = new JCheckBox("Electric Vehicle?");
 	
-	int electricCheckBoxVal = 0;
-	int disabledCheckBoxVal = 0;
+	int electricCheckBoxVal;
+	int disabledCheckBoxVal;
 	
 	public void itemStateChanged(ItemEvent e)
     {
