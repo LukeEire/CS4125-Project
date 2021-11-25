@@ -391,7 +391,6 @@ public class Database {
 			LocalDateTime expiryDateTime = created_at_LocalDateTime;
 			expiryDateTime.plusHours(hours);
 			expiryDateTime.plusMinutes(mins);
-			expiryDateTime = created_at_LocalDateTime.plusMinutes(mins);
 			System.out.println("Resrvation expires: " + expiryDateTime.format(simpleDateFormat));
 			//Converting ca & expiryDateTime to sql date format
 			Date created_at = Date.valueOf(created_at_LocalDateTime.toLocalDate());
