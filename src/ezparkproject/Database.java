@@ -15,10 +15,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.sql.*;
 
 /**
@@ -383,11 +385,12 @@ public class Database {
 
 		try {
 
+			DateTimeFormatter simpleDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			LocalDateTime created_at_LocalDateTime = LocalDateTime.now();
-			System.out.println("Resrvation Created At: " + created_at_LocalDateTime);
+			System.out.println("Resrvation Created At: " + created_at_LocalDateTime.format(simpleDateFormat));
 			LocalDateTime expiryDateTime = created_at_LocalDateTime.plusHours(hours);
 			expiryDateTime = created_at_LocalDateTime.plusMinutes(mins);
-			System.out.println("Resrvation expires " + expiryDateTime);
+			System.out.println("Resrvation expires " + expiryDateTime.format(simpleDateFormat));
 			//Converting ca & expiryDateTime to sql date format
 			Date created_at = Date.valueOf(created_at_LocalDateTime.toLocalDate());
 			Date expiry = Date.valueOf(expiryDateTime.toLocalDate());
