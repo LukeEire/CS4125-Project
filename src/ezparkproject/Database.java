@@ -388,9 +388,11 @@ public class Database {
 			DateTimeFormatter simpleDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			LocalDateTime created_at_LocalDateTime = LocalDateTime.now();
 			System.out.println("Resrvation Created At: " + created_at_LocalDateTime.format(simpleDateFormat));
-			LocalDateTime expiryDateTime = created_at_LocalDateTime.plusHours(hours);
+			LocalDateTime expiryDateTime = created_at_LocalDateTime;
+			expiryDateTime.plusHours(hours);
+			expiryDateTime.plusMinutes(mins);
 			expiryDateTime = created_at_LocalDateTime.plusMinutes(mins);
-			System.out.println("Resrvation expires " + expiryDateTime.format(simpleDateFormat));
+			System.out.println("Resrvation expires: " + expiryDateTime.format(simpleDateFormat));
 			//Converting ca & expiryDateTime to sql date format
 			Date created_at = Date.valueOf(created_at_LocalDateTime.toLocalDate());
 			Date expiry = Date.valueOf(expiryDateTime.toLocalDate());
