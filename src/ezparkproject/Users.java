@@ -37,7 +37,7 @@ public class Users {
 		plates.add(reg);
 		
 		if (addUserToDatabase) {
-			
+
 			try {
 
 				Database db = new Database();
@@ -45,7 +45,7 @@ public class Users {
 	
 			} catch (SQLException e) {
 	
-				System.out.println("Could not connect to the database " + e1.getMessage());
+				System.out.println("Could not connect to the database " + e.getMessage());
 				
 			}
 			
