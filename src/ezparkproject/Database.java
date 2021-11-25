@@ -6,11 +6,18 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Period;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.sql.*;
 
@@ -361,26 +368,35 @@ public class Database {
 	// - Expiry (Date entered for user to check out of parking space)
 
 	// INSERTS new reservation into the resrvations DB
-	public void reserve(int id, String reg, String lot, int electric, int accessibility, String sexpiry) throws SQLException {
+	public void reserve(int id, String reg, String lot, int electric, int accessibility, long hours, long mins) throws SQLException{
+		// java.util.Date expiry = new Date(2000);
+		// try {
+		// 	expiry = new SimpleDateFormat("dd/MM/yyyy").parse(sexpiry);
+		// } catch (ParseException e1) {
+		// 	e1.printStackTrace();
+		// } 
 
 		// Variable for created_at field
-		LocalDate ca = LocalDate.now();
-		// Converting ca to sql date format
-		Date created_at = Date.valueOf(ca);
-
-		java.util.Date expiry = new Date(2000);
-		try {
-			expiry = new SimpleDateFormat("dd/MM/yyyy").parse(sexpiry);
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		} 
+		// LocalDate ca = LocalDate.now();
+		// // Converting ca to sql date format
+		// Date created_at = Date.valueOf(ca);
 
 		try {
-			
+
+			LocalDateTime created_at_LocalDateTime = LocalDateTime.now();
+			System.out.println("Resrvation Created At: " + created_at_LocalDateTime);
+			LocalDateTime expiryDateTime = created_at_LocalDateTime.plusHours(hours);
+			expiryDateTime = created_at_LocalDateTime.plusMinutes(mins);
+			System.out.println("Resrvation expires " + expiryDateTime);
+			//Converting ca & expiryDateTime to sql date format
+			Date created_at = Date.valueOf(created_at_LocalDateTime.toLocalDate());
+			Date expiry = Date.valueOf(expiryDateTime.toLocalDate());
+
 			if(id > 0 && lot!=null){
 				
 				String query = "INSERT INTO " + reservations_db + "(userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (?, ?, ?, ?, ?, ?, ?)";
-	
+				
+				//INSERT INTO reservations (userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (18266401, '10LH1445', 'LOT A', 1, 0, DATE '2015-12-17', "01:15");
 
 				PreparedStatement p = con.prepareStatement(query);
 				p.setInt(1, id);
@@ -389,7 +405,7 @@ public class Database {
 				p.setInt(4, electric);
 				p.setInt(5, accessibility);
 				p.setDate(6, created_at);
-				p.setDate(7, (Date) expiry);
+				p.setDate(7, expiry);
 
 		        if(electric >= 1) {
 		        	p.setInt(4, 1);
@@ -480,16 +496,13 @@ public class Database {
 				System.out.println("-----------------------------END-------------------------------");
 				i++;
 				
+				LocalDateTime reservationTimeDate = rs.getTimestamp("created_on").toLocalDateTime();
+				LocalDateTime expiry = rs.getTimestamp("expiry").toLocalDateTime();
 				
-			
-				Date expiryDate = rs.getDate("expiry");
-				LocalDate expiryLocalDate = expiryDate.toLocalDate();
-
-				Date reservationTimeDate = rs.getDate("created_on");
-				LocalDate reservationTimeLocalDate = reservationTimeDate.toLocalDate();
-				
-				Period durationPeriod = Period.between(reservationTimeLocalDate, expiryLocalDate);
+				Period durationPeriod = Period.between(reservationTimeDate.toLocalDate(), expiry.toLocalDate());
 				String duration = durationPeriod.toString();
+				System.out.println("Resrved for:  " + duration);
+
 
 				Reservation collectedReservation = new Reservation(user, "N/A", duration );
 				reservations.add(collectedReservation);
