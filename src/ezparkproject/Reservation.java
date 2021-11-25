@@ -39,9 +39,7 @@ public class Reservation {
     // }
 
     // Ayoub - new Reservation constructor
-    // Adds reservation to DB
-//    Reservation collectedReservation = new Reservation(user, "N/A", duration);
-
+    // Adds reservation to DB if boolean addReservationToDb is set to TRUE
     public Reservation(boolean addReservationToDb, Users user, String lot, long hours, long mins) throws SQLException {
 
         this.user = user;
