@@ -14,6 +14,7 @@ public class Main {
     {
         //creating object of class Users, Login etc
         
+    	// Errors thrown, needs to be fixed
     	//new RegFrame();
       	
     	//Ayoub testing - the following has been tested and all works - 24/11/2021
@@ -31,9 +32,9 @@ public class Main {
 		
 		// HOW TO PRINT USER'S DB ITEMS - PRINT STATEMENT + ARRAYLIST
 		//db.fetchData();
-		//db.test();
 		
 		// HOW TO DELETE/BAN/UNBAN A USER USING USER ID'S
+		
 		//db.deleteUser(18266401);
 		//db.deleteUser(18266403);
 		//db.deleteUser(18266404);
@@ -51,6 +52,15 @@ public class Main {
 		//boolean b = db.verifyUser(18266404, password);
 		//System.out.println(b);
 		
+		//db.reserve(18266401, "CALIFORNIA", "Lot A", 1, 0, 1, 1);
+		//db.reserve(18266401, "NEWYORK", "Lot A", 1, 0, 1, 1);
+		//db.reserve(18266401, "CHICAGO", "Lot A", 1, 0, 1, 1);
+		//db.reserve(18266401, "WASHINGTON", "Lot A", 1, 0, 1, 1);
+
+		//db.fetchReservationData();
+		Users ayoub = new Users(true, 18266406, "Jack", "H", "123456789", null, "Student", 1, 0, "1999-12-15", "PENN");
+		db.reserve(ayoub.id, ayoub.getDefultPlate(), "LOT A", 1, 0, 2, 15);
+		db.fetchUserReservation(ayoub);
 		
        
     }

@@ -485,7 +485,7 @@ public class Database {
 				System.out.println("Resrved for:  " + duration);
 
 
-				Reservation collectedReservation = new Reservation(user, "N/A", duration );
+				Reservation collectedReservation = new Reservation(user, "N/A", duration);
 				reservations.add(collectedReservation);
 			}
 			

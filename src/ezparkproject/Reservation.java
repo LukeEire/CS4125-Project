@@ -2,7 +2,9 @@ package ezparkproject;
 import ezparkproject.Users;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
@@ -19,11 +21,9 @@ public class Reservation {
     Date checkInDate;
     Date checkOutDate;
 
-    private String lot;
     private String reg;
-    private LocalDateTime expiry;
     private LocalDateTime reservationTime;
-    private LocalTime duration;
+    private LocalDateTime duration;
     private int accessibility;
     private int electric;
     private int id;
@@ -40,22 +40,30 @@ public class Reservation {
 
     // Ayoub - new Reservation constructor
     // Adds reservation to DB
-    public Reservation(Users user, String lot, /* has to be of format HH:mm */String sduration) {
+//    Reservation collectedReservation = new Reservation(user, "N/A", duration);
+
+    public Reservation(boolean addReservationToDb, Users user, String lot, long hours, long mins) throws SQLException {
 
         this.user = user;
         this.id = user.id;
         this.accessibility = user.accessibility;
         this.electric = user.electric;
         this.reg = user.getDefultPlate();
-
-        this.lot = lot;
-        
         this.reservationTime = LocalDateTime.now();
-        this.duration = LocalTime.parse(sduration);
+        this.duration = reservationTime;
+        this.duration = this.duration.plus(Duration.ofHours(hours));
+        this.duration = this.duration.plus(Duration.ofMinutes(mins));
+
         System.out.println("Testing time: Duration = " + duration );
-        this.expiry = reservationTime.plus(duration);
-        
-        db.reserve(id, reg, lot, electric, accessibility, expiry.toString());
+
+        if(addReservationToDb){
+            try {
+                db.reserve(id, reg, lot, electric, accessibility, hours, mins);
+            } catch (SQLException e) {
+                System.out.println("Error Reserving a spot through the reservatins class constructor: " + e.getMessage() );
+                e.printStackTrace();
+            }
+        }
         
     }
 
