@@ -390,8 +390,8 @@ public class Database {
 			System.out.println("Resrvation Created At: " + created_at_LocalDateTime.format(simpleDateFormat));
 			LocalDateTime expiryDateTime = created_at_LocalDateTime;
 			// Convert from legacy class to modern class, an `Instant`, a point on the timeline in UTC with resolution of nanoseconds.
-			expiryDateTime.plus(Duration.ofHours(hours));  
-			expiryDateTime.plus(Duration.ofMinutes(mins));
+			expiryDateTime = expiryDateTime.plus(Duration.ofHours(hours));  
+			expiryDateTime = expiryDateTime.plus(Duration.ofMinutes(mins));
 			System.out.println("Resrvation expires: " + expiryDateTime.format(simpleDateFormat));
 			//Converting ca & expiryDateTime to sql date format
 			Date created_at = Date.valueOf(created_at_LocalDateTime.toLocalDate());
