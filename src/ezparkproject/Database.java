@@ -296,7 +296,6 @@ public class Database {
 		try {
 			
 			String query = "SELECT * FROM " + users_db + " WHERE id = "+checkUser+" AND password = " + "\"" + checkPass + "\"";
-			//String query = "SELECT * FROM users WHERE id = 18266404 AND password = \"Password123\"";
 			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			
@@ -372,17 +371,6 @@ public class Database {
 
 	// INSERTS new reservation into the resrvations DB
 	public void reserve(int id, String reg, String lot, int electric, int accessibility, long hours, long mins) throws SQLException{
-		// java.util.Date expiry = new Date(2000);
-		// try {
-		// 	expiry = new SimpleDateFormat("dd/MM/yyyy").parse(sexpiry);
-		// } catch (ParseException e1) {
-		// 	e1.printStackTrace();
-		// } 
-
-		// Variable for created_at field
-		// LocalDate ca = LocalDate.now();
-		// // Converting ca to sql date format
-		// Date created_at = Date.valueOf(ca);
 
 		try {
 
@@ -398,7 +386,7 @@ public class Database {
 			Date created_at = Date.valueOf(created_at_LocalDateTime.toLocalDate());
 			Date expiry = Date.valueOf(expiryDateTime.toLocalDate());
 
-			if(id > 0 && lot!=null){
+			if(id > 0 && reg!=null && lot!=null && created_at!=null && expiry!=null){
 				
 				String query = "INSERT INTO " + reservations_db + "(userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (?, ?, ?, ?, ?, ?, ?)";
 				
@@ -408,28 +396,28 @@ public class Database {
 				p.setInt(1, id);
 				p.setString(2, reg);
 				p.setString(3, lot);
-				p.setInt(4, electric);
-				p.setInt(5, accessibility);
-				p.setDate(6, created_at);
-				p.setDate(7, expiry);
-
-		        if(electric >= 1) {
+				//p.setInt(4, electric);
+				if(electric >= 1) {
 		        	p.setInt(4, 1);
 		        } else {
 		        	p.setInt(4, 0);
 		        }
-		        
 		        if(accessibility >= 1) {
 		        	p.setInt(5, 1);
 		        } else {
 		        	p.setInt(5, 0);
 		        }
+				//p.setInt(5, accessibility);
+				p.setDate(6, created_at);
+				p.setDate(7, expiry);
 		        
 	            int insert = p.executeUpdate(query);
 	
 	            if(insert == 1)
 	            {
-	                System.out.println("Reservation made successfully");
+					System.out.println("Reservation made successfully");			
+					System.out.println("Resrvation From " + created_at + " Until " + expiry);
+
 	            }
 	            else
 	            {
