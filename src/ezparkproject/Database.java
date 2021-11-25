@@ -462,14 +462,15 @@ public class Database {
 			ResultSet rs = p.executeQuery(query);
 
 			ArrayList<Reservation> reservations = new ArrayList<Reservation>();
-
+			int i = 0;
+			
 			while(rs.next()){
-
-				int i = 0;
+				
 				System.out.println("------------------------Reservation: "+i+"----------------------------");
 				System.out.println("Reservations ID: " + rs.getInt("id"));
 				System.out.println("User ID: " + rs.getInt("userID"));
 				System.out.println("Registration Plate: " + rs.getString("reg"));
+				System.out.println("LOT: " + rs.getString("lot"));
 				System.out.println("Electric Car? [Y/N]: " + rs.getString("electric"));
 				System.out.println("Assistance Required? [Y/N]: " + rs.getString("accessibility"));
 				System.out.println("Reservation Data: " + rs.getDate("created_on"));
@@ -480,12 +481,16 @@ public class Database {
 				LocalDateTime reservationTimeDate = rs.getTimestamp("created_on").toLocalDateTime();
 				LocalDateTime expiry = rs.getTimestamp("expiry").toLocalDateTime();
 				
+				long mins = ChronoUnit.MINUTES.between(reservationTimeDate, expiry);
+				long hours = ChronoUnit.HOURS.between(reservationTimeDate, expiry);
+				
 				Period durationPeriod = Period.between(reservationTimeDate.toLocalDate(), expiry.toLocalDate());
-				String duration = durationPeriod.toString();
-				System.out.println("Resrved for:  " + duration);
+				int duration = durationPeriod.getDays();
 
 
-				Reservation collectedReservation = new Reservation(user, "N/A", duration);
+				System.out.println("Resrved for:  " + duration + " Day(s)");
+
+				Reservation collectedReservation = new Reservation(false, user, rs.getString("lot"), hours, mins);
 				reservations.add(collectedReservation);
 			}
 			
