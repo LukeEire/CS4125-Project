@@ -383,40 +383,27 @@ public class Database {
 			expiryDateTime = expiryDateTime.plus(Duration.ofMinutes(mins));
 			System.out.println("Resrvation expires: " + expiryDateTime.format(simpleDateFormat));
 			//Converting ca & expiryDateTime to sql date format
-			Date created_at = Date.valueOf(created_at_LocalDateTime.toLocalDate());
+			Date created_on = Date.valueOf(created_at_LocalDateTime.toLocalDate());
 			Date expiry = Date.valueOf(expiryDateTime.toLocalDate());
 
-			if(id > 0 && reg!=null && lot!=null && created_at!=null && expiry!=null){
+			if(id > 0 && reg!=null && lot!=null && created_on!=null && expiry!=null){
 				
 				String query = "INSERT INTO " + reservations_db + "(userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (?, ?, ?, ?, ?, ?, ?)";
 				
-				//INSERT INTO reservations (userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (18266401, '10LH1445', 'LOT A', 1, 0, DATE '2015-12-17', "01:15");
-
 				PreparedStatement p = con.prepareStatement(query);
 				p.setInt(1, id);
 				p.setString(2, reg);
 				p.setString(3, lot);
-				//p.setInt(4, electric);
-				if(electric >= 1) {
-		        	p.setInt(4, 1);
-		        } else {
-		        	p.setInt(4, 0);
-		        }
-		        if(accessibility >= 1) {
-		        	p.setInt(5, 1);
-		        } else {
-		        	p.setInt(5, 0);
-		        }
-				//p.setInt(5, accessibility);
-				p.setDate(6, created_at);
+				p.setInt(4, electric);
+				p.setInt(5, accessibility);
+				p.setDate(6, created_on);
 				p.setDate(7, expiry);
-		        
-	            int insert = p.executeUpdate(query);
-	
+				
+	            int insert = p.executeUpdate();
 	            if(insert == 1)
 	            {
 					System.out.println("Reservation made successfully");			
-					System.out.println("Resrvation From " + created_at + " Until " + expiry);
+					System.out.println("Resrvation From " + created_on + " Until " + expiry);
 
 	            }
 	            else

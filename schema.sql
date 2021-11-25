@@ -37,7 +37,7 @@ reg VARCHAR(255) NOT NULL,
 lot varchar(255) NOT NULL,
 electric TINYINT(1),
 accessibility TINYINT(1),
-created_on DATE NOT NULL,
+created_on DATE,
 expiry DATE,
 FOREIGN KEY (userID) REFERENCES users(id)
 );
