@@ -6,22 +6,24 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+
 import java.time.Period;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-import java.sql.*;
+// import java.util.Calendar;
+// import java.util.List;
+// import java.util.Locale;
+// import java.sql.*;
+// import java.text.DateFormat;
+// import java.time.LocalTime;
+// import java.time.ZoneId;
 
 /**
  * @author ayoubjdair
@@ -357,35 +359,30 @@ public class Database {
 			return 3;
 		}
 	}
-	
-	
-	//Ayoub
-	//Preliminary List of booking requirements (for reservations table): 
-	//lmk if you wanna talk about adding or removing any
-	// - USER ID
-	// - Reservation ID
-	// - Lot?
-	// - Electric?
-	// - Accessability?
-	// - Expiry (Date entered for user to check out of parking space)
 
 	// INSERTS new reservation into the resrvations DB
 	public void reserve(int id, String reg, String lot, int electric, int accessibility, long hours, long mins) throws SQLException{
 
 		try {
 
+			// Creating varibales for created at and expiry attributes
+
+			// Formatting
 			DateTimeFormatter simpleDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			LocalDateTime created_at_LocalDateTime = LocalDateTime.now();
 			System.out.println("Resrvation Created At: " + created_at_LocalDateTime.format(simpleDateFormat));
 			LocalDateTime expiryDateTime = created_at_LocalDateTime;
-			// Convert from legacy class to modern class, an `Instant`, a point on the timeline in UTC with resolution of nanoseconds.
+
+			// Adding user desired duration to remain parked to expiry variable
 			expiryDateTime = expiryDateTime.plus(Duration.ofHours(hours));  
 			expiryDateTime = expiryDateTime.plus(Duration.ofMinutes(mins));
 			System.out.println("Resrvation expires: " + expiryDateTime.format(simpleDateFormat));
+
 			//Converting ca & expiryDateTime to sql date format
 			Date created_on = Date.valueOf(created_at_LocalDateTime.toLocalDate());
 			Date expiry = Date.valueOf(expiryDateTime.toLocalDate());
 
+			// INSERTING data to DB
 			if(id > 0 && reg!=null && lot!=null && created_on!=null && expiry!=null){
 				
 				String query = "INSERT INTO " + reservations_db + "(userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -420,6 +417,7 @@ public class Database {
 	
 
 	// Prints Reservation Details in DB
+	// Stores their associated userID's in an array list of strings
 	public void fetchReservationData() throws Exception{
 		try {
 			//Getting all DB data
@@ -478,19 +476,25 @@ public class Database {
 				System.out.println("-----------------------------END-------------------------------");
 				i++;
 				
+				// storing DB time variables locally 
 				LocalDateTime reservationTimeDate = rs.getTimestamp("created_on").toLocalDateTime();
 				LocalDateTime expiry = rs.getTimestamp("expiry").toLocalDateTime();
 				
+				// Creating day, hour, and minute variables by getting the difference between reservation time and expiry
 				long mins = ChronoUnit.MINUTES.between(reservationTimeDate, expiry);
 				long hours = ChronoUnit.HOURS.between(reservationTimeDate, expiry);
-				
 				Period durationPeriod = Period.between(reservationTimeDate.toLocalDate(), expiry.toLocalDate());
 				int duration = durationPeriod.getDays();
 
 
 				System.out.println("Resrved for:  " + duration + " Day(s)");
+				System.out.println("Resrved for:  " + hours + " Hour(s)");
+				System.out.println("Resrved for:  " + mins + " Min(s)");
 
+
+				// Creating new resrvation obj without adding it to the DB (false)
 				Reservation collectedReservation = new Reservation(false, user, rs.getString("lot"), hours, mins);
+				// Storing it in a reservations arraylist
 				reservations.add(collectedReservation);
 			}
 			
