@@ -12,16 +12,13 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws Exception
     {
-        //creating object of class Users, Login etc
-        
-    	// Errors thrown, needs to be fixed
-    	//new RegFrame();
+		//Ayoub testing - the following has been tested and all works - 24/11/2021
+
+    	new RegFrame();
       	
-    	//Ayoub testing - the following has been tested and all works - 24/11/2021
-		Database db = new Database();
+		//Database db = new Database();
 		
 		// HOW TO GET A CON OBJECT (ALTHOUGH YOU DONT REALLY NEED TO)
-		//db.getConnection();
 		//db.connect();
 		
 		// HOW TO REGISTER A NEW USER
@@ -58,9 +55,9 @@ public class Main {
 		//db.reserve(18266401, "WASHINGTON", "Lot A", 1, 0, 1, 1);
 
 		//db.fetchReservationData();
-		Users ayoub = new Users(true, 18266406, "Jack", "H", "123456789", null, "Student", 1, 0, "1999-12-15", "PENN");
-		db.reserve(ayoub.id, ayoub.getDefultPlate(), "LOT A", 1, 0, 2, 15);
-		db.fetchUserReservation(ayoub);
+		// Users ayoub = new Users(true, 18266406, "Jack", "H", "123456789", null, "Student", 1, 0, "1999-12-15", "PENN");
+		// db.reserve(ayoub.id, ayoub.getDefultPlate(), "LOT A", 1, 0, 2, 15);
+		// db.fetchUserReservation(ayoub);
 		
        
     }
