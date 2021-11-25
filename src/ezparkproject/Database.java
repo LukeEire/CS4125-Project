@@ -101,7 +101,8 @@ public class Database {
 				
 				userIDs.add(rs.getString(1));
 
-				Users collectedUser = new Users(rs.getInt("id"),
+				Users collectedUser = new Users(false,
+									   rs.getInt("id"),
 									   rs.getString("firstName"),
 									   rs.getString("lastName"),
 									   rs.getString("password"),

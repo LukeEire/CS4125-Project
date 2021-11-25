@@ -23,7 +23,7 @@ public class Users {
 	ArrayList<String> plates = new ArrayList<String>();
 
 
-	public Users(int id, String firstName, String lastName, String password, String email, String status, int electric, int accessibility, String sdob, String reg) {
+	public Users(boolean addUserToDatabase, int id, String firstName, String lastName, String password, String email, String status, int electric, int accessibility, String sdob, String reg) {
 		
 		this.id = id;
 		this.firstName = firstName;
@@ -36,27 +36,21 @@ public class Users {
 		this.dob = sdob;
 		plates.add(reg);
 		
+		if (addUserToDatabase) {
+			
+			try {
 
-		try{
-
-			Database db = new Database();
-            con = db.connect();
-
-        } catch(SQLException e1){
-
-            System.out.println("Could not connect to the database " + e1.getMessage());
-
-		}
-
-		try {
-
-			db.newUser(id, firstName, lastName, password, status, electric, accessibility, sdob, reg);
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
+				Database db = new Database();
+				db.newUser(id, firstName, lastName, password, status, electric, accessibility, sdob, reg);
+	
+			} catch (SQLException e) {
+	
+				System.out.println("Could not connect to the database " + e1.getMessage());
+				
+			}
 			
 		}
+		
 		
 	}
 	
