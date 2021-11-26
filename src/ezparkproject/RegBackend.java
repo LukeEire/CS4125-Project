@@ -3,7 +3,8 @@ package ezparkproject;
 import java.sql.SQLException;
 
 public class RegBackend {
-int test = 3; //Test
+
+	// Author: Luke Kellet Murray, Ashutosh Yadav
 
 	RegBackend(){
 	

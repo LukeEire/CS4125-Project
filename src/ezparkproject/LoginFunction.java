@@ -113,10 +113,18 @@ public class LoginFunction extends JFrame {
         loginButton.addActionListener(new ActionListener() {
 
         	public void actionPerformed(ActionEvent e) {
-                String userID = textField.getText();
-                @SuppressWarnings("deprecation")
+        		String userID = textField.getText();
+        		int id = Integer.parseInt(userID.getText());                             
+				@SuppressWarnings("deprecation")
 				String password = passwordField.getText();
-                try {
+                
+				
+				LoginBackend.loginFunction(id, password);
+                
+				/*try {
+                    
+                
+                /*try {
                     Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358", "dcCxqbDW1K"); //Updated connection
 
                     PreparedStatement st = (PreparedStatement) con
@@ -136,8 +144,8 @@ public class LoginFunction extends JFrame {
                     }
                 } catch (SQLException sqlException) {
                     sqlException.printStackTrace();
-                }
-            }
+                }  */
+            } 
         });
         
         logoutButton = new JButton("Quit");
