@@ -10,8 +10,6 @@ public class LoginBackend {
 	
 	public static void loginFunction(int id, String password) {
 		
-		
-		Database loginFunction = new verifyUser(id, password);
 	
 	
 	

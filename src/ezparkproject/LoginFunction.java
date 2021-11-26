@@ -119,6 +119,7 @@ public class LoginFunction extends JFrame {
                 
 				
 				LoginBackend.loginFunction(id, password);
+							
                 
 				/*try {
                     
@@ -131,7 +132,7 @@ public class LoginFunction extends JFrame {
 
                     st.setString(1, userID);
                     st.setString(2, password);
-                    ResultSet rs = st.executeQuery();
+                    ResultSet rs = st.executeQuery(); 
                     if (rs.next()) {
                         dispose();
                         Dashboard ah = new Dashboard();
