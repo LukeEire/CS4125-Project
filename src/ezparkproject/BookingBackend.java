@@ -19,6 +19,10 @@ public class BookingBackend {
 	Database db;
 	Connection con;
 	
+	BookingBackend(){
+		
+	}
+	
 	
 	/*public void newDateForBooking(Date date,  ) {
 		

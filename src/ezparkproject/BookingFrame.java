@@ -9,46 +9,30 @@ public class BookingFrame implements ActionListener{
 
 	JFrame frame;
 	
-/* Labels */
+	/* Labels */
 	
-	JLabel universityID = new JLabel("ID");
-	JLabel firstNameLabel = new JLabel("First Name");
-	JLabel lastNameLabel = new JLabel("Last Name");
-	JLabel university_statusLabel = new JLabel("Status");
-	JLabel passwordLabel = new JLabel("Password");
-	//JLabel confirmPasswordLabel = new JLabel("Confirm Password");
-	JLabel emailLabel = new JLabel("Email Address");
-	JLabel EVLabel = new JLabel("Electric Vehicle?");
-	JLabel dobLabel = new JLabel("Date of Birth");
-	JLabel accessibilityLabel = new JLabel("Disabled Permit");
-	JLabel plateLabel = new JLabel("Car Registration");
+	JLabel liveCounter = new JLabel("Live Counter");
+	JLabel LotA_Counter = new JLabel("Lot A Counter");
+	JLabel LotB_Counter = new JLabel("Lot B Counter");
+	JLabel LotC_Counter = new JLabel("Lot C Counter");
+	JLabel LotD_Counter = new JLabel("Lot D Counter");
+	
 	
 	/* Text fields for labels */
 	
-	JTextField universityIDField = new JTextField();
-	JTextField firstNameField = new JTextField();
-	JTextField lastNameField = new JTextField();
-	JPasswordField passwordField = new JPasswordField();
-	JTextField emailTextField = new JTextField();
-	JTextField dobField = new JTextField();
-	JTextField plate = new JTextField();
+	JTextField lotA_CounterField = new JTextField();
+	JTextField lotB_CounterField = new JTextField();
+	JTextField lotC_CounterField = new JTextField();
+	JTextField lotD_CounterField = new JTextField();
 	
-	
-	JPasswordField confirmPasswordField = new JPasswordField();
-	
-	
-	/* Drop down menus */
-	
-	
-	//JComboBox accessibilityComboBox = new JComboBox(accessibilityStatus);
-	//JComboBox EVComboBox = new JComboBox(EVStatus);
 	
 	/* Buttons */
 	
 	
-	JButton registerButton = new JButton("Register");
-	JButton resetButton = new JButton("Reset");
-	JButton loginButton = new JButton("Login");
+	JButton makeBookingButton = new JButton("Make Booking");
+	JButton changeBookingButton = new JButton("Change Booking");
+	JButton viewBookingButton = new JButton("View My Bookings");
+	JButton backButton = new JButton("Back");
 
 	BookingFrame() {
 
@@ -64,8 +48,8 @@ public class BookingFrame implements ActionListener{
 	public void createWindow() {
 
 		frame = new JFrame();
-		frame.setTitle("User Registration");
-		frame.setBounds(40, 40, 400, 700);
+		frame.setTitle("Bookings");
+		frame.setBounds(450, 190, 1014, 597);
 		frame.getContentPane().setBackground(Color.white);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
@@ -77,71 +61,84 @@ public class BookingFrame implements ActionListener{
 		
 		/* Label Bounds */
 
-		universityID.setBounds(20, 20, 40, 70);
-        firstNameLabel.setBounds(20, 70, 80, 70);
-        lastNameLabel.setBounds(20, 130, 80, 70);
-        passwordLabel.setBounds(20, 180, 140, 70);
-        emailLabel.setBounds(20, 225, 100, 70);
-        university_statusLabel.setBounds(20, 280, 100, 70);
-        dobLabel.setBounds(20, 330, 100, 70);
-        plateLabel.setBounds(20, 380, 100, 70);
+		liveCounter.setBounds(800, 20, 40, 70);
+		liveCounter.setSize(200,20);
+		LotA_Counter.setBounds(800, 43, 40, 70);
+		LotA_Counter.setSize(200,20);
+		LotB_Counter.setBounds(800, 83, 40, 70);
+		LotB_Counter.setSize(200,20);
+		LotC_Counter.setBounds(800, 123, 40, 70);
+		LotC_Counter.setSize(200,20);
+		LotD_Counter.setBounds(800, 163, 40, 70);
+		LotD_Counter.setSize(200,20);
+		
         
         /* Text fields and drop downs bounds */
         
-        universityIDField.setBounds(180, 43, 165, 23);
-        firstNameField.setBounds(180, 93, 165, 23);
-        lastNameField.setBounds(180, 155, 165, 23);
-        passwordField.setBounds(180, 205, 165, 23);
-        emailTextField.setBounds(180, 250, 165, 23);
-        dobField.setBounds (180, 350, 165, 23);
-        plate.setBounds (180, 400, 165, 23);
+        lotA_CounterField.setBounds(800, 63, 165, 23);
+        lotB_CounterField.setBounds(800, 103, 165, 23);
+        lotC_CounterField.setBounds(800, 143, 165, 23);
+        lotD_CounterField.setBounds(800, 183, 165, 23);
         
-        /* Button Bounds */
+        /* Make Booking Button */
         
-        registerButton.setBounds(25, 550, 100, 35);
-        resetButton.setBounds(250, 550, 100, 35);
-        loginButton.setBounds(137, 550, 100, 35);
+        makeBookingButton.setBounds(110, 200, 100, 73);
+        makeBookingButton.setSize(500,50);
+        
+        
+        /* Change Booking Button */
+        
+        changeBookingButton.setBounds(110, 272, 100, 73);
+        changeBookingButton.setSize(500,50);
+        
+        /* View Booking Button */
+        
+        viewBookingButton.setBounds(110, 350, 100, 73);
+        viewBookingButton.setSize(500,50);
+        
+        /* Logout Button */
+        
+        backButton.setBounds(110, 427, 100, 73);
+        backButton.setSize(500,50);
 	}
 
 	public void addComponentsToFrame() {
 		
 		/* Labels */
 
-		frame.add(universityID);
-		frame.add(firstNameLabel);
-		frame.add(lastNameLabel);
-		frame.add(passwordLabel);
-		frame.add(emailLabel);
-		frame.add(university_statusLabel);
-		frame.add(EVLabel);
-		frame.add(accessibilityLabel);
-		frame.add(dobLabel);
-		frame.add(plateLabel);
+		frame.add(liveCounter);
+		frame.add(LotA_Counter);
+		frame.add(LotB_Counter);
+		frame.add(LotC_Counter);
+		frame.add(LotD_Counter);
+
 		
 		/* Text fields and drop downs */
 		
-		frame.add(universityIDField);
-		frame.add(firstNameField);
-		frame.add(lastNameField);
-		frame.add(passwordField);
-		frame.add(emailTextField);
-		frame.add(dobField);
-		frame.add(plate);
+		frame.add(lotA_CounterField);
+		
+		frame.add(lotA_CounterField);
+		frame.add(lotB_CounterField);
+		frame.add(lotC_CounterField);
+		frame.add(lotD_CounterField);
+
 		
 		/* Buttons */
 		
-		frame.add(registerButton);
-		frame.add(resetButton);
-		frame.add(loginButton);
+		frame.add(makeBookingButton);
+		frame.add(changeBookingButton);
+		frame.add(viewBookingButton);
+		frame.add(backButton);
 	}
 	
 	
 
 	public void actionEvent() {
 
-		registerButton.addActionListener(this);
-		resetButton.addActionListener(this);
-		loginButton.addActionListener(this);
+		makeBookingButton.addActionListener(this);
+		changeBookingButton.addActionListener(this);
+		viewBookingButton.addActionListener(this);
+		backButton.addActionListener(this);
 	}
 	
 
@@ -149,37 +146,31 @@ public class BookingFrame implements ActionListener{
 
 		/* Create Database before using */
 
-		if (e.getSource() == registerButton) {
+		if (e.getSource() == makeBookingButton) {
+			
+			frame.dispose();
 
-			int temp = 1;
+			// Make booking action TODO
 		}	
 			
-		if (e.getSource() == resetButton) {
+		if (e.getSource() == changeBookingButton) {
+			
+			frame.dispose();
 
-			firstNameField.setText("");
-			universityID.setText("ID");
-			dobField.setText("");
-			lastNameField.setText("");		
-			passwordField.setText("");
-			confirmPasswordField.setText("");
-			emailTextField.setText("");
+			// Change booking action TODO
 		}
 
-		if (e.getSource() == loginButton) {
-
-			/* Close current window */
-			
+		if (e.getSource() == viewBookingButton) {
 			
 			frame.dispose();
 			
-			/* Create new Login form */
-			LoginFunction frame = new LoginFunction();
-	        frame.setTitle("Login Form");
-	        frame.setVisible(true);
-	        frame.setBounds(500, 200, 1100, 600);
-	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        frame.setResizable(false);
-	        
+		}
+
+		if (e.getSource() == backButton) {
+			
+			 frame.dispose();
+			 Dashboard frame = new Dashboard();
+             frame.setVisible(true);
 	        
 		}
 		

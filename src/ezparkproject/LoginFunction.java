@@ -57,6 +57,7 @@ public class LoginFunction extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(500, 200, 1100, 600);
         setResizable(true);
+        //setVisible(true);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);

@@ -76,7 +76,7 @@ package ezparkproject;
 
 	        	public void actionPerformed(ActionEvent e) {
 	        		dispose();
-	        		// need to link UiFrame.java here
+	        		new BookingFrame();
 	            }
 	        });
 	        
