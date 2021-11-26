@@ -17,13 +17,6 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-// import java.util.Calendar;
-// import java.util.List;
-// import java.util.Locale;
-// import java.sql.*;
-// import java.text.DateFormat;
-// import java.time.LocalTime;
-// import java.time.ZoneId;
 
 /**
  * @author ayoubjdair
@@ -92,6 +85,7 @@ public class Database {
 				System.out.println("Electric Car? [Y/N]: " + rs.getInt("electric"));
 				System.out.println("Assistance Required? [Y/N]: " + rs.getString("accessibility"));
 				System.out.println("Banned Status: " + rs.getInt("ban_status"));
+				System.out.println("Ban Time: " + rs.getDate("banTime"));
 				System.out.println("Penalty Points: " + rs.getInt("penalties"));
 				System.out.println("Created on: " + rs.getDate("created_on"));
 				System.out.println("D.O.B: " + rs.getDate("dob"));
@@ -240,17 +234,25 @@ public class Database {
         
     }
 	
-	// UPDATES ban_status for user to 1 i.e TRUE 
+	// UPDATES ban_status for user to 1 i.e TRUE
+	// UPDATES banTime to one week from now
     public void banUser(int id) throws SQLException{
-    	
+		
+		LocalDateTime now = LocalDateTime.now();
+		// Calculates date for one week ban
+		LocalDateTime oneWeek = now.plusWeeks(1);
+		// convertes to SQL date format
+		Date banTime = Date.valueOf(oneWeek.toLocalDate());
+
     	try {
     		
-    		String query = "UPDATE " + users_db + " SET ban_status = 1 WHERE id = \""+id+"\"";
+    		String query = "UPDATE " + users_db + " SET ban_status = 1, SET banTime = " + banTime + " WHERE id = \""+id+"\"";
 	        PreparedStatement p = con.prepareStatement(query);
 	        int ban = p.executeUpdate(query);
 	
 	        if(ban == 1){
-	        	System.out.println("User Banned Successfully");
+				System.out.println("User Banned Successfully");
+				System.out.println("User Banned Until: " + banTime);
 	        }
 	        else{
 	            System.out.println("FAIL: Ban Failed");
@@ -360,11 +362,68 @@ public class Database {
 		}
 	}
 
+	//Returns penalty points for passed in user id
+	public int getPenaltyPoints(int id) {
+		
+		// Initialise penalty variable
+		int penalties = 0;
+
+        try {
+            
+			String query = "SELECT penalties FROM " + users_db + " WHERE id = ?";
+			PreparedStatement p = con.prepareStatement(query);
+			ResultSet rs = p.executeQuery();
+
+			while (rs.next()){
+				// set penalties number from db
+				penalties += rs.getInt("penalties");
+				System.out.format("Penalties: " + penalties);
+				
+			}
+              
+        } catch (SQLException e) {
+            
+            System.out.println("Could not query the database " + e.getMessage());
+            
+		}
+		
+        return penalties;
+	}
+
+	// Adds penalty point to passed in user
+	public void setPenaltyPoints(int id) {
+		
+		// Initialise penalty variable
+		int penalties = 0;
+
+        try {
+            
+			String query = "SELECT penalties FROM " + users_db + " WHERE id = ?";
+			PreparedStatement p = con.prepareStatement(query);
+			ResultSet rs = p.executeQuery();
+
+			while (rs.next()){
+				// set penalties number from db
+				penalties += rs.getInt("penalties");
+				System.out.format("Penalties: " + penalties);
+				
+			}
+
+			p.setInt(penalties+1, id);
+			p.close();
+              
+        } catch (SQLException e) {
+            
+            System.out.println("Could not query the database " + e.getMessage());
+            
+		}
+		
+	}
+
 	// INSERTS new reservation into the resrvations DB
 	public void reserve(int id, String reg, String lot, int electric, int accessibility, long hours, long mins) throws SQLException{
 
 		try {
-
 			// Creating varibales for created at and expiry attributes
 
 			// Formatting
@@ -414,7 +473,6 @@ public class Database {
 			
 		}
     }
-	
 
 	// Prints Reservation Details in DB
 	// Stores their associated userID's in an array list of strings
