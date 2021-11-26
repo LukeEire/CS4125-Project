@@ -113,8 +113,7 @@ public class LoginFunction extends JFrame {
         loginButton.addActionListener(new ActionListener() {
 
         	public void actionPerformed(ActionEvent e) {
-        		String userID = textField.getText();
-        		int id = Integer.parseInt(userID.getText());                             
+        		int id = Integer.parseInt(textField.getText());                             
 				@SuppressWarnings("deprecation")
 				String password = passwordField.getText();
                 

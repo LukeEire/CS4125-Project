@@ -11,7 +11,7 @@ public class LoginBackend {
 	public static void loginFunction(int id, String password) {
 		
 		
-		Database User1 = new verifyUser(id, password);
+		Database loginFunction = new verifyUser(id, password);
 	
 	
 	
