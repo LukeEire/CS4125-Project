@@ -1,16 +1,12 @@
 package ezparkproject;
 
-/* @author Conall McAteer
- * 
- */
-
-public class PaymentInformation 
+public class PaymentInfo 
 {
 	String creditCardNumber;
 	String cvvNumber;
 	String expiryDate;
 	
-	public PaymentInformation(String ccNumber, String cvvNumber, String expiry)
+	public PaymentInfo(String ccNumber, String cvvNumber, String expiry)
 	{
 		this.creditCardNumber = ccNumber;
 		this.cvvNumber = cvvNumber;

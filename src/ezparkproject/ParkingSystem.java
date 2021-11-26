@@ -6,21 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.TimeZone;
 
-/* @author Conall McAteer
- * Capture time inputs from buttons, Fee charges, Ticket Validation
- */
+public class ParkingSystem {
 
-public class ParkingSystemApp {
-
-	/**
-	 * Launch the application.
-	 */
-	static ParkingSystemFrame mainFrame;
+	static ParkingFrame mainFrame;
 	
-	
-	private ArrayList<ParkingSlot> slots = null;
-	ArrayList<Ticket> ticketList = null;
-	ParkingSlot slot = null;
+	private ArrayList<ParkingSpace> slots = null;
+	ArrayList<TicketSystem> ticketList = null;
+	ParkingSpace slot = null;
 	
 	private long startTimeMilliseconds;
 	private long startTime = 0;
@@ -32,9 +24,9 @@ public class ParkingSystemApp {
 	private static final int minimumTime = 60;
 	int timeInMinutes = 0;
 	private double totalFee = 0;
-	PaymentInformation payInfo = null;
+	PaymentInfo payInfo = null;
 	
-	public ParkingSystemApp() 
+	public ParkingSystem() 
 	{
 		ParkingLot lot = new ParkingLot();
 		slots = lot.getParkingSlots();
@@ -42,33 +34,25 @@ public class ParkingSystemApp {
 		ticketList = new ArrayList<>(); // to save tickets
 	}
 	
-	/**
-	 * This method checks for available parking slot and generates a ticket if slot is available
-	 * 
-	 */
-	public Ticket park()
+	public TicketSystem park()
 	{
-		ParkingSlot slot = checkAvailability(); // check for available slots
+		ParkingSpace slot = checkAvailability(); // check for available slots
 		
 		if (slot != null)
 		{
 			startTimeMilliseconds = System.currentTimeMillis();
 						
-			Ticket ticket = new Ticket(slot.getSlotNumber(), startTimeMilliseconds, date);
-			ticketList.add(ticket); // save the ticket in ticketList
+			TicketSystem ticketSystem = new TicketSystem(slot.getSlotNumber(), startTimeMilliseconds, date);
+			ticketList.add(ticketSystem); // save the ticket in ticketList
 			
 			slot.setAvailability(false); // this slot is no more available
-			return ticket;
+			return ticketSystem;
 		}
 		return null;		
 	}
 	
 	
-	/**
-	 *  This method checks for available slots in the parking lot
-	 *  
-	 */
-	public ParkingSlot checkAvailability()
+	public ParkingSpace checkAvailability()
 	{
 		for(int i = 0; i < slots.size(); i++)
 		{
@@ -83,19 +67,13 @@ public class ParkingSystemApp {
 		return null;
 	}
 	
-	/**
-	 * This method saves the end time
-	 */
 	public void captureEndTime()
 	{
 		// capture end time
 		endTimeMilliseconds = System.currentTimeMillis();
 	}
 	
-	/**
-	 * This method validates the ticket number entered by the user when exiting the parking lot
-	 * 
-	 */
+	
 	public boolean validateTicketNumber(int ticketNumEntered)
 	{
 		boolean isValid = false;
@@ -114,9 +92,6 @@ public class ParkingSystemApp {
 		return isValid;
 	}
 
-	/**
-	 * This method calculates the total time (in minutes) the car was parked in the parking lot
-	 */
 	public void calculateTotalMinutes()
 	{
 		long durationMilliSeconds = endTimeMilliseconds - startTime; // total time the card was parked in the slot
@@ -128,10 +103,6 @@ public class ParkingSystemApp {
 		timeInMinutes = (hours * 60) + minutes + (seconds / 60);
 	}
 	
-	/**
-	 * This method calculate the total fee due payment for the duration the car was parked in the parking lot
-	 * 
-	 */
 	public double getTotalFee()
 	{
 		if(totalFee == 0)
@@ -145,10 +116,7 @@ public class ParkingSystemApp {
 		return totalFee;
 	}
 		
-	/**
-	 * This method sets the slot to available once the user chooses to exit the parking lot
-	 * 
-	 */
+	
 	public void makeSlotAvailable(int ticketNumber)
 	{
 		for (int i = 0; i < slots.size(); i++)
@@ -163,41 +131,26 @@ public class ParkingSystemApp {
 		}
 	}
 	
-	/**
-	 * This method creates a payment information object and sets all the credit card details.
-	 * 
-	 * ccNumber users credit card number
-	 * cvvNumber ccv number of the credit card
-	 * expiry credit card expiry date
-	 */
+	
 	public void setPaymentInformation(String ccNumber, String cvvNumber, String expiry)
 	{
-		payInfo = new PaymentInformation(ccNumber, cvvNumber, expiry);
+		payInfo = new PaymentInfo(ccNumber, cvvNumber, expiry);
 	}
 	
-	/**
-	 * This method sends the payment information to the bank class
-	 * 
-	 */
+	
 	public boolean validateCreditCard()
 	{
-		Bank bank = new Bank(payInfo);
-		return bank.validateCreditCard();
+		PaymentCheck paymentCheck = new PaymentCheck(payInfo);
+		return paymentCheck.validateCreditCard();
 	}
 	
 	public String convertTimeFormat(long milliSeconds)
 	{
-	    // Obtain the total seconds since midnight, Jan 1, 1970
 	    long totalSeconds = milliSeconds / 1000;
-	    // Get current second in the minute in the hour
 	    long currentSecond = totalSeconds % 60;
-	    // Obtain the total minutes
 	    long totalMinutes = totalSeconds / 60;
-	    // Compute the current minute in the hour
 		long currentMinute = totalMinutes % 60;
-	    // Obtain the total hours
 	    long totalHours = totalMinutes / 60;
-	    // Compute the current hour
 	    long currentHour = totalHours % 24;
 		
 	    return currentHour + ":" + currentMinute + ":" + currentSecond;

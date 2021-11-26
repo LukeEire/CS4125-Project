@@ -2,30 +2,22 @@ package ezparkproject;
 
 import java.util.ArrayList;
 
-/* @author Conall McAteer
- * Update of Lot Class
- */
-
 public class ParkingLot 
 {
-	private static final int numberOfSlots = 10;
+	private static final int numberOfSlots = 100;
 	
-	private ArrayList<ParkingSlot> listOfSlots = null;
+	private ArrayList<ParkingSpace> listOfSlots = null;
 	
 	public ParkingLot()
 	{
 		listOfSlots = new ArrayList<>();
 	}
-	
-	/**
-	 * This method returns list of all the parking slots 
-	 * 
-	 */
-	public ArrayList<ParkingSlot> getParkingSlots()
+
+	public ArrayList<ParkingSpace> getParkingSlots()
 	{
 		for (int i = 1; i <= numberOfSlots; i++)
 		{
-			ParkingSlot slot = new ParkingSlot(i, true);
+			ParkingSpace slot = new ParkingSpace(i, true);
 			listOfSlots.add(slot);
 		}
 		return listOfSlots;

@@ -1,17 +1,14 @@
 package ezparkproject;
 
-/* @author Conall McAteer
- * 
- */
 import java.sql.Date;
 
-public class Ticket 
+public class TicketSystem 
 {
 	private int slotNumber;
 	private long startTime;
 	private Date date;
 	
-	public Ticket(int slotNumber, long startTime, Date date)
+	public TicketSystem(int slotNumber, long startTime, Date date)
 	{
 		this.slotNumber = slotNumber;
 		this.startTime = startTime;

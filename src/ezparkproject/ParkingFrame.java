@@ -18,26 +18,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-/* @author Conall McAteer
- * Creating the frame with the Pay and Park buttons
-*/
-public class ParkingSystemFrame extends JFrame {
+public class ParkingFrame extends JFrame {
 
 	private JPanel contentPane;
 	JButton btnPark;
 	
-	private static ParkingSystemApp app = new ParkingSystemApp();
+	private static ParkingSystem app = new ParkingSystem();
+	static ParkingFrame mainFrame;
 
-	static ParkingSystemFrame mainFrame;
-
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mainFrame = new ParkingSystemFrame();
+					mainFrame = new ParkingFrame();
 					mainFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,10 +39,7 @@ public class ParkingSystemFrame extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public ParkingSystemFrame() {
+	public ParkingFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Book and Pay");
 		setBounds(450, 190, 1014, 597);
@@ -59,7 +49,7 @@ public class ParkingSystemFrame extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 		
-		/* Park Button */
+
         btnPark = new JButton("Park");
 		btnPark.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		btnPark.setBounds(240, 200, 100, 73);
@@ -67,17 +57,17 @@ public class ParkingSystemFrame extends JFrame {
 		btnPark.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{				
-				Ticket ticket = app.park();
+				TicketSystem ticketSystem = app.park();
 				
-				if (ticket == null)
+				if (ticketSystem == null)
 				{
 					JOptionPane.showMessageDialog(btnPark, "Parking full!");
 				}
 				else
 				{
-					Date date = ticket.getDate();
-					int ticketNumber = ticket.getSlotNumber();
-					long time = ticket.getStartTime();
+					Date date = ticketSystem.getDate();
+					int ticketNumber = ticketSystem.getSlotNumber();
+					long time = ticketSystem.getStartTime();
 					
 					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 					DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
@@ -101,17 +91,17 @@ public class ParkingSystemFrame extends JFrame {
 			{
 				app.captureEndTime(); 
 				
-				SlotFrame slotFrame = null;
+				PaymentMidFrame paymentMidFrame = null;
 				
 				try {
-					slotFrame = new SlotFrame(app); // display new frame for entering ticket number
+					paymentMidFrame = new PaymentMidFrame(app); // display new frame for entering ticket number
 				} 
 				catch (Exception e1) {
 					e1.printStackTrace();
 				}
 				
 				mainFrame.setVisible(false); // hide the first frame
-				slotFrame.setVisible(true);
+				paymentMidFrame.setVisible(true);
 			}
 		});
 		contentPane.add(btnPayExit, BorderLayout.EAST);

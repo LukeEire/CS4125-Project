@@ -13,26 +13,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-/**
- *  @author Conall McAteer
- *
- * This class is the USer Interface to enter the ticket (slot) number.
- */
-public class SlotFrame extends JFrame {
+public class PaymentMidFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JButton btnEnter;
 	
-	ParkingSystemApp app;
-	private SlotFrame slotFrame = this;
+	ParkingSystem app;
+	private PaymentMidFrame paymentMidFrame = this;
 	
 	double totalFee = 0;
 
-	/**
-	 * Create the frame.
-	 */
-	public SlotFrame(ParkingSystemApp parkingApp) 
+	public PaymentMidFrame(ParkingSystem parkingApp) 
 	{		
 		this.app = parkingApp;
 		
@@ -62,19 +54,19 @@ public class SlotFrame extends JFrame {
 				if (isValid) 
 				{
 				 	// hide current frame
-					slotFrame.dispose();
+					paymentMidFrame.dispose();
 					
 					app.calculateTotalMinutes();
 					
 					totalFee = app.getTotalFee();
 					
-					int option = JOptionPane.showConfirmDialog(btnEnter, "Your total parking fee is: €" + totalFee + "\n" +
-																	 "Continue with the payment? ");
+					int option = JOptionPane.showConfirmDialog(btnEnter, "Your total parking fee is: €" + totalFee + "\n" + "Continue with the payment? ");
+					
 					if (option != JOptionPane.YES_OPTION)
 					{
 						JOptionPane.showMessageDialog(btnEnter, "!");
-						ParkingSystemFrame.mainFrame = new ParkingSystemFrame();
-						ParkingSystemFrame.mainFrame.setVisible(true);
+						ParkingFrame.mainFrame = new ParkingFrame();
+						ParkingFrame.mainFrame.setVisible(true);
 						return;
 					}
 					else

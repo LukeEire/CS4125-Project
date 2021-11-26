@@ -13,23 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-import java.awt.GridLayout;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-/**
- * @author Conall McAteer
- * * This class is the User Interface for entering credit card details
- */
-
 public class PaymentFrame extends JFrame {
 
 	private JPanel contentPane;
@@ -43,24 +26,18 @@ public class PaymentFrame extends JFrame {
 	private JTextField expiryTextField;
 	
 	private JButton payButton;
-	
-	//private String durationParked;
-	   
+	  
 	String ccNumber = "";
 	String cvvNumber = "";
 	String expiry = "";
 	
-	ParkingSystemApp app;
+	ParkingSystem app;
 
 	PaymentFrame paymentFrame = this;
 	
 	double totalFee = 0;
 	
-	/**
-	 * Create the frame.
-	 */
-	
-	public PaymentFrame(ParkingSystemApp paymentApp) 
+	public PaymentFrame(ParkingSystem paymentApp) 
 	{
 		this.app = paymentApp;
 	
@@ -113,11 +90,10 @@ public class PaymentFrame extends JFrame {
 				if(isValid)
 				{
 					double totalFee = app.getTotalFee();
-					JOptionPane.showMessageDialog(payButton, "Thanks for the payment of: €" + totalFee + "\n" +
-															 "See you soon! ");
+					JOptionPane.showMessageDialog(payButton, "Thanks for the payment of: €" + totalFee + "\n" + "See you soon! ");
 										
 					paymentFrame.dispose();
-					ParkingSystemFrame.mainFrame.setVisible(true);
+					ParkingFrame.mainFrame.setVisible(true);
 				}
 				else
 				{

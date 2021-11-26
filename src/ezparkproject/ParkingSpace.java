@@ -1,15 +1,11 @@
 package ezparkproject;
 
-/* @author Conall McAteer
- * Checks availability of car park space
- */
-
-public class ParkingSlot 
+public class ParkingSpace 
 {
 	private int slotNumber;
 	private boolean availability;
 	
-	public ParkingSlot(int slotNumber, boolean availability)
+	public ParkingSpace(int slotNumber, boolean availability)
 	{
 		this.slotNumber = slotNumber;
 		this.availability = availability;
