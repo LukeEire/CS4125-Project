@@ -205,6 +205,14 @@ public class RegFrame implements ActionListener{
 		loginButton.addActionListener(this);
 	}
 	
+	//Placeholder code
+	/*public Boolean createUser(Boolean test, int id, String firstName, String lastName, String password, String status, int electric, int accessibility, String dob, String reg){
+		Users User1 = new Users(false, id, firstName, lastName, password, "@dbsucksballz", status, electric, accessibility, dob, reg);
+		Database db = new Database();
+		db.addUser(User1);
+		
+	}*/
+	
 
 	@SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent e) {
@@ -226,6 +234,30 @@ public class RegFrame implements ActionListener{
 				String dob = dobField.getText();
 				String reg = plate.getText();
 				db.newUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg);
+				BackendObj.addToDB(id, firstName, lastName, password, status, electric, accessibility, dob, reg)
+				
+				//This would pass values to backend
+				//Backend.createUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg);
+				
+				
+				//In backend it creates user
+				/*public bool createUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg){
+					Users User1 = new Users(false, id, firstName, lastName, password, "@dbsucksballz", status, electric, accessibility, dob, reg);
+					Database db = new Database();
+					db.addUser(User1);
+					
+				}*/
+				
+				
+				
+				
+				
+				
+				//Users User1 = new Users(false, id, firstName, lastName, password, "@dbsucksballz", status, electric, accessibility, dob, reg);
+				
+				
+				//Backend gives user to .addUser method to commit to DB
+				db.addUser(User1);
 
 			} catch (SQLException error) {
 
