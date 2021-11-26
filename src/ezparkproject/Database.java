@@ -246,7 +246,7 @@ public class Database {
 
     	try {
     		
-    		String query = "UPDATE " + users_db + " SET ban_status = 1, SET banTime = " + banTime + " WHERE id = \""+id+"\"";
+			String query = "UPDATE " + users_db + " SET ban_status = 1, banTime = " + "'" + banTime + "'" + " WHERE id  = \""+id+"\"";
 	        PreparedStatement p = con.prepareStatement(query);
 	        int ban = p.executeUpdate(query);
 	
