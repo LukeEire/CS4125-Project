@@ -46,3 +46,5 @@ FOREIGN KEY (userID) REFERENCES users(id)
 INSERT INTO users (id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob, reg ) VALUES (18266401, "Ayoub", "Jdair", "Password123", "Student", 1, 0, "2000-12-15", "222LH1445");
 
 INSERT INTO reservations(userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (18266401, '10LH1445', 'LOT A', 1, 0, DATE '2015-12-17', DATE '2015-12-17');
+
+UPDATE users SET ban_status = 1, banTime = DATE '2000-03-12' WHERE id = "18266401"
