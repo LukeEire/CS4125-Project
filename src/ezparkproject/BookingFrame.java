@@ -6,25 +6,17 @@ import java.awt.*;
 import java.sql.*;
 
 public class BookingFrame implements ActionListener{
-	
-	private JButton makeButton;
-	private JButton cancelButton;
-	private JButton changeButton;
-	private JButton quitButton;
-	private JTextField heading;
-	
-	java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
-	
+
 	JFrame frame;
-	String[] uniStatus = { "Student", "Staff", "Guest" }; /* also known as rank from our analysis class diagram */
 	
-	/* Labels */
+/* Labels */
 	
 	JLabel universityID = new JLabel("ID");
 	JLabel firstNameLabel = new JLabel("First Name");
 	JLabel lastNameLabel = new JLabel("Last Name");
 	JLabel university_statusLabel = new JLabel("Status");
 	JLabel passwordLabel = new JLabel("Password");
+	//JLabel confirmPasswordLabel = new JLabel("Confirm Password");
 	JLabel emailLabel = new JLabel("Email Address");
 	JLabel EVLabel = new JLabel("Electric Vehicle?");
 	JLabel dobLabel = new JLabel("Date of Birth");
@@ -38,13 +30,18 @@ public class BookingFrame implements ActionListener{
 	JTextField lastNameField = new JTextField();
 	JPasswordField passwordField = new JPasswordField();
 	JTextField emailTextField = new JTextField();
-	JComboBox uniComboBox = new JComboBox(uniStatus);
 	JTextField dobField = new JTextField();
 	JTextField plate = new JTextField();
 	
 	
+	JPasswordField confirmPasswordField = new JPasswordField();
 	
 	
+	/* Drop down menus */
+	
+	
+	//JComboBox accessibilityComboBox = new JComboBox(accessibilityStatus);
+	//JComboBox EVComboBox = new JComboBox(EVStatus);
 	
 	/* Buttons */
 	
@@ -68,7 +65,7 @@ public class BookingFrame implements ActionListener{
 
 		frame = new JFrame();
 		frame.setTitle("User Registration");
-		frame.setBounds(40, 40, 1280, 720);
+		frame.setBounds(40, 40, 400, 700);
 		frame.getContentPane().setBackground(Color.white);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
@@ -96,7 +93,6 @@ public class BookingFrame implements ActionListener{
         lastNameField.setBounds(180, 155, 165, 23);
         passwordField.setBounds(180, 205, 165, 23);
         emailTextField.setBounds(180, 250, 165, 23);
-        uniComboBox.setBounds(180, 300, 165, 23);
         dobField.setBounds (180, 350, 165, 23);
         plate.setBounds (180, 400, 165, 23);
         
@@ -129,7 +125,6 @@ public class BookingFrame implements ActionListener{
 		frame.add(lastNameField);
 		frame.add(passwordField);
 		frame.add(emailTextField);
-		frame.add(uniComboBox);
 		frame.add(dobField);
 		frame.add(plate);
 		
@@ -150,13 +145,13 @@ public class BookingFrame implements ActionListener{
 	}
 	
 
-	@SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent e) {
 
 		/* Create Database before using */
 
 		if (e.getSource() == registerButton) {
 
+			int temp = 1;
 		}	
 			
 		if (e.getSource() == resetButton) {
@@ -164,9 +159,9 @@ public class BookingFrame implements ActionListener{
 			firstNameField.setText("");
 			universityID.setText("ID");
 			dobField.setText("");
-			lastNameField.setText("");
-			uniComboBox.setSelectedItem("Student");			
+			lastNameField.setText("");		
 			passwordField.setText("");
+			confirmPasswordField.setText("");
 			emailTextField.setText("");
 		}
 
