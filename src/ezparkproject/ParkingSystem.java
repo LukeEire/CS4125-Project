@@ -1,10 +1,7 @@
 package ezparkproject;
 
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.TimeZone;
 
 public class ParkingSystem {
 
@@ -23,7 +20,7 @@ public class ParkingSystem {
 	private static final double fee = 2; // Parking fee 2 euro for 60 minutes
 	private static final int minimumTime = 60;
 	int timeInMinutes = 0;
-	private double totalFee = 0;
+	private double totalFee = 1;
 	PaymentInfo payInfo = null;
 	
 	public ParkingSystem() 
@@ -94,7 +91,7 @@ public class ParkingSystem {
 
 	public void calculateTotalMinutes()
 	{
-		long durationMilliSeconds = endTimeMilliseconds - startTime; // total time the card was parked in the slot
+		long durationMilliSeconds = endTimeMilliseconds - startTime; // total time the card was parked in the space
 		durationParked = convertTimeFormat(durationMilliSeconds);
 		String [] time = durationParked.split(":");
 		int hours = Integer.parseInt(time[0]);
@@ -105,10 +102,10 @@ public class ParkingSystem {
 	
 	public double getTotalFee()
 	{
-		if(totalFee == 0)
+		if(totalFee == 1)
 		{
 			if (timeInMinutes < 60)
-				totalFee = 2;
+				totalFee = 1;
 			else
 				totalFee = (timeInMinutes / minimumTime) * fee;
 		}

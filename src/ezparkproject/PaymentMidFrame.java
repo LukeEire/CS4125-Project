@@ -60,7 +60,7 @@ public class PaymentMidFrame extends JFrame {
 					
 					totalFee = app.getTotalFee();
 					
-					int option = JOptionPane.showConfirmDialog(btnEnter, "Your total parking fee is: €" + totalFee + "\n" + "Continue with the payment? ");
+					int option = JOptionPane.showConfirmDialog(btnEnter, "Your total parking fee is: €" + totalFee + "\n" + "Continue to payment? ");
 					
 					if (option != JOptionPane.YES_OPTION)
 					{

@@ -23,14 +23,11 @@ package ezparkproject;
 	public class Dashboard extends JFrame {
 
 	    private static final long serialVersionUID = 1L;
-	    private JTextField textField;
-	    private JPasswordField passwordField;
 	    private JButton bookingsButton;
 	    private JButton reserveButton;
 	    private JButton paymentButton;
 	    private JButton lotsButton;
 	    private JButton logoutButton;
-	    private JLabel label;
 	    private JPanel contentPane;
 
 	    /**
@@ -76,7 +73,19 @@ package ezparkproject;
 
 	        	public void actionPerformed(ActionEvent e) {
 	        		dispose();
-	        		new BookingFrame();
+	           		new BookingFrame();
+	            }
+	        });
+	        
+	        lotsButton = new JButton("Payment");
+	        lotsButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
+	        lotsButton.setBounds(240, 200, 100, 73);
+	        lotsButton.setSize(500,50);
+	        lotsButton.addActionListener(new ActionListener() {
+
+	        	public void actionPerformed(ActionEvent e) {
+	        		dispose();
+	        		new ParkingFrame();
 	            }
 	        });
 	        
@@ -91,16 +100,7 @@ package ezparkproject;
 	            }
 	        });
 	        
-	        lotsButton = new JButton("Payment");
-	        lotsButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
-	        lotsButton.setBounds(240, 200, 100, 73);
-	        lotsButton.setSize(500,50);
-	        lotsButton.addActionListener(new ActionListener() {
-
-	        	public void actionPerformed(ActionEvent e) {
-	                //listener goes here
-	            }
-	        });
+	        
 	        
 	        paymentButton = new JButton("Available Lots");
 	        paymentButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
