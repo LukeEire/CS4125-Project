@@ -8,6 +8,9 @@ java.sql.*;
 
 public class RegFrame implements ActionListener{
 	
+	RegBackend Backend = new RegBackend();
+	
+	
 	/*Required timestamp to pass during registration and DOB */
 	
 	java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
@@ -221,7 +224,21 @@ public class RegFrame implements ActionListener{
 
 		if (e.getSource() == registerButton) {
 
-			try {
+			int id = Integer.parseInt(universityIDField.getText());
+			String firstName = firstNameField.getText();
+			String lastName = lastNameField.getText();				
+			String password = passwordField.getText();
+			String status = uniComboBox.getSelectedItem().toString();
+			int electric = electricCheckBoxVal;
+			int accessibility = disabledCheckBoxVal;
+			String dob = dobField.getText();
+			String reg = plate.getText();
+			
+			Backend.addUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg);
+			
+			
+			
+			/*try {
 
 				Database db = new Database();
 				int id = Integer.parseInt(universityIDField.getText());
@@ -233,37 +250,16 @@ public class RegFrame implements ActionListener{
 				int accessibility = disabledCheckBoxVal;
 				String dob = dobField.getText();
 				String reg = plate.getText();
-				db.newUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg);
-				BackendObj.addToDB(id, firstName, lastName, password, status, electric, accessibility, dob, reg)
+				//db.newUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg);
 				
-				//This would pass values to backend
-				//Backend.createUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg);
-				
-				
-				//In backend it creates user
-				/*public bool createUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg){
-					Users User1 = new Users(false, id, firstName, lastName, password, "@dbsucksballz", status, electric, accessibility, dob, reg);
-					Database db = new Database();
-					db.addUser(User1);
-					
-				}*/
-				
-				
-				
-				
-				
-				
-				//Users User1 = new Users(false, id, firstName, lastName, password, "@dbsucksballz", status, electric, accessibility, dob, reg);
-				
-				
-				//Backend gives user to .addUser method to commit to DB
-				db.addUser(User1);
-
 			} catch (SQLException error) {
 
 				System.out.println("Could not connect to the database " + error.getMessage());
 
-			}
+			}*/
+			
+			
+			
 		}	
 			
 		if (e.getSource() == resetButton) {

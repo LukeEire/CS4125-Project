@@ -210,6 +210,87 @@ public class Database {
 		}
     }
 	
+	public void newUser(Users user1) throws SQLException {
+
+		// Converting string into sql date format
+		Date dob = Date.valueOf(user1.getsDOB());
+
+		// Creates date obj created_at DB field
+		LocalDate ld = LocalDate.now();
+		// Converts date obj to sql format
+		Date created_at = Date.valueOf(ld);
+
+		// Generates user email automatically based on status
+		String email = "NULL";
+		if(user1.getStatus() == "Student"){
+			email = user1.getID() + "@studentmail.ul.ie";
+		} else if (user1.getStatus() == "Staff") {
+			email = user1.getID() + "@ul.ie";
+		} else {
+			email = "N/A";
+		}
+
+		try {
+			
+			if(user1.getFirstName() !=null && user1.getStatus() != null && user1.getPassword() != null){
+				
+				//DB attributes
+				// id
+				// firstName 
+				// firstName 
+				// password
+				// email_address 
+				// status 
+				// electric
+				// penalties 
+				// ban_status 
+				// accessibility 
+				// created_on 
+				// dob
+				// reg
+
+				String query = "INSERT INTO " + users_db + "(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob, reg ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
+				
+				PreparedStatement p = con.prepareStatement(query);
+				p.setInt(1, user1.getID());
+				p.setString(2, user1.getFirstName());
+				p.setString(3, user1.getLastName());
+				p.setString(4, user1.getPassword());
+				p.setString(5, email);
+				p.setString(6, user1.getStatus());
+				if(user1.electric >= 1) {
+		        	p.setInt(7, 1);
+		        } else {
+		        	p.setInt(7, 0);
+		        }
+				p.setInt(8, 0);
+				p.setInt(9, 0);
+				if(user1.accessibility >= 1) {
+		        	p.setInt(10, 1);
+		        } else {
+		        	p.setInt(10, 0);
+		        }
+				p.setDate(11, created_at);
+				p.setDate(12, dob);
+				p.setString(13, user1.getReg());
+				
+	            int insert = p.executeUpdate();
+	            if(insert == 1)
+	            {
+	                System.out.println("New user added successfully");
+	            }
+	            else
+	            {
+	                System.out.println("FAIL! Error adding new user");
+	            }
+			}
+		} catch (SQLException e){
+			
+	    	System.out.println("Error registering new user: " + e.getMessage());
+			
+		}
+    }
+	
 	// DELETES user from user database
     public void deleteUser(int id) throws Exception {
     	

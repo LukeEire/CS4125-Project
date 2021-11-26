@@ -16,6 +16,7 @@ public class Users {
 	int electric;
 	int accessibility; 
 	String dob;
+	String reg;
 	Database db;
 	Connection con;
 
@@ -34,6 +35,7 @@ public class Users {
 		this.electric = electric;
 		this.accessibility = accessibility;
 		this.dob = sdob;
+		this.reg = reg;
 		plates.add(reg);
 		
 		if (addUserToDatabase) {
@@ -68,6 +70,22 @@ public class Users {
 	
 	public String getStatus() {
 		return this.status;
+	}
+	
+	public String getsDOB() {
+		return this.dob;
+	}
+	
+	public int getID() {
+		return this.id;
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+	
+	public String getReg() {
+		return this.reg;
 	}
 	
 	public void updateFirstName(String newFName) {
