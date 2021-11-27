@@ -90,7 +90,7 @@ public class Database {
 				System.out.println("Created on: " + rs.getDate("created_on"));
 				System.out.println("D.O.B: " + rs.getDate("dob"));
 				System.out.println("Penalty Points: " + rs.getInt("penalties"));
-				System.out.println("Defualt Registration Plate: " + rs.getString("reg"));
+				System.out.println("Default Registration Plate: " + rs.getString("reg"));
 
 				System.out.println("-----------------------------END-------------------------------");
 				i++;
@@ -322,7 +322,7 @@ public class Database {
 		LocalDateTime now = LocalDateTime.now();
 		// Calculates date for one week ban
 		LocalDateTime oneWeek = now.plusWeeks(1);
-		// convertes to SQL date format
+		// convert's to SQL date format
 		Date banTime = Date.valueOf(oneWeek.toLocalDate());
 
     	try {
@@ -501,16 +501,16 @@ public class Database {
 		
 	}
 
-	// INSERTS new reservation into the resrvations DB
+	// INSERTS new reservation into the reservations DB
 	public void reserve(int id, String reg, String lot, int electric, int accessibility, long hours, long mins) throws SQLException{
 
 		try {
-			// Creating varibales for created at and expiry attributes
+			// Creating variables for created at and expiry attributes
 
 			// Formatting
 			DateTimeFormatter simpleDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			LocalDateTime created_at_LocalDateTime = LocalDateTime.now();
-			System.out.println("Resrvation Created At: " + created_at_LocalDateTime.format(simpleDateFormat));
+			System.out.println("Reservation Created At: " + created_at_LocalDateTime.format(simpleDateFormat));
 			LocalDateTime expiryDateTime = created_at_LocalDateTime;
 
 			// Adding user desired duration to remain parked to expiry variable
@@ -626,9 +626,9 @@ public class Database {
 				int duration = durationPeriod.getDays();
 
 
-				System.out.println("Resrved for:  " + duration + " Day(s)");
-				System.out.println("Resrved for:  " + hours + " Hour(s)");
-				System.out.println("Resrved for:  " + mins + " Min(s)");
+				System.out.println("Reserved for:  " + duration + " Day(s)");
+				System.out.println("Reserved for:  " + hours + " Hour(s)");
+				System.out.println("Reserved for:  " + mins + " Min(s)");
 
 
 				// Creating new resrvation obj without adding it to the DB (false)
