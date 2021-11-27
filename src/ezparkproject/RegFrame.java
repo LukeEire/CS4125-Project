@@ -32,7 +32,7 @@ public class RegFrame implements ActionListener{
 	JLabel EVLabel = new JLabel("Electric Vehicle?");
 	JLabel dobLabel = new JLabel("Date of Birth");
 	JLabel accessibilityLabel = new JLabel("Disabled Permit");
-	JLabel plateLabel = new JLabel("Car Registration");
+	JLabel plateLabel = new JLabel("Car Reg");
 	
 	/* Text fields for labels */
 	
@@ -112,7 +112,7 @@ public class RegFrame implements ActionListener{
 
 		createWindow();
 		setLocationAndSize();
-		frame.getContentPane().setBackground(Color.CYAN);
+		frame.getContentPane().setBackground(Color.lightGray);
 		addComponentsToFrame();
 		actionEvent();
 	}
