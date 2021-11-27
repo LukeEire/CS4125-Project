@@ -28,7 +28,7 @@ public class RegFrame implements ActionListener{
 	JLabel university_statusLabel = new JLabel("Status");
 	JLabel passwordLabel = new JLabel("Password");
 	//JLabel confirmPasswordLabel = new JLabel("Confirm Password");
-	JLabel emailLabel = new JLabel("Email Address");
+	//JLabel emailLabel = new JLabel("Email Address");
 	JLabel EVLabel = new JLabel("Electric Vehicle?");
 	JLabel dobLabel = new JLabel("Date of Birth");
 	JLabel accessibilityLabel = new JLabel("Disabled Permit");
@@ -40,7 +40,7 @@ public class RegFrame implements ActionListener{
 	JTextField firstNameField = new JTextField();
 	JTextField lastNameField = new JTextField();
 	JPasswordField passwordField = new JPasswordField();
-	JTextField emailTextField = new JTextField();
+	//JTextField emailTextField = new JTextField();
 	JComboBox uniComboBox = new JComboBox(uniStatus);
 	JTextField dobField = new JTextField();
 	JTextField plate = new JTextField();
@@ -139,10 +139,10 @@ public class RegFrame implements ActionListener{
         firstNameLabel.setBounds(20, 70, 80, 70);
         lastNameLabel.setBounds(20, 130, 80, 70);
         passwordLabel.setBounds(20, 180, 140, 70);
-        emailLabel.setBounds(20, 225, 100, 70);
-        university_statusLabel.setBounds(20, 280, 100, 70);
-        dobLabel.setBounds(20, 330, 100, 70);
-        plateLabel.setBounds(20, 380, 100, 70);
+        //emailLabel.setBounds(20, 225, 100, 70);
+        university_statusLabel.setBounds(20, 225, 100, 70);
+        dobLabel.setBounds(20, 280, 100, 70);
+        plateLabel.setBounds(20, 330, 100, 70);
         
         /* Text fields and drop downs bounds */
         
@@ -150,12 +150,12 @@ public class RegFrame implements ActionListener{
         firstNameField.setBounds(180, 93, 165, 23);
         lastNameField.setBounds(180, 155, 165, 23);
         passwordField.setBounds(180, 205, 165, 23);
-        emailTextField.setBounds(180, 250, 165, 23);
-        uniComboBox.setBounds(180, 300, 165, 23);
-        EVCheckBox.setBounds(180, 450, 165, 23);
-        disabledCheckBox.setBounds(180, 500, 165, 23);
-        dobField.setBounds (180, 350, 165, 23);
-        plate.setBounds (180, 400, 165, 23);
+        //emailTextField.setBounds(180, 250, 165, 23);
+        uniComboBox.setBounds(180, 250, 165, 23);
+        EVCheckBox.setBounds(180, 400, 165, 23);
+        disabledCheckBox.setBounds(180, 450, 165, 23);
+        dobField.setBounds (180, 300, 165, 23);
+        plate.setBounds (180, 350, 165, 23);
         
         /* Button Bounds */
         
@@ -172,7 +172,7 @@ public class RegFrame implements ActionListener{
 		frame.add(firstNameLabel);
 		frame.add(lastNameLabel);
 		frame.add(passwordLabel);
-		frame.add(emailLabel);
+		//frame.add(emailLabel);
 		frame.add(university_statusLabel);
 		frame.add(EVLabel);
 		frame.add(accessibilityLabel);
@@ -185,7 +185,7 @@ public class RegFrame implements ActionListener{
 		frame.add(firstNameField);
 		frame.add(lastNameField);
 		frame.add(passwordField);
-		frame.add(emailTextField);
+		//frame.add(emailTextField);
 		frame.add(uniComboBox);
 		frame.add(disabledCheckBox);
 		frame.add(EVCheckBox);
@@ -271,7 +271,7 @@ public class RegFrame implements ActionListener{
 			uniComboBox.setSelectedItem("Student");			
 			passwordField.setText("");
 			confirmPasswordField.setText("");
-			emailTextField.setText("");
+			//emailTextField.setText("");
 		}
 
 		if (e.getSource() == loginButton) {
