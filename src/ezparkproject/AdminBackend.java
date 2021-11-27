@@ -14,7 +14,7 @@ public class AdminBackend {
 		
 	}
 	
-	public void fetchReservationFunction() throws Exception{
+	public static void fetchReservationFunction() throws Exception{
 		
 	
 	
@@ -35,7 +35,7 @@ public class AdminBackend {
 	
 	
 	
-	public void unBanUserFunction(int id) {
+	public static void unBanUserFunction(int id) {
 		
 		try {
 			
@@ -54,7 +54,7 @@ public class AdminBackend {
 	}
 		
 		
-	public void BanUserFunction(int id) {
+	public static void BanUserFunction(int id) {
 		
 		try {
 			
@@ -74,7 +74,7 @@ public class AdminBackend {
 		
 		
 
-	public void deleteUserFunction(int id) throws Exception {
+	public static void deleteUserFunction(int id) throws Exception {
 		
 		try {
 			

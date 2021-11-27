@@ -6,8 +6,11 @@ import java.awt.*;
 
 public class AdminFrame implements ActionListener{
 	
-	
 
+	// Declarations 
+	
+	int id;
+	
 
 	JFrame frame;
 	
@@ -187,25 +190,36 @@ public class AdminFrame implements ActionListener{
 			
 			
 
-			// change ban action 
+			AdminBackend.BanUserFunction(id);
 		}	
 			
 		if (e.getSource() == unbanUserButton) {
 			
 			
 
-			// Change unban action 
+			AdminBackend.unBanUserFunction(id);
 		}
 
 		if (e.getSource() == deleteUserButton) {
 			
-			// delete user action 
+			
+			try {
+				AdminBackend.deleteUserFunction(id);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 		}
 		
 		if (e.getSource() == loadUsersButton) {
 			
-			// load user action
+			try {
+				AdminBackend.fetchReservationFunction();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 		}
 		
