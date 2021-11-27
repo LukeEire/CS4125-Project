@@ -32,21 +32,21 @@ public class Database {
 	protected String users_db;
 	protected String reservations_db;
 	protected String url;
-	protected int Port_number;
+	protected int port_number;
 	protected String testVal;
 
 	// Creates a Database object and connects to our Database
 	public Database() throws SQLException{
 
-		this.Port_number = 3306;
 		this.reservations_db = "reservations";
 		this.users_db = "users";
-		this.server = "sql4.freesqldatabase.com:3306";
+		this.server = "sql4.freesqldatabase.com";
 		this.username = "sql4450358";
 		this.password = "dcCxqbDW1K";
-		this.url = "jdbc:mysql://" + this.server +  "/" + this.username;
+		this.port_number = 3306;
+		//jdbc:mysql://"sql4.freesqldatabase.com:3306/sql4450358
+		this.url = "jdbc:mysql://" + this.server + ":" + this.port_number + "/" + this.username;
 		this.con = DriverManager.getConnection(this.url, this.username, this.password);
-		
 	}
 	
 	// Returns a connection object
