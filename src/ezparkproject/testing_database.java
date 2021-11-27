@@ -1,6 +1,6 @@
 package ezparkproject;
 
-public class testing_database {
+public class Testing_database {
     public static void main(String[] args) throws Exception
     {
         //Ayoub testing - the following has been tested and all works - 24/11/2021
