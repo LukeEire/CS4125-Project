@@ -14,6 +14,13 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>mysql-connector-java-8.0.27.jar</name>
+			<type>1</type>
+			<location>C:/Users/lenovo/OneDrive - University of Limerick/Semester 7/CS4125 Systems analysis and design/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar</location>
+		</link>
+	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1637616609607</id>
