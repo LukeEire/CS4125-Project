@@ -19,7 +19,7 @@ import javax.swing.border.EmptyBorder;
 public class ParkingFrame extends JFrame {
 
 	private JPanel contentPane;
-	JButton btnPark;
+	JButton parkingButton;
 	
 	private static ParkingSystem app = new ParkingSystem();
 	static ParkingFrame mainFrame;
@@ -39,52 +39,51 @@ public class ParkingFrame extends JFrame {
 
 	public ParkingFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Book and Pay");
+		setTitle("PayNow Parking");
 		setBounds(450, 190, 1014, 597);
         setResizable(false);
         contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(2, 2, 2, 2));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 		
 
-        btnPark = new JButton("Park");
-		btnPark.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		btnPark.setBounds(240, 200, 100, 73);
-		btnPark.setSize(500,50);
-		btnPark.addActionListener(new ActionListener() {
+        parkingButton = new JButton("Park Now");
+		parkingButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		parkingButton.setBounds(240, 200, 100, 73);
+		parkingButton.setSize(500,50);
+		parkingButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{				
-				TicketSystem ticketSystem = app.park();
+				TicketSystem getNewTicket = app.park();
 				
-				if (ticketSystem == null)
+				if (getNewTicket == null)
 				{
-					JOptionPane.showMessageDialog(btnPark, "Parking full!");
+					JOptionPane.showMessageDialog(parkingButton, "Parking full!");
 				}
 				else
 				{
-					Date date = ticketSystem.getDate();
-					int ticketNumber = ticketSystem.getSlotNumber();
-					long time = ticketSystem.getStartTime();
+					Date date = getNewTicket.getDate();
+					int ticketNumber = getNewTicket.getSlotNumber();
+					long time = getNewTicket.getStartTime();
 					
 					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 					DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 					date = new Date(time);
 					dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 										
-					JOptionPane.showMessageDialog(btnPark, "Today's Date: " + dateFormat.format(date) + "\n" +
+					JOptionPane.showMessageDialog(parkingButton, "Today's Date: " + dateFormat.format(date) + "\n" +
 														   "Your parking ticket number: " + ticketNumber + "\n" +
 														   "Start Time: " + timeFormat.format(date));
 				}
 			}
 		});
-		contentPane.add(btnPark, BorderLayout.CENTER);
+		contentPane.add(parkingButton, BorderLayout.CENTER);
 		
-		JButton btnPayExit = new JButton("Pay");
-		btnPayExit.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		btnPayExit.setBounds(240, 300, 100, 73);
-		btnPayExit.setSize(500,50);
-		btnPayExit.addActionListener(new ActionListener() {
+		JButton exitButton = new JButton("Pay Now");
+		exitButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		exitButton.setBounds(240, 300, 100, 73);
+		exitButton.setSize(500,50);
+		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
 				app.captureEndTime(); 
@@ -102,7 +101,7 @@ public class ParkingFrame extends JFrame {
 				paymentMidFrame.setVisible(true);
 			}
 		});
-		contentPane.add(btnPayExit, BorderLayout.EAST);
+		contentPane.add(exitButton, BorderLayout.EAST);
 	}
 	
 
