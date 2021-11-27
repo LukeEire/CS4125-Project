@@ -1,0 +1,107 @@
+package ezparkproject;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
+public class AdminBackend {
+	
+	
+	// Author: Ashutosh Yadav 18249094
+	
+	AdminBackend() {
+		
+	}
+	
+	public void fetchReservationFunction() throws Exception{
+		
+	
+	
+	
+	try {
+		
+		Database db = new Database();
+		
+		db.fetchReservationData();
+		
+		
+	} catch (SQLException error) {
+
+		System.out.println("Could not connect to the database " + error.getMessage());
+
+	}
+}
+	
+	
+	
+	public void unBanUserFunction(int id) {
+		
+		try {
+			
+			Database db = new Database();
+			
+			db.unBanUser(id);
+			
+			
+			
+			
+		} catch (SQLException error) {
+
+			System.out.println("Could not connect to the database " + error.getMessage());
+
+		}
+	}
+		
+		
+	public void BanUserFunction(int id) {
+		
+		try {
+			
+			Database db = new Database();
+			
+			db.banUser(id);
+			
+			
+			
+			
+		} catch (SQLException error) {
+
+			System.out.println("Could not connect to the database " + error.getMessage());
+
+		}
+	}
+		
+		
+
+	public void deleteUserFunction(int id) {
+		
+		try {
+			
+			Database db = new Database();
+			
+			db.deleteUser(id);
+								
+			
+		} catch (SQLException error) {
+
+			System.out.println("Could not connect to the database " + error.getMessage());
+
+		}
+		
+	}
+
+
+		
+		
+	
+				
+				
+					
+				
+	
+	
+}
+
+}
+
