@@ -516,7 +516,7 @@ public class Database {
 			// Adding user desired duration to remain parked to expiry variable
 			expiryDateTime = expiryDateTime.plus(Duration.ofHours(hours));  
 			expiryDateTime = expiryDateTime.plus(Duration.ofMinutes(mins));
-			System.out.println("Resrvation expires: " + expiryDateTime.format(simpleDateFormat));
+			System.out.println("Reservation expires: " + expiryDateTime.format(simpleDateFormat));
 
 			//Converting ca & expiryDateTime to sql date format
 			Date created_on = Date.valueOf(created_at_LocalDateTime.toLocalDate());
@@ -540,7 +540,7 @@ public class Database {
 	            if(insert == 1)
 	            {
 					System.out.println("Reservation made successfully");			
-					System.out.println("Resrvation From " + created_on + " Until " + expiry);
+					System.out.println("Reservation From " + created_on + " Until " + expiry);
 
 	            }
 	            else
@@ -631,7 +631,7 @@ public class Database {
 				System.out.println("Reserved for:  " + mins + " Min(s)");
 
 
-				// Creating new resrvation obj without adding it to the DB (false)
+				// Creating new reservation obj without adding it to the DB (false)
 				Reservation collectedReservation = new Reservation(false, user, rs.getString("lot"), hours, mins);
 				// Storing it in a reservations arraylist
 				reservations.add(collectedReservation);
