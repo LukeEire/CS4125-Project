@@ -74,7 +74,7 @@ public class AdminBackend {
 		
 		
 
-	public void deleteUserFunction(int id) {
+	public void deleteUserFunction(int id) throws Exception {
 		
 		try {
 			
@@ -103,5 +103,5 @@ public class AdminBackend {
 	
 }
 
-}
+
 
