@@ -2,6 +2,8 @@ package ezparkproject;
 
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 public class LoginBackend {
 	
 	LoginBackend() {
@@ -16,7 +18,18 @@ public class LoginBackend {
 	try {
 		
 		Database db = new Database();
-		db.verifyUser(id, password);
+		
+		
+		if (db.verifyUser(id, password)) {
+			
+			Dashboard frame = new Dashboard();
+            frame.setVisible(true);
+            System.out.print("You have successfully logged in");
+		
+		}else {
+			System.out.print("Incorrect username or password");
+		
+		}
 		
 	} catch (SQLException error) {
 
