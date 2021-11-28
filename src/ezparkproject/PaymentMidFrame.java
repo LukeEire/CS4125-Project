@@ -1,5 +1,4 @@
-package ezparkproject;
-
+package ezparkproject; 
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -46,7 +45,7 @@ public class PaymentMidFrame extends JFrame {
 		textField.setColumns(4);
 		
 		backButton = new JButton("Back");
-		backButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		backButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		backButton.setBounds(10, 150, 100, 73);
 		backButton.setSize(100,30);
 		backButton.addActionListener(new ActionListener() {
@@ -64,7 +63,7 @@ public class PaymentMidFrame extends JFrame {
 	        });
 		
 		enterButton = new JButton("Enter");
-		enterButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		enterButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		enterButton.setBounds(10, 150, 100, 73);
 		enterButton.setSize(100,30);
 		enterButton.addActionListener(new ActionListener() {
