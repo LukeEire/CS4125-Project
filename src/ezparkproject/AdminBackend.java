@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 public class AdminBackend {
 	
 	
+	
+	
 	// Author: Ashutosh Yadav 18249094
 	
 	AdminBackend() {
@@ -100,18 +102,21 @@ public class AdminBackend {
 		
 	}
 	
-	public static void fetchUserFunction() throws Exception {
+	public static ArrayList<Users> fetchUserFunction() throws Exception {
+		ArrayList<Users> users;
 		
 		try {
 			
 			Database db = new Database();
 			
-			db.fetchData();
-								
+			users = db.fetchData();
+			
+			return users;
 			
 		} catch (SQLException error) {
 
 			System.out.println("Could not connect to the database " + error.getMessage());
+			return null;
 
 		}
 		

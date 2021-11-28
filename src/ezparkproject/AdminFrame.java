@@ -1,7 +1,8 @@
 package ezparkproject;
 
 import javax.swing.*; 
-import java.awt.event.*; 
+import java.awt.event.*;
+import java.util.ArrayList;
 import java.awt.*; 
 
 public class AdminFrame implements ActionListener{
@@ -10,6 +11,7 @@ public class AdminFrame implements ActionListener{
 	// Declarations 
 	
 	int id;
+	ArrayList<Users> users;
 	
 
 	JFrame frame;
@@ -232,9 +234,10 @@ public class AdminFrame implements ActionListener{
 		}
 		
 		if (e.getSource() == loadUsersButton) {
-			
+			ArrayList<Users> temp;
 			try {
-				AdminBackend.fetchUserFunction();
+				temp = AdminBackend.fetchUserFunction();
+				
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
