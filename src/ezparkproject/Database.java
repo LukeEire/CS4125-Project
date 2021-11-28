@@ -108,6 +108,113 @@ public class Database {
     	}
 	}
 
+	// Admin function
+	// CREATES users table
+	public void createUsersTable(){
+		try {
+    		
+			String query = "CREATE TABLE IF NOT EXISTS users " +
+							" ( id int(32) PRIMARY KEY, " +
+							" firstName VARCHAR(255) NOT NULL, " +
+							" lastName VARCHAR(255) NOT NULL, " +
+							" password VARCHAR(255), " +
+							" email_address VARCHAR(320), " +
+							" status VARCHAR(32), " +
+							" electric TINYINT(1), " +
+							" penalties int(11), " +
+							" ban_status TINYINT(1), " +
+							" banTime DATE, " +
+							" accessibility TINYINT(1), " +
+							" created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, " +
+							" dob DATE, " +
+							" reg VARCHAR(255) " +
+							" );";
+
+	        PreparedStatement p = con.prepareStatement(query);
+	        int dropped = p.executeUpdate(query);
+	
+	        if(dropped == 1){
+	        	System.out.println("TABLE: users CREATED successfully");
+	        }
+	        else{
+	            System.out.println("FAIL: CREATION Failed");
+	        }
+	        
+    	} catch (Exception e){
+
+    		System.out.println("Error CREATING table: " + e.getMessage());
+
+    	}
+	}
+
+	// Admin function
+	// CREATES reservations table
+	public void createReservationsTable(){
+		try {
+    		
+			String query = "CREATE TABLE IF NOT EXISTS reservations " +
+							" ( id int(32) PRIMARY KEY NOT NULL AUTO_INCREMENT,	" +
+							" userID int(32) NOT NULL, " +
+							" reg VARCHAR(255) NOT NULL, " +
+							" lot varchar(255) NOT NULL, " +
+							" electric TINYINT(1), " +
+							" accessibility TINYINT(1), " +
+							" created_on DATE, " +
+							" expiry DATE, " +
+							" FOREIGN KEY (userID) REFERENCES users(id) " +
+							" );";
+
+	        PreparedStatement p = con.prepareStatement(query);
+	        int dropped = p.executeUpdate(query);
+	
+	        if(dropped == 1){
+	        	System.out.println("TABLE: reservations CREATED successfully");
+	        }
+	        else{
+	            System.out.println("FAIL: CREATION Failed");
+	        }
+	        
+    	} catch (Exception e){
+
+    		System.out.println("Error CREATING table: " + e.getMessage());
+
+    	}
+	}
+
+	// Admin function
+	// CREATES transactions table
+	public void createTransactionsTable(){
+		try {
+    		
+			String query = "CREATE TABLE IF NOT EXISTS transactions " +
+							" ( id int(32) PRIMARY KEY NOT NULL AUTO_INCREMENT,	" +
+							" userID int(32) NOT NULL, " +
+							" reservationsID int(32) NOT NULL, " +
+							" lot varchar(255) NOT NULL, " +
+							" amount int(11) NOT NULL, " +
+							" created_on DATE, " +
+							" created_on DATE, " +
+							" FOREIGN KEY (userID) REFERENCES users(id)," +
+							" FOREIGN KEY (reservaitionsID) REFERENCES reservations(id) " +
+							" );";
+
+	        PreparedStatement p = con.prepareStatement(query);
+	        int dropped = p.executeUpdate(query);
+	
+	        if(dropped == 1){
+	        	System.out.println("TABLE: transactions CREATED successfully");
+	        }
+	        else{
+	            System.out.println("FAIL: CREATION Failed");
+	        }
+	        
+    	} catch (Exception e){
+
+    		System.out.println("Error CREATING table: " + e.getMessage());
+
+    	}
+	}
+
 	// Returns ArrayList of type User with user collected from the DB
 	// Prints User Details in DB
 	public ArrayList<Users> fetchData() throws Exception{
