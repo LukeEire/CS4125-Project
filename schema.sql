@@ -51,13 +51,13 @@ UPDATE users SET ban_status = 1, banTime = DATE '2000-03-12' WHERE id = "1826640
 
 --Ayoub - new transactions table
 -- id | userID | ReservationID | lot | amount | created_on
-CREATE TABLE IF NOT EXISTS reservations (
+CREATE TABLE IF NOT EXISTS transactions (
 id int(32) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 userID int(32) NOT NULL,
 reservaitionsID int(32) NOT NULL,
 lot varchar(255) NOT NULL,
 amount int(11) NOT NULL,
 created_on DATE,
-FOREIGN KEY (userID) REFERENCES users(id)
-FOREIGN KEY (reservaitionsID) REFERENCES users(id)
+FOREIGN KEY (userID) REFERENCES users(id),
+FOREIGN KEY (reservaitionsID) REFERENCES reservations(id)
 );
