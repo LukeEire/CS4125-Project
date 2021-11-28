@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.*; 
 import java.awt.*; 
 
-public class BookingFrame implements ActionListener{
+public class BookingMenuFrame implements ActionListener{
 
 	JFrame frame;
 	
@@ -33,7 +33,7 @@ public class BookingFrame implements ActionListener{
 	JButton viewBookingButton = new JButton("View My Bookings");
 	JButton backButton = new JButton("Back");
 
-	BookingFrame() {
+	BookingMenuFrame() {
 
 		createWindow();
 		setLocationAndSize();
