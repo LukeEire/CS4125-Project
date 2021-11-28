@@ -19,7 +19,10 @@ import javax.swing.border.EmptyBorder;
 public class ParkingFrame extends JFrame {
 
 	private JPanel contentPane;
-	JButton parkingButton;
+	private JButton parkingButton;
+	private JButton logoutButton;
+	private JButton backButton;
+	
 	
 	private static ParkingSystem app = new ParkingSystem();
 	static ParkingFrame mainFrame;
@@ -40,25 +43,27 @@ public class ParkingFrame extends JFrame {
 	public ParkingFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("PayNow Parking");
+		contentPane = new JPanel();
+	    setContentPane(contentPane);
+	    contentPane.setLayout(null);
 		setBounds(450, 190, 1014, 597);
         setResizable(false);
-        contentPane = new JPanel();
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+      
 		
 
         parkingButton = new JButton("Park Now");
-		parkingButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		parkingButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		parkingButton.setBounds(240, 200, 100, 73);
 		parkingButton.setSize(500,50);
 		parkingButton.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) 
 			{				
 				TicketSystem getNewTicket = app.park();
 				
 				if (getNewTicket == null)
 				{
-					JOptionPane.showMessageDialog(parkingButton, "Parking full!");
+					JOptionPane.showMessageDialog(parkingButton, "Parking unavailable");
 				}
 				else
 				{
@@ -77,16 +82,16 @@ public class ParkingFrame extends JFrame {
 				}
 			}
 		});
-		contentPane.add(parkingButton, BorderLayout.CENTER);
+	
 		
 		JButton exitButton = new JButton("Pay Now");
-		exitButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		exitButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		exitButton.setBounds(240, 300, 100, 73);
 		exitButton.setSize(500,50);
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				app.captureEndTime(); 
+				app.measureTime(); 
 				
 				PaymentMidFrame paymentMidFrame = null;
 				
@@ -101,7 +106,40 @@ public class ParkingFrame extends JFrame {
 				paymentMidFrame.setVisible(true);
 			}
 		});
-		contentPane.add(exitButton, BorderLayout.EAST);
+		
+		backButton = new JButton("Back");
+		backButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		backButton.setBounds(10, 2, 200, 73);
+		backButton.setSize(100,50);
+		backButton.addActionListener(new ActionListener() {
+
+	        	public void actionPerformed(ActionEvent e) {
+	        		
+	        		if (e.getSource() == backButton) {
+	        		 dispose();
+	       			 Dashboard frame = new Dashboard();
+	                 frame.setVisible(true);
+	       	        
+	       		}
+	       		
+	        	}
+	        });
+		
+		logoutButton = new JButton("Exit");
+        logoutButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
+        logoutButton.setBounds(890, 2, 200, 73);
+        logoutButton.setSize(100,50);
+        logoutButton.addActionListener(new ActionListener() {
+
+        	public void actionPerformed(ActionEvent e) {
+        		System.exit(0);
+            }
+        });
+		
+		contentPane.add(parkingButton);
+		contentPane.add(exitButton);
+		contentPane.add(logoutButton);
+		contentPane.add(backButton);
 	}
 	
 
