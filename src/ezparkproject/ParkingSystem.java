@@ -17,10 +17,10 @@ public class ParkingSystem {
 	private String durationParked;
 	private Date date;
 	
-	private static final double fee = 2; // Parking fee 2 euro for 60 minutes
+	private static final double fee = 2; // Parking fee 2 euro for every 60 minutes parked 
 	private static final int minimumTime = 60;
 	int timeInMinutes = 0;
-	private double totalFee = 1;
+	private double totalFee = 2;
 	PaymentInfo payInfo = null;
 	
 	public ParkingSystem() 
@@ -28,7 +28,7 @@ public class ParkingSystem {
 		ParkingLot lot = new ParkingLot();
 		slots = lot.getParkingSlots();
 		
-		ticketList = new ArrayList<>(); // to save tickets
+		ticketList = new ArrayList<>(); // save tickets already made
 	}
 	
 	public TicketSystem park()
@@ -102,10 +102,10 @@ public class ParkingSystem {
 	
 	public double getTotalFee()
 	{
-		if(totalFee == 1)
+		if(totalFee == 2)
 		{
 			if (timeInMinutes < 60)
-				totalFee = 1;
+				totalFee = 2;
 			else
 				totalFee = (timeInMinutes / minimumTime) * fee;
 		}
