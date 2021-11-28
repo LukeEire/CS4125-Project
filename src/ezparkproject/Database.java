@@ -650,6 +650,38 @@ public class Database {
 			
 	}
 
+	// Returns entries in the transaction table
+	public void fetchTransactionData() throws Exception{
+
+		int i = 0;
+		try {
+
+			String query = "select * from transactions";
+	        PreparedStatement p = con.prepareStatement(query);
+			ResultSet rs = p.executeQuery(query);
+
+			while(rs.next()){
+
+				System.out.println("--------------------------Transaction: "+i+"------------------------------");
+
+				System.out.println("Transaction ID: " + rs.getInt("id"));
+				System.out.println("User ID: " + rs.getInt("userID"));
+				System.out.println("Reservation ID: " + rs.getInt("reservationsID"));
+				System.out.println("Lot: " + rs.getString("lot"));
+				System.out.println("Amount: €" + rs.getInt("amount"));
+				System.out.println("Created on: " + rs.getDate("created_on"));
+
+				System.out.println("-----------------------------END-------------------------------");
+				i++;
+			}
+			
+			
+		} catch (Exception e) {
+	    	System.out.println("Error fetching transaction data: " + e.getMessage());
+		}
+			
+	}
+
 //Luke Testing here
 	//Probably need to update reservation object to have ID
 	//Get list of booking requirements before messing with this
