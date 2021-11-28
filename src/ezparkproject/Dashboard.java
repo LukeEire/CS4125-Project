@@ -73,7 +73,7 @@ package ezparkproject;
 
 	        	public void actionPerformed(ActionEvent e) {
 	        		dispose();
-	           		new BookingFrame();
+	           		new BookingMenuFrame();
 	            }
 	        });
 	        
