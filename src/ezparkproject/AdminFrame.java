@@ -18,14 +18,17 @@ public class AdminFrame implements ActionListener{
 	
 	JLabel reservationsPanel = new JLabel("Reservations Panel");
 	JLabel usersPanel = new JLabel("Users Panel");
+	JLabel transactionsPanel = new JLabel("Transactions Panel");
 	
 	/* Scrollable Containers */
 	
 	JPanel userContainer = new JPanel();
 	JPanel reservationContainer = new JPanel();
+	JPanel transactionsContainer = new JPanel();
 	
 	JScrollPane userScrollPane = new JScrollPane(userContainer);
 	JScrollPane reservationScrollPane = new JScrollPane(reservationContainer);
+	JScrollPane transactionsScrollPane = new JScrollPane(transactionsContainer);
 
 	
 	
@@ -81,6 +84,9 @@ public class AdminFrame implements ActionListener{
 		reservationsPanel.setBounds(640, 75, 40, 70);
 		reservationsPanel.setSize(200,20);
 		
+		transactionsPanel.setBounds(940, 75, 40, 70);
+		transactionsPanel.setSize(200,20);
+		
 		/* Scroll bounds */
 		
 		userScrollPane.setBounds(350, 100, 40, 70);
@@ -89,6 +95,8 @@ public class AdminFrame implements ActionListener{
 		reservationScrollPane.setBounds(600, 100, 40, 70);
 		reservationScrollPane.setSize(200,350);
 		
+		transactionsScrollPane.setBounds(900, 100, 40, 70);
+		transactionsScrollPane.setSize(200,350);
         
         /* Text fields and drop downs bounds */
         
@@ -147,6 +155,8 @@ public class AdminFrame implements ActionListener{
 		frame.add(reservationsPanel);
 		frame.add(userScrollPane);
 		frame.add(reservationScrollPane);
+		frame.add(transactionsScrollPane);
+		frame.add(transactionsScrollPane);
 		
 
 		
