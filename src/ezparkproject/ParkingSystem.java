@@ -25,7 +25,7 @@ public class ParkingSystem {
 	
 	public ParkingSystem() 
 	{
-		ParkingLot lot = new ParkingLot();
+		Lot lot = new Lot();
 		slots = lot.getParkingSlots();
 		
 		ticketList = new ArrayList<>(); // save tickets already made
