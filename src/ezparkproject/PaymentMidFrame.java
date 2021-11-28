@@ -43,9 +43,30 @@ public class PaymentMidFrame extends JFrame {
 		textField = new JTextField();
 		contentPane.add(textField);
 		
-		textField.setColumns(3);
+		textField.setColumns(4);
+		
+		backButton = new JButton("Back");
+		backButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		backButton.setBounds(10, 150, 100, 73);
+		backButton.setSize(100,30);
+		backButton.addActionListener(new ActionListener() {
+
+	        	public void actionPerformed(ActionEvent e) {
+	        		
+	        		if (e.getSource() == backButton) {
+	        		 dispose();
+	        		 ParkingFrame frame = new ParkingFrame();
+	                 frame.setVisible(true);
+	       	        
+	       		}
+	       		
+	        	}
+	        });
 		
 		enterButton = new JButton("Enter");
+		enterButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		enterButton.setBounds(10, 150, 100, 73);
+		enterButton.setSize(100,30);
 		enterButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -70,7 +91,7 @@ public class PaymentMidFrame extends JFrame {
 					else
 					{
 						// make the slot available
-						app.spaceAvailable(ticketNumEntered);
+					app.spaceAvailable(ticketNumEntered);
 					if (option != JOptionPane.NO_OPTION)	
 						try{
 							PaymentFrame paymentFrame = new PaymentFrame(app);
@@ -83,29 +104,12 @@ public class PaymentMidFrame extends JFrame {
 				else
 				{
 					JOptionPane.showMessageDialog(enterButton, "Please Enter Valid Ticket No!");
-					textField.setText("");
-					textField.requestFocus();
+					dispose();
 				}
 			}
 		});
 		
-		backButton = new JButton("Back");
-		backButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		backButton.setBounds(10, 150, 100, 73);
-		backButton.setSize(100,30);
-		backButton.addActionListener(new ActionListener() {
-
-	        	public void actionPerformed(ActionEvent e) {
-	        		
-	        		if (e.getSource() == backButton) {
-	        		 dispose();
-	       			 Dashboard frame = new Dashboard();
-	                 frame.setVisible(true);
-	       	        
-	       		}
-	       		
-	        	}
-	        });
+		
 		contentPane.add(backButton);
 		contentPane.add(enterButton);
 	}
