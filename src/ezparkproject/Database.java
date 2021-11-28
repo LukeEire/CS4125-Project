@@ -191,11 +191,11 @@ public class Database {
 							" userID int(32) NOT NULL, " +
 							" reservationsID int(32) NOT NULL, " +
 							" lot varchar(255) NOT NULL, " +
-							" amount int(11) NOT NULL, " +
+							" amount double NOT NULL, " +
 							" created_on DATE, " +
 							" created_on DATE, " +
 							" FOREIGN KEY (userID) REFERENCES users(id)," +
-							" FOREIGN KEY (reservaitionsID) REFERENCES reservations(id) " +
+							" FOREIGN KEY (reservationsID) REFERENCES reservations(id) " +
 							" );";
 
 	        PreparedStatement p = con.prepareStatement(query);
@@ -843,6 +843,47 @@ public class Database {
 			
 	}
 
+	// INSERTS a new transaction into the transactions DB
+	public void addTransaction(int userID, int reservationsID, String lot, double amount) throws Exception{
+
+		try {
+			// Creating variables for created at attribute
+			LocalDate ca = LocalDate.now();
+			//Converting ca & expiryDateTime to sql date format
+			Date created_on = Date.valueOf(ca);
+
+			// INSERTING data to DB
+			if(userID > 0 && reservationsID>0 && amount>0 && created_on!=null ){
+				
+				String query = "INSERT INTO " + transactions_db + "(userID, reservationsID, lot, amount, created_on) VALUES (?, ?, ?, ?, ?)";
+
+				PreparedStatement p = con.prepareStatement(query);
+				p.setInt(1, userID);
+				p.setInt(2, reservationsID);
+				p.setString(3, lot);
+				p.setDouble(4, amount);
+				p.setDate(5, created_on);
+				
+	            int insert = p.executeUpdate();
+	            if(insert == 1)
+	            {
+					System.out.println("Transaction logged successfully");			
+					System.out.println("Transaction amount: " + amount);
+
+	            }
+	            else
+	            {
+	                System.out.println("Transaction Failed");
+	            }
+			}
+		} catch (SQLException e){
+			
+	    	System.out.println("Error logging Transaction: " + e.getMessage());
+			
+		}
+			
+	}
+
 	// Admin function
 	// Returns entries in the transaction table
 	public void fetchTransactionData() throws Exception{
@@ -881,7 +922,7 @@ public class Database {
 		int i = 0;
 		try {
 
-			String query = "select * from transactions " + id;
+			String query = "select * from transactions WHERE userID = " + id;
 	        PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 
