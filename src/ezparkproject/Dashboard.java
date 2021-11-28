@@ -61,7 +61,7 @@ package ezparkproject;
 
 	        JLabel lblNewLabel = new JLabel("EZPark");
 	        lblNewLabel.setForeground(Color.BLACK);
-	        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 46));
+	        lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 46));
 	        lblNewLabel.setBounds(423, 13, 273, 93);
 	        contentPane.add(lblNewLabel);
 
@@ -118,9 +118,9 @@ package ezparkproject;
 	        });
 	        
 	        logoutButton = new JButton("Quit");
-	        logoutButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
-	        logoutButton.setBounds(890, 2, 200, 73);
-	        logoutButton.setSize(100,50);
+	        logoutButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	        logoutButton.setBounds(440, 450, 200, 73);
+	        logoutButton.setSize(100,30);
 	        logoutButton.addActionListener(new ActionListener() {
 
 	        	public void actionPerformed(ActionEvent e) {

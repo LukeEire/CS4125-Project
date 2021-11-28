@@ -1,6 +1,7 @@
 package ezparkproject;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,7 @@ import java.util.TimeZone;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -48,9 +50,13 @@ public class ParkingFrame extends JFrame {
 	    contentPane.setLayout(null);
 		setBounds(450, 190, 1014, 597);
         setResizable(false);
-      
-		
-
+        
+        JLabel lblNewLabel = new JLabel("EZPark");
+        lblNewLabel.setForeground(Color.BLACK);
+        lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 46));
+        lblNewLabel.setBounds(423, 13, 273, 93);
+        contentPane.add(lblNewLabel);
+      		
         parkingButton = new JButton("Park Now");
 		parkingButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		parkingButton.setBounds(240, 200, 100, 73);
@@ -108,9 +114,9 @@ public class ParkingFrame extends JFrame {
 		});
 		
 		backButton = new JButton("Back");
-		backButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		backButton.setBounds(10, 2, 200, 73);
-		backButton.setSize(100,50);
+		backButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		backButton.setBounds(340, 450, 200, 73);
+		backButton.setSize(100,30);
 		backButton.addActionListener(new ActionListener() {
 
 	        	public void actionPerformed(ActionEvent e) {
@@ -125,10 +131,10 @@ public class ParkingFrame extends JFrame {
 	        	}
 	        });
 		
-		logoutButton = new JButton("Exit");
-        logoutButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
-        logoutButton.setBounds(890, 2, 200, 73);
-        logoutButton.setSize(100,50);
+		logoutButton = new JButton("Quit");
+        logoutButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        logoutButton.setBounds(540, 450, 200, 73);
+        logoutButton.setSize(100,30);
         logoutButton.addActionListener(new ActionListener() {
 
         	public void actionPerformed(ActionEvent e) {

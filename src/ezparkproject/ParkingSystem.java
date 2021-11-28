@@ -64,7 +64,7 @@ public class ParkingSystem {
 		return null;
 	}
 	
-	public void captureEndTime()
+	public void measureTime()
 	{
 		// capture end time
 		endTimeMilliseconds = System.currentTimeMillis();
@@ -153,5 +153,7 @@ public class ParkingSystem {
 	    return currentHour + ":" + currentMinute + ":" + currentSecond;
 	
 	}
+	
+	
 
 }
