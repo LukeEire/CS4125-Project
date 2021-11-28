@@ -54,7 +54,7 @@ UPDATE users SET ban_status = 1, banTime = DATE '2000-03-12' WHERE id = "1826640
 CREATE TABLE IF NOT EXISTS transactions (
 id int(32) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 userID int(32) NOT NULL,
-reservaitionsID int(32) NOT NULL,
+reservationsID int(32) NOT NULL,
 lot varchar(255) NOT NULL,
 amount int(11) NOT NULL,
 created_on DATE,

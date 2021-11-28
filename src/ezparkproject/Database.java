@@ -30,6 +30,7 @@ public class Database {
 	protected String username;
 	protected String password;
 	protected String users_db;
+	protected String transactions_db;
 	protected String reservations_db;
 	protected String url;
 	protected int port_number;
@@ -39,6 +40,7 @@ public class Database {
 	public Database() throws SQLException{
 
 		this.reservations_db = "reservations";
+		this.transactions_db = "transactions";
 		this.users_db = "users";
 		this.server = "sql4.freesqldatabase.com";
 		this.username = "sql4450358";
