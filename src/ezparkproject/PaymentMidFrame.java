@@ -17,11 +17,12 @@ public class PaymentMidFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JButton enterButton;
+	private JButton backButton;
 	
 	ParkingSystem app;
 	private PaymentMidFrame paymentMidFrame = this;
 	
-	double Fee = 0;
+	double totalFee = 2;
 
 	public PaymentMidFrame(ParkingSystem parkingApp) 
 	{		
@@ -55,9 +56,9 @@ public class PaymentMidFrame extends JFrame {
 				{
 					paymentMidFrame.dispose(); //disposes frame 
 					app.timeParked();
-					Fee = app.getTotalFee();
+					totalFee = app.getTotalFee();
 					
-					int option = JOptionPane.showConfirmDialog(enterButton, "Your total parking fee is: €" + Fee + "\n" + "Continue to payment? ");
+					int option = JOptionPane.showConfirmDialog(enterButton, "Total Payment: €" + totalFee + "\n" + "Continue to payment? ");
 					
 					if (option != JOptionPane.YES_OPTION)
 					{
@@ -87,6 +88,25 @@ public class PaymentMidFrame extends JFrame {
 				}
 			}
 		});
+		
+		backButton = new JButton("Back");
+		backButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		backButton.setBounds(10, 150, 100, 73);
+		backButton.setSize(100,30);
+		backButton.addActionListener(new ActionListener() {
+
+	        	public void actionPerformed(ActionEvent e) {
+	        		
+	        		if (e.getSource() == backButton) {
+	        		 dispose();
+	       			 Dashboard frame = new Dashboard();
+	                 frame.setVisible(true);
+	       	        
+	       		}
+	       		
+	        	}
+	        });
+		contentPane.add(backButton);
 		contentPane.add(enterButton);
 	}
 	

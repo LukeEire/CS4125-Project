@@ -1,8 +1,12 @@
 package ezparkproject;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Lot {
+	
+	private static final int numberOfSlots = 7; // Number of overall (pay as you go) parking spaces. 
+	private ArrayList<ParkingSpace> listOfSlots = null;
 	
 	String lotName;
 	int spaces;
@@ -10,7 +14,20 @@ public class Lot {
 	int chargingSpaces;
 	
 	public Lot() {
-	}
+		
+			listOfSlots = new ArrayList<>();
+		}
+
+		public ArrayList<ParkingSpace> getParkingSlots()	//incrementing car park spaces for every ticket created 
+		{
+			for (int i = 1; i <= numberOfSlots; i++)
+			{
+				ParkingSpace slot = new ParkingSpace(i, true);
+				listOfSlots.add(slot);
+			}
+			return listOfSlots;
+		}
+	
 	
 	public Lot(String name, int spaces, int disabilitySpaces, int chargingSpaces) {
 		this.lotName = name;
@@ -36,14 +53,11 @@ public class Lot {
 		return this.chargingSpaces;
 		
 	}
+		
 	
 	public Boolean blockForEvent(Date date, int numDays) {
-		Boolean result = false;
-		
-		
-		
-		
+		Boolean result = false;	
 		return result;
 	}
-	
+
 }
