@@ -4,19 +4,19 @@ import java.sql.Date;
 
 public class TicketSystem 
 {
-	private int slotNumber;
+	private int spaceNum;
 	private long startTime;
 	private Date date;
 	
 	public TicketSystem(int slotNumber, long startTime, Date date)
 	{
-		this.slotNumber = slotNumber;
+		this.spaceNum = slotNumber;
 		this.startTime = startTime;
 		this.date = date;
 	}
 
 	public int getSlotNumber() {
-		return slotNumber;
+		return spaceNum;
 	}
 
 	public long getStartTime() {

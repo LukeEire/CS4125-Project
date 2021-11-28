@@ -2,21 +2,21 @@ package ezparkproject;
 
 public class ParkingSpace 
 {
-	private int slotNumber;
+	private int spaceNum;
 	private boolean availability;
 	
 	public ParkingSpace(int slotNumber, boolean availability)
 	{
-		this.slotNumber = slotNumber;
+		this.spaceNum = slotNumber;
 		this.availability = availability;
 	}
 
 	public int getSlotNumber() {
-		return slotNumber;
+		return spaceNum;
 	}
 
 	public void setSlotNumber(int slotNumber) {
-		this.slotNumber = slotNumber;
+		this.spaceNum = slotNumber;
 	}
 
 	public boolean getAvailability() {

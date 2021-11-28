@@ -21,7 +21,7 @@ package ezparkproject;
 	import javax.swing.border.EmptyBorder;
 
 	public class Dashboard extends JFrame {
-
+		
 	    private static final long serialVersionUID = 1L;
 	    private JButton bookingsButton;
 	    private JButton reserveButton;
@@ -66,7 +66,7 @@ package ezparkproject;
 	        contentPane.add(lblNewLabel);
 
 	        bookingsButton = new JButton("Bookings");
-	        bookingsButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
+	        bookingsButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
 	        bookingsButton.setBounds(240, 122, 100, 73);
 	        bookingsButton.setSize(500,50);
 	        bookingsButton.addActionListener(new ActionListener() {
@@ -78,19 +78,23 @@ package ezparkproject;
 	        });
 	        
 	        lotsButton = new JButton("Payment");
-	        lotsButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
+	        lotsButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
 	        lotsButton.setBounds(240, 200, 100, 73);
 	        lotsButton.setSize(500,50);
 	        lotsButton.addActionListener(new ActionListener() {
-
-	        	public void actionPerformed(ActionEvent e) {
-	        		dispose();
-	        		new ParkingFrame();
+	        
+	        public void actionPerformed(ActionEvent e) {
+	        	if (e.getSource() == lotsButton) {
+        			
+	       			 dispose();
+	       			 ParkingFrame frame = new ParkingFrame();
+	                 frame.setVisible(true);
+	       	        
 	            }
-	        });
+	        }});
 	        
 	        reserveButton = new JButton("Reserve");
-	        reserveButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
+	        reserveButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
 	        reserveButton.setBounds(240, 272, 100, 73);
 	        reserveButton.setSize(500,50);
 	        reserveButton.addActionListener(new ActionListener() {
@@ -103,7 +107,7 @@ package ezparkproject;
 	        
 	        
 	        paymentButton = new JButton("Available Lots");
-	        paymentButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
+	        paymentButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
 	        paymentButton.setBounds(240, 350, 100, 73);
 	        paymentButton.setSize(500,50);
 	        paymentButton.addActionListener(new ActionListener() {
@@ -114,7 +118,7 @@ package ezparkproject;
 	        });
 	        
 	        logoutButton = new JButton("Quit");
-	        logoutButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
+	        logoutButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
 	        logoutButton.setBounds(890, 2, 200, 73);
 	        logoutButton.setSize(100,50);
 	        logoutButton.addActionListener(new ActionListener() {
