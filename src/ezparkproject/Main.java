@@ -24,14 +24,25 @@ public class Main {
     public static void main(String[] args) throws Exception
     {
 
-    	LoginFunction frame = new LoginFunction();
-        frame.setTitle("Login Form");
-        frame.setVisible(true);
-        frame.setBounds(500, 200, 1100, 600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
+//    	LoginFunction frame = new LoginFunction();
+//        frame.setTitle("Login Form");
+//        frame.setVisible(true);
+//        frame.setBounds(500, 200, 1100, 600);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setResizable(false);
         
+		//AdminFrame frame = new AdminFrame();
         //new AdminFrame ();
+
+    	Database db = new Database();
+    	
+    	db.dropTable("reservations");
+    	db.dropTable("users");
+    	db.dropTable("transactions");
+
+    	db.createReservationsTable();
+    	db.createTransactionsTable();
+    	db.createUsersTable();
        
     }
 }
