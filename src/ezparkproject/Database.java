@@ -291,6 +291,43 @@ public class Database {
 		}
     }
 	
+	public Users getUser(int id) throws Exception {
+		
+		Users user = new Users();
+		
+		try {
+			String query = "SELECT * FROM " + users_db + " WHERE id= ?";
+			
+			
+			PreparedStatement p = con.prepareStatement(query);
+			p.setInt(1, id);
+			
+			
+			 ResultSet rs = p.executeQuery();
+		        if (rs.next())
+		        {
+		        	user.setID(rs.getInt("id"));
+		        	user.setFirstName(rs.getString("firstName"));
+		        	user.setLastName(rs.getString("lastName"));
+		        	user.setPassword(rs.getString("password"));
+		        	user.setEmail(rs.getString("email_address"));
+		        	user.setStatus(rs.getString("status"));
+		        	user.setElectric(rs.getInt("electric"));
+		        	//If theres an error check spelling
+		        	user.setAccesibility(rs.getInt("accessibility"));
+		        	user.setsDOB(rs.getString("dob"));
+		        	user.setReg(rs.getString("reg"));
+		        }
+			
+		} catch (SQLException e){
+			
+		}
+		
+		
+		return user;
+	}
+	
+	
 	// DELETES user from user database
     public void deleteUser(int id) throws Exception {
     	

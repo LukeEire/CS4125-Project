@@ -123,6 +123,14 @@ public class Users {
 		this.reg = reg;
 	}
 	
+	public void setElectric(int electric) {
+		this.electric = electric;
+	}
+	
+	public void setAccesibility(int access) {
+		this.accessibility = access;
+	}
+	
 	public void updateFirstName(String newFName) {
 		this.firstName = newFName;
 	}
