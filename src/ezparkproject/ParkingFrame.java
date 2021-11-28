@@ -1,6 +1,5 @@
 package ezparkproject;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -16,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+
 
 public class ParkingFrame extends JFrame {
 
@@ -97,7 +96,7 @@ public class ParkingFrame extends JFrame {
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				app.measureTime(); 
+				app.captureEndTime(); 
 				
 				PaymentMidFrame paymentMidFrame = null;
 				
