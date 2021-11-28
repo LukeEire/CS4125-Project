@@ -21,8 +21,6 @@ public class Testing_database {
 		db.createTransactionsTable();
 		db.createUsersTable();
 
-
-
 		// HOW TO REGISTER A NEW USER
 		db.newUser(18266401, "Ayoub", "Jdair", "Password123", "Student", 1, 0, "2000-12-15", "222LH1445");
 		db.newUser(18266402, "Ayoub2", "Jdair", "Password123", "Staff", 0, 0, "2001-12-15", "123HG654");
@@ -53,7 +51,7 @@ public class Testing_database {
 		
 		//How to reserve a space using DB class, can also be done using Registration class
 		db.reserve(18266401, "CALIFORNIA", "Lot A", 1, 0, 1, 1);
-		db.reserve(18266401, "NEWYORK", "Lot A", 1, 0, 1, 1);
+		db.reserve(18266401, "NEWYORK", "Lot B", 1, 0, 1, 1);
 		db.reserve(18266401, "CHICAGO", "Lot A", 1, 0, 1, 1);
 		db.reserve(18266401, "WASHINGTON", "Lot A", 1, 0, 1, 1);
 
@@ -62,6 +60,11 @@ public class Testing_database {
 		Users ayoub = new Users(true, 18266406, "Jack", "H", "123456789", null, "Student", 1, 0, "1999-12-15", "PENN");
 		db.reserve(ayoub.id, ayoub.getDefultPlate(), "LOT A", 1, 0, 2, 15);
 		db.fetchUserReservation(ayoub);
+
+		//Transaction
+
+		db.addTransaction(18266401, 1, "Lot A", 2.40);
+		db.addTransaction(18266401, 2, "Lot A", 2.40);
 
     }
 }
