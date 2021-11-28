@@ -56,7 +56,7 @@ public class ParkingFrame extends JFrame {
         lblNewLabel.setBounds(423, 13, 273, 93);
         contentPane.add(lblNewLabel);
       		
-        parkingButton = new JButton("Park Now");
+        parkingButton = new JButton("ParkNow");
 		parkingButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		parkingButton.setBounds(240, 200, 100, 73);
 		parkingButton.setSize(500,50);
@@ -89,7 +89,7 @@ public class ParkingFrame extends JFrame {
 		});
 	
 		
-		JButton exitButton = new JButton("Pay Now");
+		JButton exitButton = new JButton("Pay for Parking");
 		exitButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		exitButton.setBounds(240, 300, 100, 73);
 		exitButton.setSize(500,50);
@@ -102,12 +102,13 @@ public class ParkingFrame extends JFrame {
 				
 				try {
 					paymentMidFrame = new PaymentMidFrame(app); // display new frame for entering ticket number
+					
 				} 
 				catch (Exception e1) {
 					e1.printStackTrace();
 				}
 				
-				mainFrame.setVisible(false); // hide the first frame
+				// mainFrame.setVisible(false); // hides the frame 
 				paymentMidFrame.setVisible(true);
 			}
 		});

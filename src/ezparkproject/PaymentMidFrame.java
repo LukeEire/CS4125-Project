@@ -30,7 +30,7 @@ public class PaymentMidFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Ticket Number!");
 		setBounds(250, 190, 314, 150);
-		
+		setResizable(false);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		
