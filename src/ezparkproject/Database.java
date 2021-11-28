@@ -62,6 +62,52 @@ public class Database {
 		return con;
 	}
 
+	// Admin function
+	// Passed in table will be cleared of all entries
+	public void clearTable(String tableName){
+		try {
+    		
+			String query = "TRUNCATE TABLE " + tableName;
+	        PreparedStatement p = con.prepareStatement(query);
+	        int dropped = p.executeUpdate(query);
+	
+	        if(dropped == 1){
+	        	System.out.println(tableName + " cleared successfully");
+	        }
+	        else{
+	            System.out.println("FAIL: Clear Failed");
+	        }
+	        
+    	} catch (Exception e){
+
+    		System.out.println("Error clearing table: " + e.getMessage());
+
+    	}
+	}
+
+	// Admin function
+	// Passed in table will be DROPPED from the DB
+	public void dropTable(String tableName){
+		try {
+    		
+			String query = "DROP TABLE " + tableName;
+	        PreparedStatement p = con.prepareStatement(query);
+	        int dropped = p.executeUpdate(query);
+	
+	        if(dropped == 1){
+	        	System.out.println(tableName + " Dropped successfully");
+	        }
+	        else{
+	            System.out.println("FAIL: Deletion Failed");
+	        }
+	        
+    	} catch (Exception e){
+
+    		System.out.println("Error dropping table: " + e.getMessage());
+
+    	}
+	}
+
 	// Returns ArrayList of type User with user collected from the DB
 	// Prints User Details in DB
 	public ArrayList<Users> fetchData() throws Exception{
@@ -594,6 +640,7 @@ public class Database {
 		}
     }
 
+	// Admin function
 	// Prints Reservation Details in DB
 	// Stores their associated userID's in an array list of strings
 	public void fetchReservationData() throws Exception{
@@ -689,6 +736,7 @@ public class Database {
 			
 	}
 
+	// Admin function
 	// Returns entries in the transaction table
 	public void fetchUserTransactionData() throws Exception{
 
