@@ -47,6 +47,7 @@ public class AdminFrame implements ActionListener{
 	JButton logoutButton = new JButton("Logout");
 	JButton loadUsersButton = new JButton("Load Users");
 	JButton loadReservationsButton = new JButton("Load Reservations");
+	JButton loadTransactionsButton = new JButton("Load Transactions");
 	JButton blockforEventButton = new JButton("Block Lot for event");
 	
 	
@@ -55,7 +56,7 @@ public class AdminFrame implements ActionListener{
 
 		createWindow();
 		setLocationAndSize();
-		frame.getContentPane().setBackground(Color.CYAN);
+		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		addComponentsToFrame();
 		actionEvent();
 	}
@@ -140,7 +141,12 @@ public class AdminFrame implements ActionListener{
         
         loadReservationsButton.setBounds(600, 460, 100, 73);
         loadReservationsButton.setSize(200,50);
+		
+		/* Load Transactions Button */
         
+        loadTransactionsButton.setBounds(900, 460, 100, 73);
+		loadTransactionsButton.setSize(200,50);
+		
         /* Block for event button */
         
         blockforEventButton.setBounds(110, 460, 100, 73);
@@ -175,6 +181,7 @@ public class AdminFrame implements ActionListener{
 		frame.add(logoutButton);
 		frame.add(loadUsersButton);
 		frame.add(loadReservationsButton);
+		frame.add(loadTransactionsButton);
 		frame.add(blockforEventButton);
 	}
 	
@@ -188,6 +195,7 @@ public class AdminFrame implements ActionListener{
 		logoutButton.addActionListener(this);
 		loadUsersButton.addActionListener(this);
 		loadReservationsButton.addActionListener(this);
+		loadTransactionsButton.addActionListener(this);
 		blockforEventButton.addActionListener(this);
 	}
 	
@@ -237,6 +245,17 @@ public class AdminFrame implements ActionListener{
 			
 			try {
 				AdminBackend.fetchReservationFunction();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+
+		if (e.getSource() == loadTransactionsButton) {
+			
+			try {
+				AdminBackend.fetchTransactionsFunction();
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

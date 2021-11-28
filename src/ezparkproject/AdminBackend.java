@@ -13,6 +13,15 @@ public class AdminBackend {
 	AdminBackend() {
 		
 	}
+
+	public static void fetchTransactionsFunction() throws Exception{
+		try {
+			Database db = new Database();
+			db.fetchTransactionData();
+		} catch (SQLException error) {
+			System.out.println("Could not connect to the database " + error.getMessage());
+		}
+	}
 	
 	public static void fetchReservationFunction() throws Exception{
 		

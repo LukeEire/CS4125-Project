@@ -738,7 +738,7 @@ public class Database {
 
 	// Admin function
 	// Returns entries in the transaction table
-	public void fetchUserTransactionData() throws Exception{
+	public void fetchTransactionData() throws Exception{
 
 		int i = 0;
 		try {
@@ -769,7 +769,7 @@ public class Database {
 			
 	}
 
-	public void fetchTransactionData(int id) throws Exception{
+	public void fetchUserTransactionData(int id) throws Exception{
 
 		int i = 0;
 		try {
