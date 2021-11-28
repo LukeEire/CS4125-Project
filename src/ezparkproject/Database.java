@@ -651,12 +651,12 @@ public class Database {
 	}
 
 	// Returns entries in the transaction table
-	public void fetchTransactionData() throws Exception{
+	public void fetchUserTransactionData() throws Exception{
 
 		int i = 0;
 		try {
 
-			String query = "select * from transactions";
+			String query = "SELECT * FROM transactions WHERE userID = ";
 	        PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 
@@ -664,6 +664,36 @@ public class Database {
 
 				System.out.println("--------------------------Transaction: "+i+"------------------------------");
 
+				System.out.println("Transaction ID: " + rs.getInt("id"));
+				System.out.println("User ID: " + rs.getInt("userID"));
+				System.out.println("Reservation ID: " + rs.getInt("reservationsID"));
+				System.out.println("Lot: " + rs.getString("lot"));
+				System.out.println("Amount: €" + rs.getInt("amount"));
+				System.out.println("Created on: " + rs.getDate("created_on"));
+
+				System.out.println("-----------------------------END-------------------------------");
+				i++;
+			}
+			
+			
+		} catch (Exception e) {
+	    	System.out.println("Error fetching transaction data: " + e.getMessage());
+		}
+			
+	}
+
+	public void fetchTransactionData(int id) throws Exception{
+
+		int i = 0;
+		try {
+
+			String query = "select * from transactions " + id;
+	        PreparedStatement p = con.prepareStatement(query);
+			ResultSet rs = p.executeQuery(query);
+
+			while(rs.next()){
+
+				System.out.println("--------------------------Transaction: "+i+"------------------------------");
 				System.out.println("Transaction ID: " + rs.getInt("id"));
 				System.out.println("User ID: " + rs.getInt("userID"));
 				System.out.println("Reservation ID: " + rs.getInt("reservationsID"));
