@@ -215,7 +215,7 @@ public class AdminFrame implements ActionListener{
 		if (e.getSource() == loadUsersButton) {
 			
 			try {
-				AdminBackend.fetchReservationFunction();
+				AdminBackend.fetchUserFunction();
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -225,7 +225,12 @@ public class AdminFrame implements ActionListener{
 		
 		if (e.getSource() == loadReservationsButton) {
 			
-			// load reservation action
+			try {
+				AdminBackend.fetchReservationFunction();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 		}
 		

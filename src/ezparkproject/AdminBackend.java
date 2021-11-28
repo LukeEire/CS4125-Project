@@ -90,6 +90,23 @@ public class AdminBackend {
 		}
 		
 	}
+	
+	public static void fetchUserFunction() throws Exception {
+		
+		try {
+			
+			Database db = new Database();
+			
+			db.fetchData();
+								
+			
+		} catch (SQLException error) {
+
+			System.out.println("Could not connect to the database " + error.getMessage());
+
+		}
+		
+	}
 
 
 		
