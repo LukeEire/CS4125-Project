@@ -43,12 +43,6 @@ expiry DATE,
 FOREIGN KEY (userID) REFERENCES users(id)
 );
 
-INSERT INTO users (id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob, reg ) VALUES (18266401, "Ayoub", "Jdair", "Password123", "Student", 1, 0, "2000-12-15", "222LH1445");
-
-INSERT INTO reservations(userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (18266401, '10LH1445', 'LOT A', 1, 0, DATE '2015-12-17', DATE '2015-12-17');
-
-UPDATE users SET ban_status = 1, banTime = DATE '2000-03-12' WHERE id = "18266401"
-
 --Ayoub - new transactions table
 -- id | userID | ReservationID | lot | amount | created_on
 CREATE TABLE IF NOT EXISTS transactions (
@@ -56,8 +50,25 @@ id int(32) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 userID int(32) NOT NULL,
 reservationsID int(32) NOT NULL,
 lot varchar(255) NOT NULL,
-amount int(11) NOT NULL,
+amount double NOT NULL,
 created_on DATE,
 FOREIGN KEY (userID) REFERENCES users(id),
-FOREIGN KEY (reservaitionsID) REFERENCES reservations(id)
+FOREIGN KEY (reservationsID) REFERENCES reservations(id)
 );
+
+
+INSERT INTO users (id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob, reg ) VALUES (18266401, "Ayoub", "Jdair", "Password123", "Student", 1, 0, "2000-12-15", "222LH1445");
+
+INSERT INTO users (id, firstName, LastName, password, status, electric accessibility, dob, reg ) VALUES (18266401, "Ayoub", "Jdair", "Password123", "Student", 1, 0, "2000-12-15", "222LH1445");
+
+INSERT INTO users (id, firstName, LastName, password, status, electric, accessibility, created_on, dob, reg ) VALUES (18266401, "Ayoub", "Jdair", "Password123", "Student", 1, 0, "2000-12-15", DATE '2015-12-17', "222LH1445");
+
+UPDATE users SET ban_status = 1, banTime = DATE '2000-03-12' WHERE id = "18266401"
+
+INSERT INTO reservations(userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (18266401, '10LH1445', 'LOT A', 1, 0, DATE '2015-12-17', DATE '2015-12-17');
+
+INSERT INTO transactions(userID, reservationsID, lot, amount,created_on) VALUES (18266401, 1, "Lot A", 2.40,  DATE '2015-12-17');
+
+INSERT INTO users (id, firstName, LastName, password, status, electric, accessibility, dob, reg ) VALUES (18266401, "Ayoub", "Jdair", "Password123", "Student", 1, 0, "2000-12-15", "222LH1445");
+
+
