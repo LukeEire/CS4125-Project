@@ -22,7 +22,10 @@ public class Users {
 
 	//Car reg plates list for the user, relating methods below
 	ArrayList<String> plates = new ArrayList<String>();
-
+	
+	public Users() {
+		
+	}
 
 	public Users(boolean addUserToDatabase, int id, String firstName, String lastName, String password, String email, String status, int electric, int accessibility, String sdob, String reg) {
 		
@@ -86,6 +89,38 @@ public class Users {
 	
 	public String getReg() {
 		return this.reg;
+	}
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public void setsDOB(String dob) {
+		this.dob = dob;
+	}
+	
+	public void setID(int id) {
+		this.id = id;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public void setReg(String reg) {
+		this.reg = reg;
 	}
 	
 	public void updateFirstName(String newFName) {
