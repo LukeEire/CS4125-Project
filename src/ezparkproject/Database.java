@@ -413,14 +413,14 @@ public class Database {
 				p.setString(4, user1.getPassword());
 				p.setString(5, email);
 				p.setString(6, user1.getStatus());
-				if(user1.electric >= 1) {
+				if(user1.getElec() >= 1) {
 		        	p.setInt(7, 1);
 		        } else {
 		        	p.setInt(7, 0);
 		        }
 				p.setInt(8, 0);
 				p.setInt(9, 0);
-				if(user1.accessibility >= 1) {
+				if(user1.getAcc() >= 1) {
 		        	p.setInt(10, 1);
 		        } else {
 		        	p.setInt(10, 0);
