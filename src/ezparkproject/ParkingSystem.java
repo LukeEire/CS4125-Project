@@ -89,7 +89,7 @@ public class ParkingSystem {
 		return isValid;
 	}
 
-	public void calculateTotalMinutes()
+	public void timeParked()
 	{
 		long durationMilliSeconds = endTimeMilliseconds - startTime; // total time the card was parked in the space
 		durationParked = convertTimeFormat(durationMilliSeconds);
@@ -114,7 +114,7 @@ public class ParkingSystem {
 	}
 		
 	
-	public void makeSlotAvailable(int ticketNumber)
+	public void spaceAvailable(int ticketNumber)
 	{
 		for (int i = 0; i < slots.size(); i++)
 		{
