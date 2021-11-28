@@ -7,10 +7,27 @@ public class Testing_database {
         
 		// Connect to the db, RUN ALL TO SEE
 		// 	NOTE DUPLICATE ENTRIES ARE NOT ALLOWS
+		System.out.println("Testing");
 		Database db = new Database();
 		
 		// HOW TO GET A CON OBJECT (ALTHOUGH YOU DONT REALLY NEED TO)
 		db.connect();
+
+		db.dropTable("reservations");
+		db.dropTable("users");
+		db.dropTable("transactions");
+
+		db.createReservationsTable();
+		db.createTransactionsTable();
+		db.createUsersTable();
+
+
+
+		// HOW TO REGISTER A NEW USER
+		db.newUser(18266401, "Ayoub", "Jdair", "Password123", "Student", 1, 0, "2000-12-15", "222LH1445");
+		db.newUser(18266402, "Ayoub2", "Jdair", "Password123", "Staff", 0, 0, "2001-12-15", "123HG654");
+		db.newUser(18266403, "Ayoub3", "Jdair", "Password123", "Guest", 1, 1, "2010-12-15", "12HFD234");
+		db.newUser(18266404, "Ayoub4", "Jdair", "Password123", "Student", 0, 1, "1999-12-15", "99CE1234");
 
 		// HOW TO DELETE/BAN/UNBAN A USER USING USER ID'S
 
@@ -25,11 +42,6 @@ public class Testing_database {
 		db.unBanUser(18266403);
 		db.unBanUser(18266404);
 		
-		// HOW TO REGISTER A NEW USER
-		db.newUser(18266401, "Ayoub", "Jdair", "Password123", "Student", 1, 0, "2000-12-15", "222LH1445");
-		db.newUser(18266402, "Ayoub2", "Jdair", "Password123", "Staff", 0, 0, "2001-12-15", "123HG654");
-		db.newUser(18266403, "Ayoub3", "Jdair", "Password123", "Guest", 1, 1, "2010-12-15", "12HFD234");
-		db.newUser(18266404, "Ayoub4", "Jdair", "Password123", "Student", 0, 1, "1999-12-15", "99CE1234");
 		
 		// HOW TO PRINT USER'S DB ITEMS - PRINT STATEMENT + ARRAYLIST
 		db.fetchData();
@@ -50,6 +62,6 @@ public class Testing_database {
 		Users ayoub = new Users(true, 18266406, "Jack", "H", "123456789", null, "Student", 1, 0, "1999-12-15", "PENN");
 		db.reserve(ayoub.id, ayoub.getDefultPlate(), "LOT A", 1, 0, 2, 15);
 		db.fetchUserReservation(ayoub);
-       
+
     }
 }
