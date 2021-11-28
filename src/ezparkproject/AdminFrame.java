@@ -67,7 +67,7 @@ public class AdminFrame implements ActionListener{
 
 		frame = new JFrame();
 		frame.setTitle("Admin Panel");
-		frame.setBounds(450, 190, 1014, 597);
+		frame.setBounds(450, 190, 1100, 597);//'
 		frame.getContentPane().setBackground(Color.white);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
@@ -79,13 +79,13 @@ public class AdminFrame implements ActionListener{
 		
 		/* Label Bounds */
 
-		usersPanel.setBounds(410, 75, 40, 70);
+		usersPanel.setBounds(350, 75, 40, 70);
 		usersPanel.setSize(200,20);
 		
-		reservationsPanel.setBounds(640, 75, 40, 70);
+		reservationsPanel.setBounds(600, 75, 40, 70);
 		reservationsPanel.setSize(200,20);
 		
-		transactionsPanel.setBounds(940, 75, 40, 70);
+		transactionsPanel.setBounds(850, 75, 40, 70);
 		transactionsPanel.setSize(200,20);
 		
 		/* Scroll bounds */
@@ -96,7 +96,7 @@ public class AdminFrame implements ActionListener{
 		reservationScrollPane.setBounds(600, 100, 40, 70);
 		reservationScrollPane.setSize(200,350);
 		
-		transactionsScrollPane.setBounds(900, 100, 40, 70);
+		transactionsScrollPane.setBounds(850, 100, 40, 70);
 		transactionsScrollPane.setSize(200,350);
         
         /* Text fields and drop downs bounds */
@@ -144,7 +144,7 @@ public class AdminFrame implements ActionListener{
 		
 		/* Load Transactions Button */
         
-        loadTransactionsButton.setBounds(900, 460, 100, 73);
+        loadTransactionsButton.setBounds(850, 460, 100, 73);
 		loadTransactionsButton.setSize(200,50);
 		
         /* Block for event button */
@@ -159,6 +159,7 @@ public class AdminFrame implements ActionListener{
 
 		frame.add(usersPanel);
 		frame.add(reservationsPanel);
+		frame.add(transactionsPanel);
 		frame.add(userScrollPane);
 		frame.add(reservationScrollPane);
 		frame.add(transactionsScrollPane);
