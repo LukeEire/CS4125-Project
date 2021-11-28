@@ -91,6 +91,14 @@ public class Users {
 		return this.reg;
 	}
 	
+	public int getElec() {
+		return this.electric;
+	}
+	
+	public int getAcc() {
+		return this.accessibility;
+	}
+	
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
