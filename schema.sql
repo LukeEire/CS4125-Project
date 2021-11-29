@@ -57,6 +57,8 @@ accessibility TINYINT(1),
 created_on DATE,
 expiry DATE,
 FOREIGN KEY (userID) REFERENCES users(id)
+ON UPDATE CASCADE
+ON DELETE CASCADE
 );
 
 -- Testing SQL statments
@@ -72,8 +74,61 @@ lot varchar(255) NOT NULL,
 amount double NOT NULL,
 created_on DATE,
 FOREIGN KEY (userID) REFERENCES users(id),
+ON UPDATE CASCADE
+ON DELETE CASCADE
 FOREIGN KEY (reservationsID) REFERENCES reservations(id)
+ON UPDATE CASCADE
+ON DELETE CASCADE
 );
 
 -- Testing SQL statments
 INSERT INTO transactions(userID, reservationsID, lot, amount,created_on) VALUES (18266401, 1, "Lot A", 2.40,  DATE '2015-12-17');
+
+
+-- Paste directely into phpMyAdmin
+
+CREATE TABLE IF NOT EXISTS users (
+id int(32) PRIMARY KEY,
+firstName VARCHAR(255) NOT NULL,
+lastName VARCHAR(255) NOT NULL,
+password VARCHAR(255),
+email_address VARCHAR(320),
+status VARCHAR(32),
+electric TINYINT(1),
+penalties int(11),
+ban_status TINYINT(1),
+banTime DATE,
+accessibility TINYINT(1),
+created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+dob DATE,
+reg VARCHAR(255)
+)
+
+CREATE TABLE IF NOT EXISTS reservations (
+id int(32) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+userID int(32) NOT NULL,
+reg VARCHAR(255) NOT NULL,
+lot varchar(255) NOT NULL,
+electric TINYINT(1),
+accessibility TINYINT(1),
+created_on DATE,
+expiry DATE,
+FOREIGN KEY (userID) REFERENCES users(id)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+)
+
+CREATE TABLE IF NOT EXISTS transactions (
+id int(32) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+userID int(32) NOT NULL,
+reservationsID int(32) NOT NULL,
+lot varchar(255) NOT NULL,
+amount double NOT NULL,
+created_on DATE,
+FOREIGN KEY (userID) REFERENCES users(id)
+ON UPDATE CASCADE
+ON DELETE CASCADE,
+FOREIGN KEY (reservationsID) REFERENCES reservations(id)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+)
