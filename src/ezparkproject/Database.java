@@ -460,7 +460,7 @@ public class Database {
 	        	System.out.println("User " + id + " removed successfully");
 	        }
 	        else{
-	            System.out.println("FAIL: Deletion Failed");
+	            System.out.println("FAIL: Deletion Failed, User " + id + " May Not Exist.");
 	        }
 	        
     	} catch (Exception e){
