@@ -116,7 +116,7 @@ public class LoginFunction extends JFrame {
         		int id = Integer.parseInt(textField.getText());                             
 				@SuppressWarnings("deprecation")
 				String password = passwordField.getText();
-                
+                dispose();
 				
 				LoginBackend.loginFunction(id, password);
 							
