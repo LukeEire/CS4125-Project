@@ -572,7 +572,8 @@ public class Database {
 		
 		try {
 			
-			String query = "SELECT * FROM " + users_db + " WHERE id = "+checkUser+" AND password = " + "\"MD5(" + checkPass + ")\"";
+			String query = "SELECT * FROM " + users_db + " WHERE id = "+checkUser+" AND password =  MD5('" + checkPass + "')\n";
+
 			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			
