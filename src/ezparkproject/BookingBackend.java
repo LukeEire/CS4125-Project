@@ -1,11 +1,12 @@
 package ezparkproject;
 
 import java.sql.Connection;
-import java.sql.Date;
+/*import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.time.LocalDateTime;*/
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+
 
 public class BookingBackend {
 	//Get this to handle changes to bookings
@@ -14,6 +15,32 @@ public class BookingBackend {
 	Connection con;
 	
 	BookingBackend(){
+		
+	}
+	
+	public void createBooking(Reservation res) {
+		
+		try {
+			
+			Database db = new Database();
+			
+			int ID = res.getUser().getID();
+			String reg = res.getUser().getReg();
+			String lot = res.getLot();
+			int electric = res.getUser().getElec();
+			int accessibility = res.getUser().getAcc();
+			Long hours = res.getHours();
+			Long mins = res.getMins();
+			
+			
+			
+			db.reserve(ID, reg, lot, electric, accessibility, hours, mins);
+			
+		} catch (SQLException error) {
+
+			System.out.println("Could not connect to the database " + error.getMessage());
+
+		}
 		
 	}
 	

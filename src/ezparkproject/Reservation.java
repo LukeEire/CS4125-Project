@@ -31,7 +31,7 @@ public class Reservation {
     private int accessibility;
     private int electric;
     private int id;
-    Database db = new Database();
+    //Database db = new Database();
 
     // public Reservation(Users user, int duration) {
     //     this.user = user;
@@ -44,7 +44,7 @@ public class Reservation {
 
     // Ayoub - new Reservation constructor
     // Adds reservation to DB if boolean addReservationToDb is set to TRUE
-    public Reservation(boolean addReservationToDb, Users user, String lot, long hours, long mins) throws SQLException {
+    public Reservation(boolean addReservationToDb, Users user, String lot, long hours, long mins) {
 
         this.user = user;
         this.id = user.id;
@@ -61,14 +61,14 @@ public class Reservation {
 
         System.out.println("Testing time: Duration = " + duration );
 
-        if(addReservationToDb){
+        /*if(addReservationToDb){
             try {
                 db.reserve(id, reg, lot, electric, accessibility, hours, mins);
             } catch (SQLException e) {
                 System.out.println("Error Reserving a spot through the reservatins class constructor: " + e.getMessage() );
                 e.printStackTrace();
             }
-        }
+        }*/
         
     }
 

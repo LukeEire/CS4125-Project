@@ -148,6 +148,7 @@ public class BookingMenuFrame implements ActionListener{
 		if (e.getSource() == makeBookingButton) {
 			
 			frame.dispose();
+			new BookingFrame();
 
 			// Make booking action TODO
 		}	
