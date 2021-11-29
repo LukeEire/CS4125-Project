@@ -234,7 +234,17 @@ public class RegFrame implements ActionListener{
 			String dob = dobField.getText();
 			String reg = plate.getText();
 			
-			Backend.addUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg);
+			
+			
+			if (Backend.addUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg)) {
+				
+				
+			} else {						
+				
+				frame.dispose();
+				JOptionPane.showMessageDialog(loginButton, "You have successfully registered");
+			}
+        
 			
 			
 			

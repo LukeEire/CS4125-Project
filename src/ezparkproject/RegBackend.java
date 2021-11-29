@@ -10,7 +10,7 @@ public class RegBackend {
 	
 	}
 
-	public void addUser(int id, String firstName, String lastName, String password, String status, int electric, int accessibility, String dob, String reg) {
+	public boolean addUser(int id, String firstName, String lastName, String password, String status, int electric, int accessibility, String dob, String reg) {
 		
 		//Remove email attribute from user object?
 		Users User1 = new Users(true, id, firstName, lastName, password, "temp", status, electric, accessibility, dob, reg);
@@ -18,6 +18,9 @@ public class RegBackend {
 		try {
 			
 			Database db = new Database();
+			LoginFunction frame = new LoginFunction();
+            frame.setVisible(true);
+            
 			db.newUser(User1);
 			
 		} catch (SQLException error) {
@@ -25,6 +28,7 @@ public class RegBackend {
 			System.out.println("Could not connect to the database " + error.getMessage());
 
 		}
+		return false;
 		
 		
 	}
