@@ -17,6 +17,7 @@ public class Reservation {
 	
     private Users user;
     //private Lot lot ;
+    private String lot;
     //private Spaces space;
     //int duration; //in minutes
     Date checkInDate;
@@ -25,6 +26,8 @@ public class Reservation {
     private String reg;
     private LocalDateTime reservationTime;
     private LocalDateTime duration;
+    private Long hours;
+    private Long mins;
     private int accessibility;
     private int electric;
     private int id;
@@ -45,6 +48,7 @@ public class Reservation {
 
         this.user = user;
         this.id = user.id;
+        this.lot = lot;
         this.accessibility = user.accessibility;
         this.electric = user.electric;
         this.reg = user.getDefultPlate();
@@ -52,6 +56,8 @@ public class Reservation {
         this.duration = reservationTime;
         this.duration = this.duration.plus(Duration.ofHours(hours));
         this.duration = this.duration.plus(Duration.ofMinutes(mins));
+        this.hours = hours;
+        this.mins = mins;
 
         System.out.println("Testing time: Duration = " + duration );
 
@@ -90,9 +96,16 @@ public class Reservation {
         this.checkOutDate = checkOutDate;
     }
 
-    //This may be handled by ScheduleManagement
-    public void makeReservation(Users user, int duration){
-    	
+    public String getLot() {
+    	return this.lot;
+    }
+    
+    public Long getHours() {
+    	return this.hours;
+    }
+    
+    public Long getMins() {
+    	return this.mins;
     }
     
     public boolean checkAvailability() {
