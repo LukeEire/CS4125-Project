@@ -289,7 +289,6 @@ public class Database {
 		// Converting string into sql date format
 		Date dob = Date.valueOf(sdob);
 		
-		
 		// Creates date obj created_at DB field
 		LocalDateTime ld = LocalDateTime.now();
 		// Converts date obj to sql format
@@ -573,7 +572,7 @@ public class Database {
 		
 		try {
 			
-			String query = "SELECT * FROM " + users_db + " WHERE id = "+checkUser+" AND password = " + "\"" + checkPass + "\"";
+			String query = "SELECT * FROM " + users_db + " WHERE id = "+checkUser+" AND password = " + "\"MD5(" + checkPass + ")\"";
 			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			
