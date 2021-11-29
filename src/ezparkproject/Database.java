@@ -97,11 +97,27 @@ public class Database {
 	}
 
 	// Admin function
-	// CREATES users table
-	public void createUsersTable(){
+	// Deletes Entire DB
+	public void dissembleDatabase(){
+		try {
+
+    		dropTable("users");
+    		dropTable("reservations");
+    		dropTable("transactions");
+			
+    	} catch (Exception e){
+
+    		System.out.println("Error Dissembling Database: " + e.getMessage());
+
+    	}
+	}
+
+	// Admin function
+	// Re-Build Entire System DB
+	public void rebuildDatabase(){
 		try {
     		
-			String query = "CREATE TABLE IF NOT EXISTS users " +
+			String query1 = "CREATE TABLE IF NOT EXISTS users " +
 							" ( id int(32) PRIMARY KEY, " +
 							" firstName VARCHAR(255) NOT NULL, " +
 							" lastName VARCHAR(255) NOT NULL, " +
@@ -118,23 +134,7 @@ public class Database {
 							" reg VARCHAR(255) " +
 							" );";
 
-			PreparedStatement p = con.prepareStatement(query);
-			p.executeQuery();
-			System.out.println("TABLE: users CREATED successfully");
-	        
-    	} catch (Exception e){
-
-    		System.out.println("Error CREATING table: " + e.getMessage());
-
-    	}
-	}
-
-	// Admin function
-	// CREATES reservations table
-	public void createReservationsTable(){
-		try {
-    		
-			String query = "CREATE TABLE IF NOT EXISTS reservations " +
+			String query2 = "CREATE TABLE IF NOT EXISTS reservations " +
 							" ( id int(32) PRIMARY KEY NOT NULL AUTO_INCREMENT,	" +
 							" userID int(32) NOT NULL, " +
 							" reg VARCHAR(255) NOT NULL, " +
@@ -144,42 +144,41 @@ public class Database {
 							" created_on DATE, " +
 							" expiry DATE, " +
 							" FOREIGN KEY (userID) REFERENCES users(id) " +
+							" ON UPDATE CASCADE " +
+							" ON DELETE CASCADE " +
 							" );";
 
-			PreparedStatement p = con.prepareStatement(query);
-			p.executeQuery();
-			System.out.println("TABLE: reservations CREATED successfully");
-	        
-    	} catch (Exception e){
-
-    		System.out.println("Error CREATING table: " + e.getMessage());
-
-    	}
-	}
-
-	// Admin function
-	// CREATES transactions table
-	public void createTransactionsTable(){
-		try {
-    		
-			String query = "CREATE TABLE IF NOT EXISTS transactions " +
+			String query3 = "CREATE TABLE IF NOT EXISTS transactions " +
 							" ( id int(32) PRIMARY KEY NOT NULL AUTO_INCREMENT,	" +
 							" userID int(32) NOT NULL, " +
 							" reservationsID int(32) NOT NULL, " +
 							" lot varchar(255) NOT NULL, " +
 							" amount double NOT NULL, " +
 							" created_on DATE, " +
-							" FOREIGN KEY (userID) REFERENCES users(id)," +
+							" FOREIGN KEY (userID) REFERENCES users(id)" +
+							" ON UPDATE CASCADE " +
+							" ON DELETE CASCADE, " +
 							" FOREIGN KEY (reservationsID) REFERENCES reservations(id) " +
+							" ON UPDATE CASCADE " +
+							" ON DELETE CASCADE " +
 							" );";
 
-			PreparedStatement p = con.prepareStatement(query);
-			p.executeQuery();
+			PreparedStatement p1 = con.prepareStatement(query1);
+			PreparedStatement p2 = con.prepareStatement(query2);
+			PreparedStatement p3 = con.prepareStatement(query3);
+
+			p1.executeQuery();
+			System.out.println("TABLE: users CREATED successfully");
+
+			p2.executeQuery();
+			System.out.println("TABLE: reservations CREATED successfully");
+
+			p3.executeQuery();
 			System.out.println("TABLE: transactions CREATED successfully");
 	        
     	} catch (Exception e){
 
-    		System.out.println("Error CREATING table: " + e.getMessage());
+    		System.out.println("Error  Re-Building Database: " + e.getMessage());
 
     	}
 	}
