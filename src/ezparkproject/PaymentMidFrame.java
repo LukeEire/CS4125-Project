@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 public class PaymentMidFrame extends JFrame {
 
+	private static final int id = 0;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JButton enterButton;
@@ -22,6 +23,7 @@ public class PaymentMidFrame extends JFrame {
 	private PaymentMidFrame paymentMidFrame = this;
 	
 	double totalFee = 2;
+
 
 	public PaymentMidFrame(ParkingSystem parkingApp) 
 	{		
@@ -34,14 +36,13 @@ public class PaymentMidFrame extends JFrame {
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		
-		JLabel lblEnterYourTicket = new JLabel("Enter your ticket number: ");
-		lblEnterYourTicket.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		contentPane.add(lblEnterYourTicket);
+		JLabel Ticket = new JLabel("Enter your ticket number: ");
+		Ticket.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPane.add(Ticket);
 		
 		
 		textField = new JTextField();
 		contentPane.add(textField);
-		
 		textField.setColumns(4);
 		
 		backButton = new JButton("Back");
@@ -69,6 +70,7 @@ public class PaymentMidFrame extends JFrame {
 		enterButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
+            
 				int ticketNumEntered = Integer.parseInt(textField.getText());
 				boolean ticketIsValid = app.validateTicketNumber(ticketNumEntered);
 			
@@ -102,11 +104,13 @@ public class PaymentMidFrame extends JFrame {
 				}	
 				else
 				{
-					JOptionPane.showMessageDialog(enterButton, "Please Enter Valid Ticket No!");
+					JOptionPane.showMessageDialog(enterButton, "Please enter a valid Ticket Number!");
 					dispose();
 				}
 			}
 		});
+		
+		
 		
 		
 		contentPane.add(backButton);
