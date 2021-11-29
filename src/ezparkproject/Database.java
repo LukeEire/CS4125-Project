@@ -18,7 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-//Statement.executeQuery() cannot issue statements that do not produce result sets
 /**
  * @author ayoubjdair
  * For easily accessing the DB and aids in the reduction of duplicate code
@@ -103,9 +102,9 @@ public class Database {
 		try {
 
     		System.out.println("Dissembling Database");
-    		dropTable("users");
+    		dropTable("transactions");
     		dropTable("reservations");
-			dropTable("transactions");
+    		dropTable("users");
 			System.out.println("Database Disassembled Successfully!, Please Re-Build the Database");
 			
     	} catch (Exception e){
@@ -734,7 +733,7 @@ public class Database {
 			int i = 1;
 			while(rs.next()){
 
-				System.out.println("------------------------Reservation: "+i+"----------------------------");
+				System.out.println("------------------------Reservation: "+i+"-------------------------");
 				System.out.println("Reservations ID: " + rs.getInt("id"));
 				System.out.println("User ID: " + rs.getInt("userID"));
 				System.out.println("Registration Plate: " + rs.getString("reg"));
