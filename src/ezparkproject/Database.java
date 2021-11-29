@@ -68,7 +68,8 @@ public class Database {
 		try {
     		
 			String query = "TRUNCATE TABLE " + tableName;
-	        PreparedStatement p = con.prepareStatement(query);
+			PreparedStatement p = con.prepareStatement(query);
+			p.executeQuery();
 			System.out.println(tableName + " cleared successfully");
 	        
     	} catch (Exception e){
@@ -84,7 +85,8 @@ public class Database {
 		try {
     		
 			String query = "DROP TABLE " + tableName;
-	        PreparedStatement p = con.prepareStatement(query);
+			PreparedStatement p = con.prepareStatement(query);
+			p.executeQuery();
 			System.out.println(tableName + " Dropped successfully");
 	        
     	} catch (Exception e){
@@ -116,7 +118,8 @@ public class Database {
 							" reg VARCHAR(255) " +
 							" );";
 
-	        PreparedStatement p = con.prepareStatement(query);
+			PreparedStatement p = con.prepareStatement(query);
+			p.executeQuery();
 			System.out.println("TABLE: users CREATED successfully");
 	        
     	} catch (Exception e){
@@ -143,7 +146,8 @@ public class Database {
 							" FOREIGN KEY (userID) REFERENCES users(id) " +
 							" );";
 
-	        PreparedStatement p = con.prepareStatement(query);
+			PreparedStatement p = con.prepareStatement(query);
+			p.executeQuery();
 			System.out.println("TABLE: reservations CREATED successfully");
 	        
     	} catch (Exception e){
@@ -169,7 +173,8 @@ public class Database {
 							" FOREIGN KEY (reservationsID) REFERENCES reservations(id) " +
 							" );";
 
-	        PreparedStatement p = con.prepareStatement(query);
+			PreparedStatement p = con.prepareStatement(query);
+			p.executeQuery();
 			System.out.println("TABLE: transactions CREATED successfully");
 	        
     	} catch (Exception e){
