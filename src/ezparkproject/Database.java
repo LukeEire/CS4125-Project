@@ -69,14 +69,7 @@ public class Database {
     		
 			String query = "TRUNCATE TABLE " + tableName;
 	        PreparedStatement p = con.prepareStatement(query);
-	        int dropped = p.executeUpdate(query);
-	
-	        if(dropped == 1){
-	        	System.out.println(tableName + " cleared successfully");
-	        }
-	        else{
-	            System.out.println("FAIL: Clear Failed");
-	        }
+			System.out.println(tableName + " cleared successfully");
 	        
     	} catch (Exception e){
 
@@ -92,14 +85,7 @@ public class Database {
     		
 			String query = "DROP TABLE " + tableName;
 	        PreparedStatement p = con.prepareStatement(query);
-	        int dropped = p.executeUpdate(query);
-	
-	        if(dropped == 1){
-	        	System.out.println(tableName + " Dropped successfully");
-	        }
-	        else{
-	            System.out.println("FAIL: Deletion Failed");
-	        }
+			System.out.println(tableName + " Dropped successfully");
 	        
     	} catch (Exception e){
 
@@ -131,14 +117,7 @@ public class Database {
 							" );";
 
 	        PreparedStatement p = con.prepareStatement(query);
-	        int dropped = p.executeUpdate(query);
-	
-	        if(dropped == 1){
-	        	System.out.println("TABLE: users CREATED successfully");
-	        }
-	        else{
-	            System.out.println("FAIL: CREATION Failed");
-	        }
+			System.out.println("TABLE: users CREATED successfully");
 	        
     	} catch (Exception e){
 
@@ -165,14 +144,7 @@ public class Database {
 							" );";
 
 	        PreparedStatement p = con.prepareStatement(query);
-	        int dropped = p.executeUpdate(query);
-	
-	        if(dropped == 1){
-	        	System.out.println("TABLE: reservations CREATED successfully");
-	        }
-	        else{
-	            System.out.println("FAIL: CREATION Failed");
-	        }
+			System.out.println("TABLE: reservations CREATED successfully");
 	        
     	} catch (Exception e){
 
@@ -198,14 +170,7 @@ public class Database {
 							" );";
 
 	        PreparedStatement p = con.prepareStatement(query);
-	        int dropped = p.executeUpdate(query);
-	
-	        if(dropped == 1){
-	        	System.out.println("TABLE: transactions CREATED successfully");
-	        }
-	        else{
-	            System.out.println("FAIL: CREATION Failed");
-	        }
+			System.out.println("TABLE: transactions CREATED successfully");
 	        
     	} catch (Exception e){
 
@@ -220,10 +185,10 @@ public class Database {
 
 		ArrayList<String> userIDs = new ArrayList<String>();
 		ArrayList<Users> users = new ArrayList<Users>();
-		int i = 0;
+		int i = 1;
 		try {
 
-			String query = "select * from users";
+			String query = "select * from " + users_db;
 	        PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 
@@ -377,7 +342,7 @@ public class Database {
 		// Generates user email automatically based on status
 		String email = "NULL";
 		if(user1.getStatus() == "Student"){
-			email = user1.getID() + "@studentmail.ul.ie";
+			email = user1.getFirstName() + "." + user1.getLastName() + "@studentmail.ul.ie";
 		} else if (user1.getStatus() == "Staff") {
 			email = user1.getID() + "@ul.ie";
 		} else {
@@ -450,7 +415,7 @@ public class Database {
 		Users user = new Users();
 		
 		try {
-			String query = "SELECT * FROM " + users_db + " WHERE id= ?";
+			String query = "SELECT * FROM " + users_db + " WHERE id = ?";
 			
 			
 			PreparedStatement p = con.prepareStatement(query);
@@ -577,6 +542,7 @@ public class Database {
 			ResultSet rs = p.executeQuery(query);
 			
 			if(!rs.isBeforeFirst()) {
+				System.out.println("User Verified!");
 				System.out.println("UserID OR password may be incorrect");
 				System.out.println("User: "+ checkUser);
 				System.out.println("Password: " + checkPass);
@@ -585,6 +551,7 @@ public class Database {
 				while (rs.next()) {
 					int foundUser = rs.getInt("id");
 					String foundPass = rs.getString("password");
+					System.out.println("User Verification Failed!");
 					System.out.println("Found User: "+foundUser);
 					System.out.println("User Password: "+foundPass);
 				}
@@ -757,7 +724,7 @@ public class Database {
 			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			ArrayList<String> reservations = new ArrayList<String>();
-			int i = 0;
+			int i = 1;
 			while(rs.next()){
 
 				System.out.println("------------------------Reservation: "+i+"----------------------------");
@@ -792,7 +759,7 @@ public class Database {
 			ResultSet rs = p.executeQuery(query);
 
 			ArrayList<Reservation> reservations = new ArrayList<Reservation>();
-			int i = 0;
+			int i = 1;
 			
 			while(rs.next()){
 				
@@ -888,7 +855,7 @@ public class Database {
 	// Returns entries in the transaction table
 	public void fetchTransactionData() throws Exception{
 
-		int i = 0;
+		int i = 1;
 		try {
 
 			String query = "SELECT * FROM transactions ";
@@ -919,10 +886,10 @@ public class Database {
 
 	public void fetchUserTransactionData(int id) throws Exception{
 
-		int i = 0;
+		int i = 1;
 		try {
 
-			String query = "select * from transactions WHERE userID = " + id;
+			String query = "select * from "+ transactions_db +" WHERE userID = " + id;
 	        PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 
@@ -942,7 +909,7 @@ public class Database {
 			
 			
 		} catch (Exception e) {
-	    	System.out.println("Error fetching transaction data: " + e.getMessage());
+	    	System.out.println("Error fetching Transactions data: " + e.getMessage());
 		}
 			
 	}
@@ -967,7 +934,7 @@ public class Database {
 		if(status == "Student"){
 			email = id + "@studentmail.ul.ie";
 		} else if (status == "Staff") {
-			email = id + "@ul.ie";
+			email = firstName + "." + "@ul.ie";
 		} else {
 			email = "N/A";
 		}
