@@ -300,7 +300,7 @@ public class Database {
 		if(status == "Student"){
 			email = id + "@studentmail.ul.ie";
 		} else if (status == "Staff") {
-			email = id + "@ul.ie";
+			email = firstName + "." + lastName + "@ul.ie";
 		} else {
 			email = "N/A";
 		}
@@ -892,7 +892,7 @@ public class Database {
 		int i = 0;
 		try {
 
-			String query = "SELECT * FROM transactions WHERE userID = ";
+			String query = "SELECT * FROM transactions ";
 	        PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 
