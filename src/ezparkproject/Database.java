@@ -488,7 +488,7 @@ public class Database {
 	        int ban = p.executeUpdate(query);
 	
 	        if(ban == 1){
-				System.out.println("User Banned Successfully");
+				System.out.println("User Banned " + id + " Successfully.");
 				System.out.println("User Banned Until: " + banTime);
 	        }
 	        else{
@@ -763,7 +763,7 @@ public class Database {
 			
 			while(rs.next()){
 				
-				System.out.println("------------------------Reservation: "+i+"----------------------------");
+				System.out.println("------------------------Reservation: "+i+"--------------------------");
 				System.out.println("Reservations ID: " + rs.getInt("id"));
 				System.out.println("User ID: " + rs.getInt("userID"));
 				System.out.println("Registration Plate: " + rs.getString("reg"));
@@ -864,7 +864,7 @@ public class Database {
 
 			while(rs.next()){
 
-				System.out.println("--------------------------Transaction: "+i+"------------------------");
+				System.out.println("--------------------------Transaction: "+i+"-----------------------");
 
 				System.out.println("Transaction ID: " + rs.getInt("id"));
 				System.out.println("User ID: " + rs.getInt("userID"));
