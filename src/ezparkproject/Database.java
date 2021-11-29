@@ -898,13 +898,13 @@ public class Database {
 
 			while(rs.next()){
 
-				System.out.println("--------------------------Transaction: "+i+"------------------------------");
+				System.out.println("--------------------------Transaction: "+i+"------------------------");
 
 				System.out.println("Transaction ID: " + rs.getInt("id"));
 				System.out.println("User ID: " + rs.getInt("userID"));
 				System.out.println("Reservation ID: " + rs.getInt("reservationsID"));
 				System.out.println("Lot: " + rs.getString("lot"));
-				System.out.println("Amount: €" + rs.getInt("amount"));
+				System.out.println("Amount: €" + rs.getFloat("amount"));
 				System.out.println("Created on: " + rs.getDate("created_on"));
 
 				System.out.println("-----------------------------END-------------------------------");
