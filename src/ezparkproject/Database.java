@@ -69,7 +69,7 @@ public class Database {
     		
 			String query = "TRUNCATE TABLE " + tableName;
 			PreparedStatement p = con.prepareStatement(query);
-			p.executeQuery();
+			p.executeUpdate();
 			System.out.println(tableName + " cleared successfully");
 	        
     	} catch (Exception e){
@@ -86,7 +86,7 @@ public class Database {
     		
 			String query = "DROP TABLE " + tableName;
 			PreparedStatement p = con.prepareStatement(query);
-			p.executeQuery();
+			p.executeUpdate();
 			System.out.println(tableName + " Dropped successfully");
 	        
     	} catch (Exception e){
@@ -101,9 +101,11 @@ public class Database {
 	public void dissembleDatabase(){
 		try {
 
+    		System.out.println("Dissembling Database");
     		dropTable("users");
     		dropTable("reservations");
-    		dropTable("transactions");
+			dropTable("transactions");
+			System.out.println("Database Disassembled Successfully!, Please Re-Build the Database");
 			
     	} catch (Exception e){
 
@@ -167,13 +169,13 @@ public class Database {
 			PreparedStatement p2 = con.prepareStatement(query2);
 			PreparedStatement p3 = con.prepareStatement(query3);
 
-			p1.executeQuery();
+			p1.executeUpdate();
 			System.out.println("TABLE: users CREATED successfully");
 
-			p2.executeQuery();
+			p2.executeUpdate();
 			System.out.println("TABLE: reservations CREATED successfully");
 
-			p3.executeQuery();
+			p3.executeUpdate();
 			System.out.println("TABLE: transactions CREATED successfully");
 	        
     	} catch (Exception e){
