@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+//Statement.executeQuery() cannot issue statements that do not produce result sets
 /**
  * @author ayoubjdair
  * For easily accessing the DB and aids in the reduction of duplicate code
@@ -548,7 +549,7 @@ public class Database {
 			ResultSet rs = p.executeQuery(query);
 			
 			if(!rs.isBeforeFirst()) {
-				System.out.println("User Verified!");
+				System.out.println("User Verification Failed!");
 				System.out.println("UserID OR password may be incorrect");
 				System.out.println("User: "+ checkUser);
 				System.out.println("Password: " + checkPass);
@@ -557,7 +558,7 @@ public class Database {
 				while (rs.next()) {
 					int foundUser = rs.getInt("id");
 					String foundPass = rs.getString("password");
-					System.out.println("User Verification Failed!");
+					System.out.println("User Verified!");
 					System.out.println("Found User: "+foundUser);
 					System.out.println("User Password: "+foundPass);
 				}
