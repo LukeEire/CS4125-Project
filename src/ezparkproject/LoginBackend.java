@@ -12,9 +12,6 @@ public class LoginBackend {
 	
 	public static boolean loginFunction(int id, String password) {
 		
-	
-	
-	
 	try {
 		
 		Database db = new Database();
@@ -25,6 +22,13 @@ public class LoginBackend {
 			Dashboard frame = new Dashboard();
             frame.setVisible(true);
             System.out.print("You have successfully logged in");
+            
+            try {
+				Main.currentUser = db.getUser(id);
+			} catch (Exception e) {
+				System.out.println("Could not connect to the database " + e.getMessage());
+			}
+            
             return true;   
             
 		
