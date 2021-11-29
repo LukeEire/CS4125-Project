@@ -63,6 +63,8 @@ INSERT INTO users (id, firstName, LastName, password, status, electric accessibi
 
 INSERT INTO users (id, firstName, LastName, password, status, electric, accessibility, created_on, dob, reg ) VALUES (18266401, "Ayoub", "Jdair", "Password123", "Student", 1, 0, "2000-12-15", DATE '2015-12-17', "222LH1445");
 
+INSERT INTO `users` (`id`, `firstName`, `lastName`, `password`, `email_address`, `status`, `electric`, `penalties`, `ban_status`, `banTime`, `accessibility`, `created_on`, `dob`, `reg`) VALUES ('', '', '', MD5(''), NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, NULL, NULL);
+
 UPDATE users SET ban_status = 1, banTime = DATE '2000-03-12' WHERE id = "18266401"
 
 INSERT INTO reservations(userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (18266401, '10LH1445', 'LOT A', 1, 0, DATE '2015-12-17', DATE '2015-12-17');
