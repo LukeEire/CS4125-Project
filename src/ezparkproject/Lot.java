@@ -53,6 +53,10 @@ public class Lot {
 		return this.chargingSpaces;
 		
 	}
+	
+	public void setSpaces(int newCount) {
+		this.spaces = newCount;
+	}
 		
 	
 	public Boolean blockForEvent(Date date, int numDays) {
