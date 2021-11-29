@@ -1,6 +1,7 @@
 package ezparkproject;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ParkingSystem {
@@ -88,6 +89,8 @@ public class ParkingSystem {
 		}
 		return isValid;
 	}
+	
+
 
 	public void timeParked()
 	{

@@ -26,6 +26,8 @@ public class TicketSystem
 	public Date getDate() {
 		return date;
 	}
+	
+	
 }
 
 

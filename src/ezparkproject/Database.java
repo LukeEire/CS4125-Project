@@ -924,6 +924,42 @@ public class Database {
 		}
 			
 	}
+	
+	
+public boolean checkID(int id) throws SQLException { //conall testing
+		
+		int checkUser = id;
+		boolean result;
+		
+		try {
+			
+			String query = "SELECT * FROM " + reservations_db + " WHERE id = " + id;
+
+			PreparedStatement p = con.prepareStatement(query);
+			ResultSet rs = p.executeQuery(query);
+			
+			if(!rs.isBeforeFirst()) {
+				System.out.println("UserID may be incorrect");
+				System.out.println("User: "+ checkUser);
+				result = false;
+			} else {
+				while (rs.next()) {
+					int foundUser = rs.getInt("id");
+					System.out.println("User Verified!");
+					System.out.println("Found User: "+foundUser);
+				}
+				result = true;
+			}
+			return result;
+			
+		} catch(SQLException e) {
+									
+			System.out.println("Error locating data entered: " + e.getMessage());
+			result = false;
+			return result;
+			
+		}
+	}
 
 //Luke Testing here
 	//Probably need to update reservation object to have ID
