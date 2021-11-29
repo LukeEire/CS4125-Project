@@ -46,7 +46,7 @@ public class BookingBackend {
 			int ID = res.getUser().getID();
 			String reg = res.getUser().getReg();
 			String lot = res.getLot();
-			int electric = res.getUser().getElec();
+			int electric = res.getChargingCheck();
 			int accessibility = res.getUser().getAcc();
 			Long hours = res.getHours();
 			Long mins = res.getMins();
