@@ -148,7 +148,7 @@ public class BookingMenuFrame implements ActionListener{
 		if (e.getSource() == makeBookingButton) {
 			
 			frame.dispose();
-			new BookingFrame();
+			new MakeBookingFrame();
 
 			// Make booking action TODO
 		}	
@@ -156,6 +156,7 @@ public class BookingMenuFrame implements ActionListener{
 		if (e.getSource() == changeBookingButton) {
 			
 			frame.dispose();
+			new ChangeBookingFrame();
 
 			// Change booking action TODO
 		}

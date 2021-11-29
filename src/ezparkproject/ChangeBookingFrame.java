@@ -1,12 +1,18 @@
 package ezparkproject;
 
-import javax.swing.*; 
-import java.awt.event.*; 
-import java.awt.*; 
-import java.sql.*;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 
-public class BookingFrame implements ActionListener{
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
+public class ChangeBookingFrame implements ActionListener{
 	BookingBackend Backend = new BookingBackend();
 	
 	String[] parkingLots = { "Lot A", "Lot B", "Lot C", "Lot D" };
@@ -34,12 +40,6 @@ public class BookingFrame implements ActionListener{
 	JTextField dateField = new JTextField();
 	JTextField timeField = new JTextField();
 	JTextField durationField = new JTextField();
-	
-	//JTextField emailTextField = new JTextField();
-	
-	
-	
-	
 	
 	
 	/* JCheckbox for accessibility and EV status */
@@ -79,11 +79,11 @@ public class BookingFrame implements ActionListener{
 	/* Buttons */
 	
 	
-	JButton reserveButton = new JButton("Reserve");
-	JButton resetButton = new JButton("Reset");
+	JButton updateButton = new JButton("Update");
+	JButton loadButton = new JButton("Load");
 	JButton cancelButton = new JButton("Cancel");
 
-	BookingFrame() {
+	ChangeBookingFrame() {
 
 		createWindow();
 		setLocationAndSize();
@@ -97,7 +97,7 @@ public class BookingFrame implements ActionListener{
 	public void createWindow() {
 
 		frame = new JFrame();
-		frame.setTitle("Reservations");
+		frame.setTitle("Change Booking");
 		frame.setBounds(40, 40, 400, 700);
 		frame.getContentPane().setBackground(Color.white);
 		frame.getContentPane().setLayout(null);
@@ -134,8 +134,8 @@ public class BookingFrame implements ActionListener{
         
         /* Button Bounds */
         
-        reserveButton.setBounds(25, 550, 100, 35);
-        resetButton.setBounds(137, 550, 100, 35);
+        updateButton.setBounds(25, 550, 100, 35);
+        loadButton.setBounds(137, 550, 100, 35);
         cancelButton.setBounds(250, 550, 100, 35);
 	}
 
@@ -165,8 +165,8 @@ public class BookingFrame implements ActionListener{
 		
 		/* Buttons */
 		
-		frame.add(reserveButton);
-		frame.add(resetButton);
+		frame.add(updateButton);
+		frame.add(loadButton);
 		frame.add(cancelButton);
 	}
 	
@@ -174,26 +174,16 @@ public class BookingFrame implements ActionListener{
 
 	public void actionEvent() {
 
-		reserveButton.addActionListener(this);
-		resetButton.addActionListener(this);
+		updateButton.addActionListener(this);
+		loadButton.addActionListener(this);
 		cancelButton.addActionListener(this);
 	}
-	
-	//Placeholder code
-	/*public Boolean createUser(Boolean test, int id, String firstName, String lastName, String password, String status, int electric, int accessibility, String dob, String reg){
-		Users User1 = new Users(false, id, firstName, lastName, password, "@dbsucksballz", status, electric, accessibility, dob, reg);
-		Database db = new Database();
-		db.addUser(User1);
-		
-	}*/
 	
 
 	@SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent e) {
 
-		/* Create Database before using */
-
-		if (e.getSource() == reserveButton) {
+		if (e.getSource() == updateButton) {
 
 			int id = Integer.parseInt(userIDField.getText());
 			String reg = regField.getText();
@@ -206,38 +196,15 @@ public class BookingFrame implements ActionListener{
 			String dob = dobField.getText();
 			String reg = plate.getText();*/
 			
+			
 			Reservation res = new Reservation(false, null, reg, hours, 0);
-			
+			//Can change to directly Update Where ID = ID etc
 			Backend.createBooking(res);
-			
-			
-			
-			/*try {
-
-				Database db = new Database();
-				int id = Integer.parseInt(universityIDField.getText());
-				String firstName = firstNameField.getText();
-				String lastName = lastNameField.getText();				
-				String password = passwordField.getText();
-				String status = uniComboBox.getSelectedItem().toString();
-				int electric = electricCheckBoxVal;
-				int accessibility = disabledCheckBoxVal;
-				String dob = dobField.getText();
-				String reg = plate.getText();
-				//db.newUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg);
-				
-			} catch (SQLException error) {
-
-				System.out.println("Could not connect to the database " + error.getMessage());
-
-			}*/
-			
-			
-			
 		}	
 			
-		if (e.getSource() == resetButton) {
+		if (e.getSource() == loadButton) {
 
+			//These needs backend function to grab data
 			regField.setText("");
 			userIDField.setText("");
 			dateField.setText("");
