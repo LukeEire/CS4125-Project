@@ -291,9 +291,9 @@ public class Database {
 		
 		
 		// Creates date obj created_at DB field
-		LocalDate ld = LocalDate.now();
+		LocalDateTime ld = LocalDateTime.now();
 		// Converts date obj to sql format
-		Date created_at = Date.valueOf(ld);
+		Date created_at = Date.valueOf(ld.toLocalDate());
 
 		// Generates user email automatically based on status
 		String email = "NULL";
