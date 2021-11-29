@@ -193,7 +193,6 @@ public class Database {
 							" lot varchar(255) NOT NULL, " +
 							" amount double NOT NULL, " +
 							" created_on DATE, " +
-							" created_on DATE, " +
 							" FOREIGN KEY (userID) REFERENCES users(id)," +
 							" FOREIGN KEY (reservationsID) REFERENCES reservations(id) " +
 							" );";
