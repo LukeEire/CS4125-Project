@@ -6,21 +6,20 @@ import java.awt.*;
 import
 java.sql.*;
 
-public class RegFrame implements ActionListener{
+public class RegFrame implements ActionListener, ItemListener{
+	
+	
+	
 	
 	RegBackend Backend = new RegBackend();
 	
-	
-	/*Required timestamp to pass during registration and DOB */
+
 	
 	java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
 	
 	JFrame frame;
 	String[] uniStatus = { "Student", "Staff", "Guest" }; /* also known as rank from our analysis class diagram */
-	//String[] accessibilityStatus = { "Yes", "No" }; /* When checking for disabled spaces, they will show in reservations */
-	//String[] EVStatus = { "Yes", "No" }; /* Electric vehicle status - needs to be set to yes to show EV parking spaces */
-	
-	/* Labels */
+
 	
 	JLabel universityID = new JLabel("ID");
 	JLabel firstNameLabel = new JLabel("First Name");
@@ -45,48 +44,35 @@ public class RegFrame implements ActionListener{
 	JTextField dobField = new JTextField();
 	JTextField plate = new JTextField();
 	
+
 	
-	
+
 	
 	/* JCheckbox for accessibility and EV status */
 	
 	JCheckBox EVCheckBox = new JCheckBox("Disabled Permit?");
 	JCheckBox disabledCheckBox = new JCheckBox("Electric Vehicle?");
 	
-	int electricCheckBoxVal;
-	int disabledCheckBoxVal;
 	
-	public void itemStateChanged(ItemEvent e)
-    {
-        // if the state of checkbox1 is changed
-        if (e.getSource() == EVCheckBox) {
-            if (e.getStateChange() == 1)
-                // Set to 1 
-            	// AYOUBS FUNCTION TO CHANGE TO 1
-            	electricCheckBoxVal = 1;
-            	System.out.println("Set to 1");
-        } else {
-                // Set to 0
-            	// AYOUBS FUNCTION TO CHANGE TO 0
-            	electricCheckBoxVal = 0;
-            	System.out.println("Set to 0");
-        }
-        
-        if (e.getSource() == disabledCheckBox) {
-            if (e.getStateChange() == 1)
-                // Set to 1             	
-            	// AYOUBS FUNCTION TO CHANGE TO 1
-            	disabledCheckBoxVal = 1;
-            	System.out.println("Set to 1");
-        } else {
-                // Set to 0
-            	// AYOUBS FUNCTION TO CHANGE TO 0
-        		disabledCheckBoxVal = 0;
-            	System.out.println("Set to 0");
-        }
-  
-        
-    }
+	
+	int electricCheckBoxVal, disabledCheckBoxVal;
+	
+	
+	public void CheckBox()
+	{
+		
+		if(EVCheckBox.isSelected())
+			electricCheckBoxVal=1;
+		else
+			electricCheckBoxVal=0;
+		
+		if(disabledCheckBox.isSelected())
+			disabledCheckBoxVal=1;
+		else
+			disabledCheckBoxVal=0;
+		
+	}
+		
 	
 
 	/* End of CheckBox function */
@@ -94,12 +80,7 @@ public class RegFrame implements ActionListener{
 	
 	JPasswordField confirmPasswordField = new JPasswordField();
 	
-	
-	/* Drop down menus */
-	
-	
-	//JComboBox accessibilityComboBox = new JComboBox(accessibilityStatus);
-	//JComboBox EVComboBox = new JComboBox(EVStatus);
+
 	
 	/* Buttons */
 	
@@ -139,7 +120,6 @@ public class RegFrame implements ActionListener{
         firstNameLabel.setBounds(20, 70, 80, 70);
         lastNameLabel.setBounds(20, 130, 80, 70);
         passwordLabel.setBounds(20, 180, 140, 70);
-        //emailLabel.setBounds(20, 225, 100, 70);
         university_statusLabel.setBounds(20, 225, 100, 70);
         dobLabel.setBounds(20, 280, 100, 70);
         plateLabel.setBounds(20, 330, 100, 70);
@@ -150,7 +130,6 @@ public class RegFrame implements ActionListener{
         firstNameField.setBounds(180, 93, 165, 23);
         lastNameField.setBounds(180, 155, 165, 23);
         passwordField.setBounds(180, 205, 165, 23);
-        //emailTextField.setBounds(180, 250, 165, 23);
         uniComboBox.setBounds(180, 250, 165, 23);
         EVCheckBox.setBounds(180, 400, 165, 23);
         disabledCheckBox.setBounds(180, 450, 165, 23);
@@ -172,7 +151,6 @@ public class RegFrame implements ActionListener{
 		frame.add(firstNameLabel);
 		frame.add(lastNameLabel);
 		frame.add(passwordLabel);
-		//frame.add(emailLabel);
 		frame.add(university_statusLabel);
 		frame.add(EVLabel);
 		frame.add(accessibilityLabel);
@@ -185,7 +163,6 @@ public class RegFrame implements ActionListener{
 		frame.add(firstNameField);
 		frame.add(lastNameField);
 		frame.add(passwordField);
-		//frame.add(emailTextField);
 		frame.add(uniComboBox);
 		frame.add(disabledCheckBox);
 		frame.add(EVCheckBox);
@@ -208,13 +185,7 @@ public class RegFrame implements ActionListener{
 		loginButton.addActionListener(this);
 	}
 	
-	//Placeholder code
-	/*public Boolean createUser(Boolean test, int id, String firstName, String lastName, String password, String status, int electric, int accessibility, String dob, String reg){
-		Users User1 = new Users(false, id, firstName, lastName, password, "@dbsucksballz", status, electric, accessibility, dob, reg);
-		Database db = new Database();
-		db.addUser(User1);
-		
-	}*/
+
 	
 
 	@SuppressWarnings("deprecation")
@@ -223,6 +194,10 @@ public class RegFrame implements ActionListener{
 		/* Create Database before using */
 
 		if (e.getSource() == registerButton) {
+			
+		
+			
+			CheckBox(); // Used for checking value of EVCheckBox and disabledCheckBox - either 1 or 0 (true or false) 
 
 			int id = Integer.parseInt(universityIDField.getText());
 			String firstName = firstNameField.getText();
@@ -238,37 +213,21 @@ public class RegFrame implements ActionListener{
 			
 			if (Backend.addUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg)) {
 				
+				frame.dispose();
+				
+				/* Test Code for checking JCheckBox - Ash */
+				System.out.println("EV Set to " +electricCheckBoxVal);
+				System.out.println("DisabledBox Set to " +disabledCheckBoxVal);
+				
+				JOptionPane.showMessageDialog(registerButton, "You have successfully registered");
 				
 			} else {						
 				
-				frame.dispose();
-				JOptionPane.showMessageDialog(loginButton, "You have successfully registered");
+				JOptionPane.showMessageDialog(registerButton, "Registration Failed");
+				
 			}
         
-			
-			
-			
-			/*try {
-
-				Database db = new Database();
-				int id = Integer.parseInt(universityIDField.getText());
-				String firstName = firstNameField.getText();
-				String lastName = lastNameField.getText();				
-				String password = passwordField.getText();
-				String status = uniComboBox.getSelectedItem().toString();
-				int electric = electricCheckBoxVal;
-				int accessibility = disabledCheckBoxVal;
-				String dob = dobField.getText();
-				String reg = plate.getText();
-				//db.newUser(id, firstName, lastName, password, status, electric, accessibility, dob, reg);
-				
-			} catch (SQLException error) {
-
-				System.out.println("Could not connect to the database " + error.getMessage());
-
-			}*/
-			
-			
+		
 			
 		}	
 			
@@ -304,6 +263,14 @@ public class RegFrame implements ActionListener{
 		
 		
 
+	}
+
+
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	}
 

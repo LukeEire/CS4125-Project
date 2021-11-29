@@ -28,7 +28,7 @@ public class RegBackend {
 			System.out.println("Could not connect to the database " + error.getMessage());
 
 		}
-		return false;
+		return true;
 		
 		
 	}

@@ -4,8 +4,6 @@ import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.random.RandomGenerator;
-
 import javax.swing.JFrame;
 
 public class Main {
