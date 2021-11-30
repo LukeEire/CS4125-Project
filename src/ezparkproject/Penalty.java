@@ -1,66 +1,37 @@
 package ezparkproject;
 
-// import java.sql.Connection;
-// import java.sql.PreparedStatement;
-// import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class Penalty {
 
-    Database db;
-    int penalties;
+    PenaltyBackend pb;
 
+    /**
+    * Constructor that takes in no params
+    */
     
     public Penalty(){ 
-
-        penalties = 0;
-
-        try{
-            
-            db = new Database();
-
-        } catch(SQLException e1){
-
-            System.out.println("Could not connect to the database " + e1.getMessage());
-
-        }
-
+        pb = new PenaltyBackend();
     }
+
+    /**
+    * Preconditions: int id is a valid user stored in the DB
+    * Postconditions: The user's penalty attribute is incremented by 1
+    */
+
+    // Adds one penalty point to passed in user
+    // Invokes check for user penalties and bans user if penalties exceed 3
+	public void addInfraction(int id){
+        pb.PenaltyBackendAddInfraction(id);  
+    }
+
+
+    /**
+    * Preconditions: int id is a valid user stored in the DB
+    * Postconditions: returns an integer value of the users penalties to date according to the DB
+    */
 
     // Returns penalty count for user
 	public int getInfractions(int id) {
-
-        penalties = db.getPenaltyPoints(id);
-
-        if(penalties >= 3) {
-            penaliseNoShows(id); 
-        }
-        
-        return penalties;
+        return pb.PenaltyBackendGetInfractions(id);
     }
 
-    // Adds one penalty point to passed in user
-	public void addInfraction(int id){
-        
-        db.setPenaltyPoints(id);  
-
-    }
-
-    // IF user surpasses 3 penalty points, we ban the user for one week
-	public void penaliseNoShows(int id) {
-        
-        int penalties = db.getPenaltyPoints(id);
-
-        if(penalties >= 3) {
-            
-			try {
-				db.banUser(id);
-				System.out.println("Too many no-shows this week, please come back in 1 week");
-
-			} catch (SQLException e) {
-				System.out.println("SQL exception: " + e.getMessage());
-				e.printStackTrace();
-			}
-        }
-    }
 }
