@@ -113,7 +113,7 @@ public class AdminBackend {
 			
 			
 			for (int i =0 ; i < users.size(); i++){
-				output = output + "--------------------------User: "+ users.get(i).getID()+ "------------------------------ " + System.lineSeparator();
+				output = output + "--------------------------User: "+ users.get(i).getID()+ "----------------------------- " + System.lineSeparator();
 				output = output + "User ID: " + users.get(i).getID() +System.lineSeparator();
 				
 				
