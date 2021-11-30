@@ -111,8 +111,8 @@ reg VARCHAR(255) NOT NULL,
 lot varchar(255) NOT NULL,
 electric TINYINT(1),
 accessibility TINYINT(1),
-created_on DATE,
-expiry DATE,
+created_on TIMESTAMP,
+expiry TIMESTAMP,
 FOREIGN KEY (userID) REFERENCES users(id)
 ON UPDATE CASCADE
 ON DELETE CASCADE

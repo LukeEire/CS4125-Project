@@ -6,7 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -39,9 +39,9 @@ public class Database {
 	// Creates a Database object and connects to our Database
 	public Database() throws SQLException{
 
-		this.reservations_db = "reservations";
-		this.transactions_db = "transactions";
-		this.users_db = "users";
+		this.reservations_db = "Reservations";
+		this.transactions_db = "Transactions";
+		this.users_db = "Users";
 		this.server = "sql4.freesqldatabase.com";
 		this.username = "sql4450358";
 		this.password = "dcCxqbDW1K";
@@ -63,7 +63,8 @@ public class Database {
 	}
 
 	// Admin function
-	// Passed in table will be cleared of all entries
+	// Pre-Condition - tableName must exist in the DB
+	// Post-Condition - Passed in table will be cleared of all entries
 	public void clearTable(String tableName){
 		try {
     		
@@ -80,7 +81,8 @@ public class Database {
 	}
 
 	// Admin function
-	// Passed in table will be DROPPED from the DB
+	// Pre-Condition - tableName must exist in the DB
+	// Post-Condition - Passed in table will be DROPPED from the DB
 	public void dropTable(String tableName){
 		try {
     		
@@ -97,7 +99,8 @@ public class Database {
 	}
 
 	// Admin function
-	// Deletes Entire DB
+	// Pre-Condition - none
+	// Post-Condition - Deletes Entire DB
 	public void dissembleDatabase(){
 		try {
 
@@ -115,11 +118,12 @@ public class Database {
 	}
 
 	// Admin function
-	// Re-Build Entire System DB
+	// Pre-Condition - None
+	// Post-Condition - Re-Builds Entire System DB
 	public void rebuildDatabase(){
 		try {
     		
-			String query1 = "CREATE TABLE IF NOT EXISTS users " +
+			String query1 = "CREATE TABLE IF NOT EXISTS Users " +
 							" ( id int(32) PRIMARY KEY, " +
 							" firstName VARCHAR(255) NOT NULL, " +
 							" lastName VARCHAR(255) NOT NULL, " +
@@ -136,21 +140,21 @@ public class Database {
 							" reg VARCHAR(255) " +
 							" );";
 
-			String query2 = "CREATE TABLE IF NOT EXISTS reservations " +
+			String query2 = "CREATE TABLE IF NOT EXISTS Reservations " +
 							" ( id int(32) PRIMARY KEY NOT NULL AUTO_INCREMENT,	" +
 							" userID int(32) NOT NULL, " +
 							" reg VARCHAR(255) NOT NULL, " +
 							" lot varchar(255) NOT NULL, " +
 							" electric TINYINT(1), " +
 							" accessibility TINYINT(1), " +
-							" created_on DATE, " +
-							" expiry DATE, " +
+							" created_on TIMESTAMP, " +
+							" expiry TIMESTAMP, " +
 							" FOREIGN KEY (userID) REFERENCES users(id) " +
 							" ON UPDATE CASCADE " +
 							" ON DELETE CASCADE " +
 							" );";
 
-			String query3 = "CREATE TABLE IF NOT EXISTS transactions " +
+			String query3 = "CREATE TABLE IF NOT EXISTS Transactions " +
 							" ( id int(32) PRIMARY KEY NOT NULL AUTO_INCREMENT,	" +
 							" userID int(32) NOT NULL, " +
 							" reservationsID int(32) NOT NULL, " +
@@ -170,13 +174,13 @@ public class Database {
 			PreparedStatement p3 = con.prepareStatement(query3);
 
 			p1.executeUpdate();
-			System.out.println("TABLE: users CREATED successfully");
+			System.out.println("TABLE: [Users] CREATED successfully");
 
 			p2.executeUpdate();
-			System.out.println("TABLE: reservations CREATED successfully");
+			System.out.println("TABLE: [Reservations] CREATED successfully");
 
 			p3.executeUpdate();
-			System.out.println("TABLE: transactions CREATED successfully");
+			System.out.println("TABLE: [Transactions] CREATED successfully");
 	        
     	} catch (Exception e){
 
@@ -185,6 +189,8 @@ public class Database {
     	}
 	}
 
+	// Pre-Condition - None
+	// Post-Condition:
 	// Returns ArrayList of type User with user collected from the DB
 	// Prints User Details in DB
 	public ArrayList<Users> fetchData() throws Exception{
@@ -253,16 +259,20 @@ public class Database {
 			
 	}
 	
-	// INSERTS new user into the DB object
+	// Pre-Condition - Params must follow the following format:
+	//				   int id, String firstName, String lastName, String password, String status, int electric, int accessibility, String sdob, String reg
+	// 				 - Date of birth must be provided in the following format: YYYY-mm-DD
+	// Post-Condition:
+	// INSERTS new user into the DB with populated fields
 	public void newUser(int id, String firstName, String lastName, String password, String status, int electric, int accessibility, String sdob, String reg) throws SQLException {
 
 		// Converting string into sql date format
 		Date dob = Date.valueOf(sdob);
 		
 		// Creates date obj created_at DB field
-		LocalDateTime ld = LocalDateTime.now();
+		LocalDate ld = LocalDate.now();
 		// Converts date obj to sql format
-		Date created_at = Date.valueOf(ld.toLocalDate());
+		Date created_at = Date.valueOf(ld);
 
 		// Generates user email automatically based on status
 		String email = "NULL";
@@ -335,6 +345,7 @@ public class Database {
 		}
     }
 	
+	// Luke: Same as above but uses Users object instead
 	public void newUser(Users user1) throws SQLException {
 
 		// Converting string into sql date format
@@ -348,9 +359,9 @@ public class Database {
 		// Generates user email automatically based on status
 		String email = "NULL";
 		if(user1.getStatus() == "Student"){
-			email = user1.getFirstName() + "." + user1.getLastName() + "@studentmail.ul.ie";
+			email = user1.getID() + "@studentmail.ul.ie";
 		} else if (user1.getStatus() == "Staff") {
-			email = user1.getID() + "@ul.ie";
+			email = user1.getFirstName() + "." + user1.getLastName() + "@ul.ie";
 		} else {
 			email = "N/A";
 		}
@@ -452,8 +463,8 @@ public class Database {
 		return user;
 	}
 	
-	
-	// DELETES user from user database
+	// Pre-Condition - id passed must exist in the DB
+	// Post-Condition - DELETES user from user database
     public void deleteUser(int id) throws Exception {
     	
     	try {
@@ -477,6 +488,8 @@ public class Database {
         
     }
 	
+	// Pre-Condition - id passed must exist in the DB
+	// Post-Condition:
 	// UPDATES ban_status for user to 1 i.e TRUE
 	// UPDATES banTime to one week from now
     public void banUser(int id) throws SQLException{
@@ -509,6 +522,8 @@ public class Database {
     	
     }
 		
+	// Pre-Condition - id passed must exist in the DB
+	// Post-Condition:
 	// UPDATES ban_status for user to 0 i.e FALSE 
 	public void unBanUser(int id) throws SQLException{
     	
@@ -532,6 +547,8 @@ public class Database {
     	}
     }
 	
+	// Pre-Condition - id and password passed must exist in DB
+	// Post-Condition:
 	// Verifies that the ID and PASSWORD passed into this function are present in the Users Database
 	// Returns true if credentials are true
 	public boolean verifyUser(int id, String password) throws SQLException {
@@ -574,7 +591,8 @@ public class Database {
 		}
 	}
 	
-	//Returns 0 for student, 1 for staff, 2 for guest
+	// Pre-Condition - id passed must exist in the DB
+	// Post-Condition - Returns 0 for student, 1 for staff, 2 for guest
 	public int getUserStatus(int id) throws SQLException{
 		
 		try {
@@ -608,7 +626,8 @@ public class Database {
 		}
 	}
 
-	//Returns penalty points for passed in user id
+	// Pre-Condition - id passed must exist in the DB
+	// Post-Condition - Returns penalty points for passed in user id
 	public int getPenaltyPoints(int id) {
 		
 		// Initialise penalty variable
@@ -636,7 +655,8 @@ public class Database {
         return penalties;
 	}
 
-	// Adds penalty point to passed in user
+	// Pre-Condition - id passed must exist in the DB
+	// Post-Condition - Adds penalty point to passed in user
 	public void setPenaltyPoints(int id) {
 		
 		// Initialise penalty variable
@@ -666,8 +686,66 @@ public class Database {
 		
 	}
 
-	// INSERTS new reservation into the reservations DB
-	public void reserve(int id, String reg, String lot, int electric, int accessibility, long hours, long mins) throws SQLException{
+	// Pre-Condition - passed in params must follow the following format
+	//				   int id, String reg, String lot, int electric, 
+	//				   int accessibility, LocalDateTime bookingTime, long hours
+	// Post-Condition - INSERTS new reservation into the reservations DB - for pre - booking
+	public void preBook(int id, String reg, String lot, int electric, int accessibility, LocalDateTime bookingTime, long hours) throws SQLException {
+
+		try {
+			// Creating variables for created at and expiry attributes
+
+			// Formatting
+			DateTimeFormatter simpleDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			System.out.println("Pre-Booking Reserved For: " + bookingTime.format(simpleDateFormat));
+
+			// Adding user desired duration to remain parked to expiry variable
+			LocalDateTime expiryDateTime = bookingTime.plus(Duration.ofHours(hours));
+			 
+			System.out.println("Pre-Bookiing Expires: " + expiryDateTime.format(simpleDateFormat));
+
+			//Converting ca & expiryDateTime to sql time format
+			Timestamp created_on = Timestamp.valueOf(bookingTime);
+			Timestamp expiry = Timestamp.valueOf(expiryDateTime);
+
+			// INSERTING data to DB
+			if(id > 0 && reg!=null && lot!=null && created_on!=null && expiry!=null){
+				
+				String query = "INSERT INTO " + reservations_db + "(userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				
+				PreparedStatement p = con.prepareStatement(query);
+				p.setInt(1, id);
+				p.setString(2, reg);
+				p.setString(3, lot);
+				p.setInt(4, electric);
+				p.setInt(5, accessibility);
+				p.setTimestamp(6, created_on);
+				p.setTimestamp(7, expiry);
+				
+	            int insert = p.executeUpdate();
+	            if(insert == 1)
+	            {
+					System.out.println("Reservation made successfully");			
+					System.out.println("Reservation From " + created_on + " Until " + expiry);
+
+	            }
+	            else
+	            {
+	                System.out.println("Reservation Failed");
+	            }
+			}
+		} catch (SQLException e){
+			
+	    	System.out.println("Error reserving a spot: " + e.getMessage());
+			
+		}
+	}
+
+	// Pre-Condition - passed in params must follow the following format
+	//				   int id, String reg, String lot, int electric, 
+	//				   int accessibility, long hours
+	// Post-Condition - INSERTS new reservation into the reservations DB
+	public void reserve(int id, String reg, String lot, int electric, int accessibility, long hours) throws SQLException {
 
 		try {
 			// Creating variables for created at and expiry attributes
@@ -679,8 +757,8 @@ public class Database {
 			LocalDateTime expiryDateTime = created_at_LocalDateTime;
 
 			// Adding user desired duration to remain parked to expiry variable
-			expiryDateTime = expiryDateTime.plus(Duration.ofHours(hours));  
-			expiryDateTime = expiryDateTime.plus(Duration.ofMinutes(mins));
+			expiryDateTime = expiryDateTime.plus(Duration.ofHours(hours)); 
+
 			System.out.println("Reservation expires: " + expiryDateTime.format(simpleDateFormat));
 
 			//Converting ca & expiryDateTime to sql date format
@@ -721,15 +799,14 @@ public class Database {
     }
 
 	// Admin function
-	// Prints Reservation Details in DB
-	// Stores their associated userID's in an array list of strings
+	// Pre-Condition - none
+	// Post-Condition - Prints Reservation Details from DB
 	public void fetchReservationData() throws Exception{
 		try {
 			//Getting all DB data
 			String query = "select * from " + reservations_db;
 			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
-			ArrayList<String> reservations = new ArrayList<String>();
 			int i = 1;
 			while(rs.next()){
 
@@ -744,7 +821,6 @@ public class Database {
 				System.out.println("-----------------------------END-------------------------------");
 				i++;
 				
-				reservations.add(rs.getString(1));
 			}
 			
 		} catch (Exception e) {
@@ -755,8 +831,8 @@ public class Database {
 			
 	}
 
-
-	// Returns ArrayList of type Reservations with reservation collected from the DB
+	// Pre-Condition - User passed must exist in DB
+	// Post-Condition - Returns ArrayList of type Reservations with reservation collected from the DB
 	public ArrayList<Reservation> fetchUserReservation(Users user) throws Exception{
 		try {
 			//Getting all DB data
@@ -816,7 +892,9 @@ public class Database {
 			
 	}
 
-	// INSERTS a new transaction into the transactions DB
+	// Pre-Condition - params must follow the following format:
+	//				   int userID, int reservationsID, String lot, double amount
+	// Post-Condition - INSERTS a new transaction into the transactions DB
 	public void addTransaction(int userID, int reservationsID, String lot, double amount) throws Exception{
 
 		try {
@@ -858,7 +936,8 @@ public class Database {
 	}
 
 	// Admin function
-	// Returns entries in the transaction table
+	// Pre-Condition - None
+	// Post-Condition - Returns entries in the transaction table
 	public void fetchTransactionData() throws Exception{
 
 		int i = 1;
@@ -890,6 +969,8 @@ public class Database {
 			
 	}
 
+	// Pre-Condition - passed in user id must exist in the DB
+	// Post-Condition -returns transactions from the Transactions table associated with user id passed
 	public void fetchUserTransactionData(int id) throws Exception{
 
 		int i = 1;
