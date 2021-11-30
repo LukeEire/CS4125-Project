@@ -3,8 +3,6 @@ package ezparkproject;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import ezparkproject.Database.Database;
-
 public class Users {
 	
 	int id;

@@ -1,4 +1,4 @@
-package ezparkproject.PreBooking;
+package ezparkproject;
 
 import java.sql.Connection;
 /*import java.sql.Date;
@@ -6,10 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.time.LocalDateTime;*/
 import java.sql.SQLException;
-
-import ezparkproject.Main;
-import ezparkproject.Reservation;
-import ezparkproject.Database.Database;
 
 
 public class BookingBackend {

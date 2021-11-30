@@ -1,4 +1,4 @@
-package ezparkproject.Database;
+package ezparkproject;
 
 import java.sql.DriverManager;
 import java.awt.Component;
@@ -18,10 +18,6 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-
-import ezparkproject.Main;
-import ezparkproject.Reservation;
-import ezparkproject.Users;
 
 /**
  * @author ayoubjdair

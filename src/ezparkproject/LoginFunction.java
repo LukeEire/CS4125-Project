@@ -1,4 +1,4 @@
-package ezparkproject.Login;
+package ezparkproject;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -21,9 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-import ezparkproject.MyAccountandPasswords.ForgotPasswordFrame;
-import ezparkproject.Registration.RegFrame;
 
 
 /* Author: Conall McAteer, Ashutosh Yadav and Luke Kellet Murray */

@@ -1,4 +1,4 @@
-package ezparkproject.Database;
+package ezparkproject;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
-
-import ezparkproject.Users;
 
 /**
  * The test class DatabaseTest.

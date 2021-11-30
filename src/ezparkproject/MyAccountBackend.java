@@ -1,10 +1,7 @@
-package ezparkproject.MyAccountandPasswords;
+package ezparkproject;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
-import ezparkproject.Users;
-import ezparkproject.Database.Database;
 
 
 /* Author:  Ashutosh Yadav  */

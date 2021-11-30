@@ -1,12 +1,8 @@
-package ezparkproject.Login;
+package ezparkproject;
 
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
-
-import ezparkproject.Dashboard;
-import ezparkproject.Main;
-import ezparkproject.Database.Database;
 
 
 /* Author:  Ashutosh Yadav  */

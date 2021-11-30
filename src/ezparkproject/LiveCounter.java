@@ -1,4 +1,4 @@
-package ezparkproject.PreBooking;
+package ezparkproject;
 
 public class LiveCounter {
 	

@@ -1,10 +1,6 @@
-package ezparkproject.Registration;
+package ezparkproject;
 
 import java.sql.SQLException;
-
-import ezparkproject.Users;
-import ezparkproject.Database.Database;
-import ezparkproject.Login.LoginFunction;
 
 public class RegBackend {
 
