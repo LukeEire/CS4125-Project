@@ -488,6 +488,32 @@ public class Database {
         
     }
 	
+	// Pre-Condition - id passed must exist in the DB, new password must be passed in a string
+	// Post-Condition - UPDATES password for user to new passed in password
+    public void changePassword(int id, String password) throws SQLException{
+	
+    	try {
+    		
+			String query = "UPDATE " + users_db + " SET password = MD5('" + password + "') WHERE id  = \""+id+"\"";
+			
+	        PreparedStatement p = con.prepareStatement(query);
+	        int pass = p.executeUpdate(query);
+	
+	        if(pass == 1){
+				System.out.println("User " + id + " Password Changed Successfully.");
+	        }
+	        else{
+	            System.out.println("FAIL: Pasword UPDATE Failed");
+	        }
+	        
+    	} catch (SQLException e){
+
+    		System.out.println("Error changing password: " + e.getMessage());
+
+    	}
+    	
+	}
+	
 	// Pre-Condition - id passed must exist in the DB
 	// Post-Condition:
 	// UPDATES ban_status for user to 1 i.e TRUE
