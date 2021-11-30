@@ -7,6 +7,13 @@ import java.awt.*;
 
 public class MyAccountFrame implements ActionListener{
 	
+	String ID;
+	String firstName;
+	String lastName;
+	String password;
+	String status;
+	String dob;
+	String reg;
 	
 
 	JFrame frame;
@@ -34,6 +41,20 @@ public class MyAccountFrame implements ActionListener{
 	JLabel dobLabel = new JLabel("Date of Birth");
 	JLabel accessibilityLabel = new JLabel("Disabled Permit");
 	JLabel plateLabel = new JLabel("Car Reg");
+	
+	
+	/* Text Fields */
+	
+	String[] uniStatus = { "Student", "Staff", "Guest" }; /* also known as rank from our analysis class diagram */
+	
+	JTextField universityIDField = new JTextField();
+	JTextField firstNameField = new JTextField();
+	JTextField lastNameField = new JTextField();
+	JPasswordField passwordField = new JPasswordField();
+	JComboBox uniComboBox = new JComboBox(uniStatus);
+	JTextField dobField = new TextHint("Example: 1999-01-01");  // adds hint of format
+	JTextField plate = new JTextField();
+	
 
 	
 
@@ -75,6 +96,16 @@ public class MyAccountFrame implements ActionListener{
         university_statusLabel.setBounds(600, 280, 100, 70);
         dobLabel.setBounds(600, 330, 100, 70);
         plateLabel.setBounds(600, 380, 100, 70);
+        
+        /* Text Field Locations */
+        
+        universityIDField.setBounds(700, 93, 165, 23);
+        firstNameField.setBounds(700, 155, 165, 23);
+        lastNameField.setBounds(700, 205, 165, 23);
+        passwordField.setBounds(700, 250, 165, 23);
+        uniComboBox.setBounds(700, 300, 165, 23);        
+        dobField.setBounds (700, 350, 165, 23);
+        plate.setBounds (700, 400, 165, 23);
      
 		
         
@@ -137,6 +168,16 @@ public class MyAccountFrame implements ActionListener{
 		frame.add(dobLabel);
 		frame.add(plateLabel);
 		frame.add(yourDetails);
+		
+		/* Text fields */
+		
+		frame.add(universityIDField);
+		frame.add(firstNameField);
+		frame.add(lastNameField);
+		frame.add(passwordField);
+		frame.add(uniComboBox);
+		frame.add(dobField);
+		frame.add(plate);
 
 	}
 	
