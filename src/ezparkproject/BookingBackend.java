@@ -72,15 +72,15 @@ public class BookingBackend {
 			res = db.fetchSingleReservation(id);
 			
 			
-			
+			return res;
 		} catch (SQLException error) {
 
 			System.out.println("Could not connect to the database " + error.getMessage());
-
+			return null;
 		}
 		
 		
-		return null;
+		
 	}
 	
 	public void decrementTest() {

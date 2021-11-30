@@ -47,8 +47,33 @@ public class Reservation {
     	
     }
     // Ayoub - new Reservation constructor
-    // Adds reservation to DB if boolean addReservationToDb is set to TRUE
     public Reservation(Users user, String lot, int electricSpace, String reg, long hours) {
+
+        //db = new Database();
+        this.user = user;
+        this.id = user.id;
+        this.lot = lot;
+        this.accessibility = user.accessibility;
+        this.chargingSpace = electricSpace;
+        this.reg = reg;
+        this.reservationTime = LocalDateTime.now();
+        this.duration = reservationTime.plus(Duration.ofHours(hours));
+        this.hours = hours;
+
+        System.out.println("Testing time: Duration = " + duration );
+
+        /*if(addReservationToDb){
+            try {
+                db.reserve(id, reg, lot, user.electric, accessibility, hours);
+            } catch (SQLException e) {
+                System.out.println("Error Reserving a spot through the reservatins class constructor: " + e.getMessage() );
+                e.printStackTrace();
+            }
+        }*/
+        
+    }
+    
+    public Reservation(Users user, String lot, int electricSpace, String reg, LocalDateTime beginTime, long hours) {
 
         //db = new Database();
         this.user = user;

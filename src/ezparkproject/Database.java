@@ -871,9 +871,10 @@ public class Database {
 					res.setLot(rs.getString("lot"));
 					res.setCharging( Integer.valueOf(rs.getString("electric")));
 					res.setReg(rs.getString("reg"));
-					
+					//Date checkInTime = rs.getTimestamp("created_on");
 					Long diff = (rs.getTimestamp("created_on").getTime()) - (rs.getTimestamp("expiry").getTime());
 					res.setHours(diff / (60 * 60 * 1000));
+					//res.checkInDate = 
 				}
 				return res;
 				

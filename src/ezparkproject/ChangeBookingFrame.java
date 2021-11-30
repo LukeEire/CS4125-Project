@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -104,6 +107,7 @@ public class ChangeBookingFrame implements ActionListener{
         
         /* Text fields and drop downs bounds */
         
+        bookingIDField.setBounds(180, 43, 165, 23);
         lotComboBox.setBounds(180, 93, 165, 23);
         dateField.setBounds(180, 150, 165, 23);
         timeComboBox.setBounds(180, 200, 165, 23);
@@ -168,17 +172,26 @@ public class ChangeBookingFrame implements ActionListener{
 			int resID = Integer.parseInt(bookingIDField.getText());
 			res = Backend.loadBooking(resID);
 			
+			/*Date temp = res.getcheckInDate();
+			DateFormat dateFormat = new SimpleDateFormat("yyy-mm-dd");
+			String date = dateFormat.format(temp);*/
+			
 			
 			
 			
 
 			//These needs backend function to grab data
-			dateField.setText("");
-			userIDField.setText(Integer.toString(Main.currentUser.getID()));
-			dateField.setText("");
-			timeField.setText("");
-			lotComboBox.setSelectedItem("Lot A");			
-			durationField.setText("");
+			lotComboBox.setSelectedItem(res.getLot());
+			//dateField.setText(date);
+			//userIDField.setText(Integer.toString(Main.currentUser.getID()));
+			timeComboBox.setSelectedItem("09:00");
+			durationComboBox.setSelectedItem("1");
+			
+			if (res.getChargingCheck() == 1) {
+				EVCheckBox.setSelected(true);
+			}else {
+				EVCheckBox.setSelected(false);
+			}
 		}
 
 		if (e.getSource() == cancelButton) {
