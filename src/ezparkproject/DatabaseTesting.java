@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The test class DatabaseTest.
  *
- * @author  ayoub
+ * @author  testingUser
  * @version 28/11/21
  */
 public class DatabaseTesting
@@ -96,9 +96,9 @@ public class DatabaseTesting
 //		System.out.println("Test 11");
 //		System.out.println();
 //		db.fetchReservationData();
-		Users ayoub = new Users(true, 22222222, "Jack", "H", "123456789", null, "Student", 1, 0, "1999-12-15", "PENN");
-//		db.reserve(ayoub.id, ayoub.getDefultPlate(), "LOT A", 1, 0, 2);
-//		db.fetchUserReservation(ayoub);
+		Users testingUser = new Users(true, 22222222, "Jack", "H", "123456789", null, "Student", 1, 0, "1999-12-15", "PENN");
+//		db.reserve(testingUser.id, testingUser.getDefultPlate(), "LOT A", 1, 0, 2);
+//		db.fetchUserReservation(testingUser);
 //		
 //		//Transaction
 //		System.out.println("Test 12");
@@ -110,7 +110,7 @@ public class DatabaseTesting
 //		System.out.println("Test 13");
 //		System.out.println();
 //		db.fetchTransactionData();
-//		db.fetchUserTransactionData(ayoub.getID());
+//		db.fetchUserTransactionData(testingUser.getID());
 //		
 //		//Using method arraylist
 //		System.out.println();  
@@ -133,16 +133,22 @@ public class DatabaseTesting
 		System.out.println("Test 15");
 		System.out.println();
 		LocalDateTime bookingTime = LocalDateTime.of(2021, Month.DECEMBER, 10, 13, 30, 40);
-		db.preBook(ayoub.id, ayoub.getDefultPlate(), lots.get(0), ayoub.electric, ayoub.accessibility, bookingTime, 2);
+		db.preBook(testingUser.id, testingUser.getDefultPlate(), lots.get(0), testingUser.electric, testingUser.accessibility, bookingTime, 2);
 		System.out.println();
 		
-		// HOW SET PENALTY POINTS AND GET PENALTY POINTS FOR USERS
+		// HOW TO SET PENALTY POINTS AND GET PENALTY POINTS FOR USERS
 		System.out.println("Test 16");
-		db.setPenaltyPoints(ayoub.id);
-		int p = db.getPenaltyPoints(ayoub.id);
+		db.setPenaltyPoints(testingUser.id);
+		int p = db.getPenaltyPoints(testingUser.id);
 		System.out.println("Returned penalty points:  "+ p); 
 		System.out.println(); 
-				
+		
+		// HOW TO CHANGE USER PASSWORDS FOR USERS
+		System.out.println("Test 17");
+		String newPassword = "MD5passwordsSuck100";
+		db.changePassword(testingUser.id, newPassword);
+		System.out.println(); 
+		
 		System.out.println();  
 		System.out.println("Testing Complete.");
 		System.out.println();  
