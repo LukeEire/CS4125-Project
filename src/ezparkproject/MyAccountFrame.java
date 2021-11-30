@@ -81,13 +81,13 @@ public class MyAccountFrame extends Users implements ActionListener {
 	
 	public void getUserDetails() {
 		
-		int id = this.getID();
-		String firstName = this.getFirstName();
-		String lastName = this.getLastName();
+		int id = Main.currentUser.getID();
+		String firstName = Main.currentUser.getFirstName();
+		String lastName = Main.currentUser.getLastName();
 		String password;
-		String status = this.getStatus();
-		String dob = this.getsDOB();
-		String reg = this.getReg();
+		String status = Main.currentUser.getStatus();
+		String dob = Main.currentUser.getsDOB();
+		String reg = Main.currentUser.getReg();
 		
 		// test to see what each string returns
 		
