@@ -33,6 +33,7 @@ public class LoginFunction extends JFrame {
     private JButton loginButton;
     private JButton logoutButton;
     private JButton registerButton;
+    private JButton forgotPWButton;
     private JLabel label;
     private JPanel contentPane;
 
@@ -150,10 +151,25 @@ public class LoginFunction extends JFrame {
         		
             }
         });
+        
+        forgotPWButton = new JButton("Forgot Password?");
+        forgotPWButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        forgotPWButton.setBounds(450, 475, 162, 73);;
+        forgotPWButton.setSize(250,50);
+        forgotPWButton.addActionListener(new ActionListener() {
+
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		dispose();
+        		new ForgotPasswordFrame();
+        		
+            }
+        });
 
         contentPane.add(loginButton);
         contentPane.add(logoutButton);
         contentPane.add(registerButton);
+        contentPane.add(forgotPWButton);
     }
 }
 
