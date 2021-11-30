@@ -74,15 +74,7 @@ public class LoginFunction extends JFrame {
         label.setBounds(503, 13, 273, 93);
         label.setSize(100,100);
         contentPane.add(label);
-        
-        
-        /* Placeholder login instead of logo below */
-
-       /*JLabel lblNewLabel = new JLabel("Login");
-        lblNewLabel.setForeground(Color.BLACK);
-        lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 46));
-        lblNewLabel.setBounds(503, 13, 273, 93);
-        contentPane.add(lblNewLabel); */
+                
 
         textField = new JTextField();
         textField.setFont(new Font("Tahoma", Font.PLAIN, 32));
@@ -131,30 +123,6 @@ public class LoginFunction extends JFrame {
 						JOptionPane.showMessageDialog(loginButton, "Wrong Username or password, please try again");
 					}
                 
-				/*try {
-                    
-                
-                /*try {
-                    Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com:3306/sql4450358","sql4450358", "dcCxqbDW1K"); //Updated connection
-
-                    PreparedStatement st = (PreparedStatement) con
-                        .prepareStatement("Select id, password from users where id=? and password=?");
-
-                    st.setString(1, userID);
-                    st.setString(2, password);
-                    ResultSet rs = st.executeQuery(); 
-                    if (rs.next()) {
-                        dispose();
-                        Dashboard ah = new Dashboard();
-                        ah.setTitle("Welcome");
-                        ah.setVisible(true);
-                        JOptionPane.showMessageDialog(loginButton, "You have successfully logged in");
-                    } else {
-                        JOptionPane.showMessageDialog(loginButton, "Wrong Username & Password");
-                    }
-                } catch (SQLException sqlException) {
-                    sqlException.printStackTrace();
-                }  */
             } 
         });
         
@@ -189,4 +157,4 @@ public class LoginFunction extends JFrame {
     }
 }
 
-// Login function just needs to be linked to new page. SQL is working and links with existing users and passwords in the DB
+
