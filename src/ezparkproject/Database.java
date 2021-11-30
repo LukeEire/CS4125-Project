@@ -700,7 +700,7 @@ public class Database {
 				System.out.println("User penalty count: " + getPenaltyPoints(id));
 	        }
 	        else{
-	            System.out.println("FAIL: Penalty Points addtion unsuccessfull");
+	            System.out.println("FAIL: Penalty Points addition unsuccessful");
 	        }
               
         } catch (SQLException e) {

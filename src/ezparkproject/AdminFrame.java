@@ -2,8 +2,11 @@ package ezparkproject;
 
 import javax.swing.*; 
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.awt.*; 
+import net.proteanit.sql.DbUtils;
 
 public class AdminFrame implements ActionListener{
 	
@@ -13,7 +16,7 @@ public class AdminFrame implements ActionListener{
 	int id;
 	ArrayList<Users> users;
 	AdminBackend Backend = new AdminBackend();
-	String usersData = Backend.fetchUserFunction();
+	//String usersData = Backend.fetchUserFunction();
 		
 	JFrame frame;
 	
@@ -25,15 +28,16 @@ public class AdminFrame implements ActionListener{
 	
 	/* Scrollable Containers */
 	
-	JLabel allUserList = new JLabel("" + usersData);
+	//JPanel userContainer = new JPanel();
+
 	
-	//JLabel reservationList = new JLabel("" + AdminBackend.fetchReservationFunction());
-	
-	JPanel userContainer = new JPanel();
+	JScrollPane scrollPane = new JScrollPane();
+	JTable userContainer = new JTable();
+
 	JPanel reservationContainer = new JPanel();
 	JPanel transactionsContainer = new JPanel();
 	
-	JScrollPane userScrollPane = new JScrollPane(allUserList);
+	//JScrollPane userScrollPane = new JScrollPane(allUserList);
 
 	JScrollPane reservationScrollPane = new JScrollPane(reservationContainer);
 	JScrollPane transactionsScrollPane = new JScrollPane(transactionsContainer);
@@ -90,8 +94,10 @@ public class AdminFrame implements ActionListener{
 		
 		/* Label Bounds */
 
-		usersPanel.setBounds(350, 75, 40, 70);
-		usersPanel.setSize(200,20);
+		// usersPanel.setBounds(350, 75, 40, 70);
+		// usersPanel.setSize(200,20);
+		scrollPane.setBounds(350, 75, 40, 70);
+		scrollPane.setSize(200,20);
 		
 		reservationsPanel.setBounds(600, 75, 40, 70);
 		reservationsPanel.setSize(200,20);
@@ -169,12 +175,14 @@ public class AdminFrame implements ActionListener{
 		/* Labels */
 
 		frame.add(usersPanel);
+		frame.getContentPane().add(scrollPane);
 		frame.add(reservationsPanel);
 		frame.add(transactionsPanel);
 		frame.add(userScrollPane);
 		frame.add(reservationScrollPane);
 		frame.add(transactionsScrollPane);
 		frame.add(transactionsScrollPane);
+
 		
 
 		
@@ -243,15 +251,27 @@ public class AdminFrame implements ActionListener{
 		}
 		
 		if (e.getSource() == loadUsersButton) {
-			String temp;
-			try {
-				temp = Backend.fetchUserFunction();
+			// ArrayList<Users> temp;
+			// try {
+			// 	temp = AdminBackend.fetchUserFunction();
 				
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			// } catch (Exception e1) {
+			// 	// TODO Auto-generated catch block
+			// 	e1.printStackTrace();
+			// }
+			try {
+				Database db = new Database();
+				String query = "SELECT * FROM Users";
+				Connection con = db.connect();
+				java.sql.PreparedStatement ps = con.prepareStatement(query);
+				ResultSet rs = ps.executeQuery();
+				userContainer.setModel(DbUtils.resultSetToTableModel(rs));
 			}
-			
+
+			catch (Exception e) {
+
+				e.printStackTrace();
+			}
 		}
 		
 		if (e.getSource() == loadReservationsButton) {
