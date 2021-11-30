@@ -7,6 +7,8 @@ import	java.sql.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+/* Author:  Ashutosh Yadav  */
+
 public class RegFrame implements ActionListener, ItemListener{
 	
 	

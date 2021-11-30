@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.awt.*; 
 import net.proteanit.sql.DbUtils;
 
+/* Author:  Ashutosh Yadav  */
+
 public class AdminFrame implements ActionListener{
 	
 

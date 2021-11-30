@@ -10,7 +10,7 @@ public class AdminBackend {
 	
 	
 	
-	// Author: Ashutosh Yadav 18249094
+	/* Author:  Ashutosh Yadav  */
 	
 	AdminBackend() {
 		

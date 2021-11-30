@@ -22,6 +22,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+
+/* Author: Conall McAteer, Ashutosh Yadav and Luke Kellet Murray */
+
 public class LoginFunction extends JFrame {
 
     private static final long serialVersionUID = 1L;
