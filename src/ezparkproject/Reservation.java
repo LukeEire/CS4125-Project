@@ -102,12 +102,34 @@ public class Reservation {
     	return this.lot;
     }
     
+    public void setLot(String lot) {
+    	this.lot = lot;
+    }
+    
+    
+    
+    public String getReg() {
+    	return this.reg;
+    }
+    
+    public void setReg(String reg) {
+    	this.reg = reg;
+    }
+    
     public Long getHours() {
     	return this.hours;
     }
     
+    public void setHours(Long hours) {
+    	this.hours = hours;
+    }
+    
     public int getChargingCheck() {
     	return this.chargingSpace;
+    }
+    
+    public void setCharging(int elec) {
+    	this.chargingSpace = elec;
     }
     
     public boolean checkAvailability() {
