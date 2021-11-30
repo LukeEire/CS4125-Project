@@ -116,10 +116,17 @@ public class LoginFunction extends JFrame {
         		int id = Integer.parseInt(textField.getText());                             
 				@SuppressWarnings("deprecation")
 				String password = passwordField.getText();
-                dispose();
+                
 				
-				LoginBackend.loginFunction(id, password);
-							
+				//LoginBackend.loginFunction(id, password);
+				
+				
+				if (LoginBackend.loginFunction(id, password)) {
+						dispose();
+						
+					} else {						
+						JOptionPane.showMessageDialog(loginButton, "Wrong Username or password, please try again");
+					}
                 
 				/*try {
                     

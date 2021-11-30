@@ -29,7 +29,7 @@ public class Reservation {
     private Long hours;
     private Long mins;
     private int accessibility;
-    private int electric;
+    private int chargingSpace;
     private int id;
     //Database db = new Database();
 
@@ -44,14 +44,14 @@ public class Reservation {
 
     // Ayoub - new Reservation constructor
     // Adds reservation to DB if boolean addReservationToDb is set to TRUE
-    public Reservation(boolean addReservationToDb, Users user, String lot, long hours, long mins) {
+    public Reservation(boolean addReservationToDb, Users user, String lot, int electricSpace, String reg, long hours, long mins) {
 
         this.user = user;
         this.id = user.id;
         this.lot = lot;
         this.accessibility = user.accessibility;
-        this.electric = user.electric;
-        this.reg = user.getDefultPlate();
+        this.chargingSpace = electricSpace;
+        this.reg = reg;
         this.reservationTime = LocalDateTime.now();
         this.duration = reservationTime;
         this.duration = this.duration.plus(Duration.ofHours(hours));
@@ -108,6 +108,10 @@ public class Reservation {
     	return this.mins;
     }
     
+    public int getChargingCheck() {
+    	return this.chargingSpace;
+    }
+    
     public boolean checkAvailability() {
     	
 		return false;
@@ -117,7 +121,7 @@ public class Reservation {
     //Move the penalty part to the ScheduleManagement?
 //    public void checkOut(LocalDateTime checkOut) {
 //    	if(checkOut.isAfter(checkOutDate)) {
-//    		System.out.println("You overstayed your welcome!");
+//    		System.out.println("You over stayed your welcome!");
 //    		Penalty p = new Penalty();
 //    		p.addInfraction(user.id);
 //    	} else {

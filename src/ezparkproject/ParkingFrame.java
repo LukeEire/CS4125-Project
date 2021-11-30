@@ -21,6 +21,7 @@ public class ParkingFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JButton parkingButton;
+	private JButton parkingButton1;
 	private JButton logoutButton;
 	private JButton backButton;
 	
@@ -56,9 +57,9 @@ public class ParkingFrame extends JFrame {
         lblNewLabel.setBounds(423, 13, 273, 93);
         contentPane.add(lblNewLabel);
       		
-        parkingButton = new JButton("ParkNow");
+        parkingButton = new JButton("Non-Pre Booked Parking");
 		parkingButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		parkingButton.setBounds(240, 200, 100, 73);
+		parkingButton.setBounds(240, 120, 100, 73);
 		parkingButton.setSize(500,50);
 		parkingButton.addActionListener(new ActionListener() {
 			
@@ -87,11 +88,33 @@ public class ParkingFrame extends JFrame {
 				}
 			}
 		});
+		
+		JButton parkingButton1 = new JButton("Pay Reserved Parking");
+		parkingButton1.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		parkingButton1.setBounds(240, 350, 100, 73);
+		parkingButton1.setSize(500,50);
+		parkingButton1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+			
+				try {
+					
+					
+				} 
+				catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+				// mainFrame.setVisible(false); // hides the frame 
+				
+			}
+		});
+		
 	
 		
-		JButton exitButton = new JButton("Pay for Parking");
+		JButton exitButton = new JButton("Pay Non-Booked Parking");
 		exitButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		exitButton.setBounds(240, 300, 100, 73);
+		exitButton.setBounds(240, 235, 100, 73);
 		exitButton.setSize(500,50);
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -112,6 +135,7 @@ public class ParkingFrame extends JFrame {
 				paymentMidFrame.setVisible(true);
 			}
 		});
+		
 		
 		backButton = new JButton("Back");
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -143,6 +167,7 @@ public class ParkingFrame extends JFrame {
         });
 		
 		contentPane.add(parkingButton);
+		contentPane.add(parkingButton1);
 		contentPane.add(exitButton);
 		contentPane.add(logoutButton);
 		contentPane.add(backButton);

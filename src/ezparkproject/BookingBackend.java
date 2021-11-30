@@ -13,9 +13,28 @@ public class BookingBackend {
 	
 	Database db;
 	Connection con;
+	/*static Lot LotA = Main.LotA;
+	Lot LotB = Main.LotB;
+	Lot LotC = Main.LotC;
+	Lot LotD = Main.LotD;*/
 	
 	BookingBackend(){
 		
+	}
+	
+	public void decrementLotSpaces() {
+		
+	}
+	
+	public String returnLot() {
+		String temp;
+		
+		temp = Integer.toString(Main.LotA.countSpaces()) + ",";
+		temp = temp + Integer.toString(Main.LotB.countSpaces()) + ",";
+		temp = temp + Integer.toString(Main.LotC.countSpaces()) + ",";
+		temp = temp + Integer.toString(Main.LotD.countSpaces());
+		
+		return temp;
 	}
 	
 	public void createBooking(Reservation res) {
@@ -27,7 +46,7 @@ public class BookingBackend {
 			int ID = res.getUser().getID();
 			String reg = res.getUser().getReg();
 			String lot = res.getLot();
-			int electric = res.getUser().getElec();
+			int electric = res.getChargingCheck();
 			int accessibility = res.getUser().getAcc();
 			Long hours = res.getHours();
 			Long mins = res.getMins();
@@ -44,7 +63,9 @@ public class BookingBackend {
 		
 	}
 	
-	
+	public void decrementTest() {
+		Main.LotA.setSpaces(Main.LotA.countSpaces()-1);
+	}
 	/*public void newDateForBooking(Date date,  ) {
 		
 	}*/

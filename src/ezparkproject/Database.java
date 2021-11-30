@@ -848,9 +848,13 @@ public class Database {
 				System.out.println("------------------------Reservation: "+i+"--------------------------");
 				System.out.println("Reservations ID: " + rs.getInt("id"));
 				System.out.println("User ID: " + rs.getInt("userID"));
-				System.out.println("Registration Plate: " + rs.getString("reg"));
+				//Added here to match new Reservation constructor
+				String reg = rs.getString("reg");
+				System.out.println("Registration Plate: " + reg);
 				System.out.println("LOT: " + rs.getString("lot"));
-				System.out.println("Electric Car? [Y/N]: " + rs.getString("electric"));
+				//Added here to match new Reservation constructor
+				String elec = rs.getString("electric");
+				System.out.println("Electric Car? [Y/N]: " + elec);
 				System.out.println("Assistance Required? [Y/N]: " + rs.getString("accessibility"));
 				System.out.println("Reservation Data: " + rs.getDate("created_on"));
 				System.out.println("Reserved until: " + rs.getDate("expiry"));
@@ -873,8 +877,9 @@ public class Database {
 				System.out.println("Reserved for:  " + mins + " Min(s)");
 
 
+				int elecInt = Integer.parseInt(elec);
 				// Creating new reservation obj without adding it to the DB (false)
-				Reservation collectedReservation = new Reservation(false, user, rs.getString("lot"), hours, mins);
+				Reservation collectedReservation = new Reservation(false, user, rs.getString("lot"), elecInt, reg, hours, mins);
 				// Storing it in a reservations arraylist
 				reservations.add(collectedReservation);
 			}
@@ -999,6 +1004,42 @@ public class Database {
 	    	System.out.println("Error fetching Transactions data: " + e.getMessage());
 		}
 			
+	}
+	
+	
+public boolean checkID(int id) throws SQLException { //conall testing
+		
+		int checkUser = id;
+		boolean result;
+		
+		try {
+			
+			String query = "SELECT * FROM " + reservations_db + " WHERE id = " + id;
+
+			PreparedStatement p = con.prepareStatement(query);
+			ResultSet rs = p.executeQuery(query);
+			
+			if(!rs.isBeforeFirst()) {
+				System.out.println("UserID may be incorrect");
+				System.out.println("User: "+ checkUser);
+				result = false;
+			} else {
+				while (rs.next()) {
+					int foundUser = rs.getInt("id");
+					System.out.println("User Verified!");
+					System.out.println("Found User: "+foundUser);
+				}
+				result = true;
+			}
+			return result;
+			
+		} catch(SQLException e) {
+									
+			System.out.println("Error locating data entered: " + e.getMessage());
+			result = false;
+			return result;
+			
+		}
 	}
 
 //Luke Testing here

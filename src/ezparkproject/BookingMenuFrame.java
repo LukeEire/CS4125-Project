@@ -7,6 +7,7 @@ import java.awt.*;
 public class BookingMenuFrame implements ActionListener{
 
 	JFrame frame;
+	BookingBackend Backend = new BookingBackend();
 	
 	/* Labels */
 	
@@ -40,9 +41,25 @@ public class BookingMenuFrame implements ActionListener{
 		frame.getContentPane().setBackground(Color.CYAN);
 		addComponentsToFrame();
 		actionEvent();
+		loadCounters();
 	}
 	
+	public String[] returnSpaces() {
+		String temp = Backend.returnLot();
+		String[] lots = temp.split(","); 
+		
+		return lots;
+		
+	}
 	
+	public void loadCounters() {
+		String[] temp = returnSpaces();
+		lotA_CounterField.setText(temp[0]);
+		lotB_CounterField.setText(temp[1]);
+		lotC_CounterField.setText(temp[2]);
+		lotD_CounterField.setText(temp[3]);
+		
+	}
 
 	public void createWindow() {
 
@@ -163,7 +180,8 @@ public class BookingMenuFrame implements ActionListener{
 
 		if (e.getSource() == viewBookingButton) {
 			
-			frame.dispose();
+			//frame.dispose();
+			Backend.decrementTest();
 			
 		}
 
