@@ -49,11 +49,10 @@ public class BookingBackend {
 			int electric = res.getChargingCheck();
 			int accessibility = res.getUser().getAcc();
 			Long hours = res.getHours();
-			Long mins = res.getMins();
 			
 			
 			
-			db.reserve(ID, reg, lot, electric, accessibility, hours, mins);
+			db.reserve(ID, reg, lot, electric, accessibility, hours);
 			
 		} catch (SQLException error) {
 

@@ -44,7 +44,7 @@ public class Reservation {
 
     // Ayoub - new Reservation constructor
     // Adds reservation to DB if boolean addReservationToDb is set to TRUE
-    public Reservation(Users user, String lot, int electricSpace, String reg, long hours) throws SQLException{
+    public Reservation(Users user, String lot, int electricSpace, String reg, long hours) {
 
         //db = new Database();
         this.user = user;

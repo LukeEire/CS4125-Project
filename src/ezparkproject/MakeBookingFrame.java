@@ -168,7 +168,7 @@ public class MakeBookingFrame implements ActionListener{
 			CheckBox_Booking();
 			
 			
-			Reservation res = new Reservation(false, Main.currentUser, selectedLot, electricCheckBoxVal, reg, hours, 0);
+			Reservation res = new Reservation(Main.currentUser, selectedLot, electricCheckBoxVal, reg, hours);
 			
 			Backend.createBooking(res);
 			

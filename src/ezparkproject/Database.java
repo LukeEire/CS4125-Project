@@ -903,7 +903,7 @@ public class Database {
 
 				int elecInt = Integer.parseInt(elec);
 				// Creating new reservation obj without adding it to the DB (false)
-				Reservation collectedReservation = new Reservation(false, user, rs.getString("lot"), elecInt, reg, hours);
+				Reservation collectedReservation = new Reservation(user, rs.getString("lot"), elecInt, reg, hours);
 				// Storing it in a reservations arraylist
 				reservations.add(collectedReservation);
 			}
