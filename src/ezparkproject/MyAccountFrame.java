@@ -35,6 +35,8 @@ public class MyAccountFrame extends Users implements ActionListener {
 	JLabel dobLabel = new JLabel("Date of Birth");
 	JLabel accessibilityLabel = new JLabel("Disabled Permit");
 	JLabel plateLabel = new JLabel("Car Reg");
+	JLabel welcomeLabel = new JLabel("Welcome");
+	JLabel wUserLabel = new JLabel ("" + Main.currentUser.getFirstName());
 	
 	
 	/* Text Fields */
@@ -91,10 +93,10 @@ public class MyAccountFrame extends Users implements ActionListener {
 		
 		// test to see what each string returns
 		
-		System.out.println(firstName);
+		System.out.println(firstName);		
 		
 		firstNameField.setText(firstName);
-	    universityIDField.setText("user id");
+	    universityIDField.setText("" +id);
 	    dobField.setText("");
 	    lastNameField.setText(lastName);	
 	    passwordField.setText("");
@@ -120,6 +122,12 @@ public class MyAccountFrame extends Users implements ActionListener {
         university_statusLabel.setBounds(600, 280, 100, 70);
         dobLabel.setBounds(600, 330, 100, 70);
         plateLabel.setBounds(600, 380, 100, 70);
+        
+        welcomeLabel.setBounds(120, 20, 100, 70);
+        welcomeLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        
+        wUserLabel.setBounds(210, 20, 100, 70);
+        wUserLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
         
      
         
@@ -202,6 +210,8 @@ public class MyAccountFrame extends Users implements ActionListener {
 		frame.add(dobLabel);
 		frame.add(plateLabel);
 		frame.add(yourDetails);
+		frame.add(welcomeLabel);
+		frame.add(wUserLabel);
 		
 		/* Text fields */
 		

@@ -1,6 +1,7 @@
 package ezparkproject;
 
 import java.sql.DriverManager;
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
