@@ -92,9 +92,13 @@ public class BookingMenuFrame implements ActionListener{
         /* Text fields and drop downs bounds */
         
         lotA_CounterField.setBounds(800, 63, 165, 23);
+        lotA_CounterField.setEditable(false);
         lotB_CounterField.setBounds(800, 103, 165, 23);
+        lotB_CounterField.setEditable(false);
         lotC_CounterField.setBounds(800, 143, 165, 23);
+        lotC_CounterField.setEditable(false);
         lotD_CounterField.setBounds(800, 183, 165, 23);
+        lotD_CounterField.setEditable(false);
         
         /* Make Booking Button */
         
