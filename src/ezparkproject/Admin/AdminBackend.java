@@ -1,9 +1,12 @@
-package ezparkproject;
+package ezparkproject.Admin;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+
+import ezparkproject.Users;
+import ezparkproject.Database.Database;
 
 public class AdminBackend {
 	

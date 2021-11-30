@@ -1,4 +1,4 @@
-package ezparkproject;
+package ezparkproject.MyAccountandPasswords;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -12,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import ezparkproject.Users;
+import ezparkproject.Login.LoginFunction;
 
 /* Author: Ashutosh Yadav */
 

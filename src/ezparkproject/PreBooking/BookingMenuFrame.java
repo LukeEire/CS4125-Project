@@ -1,6 +1,9 @@
-package ezparkproject;
+package ezparkproject.PreBooking;
 
-import javax.swing.*; 
+import javax.swing.*;
+
+import ezparkproject.Dashboard;
+
 import java.awt.event.*; 
 import java.awt.*; 
 

@@ -1,7 +1,9 @@
-package ezparkproject;
+package ezparkproject.PaymentAndPenalties;
 
 import java.sql.Connection;
 import java.sql.Date;
+
+import ezparkproject.Database.Database;
 
 public class TicketSystem 
 {

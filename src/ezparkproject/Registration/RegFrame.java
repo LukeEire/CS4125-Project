@@ -1,6 +1,10 @@
-package ezparkproject;
+package ezparkproject.Registration;
 
-import javax.swing.*; 
+import javax.swing.*;
+
+import ezparkproject.Login.LoginFunction;
+import ezparkproject.MyAccountandPasswords.TextHint;
+
 import java.awt.event.*; 
 import java.awt.*; 
 import	java.sql.*;

@@ -1,6 +1,11 @@
-package ezparkproject;
+package ezparkproject.Admin;
 
-import javax.swing.*; 
+import javax.swing.*;
+
+import ezparkproject.Users;
+import ezparkproject.Database.Database;
+import ezparkproject.Login.LoginFunction;
+
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.ResultSet;

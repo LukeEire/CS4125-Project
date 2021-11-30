@@ -1,6 +1,14 @@
-package ezparkproject;
+package ezparkproject.MyAccountandPasswords;
 
-import javax.swing.*; 
+import javax.swing.*;
+
+import ezparkproject.Dashboard;
+import ezparkproject.Main;
+import ezparkproject.Users;
+import ezparkproject.Database.Database;
+import ezparkproject.PreBooking.ChangeBookingFrame;
+import ezparkproject.PreBooking.MakeBookingFrame;
+
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.awt.*; 

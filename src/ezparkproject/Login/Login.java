@@ -1,4 +1,4 @@
-package ezparkproject;
+package ezparkproject.Login;
 
 import javax.swing.JFrame;
 

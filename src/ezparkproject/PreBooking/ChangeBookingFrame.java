@@ -1,11 +1,23 @@
-package ezparkproject;
+package ezparkproject.PreBooking;
 
-import javax.swing.*; 
-import java.awt.event.*; 
-import java.awt.*; 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
-public class MakeBookingFrame implements ActionListener{
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
+import ezparkproject.Reservation;
+
+public class ChangeBookingFrame implements ActionListener{
 	BookingBackend Backend = new BookingBackend();
 	
 	String[] parkingLots = { "Lot A", "Lot B", "Lot C", "Lot D" };
@@ -17,7 +29,7 @@ public class MakeBookingFrame implements ActionListener{
 	
 	/* Labels */
 	
-	//JLabel regLabel = new JLabel("Registration");
+	JLabel bookingIDLabel = new JLabel("Booking ID");
 	JLabel lotLabel = new JLabel("Parking Lot");
 	JLabel dateLabel = new JLabel("Date of Booking");
 	JLabel timeLabel = new JLabel("Time of Booking");
@@ -26,18 +38,18 @@ public class MakeBookingFrame implements ActionListener{
 	
 	/* Text fields for labels */
 	
+	JTextField bookingIDField = new JTextField();
 	JComboBox<String> lotComboBox = new JComboBox<String>(parkingLots);
 	JComboBox<String> timeComboBox = new JComboBox<String>(hours);
 	JTextField dateField = new JTextField();
 	JComboBox<String> durationComboBox = new JComboBox<String>(duration);
 	
 	
-	
 	/* JCheckbox for accessibility and EV status */
 	
-	JCheckBox EVCheckBox = new JCheckBox("Required?");
-	int electricCheckBoxVal;
+	JCheckBox EVCheckBox = new JCheckBox("Electric Vehicle?");
 	
+	int electricCheckBoxVal;
 	
 	public void CheckBox_Booking()
 	{
@@ -53,13 +65,15 @@ public class MakeBookingFrame implements ActionListener{
 	/* End of CheckBox function */
 	
 	
+	
 	/* Buttons */
 	
-	JButton reserveButton = new JButton("Reserve");
-	JButton resetButton = new JButton("Reset");
+	
+	JButton updateButton = new JButton("Update");
+	JButton loadButton = new JButton("Load");
 	JButton cancelButton = new JButton("Cancel");
 
-	MakeBookingFrame() {
+	ChangeBookingFrame() {
 
 		createWindow();
 		setLocationAndSize();
@@ -73,7 +87,7 @@ public class MakeBookingFrame implements ActionListener{
 	public void createWindow() {
 
 		frame = new JFrame();
-		frame.setTitle("Reservations");
+		frame.setTitle("Change Booking");
 		frame.setBounds(40, 40, 400, 700);
 		frame.getContentPane().setBackground(Color.white);
 		frame.getContentPane().setLayout(null);
@@ -86,8 +100,8 @@ public class MakeBookingFrame implements ActionListener{
 		
 		/* Label Bounds */
 
-        //regLabel.setBounds(20, 70, 80, 70);
-        lotLabel.setBounds(20, 70, 80, 70);
+		bookingIDLabel.setBounds(20, 20, 40, 70);
+		lotLabel.setBounds(20, 70, 80, 70);
         dateLabel.setBounds(20, 130, 140, 70);
         timeLabel.setBounds(20, 180, 100, 70);
         durationLabel.setBounds(20, 230, 100, 70);
@@ -95,7 +109,7 @@ public class MakeBookingFrame implements ActionListener{
         
         /* Text fields and drop downs bounds */
         
-        //regField.setBounds(180, 93, 165, 23);
+        bookingIDField.setBounds(180, 43, 165, 23);
         lotComboBox.setBounds(180, 93, 165, 23);
         dateField.setBounds(180, 150, 165, 23);
         timeComboBox.setBounds(180, 200, 165, 23);
@@ -104,8 +118,8 @@ public class MakeBookingFrame implements ActionListener{
         
         /* Button Bounds */
         
-        reserveButton.setBounds(25, 550, 100, 35);
-        resetButton.setBounds(137, 550, 100, 35);
+        updateButton.setBounds(25, 550, 100, 35);
+        loadButton.setBounds(137, 550, 100, 35);
         cancelButton.setBounds(250, 550, 100, 35);
 	}
 
@@ -113,6 +127,7 @@ public class MakeBookingFrame implements ActionListener{
 		
 		/* Labels */
 
+		frame.add(bookingIDLabel);
 		frame.add(lotLabel);
 		frame.add(dateLabel);
 		frame.add(timeLabel);
@@ -121,6 +136,7 @@ public class MakeBookingFrame implements ActionListener{
 		
 		/* Text fields and drop downs */
 		
+		frame.add(bookingIDField);
 		frame.add(dateField);
 		frame.add(timeComboBox);
 		frame.add(lotComboBox);
@@ -129,8 +145,8 @@ public class MakeBookingFrame implements ActionListener{
 		
 		/* Buttons */
 		
-		frame.add(reserveButton);
-		frame.add(resetButton);
+		frame.add(updateButton);
+		frame.add(loadButton);
 		frame.add(cancelButton);
 	}
 	
@@ -138,44 +154,46 @@ public class MakeBookingFrame implements ActionListener{
 
 	public void actionEvent() {
 
-		reserveButton.addActionListener(this);
-		resetButton.addActionListener(this);
+		updateButton.addActionListener(this);
+		loadButton.addActionListener(this);
 		cancelButton.addActionListener(this);
 	}
+	
 
+	@SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent e) {
 
-		/* Create Database before using */
+		if (e.getSource() == updateButton) {
 
-		if (e.getSource() == reserveButton) {
-
-			String reg = Main.currentUser.getReg();
-			Long hours = Long.parseLong(durationComboBox.getSelectedItem().toString());
-			/*String lastName = lastNameField.getText();				
-			String password = passwordField.getText();
-			String status = uniComboBox.getSelectedItem().toString();
-			int electric = electricCheckBoxVal;
-			int accessibility = disabledCheckBoxVal;
-			String dob = dobField.getText();
-			String reg = plate.getText();*/
-			String selectedLot = lotComboBox.getSelectedItem().toString();
-			
-			CheckBox_Booking();
-			
-			
-			Reservation res = new Reservation(Main.currentUser, selectedLot, electricCheckBoxVal, reg, hours);
-			
-			Backend.createBooking(res);
 			
 		}	
 			
-		if (e.getSource() == resetButton) {
+		if (e.getSource() == loadButton) {
+			
+			Reservation res = new Reservation();
+			int resID = Integer.parseInt(bookingIDField.getText());
+			res = Backend.loadBooking(resID);
+			
+			/*Date temp = res.getcheckInDate();
+			DateFormat dateFormat = new SimpleDateFormat("yyy-mm-dd");
+			String date = dateFormat.format(temp);*/
+			
+			
+			
+			
 
-			//regField.setText("");
-			dateField.setText("");
-			timeComboBox.setSelectedItem("09:00");	
-			lotComboBox.setSelectedItem("Lot A");			
-			durationComboBox.setSelectedItem("1");	
+			//These needs backend function to grab data
+			lotComboBox.setSelectedItem(res.getLot());
+			//dateField.setText(date);
+			//userIDField.setText(Integer.toString(Main.currentUser.getID()));
+			timeComboBox.setSelectedItem("09:00");
+			durationComboBox.setSelectedItem("1");
+			
+			if (res.getChargingCheck() == 1) {
+				EVCheckBox.setSelected(true);
+			}else {
+				EVCheckBox.setSelected(false);
+			}
 		}
 
 		if (e.getSource() == cancelButton) {
