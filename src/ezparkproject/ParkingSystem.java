@@ -1,10 +1,13 @@
 package ezparkproject;
 
+import java.sql.Connection;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ParkingSystem {
+	
+	Database db;
+	Connection con;
 
 	static ParkingFrame mainFrame;
 	
@@ -12,9 +15,8 @@ public class ParkingSystem {
 	ArrayList<TicketSystem> ticketList = null;
 	ParkingSpace slot = null;
 	
-	private long startTimeMilliseconds;
 	private long startTime = 0;
-	private long endTimeMilliseconds;
+	private long endTime;
 	private String durationParked;
 	private Date date;
 	
@@ -38,9 +40,9 @@ public class ParkingSystem {
 		
 		if (slot != null)
 		{
-			startTimeMilliseconds = System.currentTimeMillis();
+			startTime = System.currentTimeMillis();
 						
-			TicketSystem ticketSystem = new TicketSystem(slot.getSlotNumber(), startTimeMilliseconds, date);
+			TicketSystem ticketSystem = new TicketSystem(slot.getSlotNumber(), startTime, date);
 			ticketList.add(ticketSystem); // save the ticket in ticketList
 			
 			slot.setAvailability(false); // this slot is no more available
@@ -68,7 +70,7 @@ public class ParkingSystem {
 	public void captureEndTime()
 	{
 		// capture end time
-		endTimeMilliseconds = System.currentTimeMillis();
+		endTime = System.currentTimeMillis();
 	}
 	
 	
@@ -89,12 +91,12 @@ public class ParkingSystem {
 		}
 		return isValid;
 	}
-	
+
 
 
 	public void timeParked()
 	{
-		long durationMilliSeconds = endTimeMilliseconds - startTime; // total time the card was parked in the space
+		long durationMilliSeconds = endTime - startTime; // total time the card was parked in the space
 		durationParked = convertTimeFormat(durationMilliSeconds);
 		String [] time = durationParked.split(":");
 		int hours = Integer.parseInt(time[0]);
@@ -147,13 +149,13 @@ public class ParkingSystem {
 	public String convertTimeFormat(long milliSeconds)
 	{
 	    long totalSeconds = milliSeconds / 1000;
-	    long currentSecond = totalSeconds % 60;
+	    long Seconds = totalSeconds % 60;
 	    long totalMinutes = totalSeconds / 60;
-		long currentMinute = totalMinutes % 60;
+		long Minutes = totalMinutes % 60;
 	    long totalHours = totalMinutes / 60;
-	    long currentHour = totalHours % 24;
+	    long Hours = totalHours % 24;
 		
-	    return currentHour + ":" + currentMinute + ":" + currentSecond;
+	    return Hours + ":" + Minutes + ":" + Seconds;
 	
 	}
 	
