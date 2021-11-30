@@ -879,7 +879,7 @@ public class Database {
 
 				int elecInt = Integer.parseInt(elec);
 				// Creating new reservation obj without adding it to the DB (false)
-				Reservation collectedReservation = new Reservation(false, user, rs.getString("lot"), elecInt, reg, hours, mins);
+				Reservation collectedReservation = new Reservation(false, user, rs.getString("lot"), elecInt, reg, hours);
 				// Storing it in a reservations arraylist
 				reservations.add(collectedReservation);
 			}
@@ -948,7 +948,7 @@ public class Database {
 		int i = 1;
 		try {
 
-			String query = "SELECT * FROM transactions ";
+			String query = "SELECT * FROM " + transactions_db;
 	        PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 

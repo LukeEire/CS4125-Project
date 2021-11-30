@@ -22,6 +22,8 @@ public class Reservation {
     //int duration; //in minutes
     Date checkInDate;
     Date checkOutDate;
+    
+    Database db;
 
     private String reg;
     private LocalDateTime reservationTime;
@@ -30,7 +32,6 @@ public class Reservation {
     private int accessibility;
     private int chargingSpace;
     private int id;
-    Database db = new Database();
 
     // public Reservation(Users user, int duration) {
     //     this.user = user;
@@ -43,8 +44,9 @@ public class Reservation {
 
     // Ayoub - new Reservation constructor
     // Adds reservation to DB if boolean addReservationToDb is set to TRUE
-    public Reservation(boolean addReservationToDb, Users user, String lot, int electricSpace, String reg, long hours) {
+    public Reservation(boolean addReservationToDb, Users user, String lot, int electricSpace, String reg, long hours) throws SQLException{
 
+        db = new Database();
         this.user = user;
         this.id = user.id;
         this.lot = lot;
