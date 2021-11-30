@@ -135,7 +135,7 @@ public class Database {
 							" ban_status TINYINT(1), " +
 							" banTime DATE, " +
 							" accessibility TINYINT(1), " +
-							" created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, " +
+							" created_on DATE NOT NULL, " +
 							" dob DATE, " +
 							" reg VARCHAR(255) " +
 							" );";
@@ -160,7 +160,7 @@ public class Database {
 							" reservationsID int(32) NOT NULL, " +
 							" lot varchar(255) NOT NULL, " +
 							" amount double NOT NULL, " +
-							" created_on DATE, " +
+							" created_on TIMESTAMP, " +
 							" FOREIGN KEY (userID) REFERENCES Users(id)" +
 							" ON UPDATE CASCADE " +
 							" ON DELETE CASCADE, " +
@@ -529,7 +529,8 @@ public class Database {
     	
     	try {
     		
-    		String query = "UPDATE " + users_db + " SET ban_status = 0 WHERE id = \""+id+"\"";
+			String query = "UPDATE " + users_db + " SET ban_status = 1, banTime = " + "'" + null + "'" + " WHERE id  = \""+id+"\"";
+
             PreparedStatement p = con.prepareStatement(query);
             int unBan = p.executeUpdate(query);
 
@@ -635,13 +636,13 @@ public class Database {
 
         try {
             
-			String query = "SELECT penalties FROM " + users_db + " WHERE id = ?";
+			String query = "SELECT penalties FROM " + users_db + " WHERE id = " + id;
 			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery();
 
 			while (rs.next()){
 				// set penalties number from db
-				penalties += rs.getInt("penalties");
+				penalties = rs.getInt("penalties");
 				System.out.format("Penalties: " + penalties);
 				
 			}
@@ -658,25 +659,22 @@ public class Database {
 	// Pre-Condition - id passed must exist in the DB
 	// Post-Condition - Adds penalty point to passed in user
 	public void setPenaltyPoints(int id) {
-		
-		// Initialise penalty variable
-		int penalties = 0;
 
         try {
-            
-			String query = "SELECT penalties FROM " + users_db + " WHERE id = ?";
+
+			int penalties = getPenaltyPoints(id);
+			int penalty = penalties + 1;
+			String query = "UPDATE " + users_db + " SET penalties = " + penalty + " WHERE id  = \""+id+"\"";
 			PreparedStatement p = con.prepareStatement(query);
-			ResultSet rs = p.executeQuery();
+			int penaltySet = p.executeUpdate(query);
 
-			while (rs.next()){
-				// set penalties number from db
-				penalties += rs.getInt("penalties");
-				System.out.format("Penalties: " + penalties);
-				
-			}
-
-			p.setInt(penalties+1, id);
-			p.close();
+			if(penaltySet == 1){
+				System.out.println("Penalty applied to User " + id + " Successfully.");
+				System.out.println("User penalty count: " + getPenaltyPoints(id));
+	        }
+	        else{
+	            System.out.println("FAIL: Penalty Points addtion unsuccessfull");
+	        }
               
         } catch (SQLException e) {
             
@@ -762,8 +760,8 @@ public class Database {
 			System.out.println("Reservation expires: " + expiryDateTime.format(simpleDateFormat));
 
 			//Converting ca & expiryDateTime to sql date format
-			Date created_on = Date.valueOf(created_at_LocalDateTime.toLocalDate());
-			Date expiry = Date.valueOf(expiryDateTime.toLocalDate());
+			Timestamp created_on = Timestamp.valueOf(created_at_LocalDateTime);
+			Timestamp expiry = Timestamp.valueOf(expiryDateTime);
 
 			// INSERTING data to DB
 			if(id > 0 && reg!=null && lot!=null && created_on!=null && expiry!=null){
@@ -776,8 +774,8 @@ public class Database {
 				p.setString(3, lot);
 				p.setInt(4, electric);
 				p.setInt(5, accessibility);
-				p.setDate(6, created_on);
-				p.setDate(7, expiry);
+				p.setTimestamp(6, created_on);
+				p.setTimestamp(7, expiry);
 				
 	            int insert = p.executeUpdate();
 	            if(insert == 1)
@@ -816,8 +814,8 @@ public class Database {
 				System.out.println("Registration Plate: " + rs.getString("reg"));
 				System.out.println("Electric Car? [Y/N]: " + rs.getString("electric"));
 				System.out.println("Assistance Required? [Y/N]: " + rs.getString("accessibility"));
-				System.out.println("Reservation Date: " + rs.getDate("created_on"));
-				System.out.println("Reserved until: " + rs.getDate("expiry"));
+				System.out.println("Reservation Date: " + rs.getTimestamp("created_on"));
+				System.out.println("Reserved until: " + rs.getTimestamp("expiry"));
 				System.out.println("-----------------------------END-------------------------------");
 				i++;
 				
@@ -856,8 +854,8 @@ public class Database {
 				String elec = rs.getString("electric");
 				System.out.println("Electric Car? [Y/N]: " + elec);
 				System.out.println("Assistance Required? [Y/N]: " + rs.getString("accessibility"));
-				System.out.println("Reservation Data: " + rs.getDate("created_on"));
-				System.out.println("Reserved until: " + rs.getDate("expiry"));
+				System.out.println("Reservation Data: " + rs.getTimestamp("created_on"));
+				System.out.println("Reserved until: " + rs.getTimestamp("expiry"));
 				System.out.println("-----------------------------END-------------------------------");
 				i++;
 				
@@ -904,9 +902,9 @@ public class Database {
 
 		try {
 			// Creating variables for created at attribute
-			LocalDate ca = LocalDate.now();
+			LocalDateTime ca = LocalDateTime.now();
 			//Converting ca & expiryDateTime to sql date format
-			Date created_on = Date.valueOf(ca);
+			Timestamp created_on = Timestamp.valueOf(ca);
 
 			// INSERTING data to DB
 			if(userID > 0 && reservationsID>0 && amount>0 && created_on!=null ){
@@ -918,7 +916,7 @@ public class Database {
 				p.setInt(2, reservationsID);
 				p.setString(3, lot);
 				p.setDouble(4, amount);
-				p.setDate(5, created_on);
+				p.setTimestamp(5, created_on);
 				
 	            int insert = p.executeUpdate();
 	            if(insert == 1)
@@ -961,7 +959,7 @@ public class Database {
 				System.out.println("Reservation ID: " + rs.getInt("reservationsID"));
 				System.out.println("Lot: " + rs.getString("lot"));
 				System.out.println("Amount: €" + rs.getFloat("amount"));
-				System.out.println("Created on: " + rs.getDate("created_on"));
+				System.out.println("Created on: " + rs.getTimestamp("created_on"));
 
 				System.out.println("-----------------------------END-------------------------------");
 				i++;
@@ -993,7 +991,7 @@ public class Database {
 				System.out.println("Reservation ID: " + rs.getInt("reservationsID"));
 				System.out.println("Lot: " + rs.getString("lot"));
 				System.out.println("Amount: €" + rs.getInt("amount"));
-				System.out.println("Created on: " + rs.getDate("created_on"));
+				System.out.println("Created on: " + rs.getTimestamp("created_on"));
 
 				System.out.println("-----------------------------END-------------------------------");
 				i++;
