@@ -4,15 +4,9 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*; 
 
-public class MyAccountFrame implements ActionListener{
+public class MyAccountFrame extends Users implements ActionListener {
 	
-	String ID;
-	String firstName;
-	String lastName;
-	String password;
-	String status;
-	String dob;
-	String reg;
+	
 	
 	
 	JFrame frame;
@@ -86,14 +80,26 @@ public class MyAccountFrame implements ActionListener{
 	
 	public void getUserDetails() {
 		
-		firstNameField.setText("user first name");
-	    universityIDField.setText("user ID");
+		int id = this.getID();
+		String firstName = this.getFirstName();
+		String lastName = this.getLastName();
+		String password;
+		String status = this.getStatus();
+		String dob = this.getsDOB();
+		String reg = this.getReg();
+		
+		// test to see what each string returns
+		
+		System.out.println(firstName);
+		
+		firstNameField.setText(firstName);
+	    universityIDField.setText("user id");
 	    dobField.setText("");
-	    lastNameField.setText("user last name");	
+	    lastNameField.setText(lastName);	
 	    passwordField.setText("");
-	    plate.setText("user reg");
-	    statusField.setText("user status");
-	    dobField.setText("user DOB in yyyy-mm-dd");
+	    plate.setText(reg);
+	    statusField.setText(status);
+	    dobField.setText(dob);
 		
 			   
 	}
