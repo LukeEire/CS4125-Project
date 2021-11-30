@@ -197,9 +197,9 @@ public class ChangeBookingFrame implements ActionListener{
 			String reg = plate.getText();*/
 			
 			
-			Reservation res = new Reservation(false, null, reg, hours, 0);
+			//Reservation res = new Reservation(, null, reg, hours, 0);
 			//Can change to directly Update Where ID = ID etc
-			Backend.createBooking(res);
+			//Backend.createBooking(res);
 		}	
 			
 		if (e.getSource() == loadButton) {

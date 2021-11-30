@@ -2,6 +2,7 @@ package ezparkproject;
 
 import javax.swing.*; 
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.awt.*; 
 
 public class MyAccountFrame extends Users implements ActionListener {
@@ -34,6 +35,8 @@ public class MyAccountFrame extends Users implements ActionListener {
 	JLabel dobLabel = new JLabel("Date of Birth");
 	JLabel accessibilityLabel = new JLabel("Disabled Permit");
 	JLabel plateLabel = new JLabel("Car Reg");
+	JLabel welcomeLabel = new JLabel("Welcome");
+	JLabel wUserLabel = new JLabel ("" + Main.currentUser.getFirstName());
 	
 	
 	/* Text Fields */
@@ -80,20 +83,20 @@ public class MyAccountFrame extends Users implements ActionListener {
 	
 	public void getUserDetails() {
 		
-		int id = this.getID();
-		String firstName = this.getFirstName();
-		String lastName = this.getLastName();
+		int id = Main.currentUser.getID();
+		String firstName = Main.currentUser.getFirstName();
+		String lastName = Main.currentUser.getLastName();
 		String password;
-		String status = this.getStatus();
-		String dob = this.getsDOB();
-		String reg = this.getReg();
+		String status = Main.currentUser.getStatus();
+		String dob = Main.currentUser.getsDOB();
+		String reg = Main.currentUser.getReg();
 		
 		// test to see what each string returns
 		
-		System.out.println(firstName);
+		System.out.println(firstName);		
 		
 		firstNameField.setText(firstName);
-	    universityIDField.setText("user id");
+	    universityIDField.setText("" +id);
 	    dobField.setText("");
 	    lastNameField.setText(lastName);	
 	    passwordField.setText("");
@@ -119,6 +122,12 @@ public class MyAccountFrame extends Users implements ActionListener {
         university_statusLabel.setBounds(600, 280, 100, 70);
         dobLabel.setBounds(600, 330, 100, 70);
         plateLabel.setBounds(600, 380, 100, 70);
+        
+        welcomeLabel.setBounds(120, 20, 100, 70);
+        welcomeLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        
+        wUserLabel.setBounds(210, 20, 100, 70);
+        wUserLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
         
      
         
@@ -201,6 +210,8 @@ public class MyAccountFrame extends Users implements ActionListener {
 		frame.add(dobLabel);
 		frame.add(plateLabel);
 		frame.add(yourDetails);
+		frame.add(welcomeLabel);
+		frame.add(wUserLabel);
 		
 		/* Text fields */
 		
@@ -258,6 +269,22 @@ public class MyAccountFrame extends Users implements ActionListener {
 			frame.dispose();
 			Dashboard frame = new Dashboard();
             frame.setVisible(true);
+	        
+		}
+		
+		if (e.getSource() == updateDetailsButton) {
+			
+			try {
+				Database db = new Database();
+				
+				db.changePassword(id, password);
+				
+				JOptionPane.showMessageDialog(updateDetailsButton, "You have successfully changed your password");
+				
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	        
 		}
 		

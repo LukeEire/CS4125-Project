@@ -42,11 +42,15 @@ public class Reservation {
     //     //checkOutDate = checkInDate.plusMinutes(duration);
     // }
 
+    
+    public Reservation() {
+    	
+    }
     // Ayoub - new Reservation constructor
     // Adds reservation to DB if boolean addReservationToDb is set to TRUE
-    public Reservation(boolean addReservationToDb, Users user, String lot, int electricSpace, String reg, long hours) throws SQLException{
+    public Reservation(Users user, String lot, int electricSpace, String reg, long hours) {
 
-        db = new Database();
+        //db = new Database();
         this.user = user;
         this.id = user.id;
         this.lot = lot;
@@ -59,14 +63,14 @@ public class Reservation {
 
         System.out.println("Testing time: Duration = " + duration );
 
-        if(addReservationToDb){
+        /*if(addReservationToDb){
             try {
                 db.reserve(id, reg, lot, user.electric, accessibility, hours);
             } catch (SQLException e) {
                 System.out.println("Error Reserving a spot through the reservatins class constructor: " + e.getMessage() );
                 e.printStackTrace();
             }
-        }
+        }*/
         
     }
 
@@ -100,10 +104,6 @@ public class Reservation {
     
     public Long getHours() {
     	return this.hours;
-    }
-    
-    public Long getMins() {
-    	return this.mins;
     }
     
     public int getChargingCheck() {

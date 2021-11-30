@@ -17,7 +17,7 @@ public class MakeBookingFrame implements ActionListener{
 	
 	/* Labels */
 	
-	JLabel regLabel = new JLabel("Registration");
+	//JLabel regLabel = new JLabel("Registration");
 	JLabel lotLabel = new JLabel("Parking Lot");
 	JLabel dateLabel = new JLabel("Date of Booking");
 	JLabel timeLabel = new JLabel("Time of Booking");
@@ -27,7 +27,7 @@ public class MakeBookingFrame implements ActionListener{
 	
 	/* Text fields for labels */
 	
-	JTextField regField = new JTextField();
+	//JTextField regField = new JTextField();
 	JComboBox<String> lotComboBox = new JComboBox<String>(parkingLots);
 	JComboBox<String> timeComboBox = new JComboBox<String>(hours);
 	JTextField dateField = new JTextField();
@@ -88,22 +88,21 @@ public class MakeBookingFrame implements ActionListener{
 		
 		/* Label Bounds */
 
-        regLabel.setBounds(20, 70, 80, 70);
-        lotLabel.setBounds(20, 130, 80, 70);
-        dateLabel.setBounds(20, 180, 140, 70);
-        //emailLabel.setBounds(20, 225, 100, 70);
-        timeLabel.setBounds(20, 225, 100, 70);
-        durationLabel.setBounds(20, 280, 100, 70);
-        chargingLabel.setBounds(20, 330, 100, 70);
+        //regLabel.setBounds(20, 70, 80, 70);
+        lotLabel.setBounds(20, 70, 80, 70);
+        dateLabel.setBounds(20, 130, 140, 70);
+        timeLabel.setBounds(20, 180, 100, 70);
+        durationLabel.setBounds(20, 230, 100, 70);
+        chargingLabel.setBounds(20, 280, 100, 70);
         
         /* Text fields and drop downs bounds */
         
-        regField.setBounds(180, 93, 165, 23);
-        dateField.setBounds(180, 200, 165, 23);
-        lotComboBox.setBounds(180, 150, 165, 23);
-        timeComboBox.setBounds(180, 250, 165, 23);
-        durationComboBox.setBounds(180, 300, 165, 23);
-        EVCheckBox.setBounds(180, 350, 165, 23);
+        //regField.setBounds(180, 93, 165, 23);
+        lotComboBox.setBounds(180, 93, 165, 23);
+        dateField.setBounds(180, 150, 165, 23);
+        timeComboBox.setBounds(180, 200, 165, 23);
+        durationComboBox.setBounds(180, 250, 165, 23);
+        EVCheckBox.setBounds(180, 300, 165, 23);
         
         /* Button Bounds */
         
@@ -116,7 +115,6 @@ public class MakeBookingFrame implements ActionListener{
 		
 		/* Labels */
 
-		frame.add(regLabel);
 		frame.add(lotLabel);
 		frame.add(dateLabel);
 		frame.add(timeLabel);
@@ -125,7 +123,6 @@ public class MakeBookingFrame implements ActionListener{
 		
 		/* Text fields and drop downs */
 		
-		frame.add(regField);
 		frame.add(dateField);
 		frame.add(timeComboBox);
 		frame.add(lotComboBox);
@@ -154,7 +151,7 @@ public class MakeBookingFrame implements ActionListener{
 
 		if (e.getSource() == reserveButton) {
 
-			String reg = regField.getText();
+			String reg = Main.currentUser.getReg();
 			Long hours = Long.parseLong(durationComboBox.getSelectedItem().toString());
 			/*String lastName = lastNameField.getText();				
 			String password = passwordField.getText();
@@ -168,7 +165,7 @@ public class MakeBookingFrame implements ActionListener{
 			CheckBox_Booking();
 			
 			
-			Reservation res = new Reservation(false, Main.currentUser, selectedLot, electricCheckBoxVal, reg, hours, 0);
+			Reservation res = new Reservation(Main.currentUser, selectedLot, electricCheckBoxVal, reg, hours);
 			
 			Backend.createBooking(res);
 			
@@ -176,7 +173,7 @@ public class MakeBookingFrame implements ActionListener{
 			
 		if (e.getSource() == resetButton) {
 
-			regField.setText("");
+			//regField.setText("");
 			dateField.setText("");
 			timeComboBox.setSelectedItem("09:00");	
 			lotComboBox.setSelectedItem("Lot A");			

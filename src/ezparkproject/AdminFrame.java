@@ -15,8 +15,9 @@ public class AdminFrame implements ActionListener{
 	
 	int id;
 	ArrayList<Users> users;
-	
-
+	AdminBackend Backend = new AdminBackend();
+	//String usersData = Backend.fetchUserFunction();
+		
 	JFrame frame;
 	
 	/* Labels */
@@ -36,9 +37,13 @@ public class AdminFrame implements ActionListener{
 	JPanel reservationContainer = new JPanel();
 	JPanel transactionsContainer = new JPanel();
 	
-	JScrollPane userScrollPane = new JScrollPane(userContainer);
+	//JScrollPane userScrollPane = new JScrollPane(allUserList);
+
 	JScrollPane reservationScrollPane = new JScrollPane(reservationContainer);
 	JScrollPane transactionsScrollPane = new JScrollPane(transactionsContainer);
+	
+	
+    
 
 	
 	

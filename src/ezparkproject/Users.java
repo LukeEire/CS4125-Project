@@ -2,8 +2,6 @@ package ezparkproject;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-//import java.util.List;
 
 public class Users {
 	
@@ -19,9 +17,6 @@ public class Users {
 	String reg;
 	Database db;
 	Connection con;
-
-	//Car reg plates list for the user, relating methods below
-	ArrayList<String> plates = new ArrayList<String>();
 	
 	public Users() {
 		
@@ -39,12 +34,10 @@ public class Users {
 		this.accessibility = accessibility;
 		this.dob = sdob;
 		this.reg = reg;
-		plates.add(reg);
 		
 		if (addUserToDatabase) {
 
 			try {
-
 				Database db = new Database();
 				db.newUser(id, firstName, lastName, password, status, electric, accessibility, sdob, reg);
 	
@@ -150,51 +143,5 @@ public class Users {
 	public void updateEmail(String newEmail) {
 		this.email = newEmail;
 	}
-
-	//add reg to user reg list
-	public void addPlate(String reg){
-
-		plates.add(reg);
-		System.out.println("Added car reg: " + reg);
-		System.out.println("Your vehicle number plates: ");
-		System.out.println(plates);
-
-	}
-
-	//return list of reg plates for user
-	public ArrayList<String> getPlates(){
-
-		if (!plates.isEmpty()){
-		
-			return(plates);
-
-		}else {
-
-			System.out.println("No Reg plates found!");
-			return(plates);
-
-		}
-		
-	}
-
-	//default reg plate is set as the first plate in the list and will automtically be the default when booking a parking space
-	public void setDefaultPlate(String reg){
-		System.out.println("Current Primary Vehicle set to: " + plates.get(0));
-		plates.add(0, reg);
-		System.out.println("Primary Vehicle set to: " + reg);
-	}
-
-	//returns default reg number for user
-	public String getDefultPlate(){
-		System.out.println("Primary Vehicle is: " + plates.get(0));
-		return plates.get(0);
-	}
-
-	//deletes all reg numbers for the user
-	public void clearPlates(){
-		plates.clear();
-		System.out.println("All Plates deleted");
-	}
-	
 	
 }
