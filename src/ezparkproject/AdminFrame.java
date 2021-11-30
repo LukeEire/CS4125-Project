@@ -12,8 +12,9 @@ public class AdminFrame implements ActionListener{
 	
 	int id;
 	ArrayList<Users> users;
-	
-
+	AdminBackend Backend = new AdminBackend();
+	String usersData = Backend.fetchUserFunction();
+		
 	JFrame frame;
 	
 	/* Labels */
@@ -24,13 +25,20 @@ public class AdminFrame implements ActionListener{
 	
 	/* Scrollable Containers */
 	
+	JLabel allUserList = new JLabel("" + usersData);
+	
+	//JLabel reservationList = new JLabel("" + AdminBackend.fetchReservationFunction());
+	
 	JPanel userContainer = new JPanel();
 	JPanel reservationContainer = new JPanel();
 	JPanel transactionsContainer = new JPanel();
 	
-	JScrollPane userScrollPane = new JScrollPane(userContainer);
+	JScrollPane userScrollPane = new JScrollPane(allUserList);
+	
 	JScrollPane reservationScrollPane = new JScrollPane(reservationContainer);
 	JScrollPane transactionsScrollPane = new JScrollPane(transactionsContainer);
+	
+    
 
 	
 	
@@ -234,9 +242,9 @@ public class AdminFrame implements ActionListener{
 		}
 		
 		if (e.getSource() == loadUsersButton) {
-			ArrayList<Users> temp;
+			String temp;
 			try {
-				temp = AdminBackend.fetchUserFunction();
+				temp = Backend.fetchUserFunction();
 				
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
