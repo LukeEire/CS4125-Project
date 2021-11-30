@@ -27,11 +27,10 @@ public class Reservation {
     private LocalDateTime reservationTime;
     private LocalDateTime duration;
     private Long hours;
-    private Long mins;
     private int accessibility;
     private int chargingSpace;
     private int id;
-    //Database db = new Database();
+    Database db = new Database();
 
     // public Reservation(Users user, int duration) {
     //     this.user = user;
@@ -44,7 +43,7 @@ public class Reservation {
 
     // Ayoub - new Reservation constructor
     // Adds reservation to DB if boolean addReservationToDb is set to TRUE
-    public Reservation(boolean addReservationToDb, Users user, String lot, int electricSpace, String reg, long hours, long mins) {
+    public Reservation(boolean addReservationToDb, Users user, String lot, int electricSpace, String reg, long hours) {
 
         this.user = user;
         this.id = user.id;
@@ -53,22 +52,19 @@ public class Reservation {
         this.chargingSpace = electricSpace;
         this.reg = reg;
         this.reservationTime = LocalDateTime.now();
-        this.duration = reservationTime;
-        this.duration = this.duration.plus(Duration.ofHours(hours));
-        this.duration = this.duration.plus(Duration.ofMinutes(mins));
+        this.duration = reservationTime.plus(Duration.ofHours(hours));
         this.hours = hours;
-        this.mins = mins;
 
         System.out.println("Testing time: Duration = " + duration );
 
-        /*if(addReservationToDb){
+        if(addReservationToDb){
             try {
-                db.reserve(id, reg, lot, electric, accessibility, hours, mins);
+                db.reserve(id, reg, lot, user.electric, accessibility, hours);
             } catch (SQLException e) {
                 System.out.println("Error Reserving a spot through the reservatins class constructor: " + e.getMessage() );
                 e.printStackTrace();
             }
-        }*/
+        }
         
     }
 

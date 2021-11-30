@@ -4,6 +4,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import java.util.random.RandomGenerator;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
@@ -83,10 +86,10 @@ public class DatabaseTesting
 		//How to reserve a space using DB class, can also be done using Registration class
 		System.out.println("Test 10");
 		System.out.println();
-		db.reserve(18266401, "CALIFORNIA", "Lot A", 1, 0, 1, 1);
-		db.reserve(18266401, "NEWYORK", "Lot B", 1, 0, 1, 1);
-		db.reserve(18266401, "CHICAGO", "Lot A", 1, 0, 1, 1);
-		db.reserve(18266401, "WASHINGTON", "Lot A", 1, 0, 1, 1);
+		db.reserve(18266401, "CALIFORNIA", "Lot A", 1, 0, 1);
+		db.reserve(18266401, "NEWYORK", "Lot B", 1, 0, 2);
+		db.reserve(18266401, "CHICAGO", "Lot A", 1, 0, 2);
+		db.reserve(18266401, "WASHINGTON", "Lot A", 1, 0, 1);
 		System.out.println();  
 
 		//How to get reservation details
@@ -94,7 +97,7 @@ public class DatabaseTesting
 		System.out.println();
 		db.fetchReservationData();
 		Users ayoub = new Users(true, 18266406, "Jack", "H", "123456789", null, "Student", 1, 0, "1999-12-15", "PENN");
-		db.reserve(ayoub.id, ayoub.getDefultPlate(), "LOT A", 1, 0, 2, 15);
+		db.reserve(ayoub.id, ayoub.getDefultPlate(), "LOT A", 1, 0, 2);
 		db.fetchUserReservation(ayoub);
 		
 		//Transaction
@@ -121,9 +124,16 @@ public class DatabaseTesting
 			lots.add("Lot D");
 		for(int i = 0; i<users.size(); i++){
 			int random_int = (int)Math.floor(Math.random()*(3-0+1)+0);
-			Reservation reservation = new Reservation(true, users.get(i), lots.get(random_int), random_int, 30);
+			// Reservation reservation = new Reservation(true, users.get(i), lots.get(random_int), random_int, 30);
+			Reservation reservation = new Reservation(true, users.get(i), lots.get(random_int), users.get(i).electric, users.get(i).getDefultPlate(), 2);
 			db.addTransaction(users.get(i).id, i, lots.get(i), random_int+.35);
 		}
+
+		System.out.println();  
+		System.out.println("Test 15");
+		System.out.println();
+		LocalDateTime bookingTime = LocalDateTime.of(2021, Month.DECEMBER, 10, 13, 30, 40);
+		db.preBook(ayoub.id, ayoub.getDefultPlate(), lots.get(0), ayoub.electric, ayoub.accessibility, bookingTime, 2);
 		
 		System.out.println();  
 		System.out.println("Testing Complete.");
