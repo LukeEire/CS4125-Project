@@ -38,7 +38,6 @@ public class Users {
 		if (addUserToDatabase) {
 
 			try {
-
 				Database db = new Database();
 				db.newUser(id, firstName, lastName, password, status, electric, accessibility, sdob, reg);
 	
