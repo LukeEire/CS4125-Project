@@ -856,7 +856,7 @@ public class Database {
 			
 	}
 
-	//Pre-condition: Reservation with id must exist in DB
+		//Pre-condition: Reservation with id must exist in DB
 		//Post-condition: Reservation object is returned 
 		public void fetchSingleReservation(int id) throws Exception{
 			try {
@@ -864,19 +864,15 @@ public class Database {
 				String query = "select * from " + reservations_db + " where id = " + id;
 				PreparedStatement p = con.prepareStatement(query);
 				ResultSet rs = p.executeQuery(query);
-				int i = 1;
+				
 				while(rs.next()){
-
-					System.out.println("Reservations ID: " + rs.getInt("id"));
-					System.out.println("User ID: " + rs.getInt("userID"));
-					System.out.println("Registration Plate: " + rs.getString("reg"));
-					System.out.println("Electric Car? [Y/N]: " + rs.getString("electric"));
-					System.out.println("Assistance Required? [Y/N]: " + rs.getString("accessibility"));
-					System.out.println("Reservation Date: " + rs.getTimestamp("created_on"));
-					System.out.println("Reserved until: " + rs.getTimestamp("expiry"));
-					System.out.println("-----------------------------END-------------------------------");
-					i++;
+					res.setUser(Main.currentUser);
+					res.setLot(rs.getString("lot"));
+					res.setCharging( Integer.valueOf(rs.getString("electric")));
+					res.setReg(rs.getString("reg"));
 					
+					Long diff = (rs.getTimestamp("created_on").getTime()) - (rs.getTimestamp("expiry").getTime());
+					res.setHours(diff / (60 * 60 * 1000));
 				}
 				
 			} catch (Exception e) {
