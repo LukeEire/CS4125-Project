@@ -865,6 +865,7 @@ public class Database {
 				PreparedStatement p = con.prepareStatement(query);
 				ResultSet rs = p.executeQuery(query);
 				
+				
 				while(rs.next()){
 					res.setUser(Main.currentUser);
 					res.setLot(rs.getString("lot"));
