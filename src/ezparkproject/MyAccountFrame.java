@@ -2,6 +2,7 @@ package ezparkproject;
 
 import javax.swing.*; 
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.awt.*; 
 
 public class MyAccountFrame extends Users implements ActionListener {
@@ -258,6 +259,22 @@ public class MyAccountFrame extends Users implements ActionListener {
 			frame.dispose();
 			Dashboard frame = new Dashboard();
             frame.setVisible(true);
+	        
+		}
+		
+		if (e.getSource() == updateDetailsButton) {
+			
+			try {
+				Database db = new Database();
+				
+				db.changePassword(id, password);
+				
+				JOptionPane.showMessageDialog(updateDetailsButton, "You have successfully changed your password");
+				
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	        
 		}
 		
