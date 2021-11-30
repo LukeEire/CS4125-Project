@@ -858,7 +858,7 @@ public class Database {
 
 		//Pre-condition: Reservation with id must exist in DB
 		//Post-condition: Reservation object is returned 
-		public void fetchSingleReservation(int id) throws Exception{
+		public Reservation fetchSingleReservation(int id) throws Exception{
 			try {
 				Reservation res = new Reservation();
 				String query = "select * from " + reservations_db + " where id = " + id;
@@ -875,11 +875,12 @@ public class Database {
 					Long diff = (rs.getTimestamp("created_on").getTime()) - (rs.getTimestamp("expiry").getTime());
 					res.setHours(diff / (60 * 60 * 1000));
 				}
+				return res;
 				
 			} catch (Exception e) {
 				
 				System.out.println("Error fetching data: " + e.getMessage());
-				
+				return null;
 			}
 				
 		}
