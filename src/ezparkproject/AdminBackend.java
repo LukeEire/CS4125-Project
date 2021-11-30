@@ -110,11 +110,15 @@ public class AdminBackend {
 			
 			users = db.fetchData();
 			String output = "";
+			String newlineusingGetProp = System.getProperty("line.separator");
 			
 			
-			for (int i =0 ; i < users.size(); i++){
-				output = output + "--------------------------User: "+ users.get(i).getID()+ "------------------------------" + System.lineSeparator();
-				output = output + "User ID: " + users.get(i).getID() +System.lineSeparator();
+			for (int i =0 ; i < users.size(); i++){	
+				
+		
+				output = output + "User ID" + users.get(i).getID() +"\r\n"+users.get(i).getFirstName();
+				output = output + "First Name" + users.get(i).getFirstName();
+				output = output + "Last Name" + users.get(i).getLastName();
 				
 				
 				

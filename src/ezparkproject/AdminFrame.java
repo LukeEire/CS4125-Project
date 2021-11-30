@@ -34,9 +34,10 @@ public class AdminFrame implements ActionListener{
 	JPanel transactionsContainer = new JPanel();
 	
 	JScrollPane userScrollPane = new JScrollPane(allUserList);
-	
+
 	JScrollPane reservationScrollPane = new JScrollPane(reservationContainer);
 	JScrollPane transactionsScrollPane = new JScrollPane(transactionsContainer);
+	
 	
     
 
