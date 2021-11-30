@@ -3,8 +3,9 @@ package ezparkproject;
 import javax.swing.*; 
 import java.awt.event.*; 
 import java.awt.*; 
-import
-java.sql.*;
+import	java.sql.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class RegFrame implements ActionListener, ItemListener{
 	
@@ -26,8 +27,6 @@ public class RegFrame implements ActionListener, ItemListener{
 	JLabel lastNameLabel = new JLabel("Last Name");
 	JLabel university_statusLabel = new JLabel("Status");
 	JLabel passwordLabel = new JLabel("Password");
-	//JLabel confirmPasswordLabel = new JLabel("Confirm Password");
-	//JLabel emailLabel = new JLabel("Email Address");
 	JLabel EVLabel = new JLabel("Electric Vehicle?");
 	JLabel dobLabel = new JLabel("Date of Birth");
 	JLabel accessibilityLabel = new JLabel("Disabled Permit");
@@ -39,13 +38,13 @@ public class RegFrame implements ActionListener, ItemListener{
 	JTextField firstNameField = new JTextField();
 	JTextField lastNameField = new JTextField();
 	JPasswordField passwordField = new JPasswordField();
-	//JTextField emailTextField = new JTextField();
 	JComboBox uniComboBox = new JComboBox(uniStatus);
-	JTextField dobField = new JTextField();
+	JTextField dobField = new TextHint("yyyy-mm-dd");  // adds hint of format
 	JTextField plate = new JTextField();
 	
-
+	 
 	
+       
 
 	
 	/* JCheckbox for accessibility and EV status */
