@@ -28,6 +28,7 @@ package ezparkproject;
 	    private JButton paymentButton;
 	    private JButton lotsButton;
 	    private JButton logoutButton;
+	    private JButton myAccountButton;
 	    private JPanel contentPane;
 
 	    /**
@@ -77,6 +78,7 @@ package ezparkproject;
 	            }
 	        });
 	        
+	        	        
 	        lotsButton = new JButton("Payment");
 	        lotsButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
 	        lotsButton.setBounds(240, 200, 100, 73);
@@ -108,7 +110,7 @@ package ezparkproject;
 	        
 	        paymentButton = new JButton("Available Lots");
 	        paymentButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
-	        paymentButton.setBounds(240, 350, 100, 73);
+	        paymentButton.setBounds(240, 342, 100, 73);
 	        paymentButton.setSize(500,50);
 	        paymentButton.addActionListener(new ActionListener() {
 
@@ -117,9 +119,21 @@ package ezparkproject;
 	            }
 	        });
 	        
+	        myAccountButton = new JButton("My Account");
+	        myAccountButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
+	        myAccountButton.setBounds(240, 420, 100, 73);
+	        myAccountButton.setSize(500,50);
+	        myAccountButton.addActionListener(new ActionListener() {
+
+	        	public void actionPerformed(ActionEvent e) {
+	        		dispose();
+	           		new MyAccountFrame();
+	            }
+	        });
+	        
 	        logoutButton = new JButton("Quit");
 	        logoutButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	        logoutButton.setBounds(440, 450, 200, 73);
+	        logoutButton.setBounds(440, 500, 200, 73);
 	        logoutButton.setSize(100,30);
 	        logoutButton.addActionListener(new ActionListener() {
 
@@ -133,5 +147,6 @@ package ezparkproject;
 	        contentPane.add(lotsButton);
 	        contentPane.add(reserveButton);
 	        contentPane.add(logoutButton);
+	        contentPane.add(myAccountButton);
 	    }
 	}
