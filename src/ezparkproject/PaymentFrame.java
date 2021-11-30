@@ -37,9 +37,9 @@ public class PaymentFrame extends JFrame {
 	
 	double totalFee = 2;
 	
-	public PaymentFrame(ParkingSystem paymentApp) 
+	public PaymentFrame(ParkingSystem payment) 
 	{
-		this.app = paymentApp;
+		this.app = payment;
 	
 		initComponents(); 
 		

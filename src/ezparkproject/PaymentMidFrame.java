@@ -45,23 +45,6 @@ public class PaymentMidFrame extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(4);
 		
-		backButton = new JButton("Back");
-		backButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		backButton.setBounds(10, 150, 100, 73);
-		backButton.setSize(100,30);
-		backButton.addActionListener(new ActionListener() {
-
-	        	public void actionPerformed(ActionEvent e) {
-	        		
-	        		if (e.getSource() == backButton) {
-	        		 dispose();
-	        		 ParkingFrame frame = new ParkingFrame();
-	                 frame.setVisible(true);
-	       	        
-	       		}
-	       		
-	        	}
-	        });
 		
 		enterButton = new JButton("Enter");
 		enterButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -109,6 +92,25 @@ public class PaymentMidFrame extends JFrame {
 				}
 			}
 		});
+		
+		backButton = new JButton("Back");
+		backButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		backButton.setBounds(10, 150, 100, 73);
+		backButton.setSize(100,30);
+		backButton.addActionListener(new ActionListener() {
+
+	        	public void actionPerformed(ActionEvent e) {
+	        		
+	        		if (e.getSource() == backButton) {
+	        		 dispose();
+	        		 ParkingFrame frame = new ParkingFrame();
+	                 frame.setVisible(true);
+	       	        
+	       		}
+	       		
+	        	}
+	        });
+		
 		
 		
 		

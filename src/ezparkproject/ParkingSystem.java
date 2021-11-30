@@ -8,8 +8,6 @@ public class ParkingSystem {
 	
 	Database db;
 	Connection con;
-
-	static ParkingFrame mainFrame;
 	
 	private ArrayList<ParkingSpace> slots = null;
 	ArrayList<TicketSystem> ticketList = null;
