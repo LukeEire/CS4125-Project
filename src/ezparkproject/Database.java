@@ -503,7 +503,7 @@ public class Database {
 				System.out.println("User " + id + " Password Changed Successfully.");
 	        }
 	        else{
-	            System.out.println("FAIL: Pasword UPDATE Failed");
+	            System.out.println("FAIL: Password UPDATE Failed");
 	        }
 	        
     	} catch (SQLException e){
@@ -555,7 +555,7 @@ public class Database {
     	
     	try {
     		
-			String query = "UPDATE " + users_db + " SET ban_status = 1, banTime = " + "'" + null + "'" + " WHERE id  = \""+id+"\"";
+			String query = "UPDATE " + users_db + " SET ban_status = 0, banTime = NULL WHERE id  = \""+id+"\"";
 
             PreparedStatement p = con.prepareStatement(query);
             int unBan = p.executeUpdate(query);
@@ -669,7 +669,7 @@ public class Database {
 			while (rs.next()){
 				// set penalties number from db
 				penalties = rs.getInt("penalties");
-				System.out.format("Penalties: " + penalties);
+				System.out.println("Penalties: " + penalties);
 				
 			}
               
