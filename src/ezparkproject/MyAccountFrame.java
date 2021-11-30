@@ -2,7 +2,6 @@ package ezparkproject;
 
 import javax.swing.*; 
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.awt.*; 
 
 public class MyAccountFrame implements ActionListener{
@@ -15,7 +14,7 @@ public class MyAccountFrame implements ActionListener{
 	String dob;
 	String reg;
 	
-
+	
 	JFrame frame;
 	
 	/* Buttons */
@@ -54,6 +53,8 @@ public class MyAccountFrame implements ActionListener{
 	JTextField dobField = new TextHint("Example: 1999-01-01");  // adds hint of format
 	JTextField plate = new JTextField();
 	
+	
+	
 
 	
 
@@ -64,6 +65,9 @@ public class MyAccountFrame implements ActionListener{
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		addComponentsToFrame();
 		actionEvent();
+		getUserDetails();
+		
+		
 	}
 	
 	
@@ -78,6 +82,20 @@ public class MyAccountFrame implements ActionListener{
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
+	}
+	
+	public void getUserDetails() {
+		
+		firstNameField.setText("user first name");
+	    universityIDField.setText("user ID");
+	    dobField.setText("");
+	    lastNameField.setText("user last name");	
+	    passwordField.setText("");
+	    plate.setText("user reg");
+	    statusField.setText("user status");
+	    dobField.setText("user DOB in yyyy-mm-dd");
+		
+			   
 	}
 
 	public void setLocationAndSize() {
@@ -95,6 +113,8 @@ public class MyAccountFrame implements ActionListener{
         university_statusLabel.setBounds(600, 280, 100, 70);
         dobLabel.setBounds(600, 330, 100, 70);
         plateLabel.setBounds(600, 380, 100, 70);
+        
+     
         
         /* Text Field Locations */
         
