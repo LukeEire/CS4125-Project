@@ -39,7 +39,7 @@ public class RegFrame implements ActionListener, ItemListener{
 	JTextField lastNameField = new JTextField();
 	JPasswordField passwordField = new JPasswordField();
 	JComboBox uniComboBox = new JComboBox(uniStatus);
-	JTextField dobField = new TextHint("yyyy-mm-dd");  
+	JTextField dobField = new TextHint("yyyy-mm-dd");  // adds hint of format
 	JTextField plate = new JTextField();
 	
 	 

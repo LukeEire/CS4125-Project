@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 
 /* Reference: http://javaswingcomponents.blogspot.com/2012/05/how-to-create-simple-hinttextfield-in.html: */ 
 
-/* Used by Ashutosh Yadav for the purposes of adding JTextfield hints for DOB and other RegFrame components */
+/* Used by Ashutosh Yadav for the purposes of adding JTextfield hints for Date of Birth and other RegFrame component */
   
 public class TextHint extends JTextField {  
   
