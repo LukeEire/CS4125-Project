@@ -25,7 +25,7 @@ public class MyAccountFrame implements ActionListener{
 	JButton makeBookingButton = new JButton("Make Booking");
 	JButton changeBookingButton = new JButton("Change My Booking");
 	JButton backButton = new JButton("Back");
-	JButton updateDetailsButton = new JButton("Update Details");
+	JButton updateDetailsButton = new JButton("Change Password");
 	
 	
 	
@@ -45,13 +45,12 @@ public class MyAccountFrame implements ActionListener{
 	
 	/* Text Fields */
 	
-	String[] uniStatus = { "Student", "Staff", "Guest" }; /* also known as rank from our analysis class diagram */
 	
 	JTextField universityIDField = new JTextField();
 	JTextField firstNameField = new JTextField();
 	JTextField lastNameField = new JTextField();
 	JPasswordField passwordField = new JPasswordField();
-	JComboBox uniComboBox = new JComboBox(uniStatus);
+	JTextField statusField = new JTextField();
 	JTextField dobField = new TextHint("Example: 1999-01-01");  // adds hint of format
 	JTextField plate = new JTextField();
 	
@@ -103,10 +102,18 @@ public class MyAccountFrame implements ActionListener{
         firstNameField.setBounds(700, 155, 165, 23);
         lastNameField.setBounds(700, 205, 165, 23);
         passwordField.setBounds(700, 250, 165, 23);
-        uniComboBox.setBounds(700, 300, 165, 23);        
+        statusField.setBounds(700, 300, 165, 23);        
         dobField.setBounds (700, 350, 165, 23);
         plate.setBounds (700, 400, 165, 23);
-     
+        
+        /* Set certain fields to be read only */
+        
+        universityIDField.setEditable(false);
+        firstNameField.setEditable(false);
+        lastNameField.setEditable(false);
+        statusField.setEditable(false);
+        dobField.setEditable(false);
+        plate.setEditable(false);
 		
         
         /* My Bookings Button */
@@ -175,7 +182,7 @@ public class MyAccountFrame implements ActionListener{
 		frame.add(firstNameField);
 		frame.add(lastNameField);
 		frame.add(passwordField);
-		frame.add(uniComboBox);
+		frame.add(statusField);
 		frame.add(dobField);
 		frame.add(plate);
 
