@@ -64,7 +64,20 @@ public class BookingBackend {
 	
 	public Reservation loadBooking(int id) {
 		
-		
+		try {
+			
+			Database db = new Database();
+			Reservation res = new Reservation();
+			
+			res = db.fetchSingleReservation(id);
+			
+			
+			
+		} catch (SQLException error) {
+
+			System.out.println("Could not connect to the database " + error.getMessage());
+
+		}
 		
 		
 		return null;

@@ -22,12 +22,10 @@ public class MakeBookingFrame implements ActionListener{
 	JLabel dateLabel = new JLabel("Date of Booking");
 	JLabel timeLabel = new JLabel("Time of Booking");
 	JLabel durationLabel = new JLabel("Duration (Hours)");
-	//JLabel startTimeLabel = new JLabel("Start Time");
 	JLabel chargingLabel = new JLabel("Charging");
 	
 	/* Text fields for labels */
 	
-	//JTextField regField = new JTextField();
 	JComboBox<String> lotComboBox = new JComboBox<String>(parkingLots);
 	JComboBox<String> timeComboBox = new JComboBox<String>(hours);
 	JTextField dateField = new JTextField();

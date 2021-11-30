@@ -16,30 +16,28 @@ public class ChangeBookingFrame implements ActionListener{
 	BookingBackend Backend = new BookingBackend();
 	
 	String[] parkingLots = { "Lot A", "Lot B", "Lot C", "Lot D" };
+	String[] hours = { "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00" };
+	String[] duration = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 	
 	
 	JFrame frame;
 	
 	/* Labels */
 	
-	JLabel userIDLabel = new JLabel("ID");
-	//This can be updated to pull from userDB
-	JLabel regLabel = new JLabel("Registration");
+	JLabel bookingIDLabel = new JLabel("Booking ID");
 	JLabel lotLabel = new JLabel("Parking Lot");
 	JLabel dateLabel = new JLabel("Date of Booking");
 	JLabel timeLabel = new JLabel("Time of Booking");
-	JLabel durationLabel = new JLabel("Duration of Booking (Hours)");
-	//Pull this from user profile Electric can be optional
-	JLabel accessibilityLabel = new JLabel("Disabled Permit");
+	JLabel durationLabel = new JLabel("Duration (Hours)");
+	JLabel chargingLabel = new JLabel("Charging");
 	
 	/* Text fields for labels */
 	
-	JTextField userIDField = new JTextField();
-	JTextField regField = new JTextField();
-	JComboBox lotComboBox = new JComboBox(parkingLots);
+	JTextField bookingIDField = new JTextField();
+	JComboBox<String> lotComboBox = new JComboBox<String>(parkingLots);
+	JComboBox<String> timeComboBox = new JComboBox<String>(hours);
 	JTextField dateField = new JTextField();
-	JTextField timeField = new JTextField();
-	JTextField durationField = new JTextField();
+	JComboBox<String> durationComboBox = new JComboBox<String>(duration);
 	
 	
 	/* JCheckbox for accessibility and EV status */
@@ -48,33 +46,20 @@ public class ChangeBookingFrame implements ActionListener{
 	
 	int electricCheckBoxVal;
 	
-	public void itemStateChanged(ItemEvent e)
-    {
-        // if the state of checkbox1 is changed
-        if (e.getSource() == EVCheckBox) {
-            if (e.getStateChange() == 1)
-                // Set to 1 
-            	// AYOUBS FUNCTION TO CHANGE TO 1
-            	electricCheckBoxVal = 1;
-            	System.out.println("Set to 1");
-        } else {
-                // Set to 0
-            	// AYOUBS FUNCTION TO CHANGE TO 0
-            	electricCheckBoxVal = 0;
-            	System.out.println("Set to 0");
-        }
-              
-    }
+	public void CheckBox_Booking()
+	{
+		
+		if(EVCheckBox.isSelected()) {
+			electricCheckBoxVal=1;
+		}else {
+			electricCheckBoxVal=0;
+		}
+	}
 	
 
 	/* End of CheckBox function */
 	
 	
-	/* Drop down menus */
-	
-	
-	//JComboBox accessibilityComboBox = new JComboBox(accessibilityStatus);
-	//JComboBox EVComboBox = new JComboBox(EVStatus);
 	
 	/* Buttons */
 	
@@ -110,27 +95,20 @@ public class ChangeBookingFrame implements ActionListener{
 		
 		/* Label Bounds */
 
-		userIDLabel.setBounds(20, 20, 40, 70);
-        regLabel.setBounds(20, 70, 80, 70);
-        lotLabel.setBounds(20, 130, 80, 70);
-        dateLabel.setBounds(20, 180, 140, 70);
-        //emailLabel.setBounds(20, 225, 100, 70);
-        timeLabel.setBounds(20, 225, 100, 70);
-        durationLabel.setBounds(20, 280, 100, 70);
-        accessibilityLabel.setBounds(20, 330, 100, 70);
+		bookingIDLabel.setBounds(20, 20, 40, 70);
+		lotLabel.setBounds(20, 70, 80, 70);
+        dateLabel.setBounds(20, 130, 140, 70);
+        timeLabel.setBounds(20, 180, 100, 70);
+        durationLabel.setBounds(20, 230, 100, 70);
+        chargingLabel.setBounds(20, 280, 100, 70);
         
         /* Text fields and drop downs bounds */
         
-        userIDField.setBounds(180, 43, 165, 23);
-        regField.setBounds(180, 93, 165, 23);
-        dateField.setBounds(180, 155, 165, 23);
-        timeField.setBounds(180, 205, 165, 23);
-        //emailTextField.setBounds(180, 250, 165, 23);
-        lotComboBox.setBounds(180, 250, 165, 23);
-        EVCheckBox.setBounds(180, 400, 165, 23);
-        //disabledCheckBox.setBounds(180, 450, 165, 23);
-        durationField.setBounds (180, 300, 165, 23);
-        //plate.setBounds (180, 350, 165, 23);
+        lotComboBox.setBounds(180, 93, 165, 23);
+        dateField.setBounds(180, 150, 165, 23);
+        timeComboBox.setBounds(180, 200, 165, 23);
+        durationComboBox.setBounds(180, 250, 165, 23);
+        EVCheckBox.setBounds(180, 300, 165, 23);
         
         /* Button Bounds */
         
@@ -143,25 +121,21 @@ public class ChangeBookingFrame implements ActionListener{
 		
 		/* Labels */
 
-		frame.add(userIDLabel);
-		frame.add(regLabel);
+		frame.add(bookingIDLabel);
 		frame.add(lotLabel);
 		frame.add(dateLabel);
-		//frame.add(emailLabel);
 		frame.add(timeLabel);
 		frame.add(durationLabel);
-		frame.add(accessibilityLabel);
+		frame.add(chargingLabel);
 		
 		/* Text fields and drop downs */
 		
-		frame.add(userIDField);
-		frame.add(regField);
+		frame.add(bookingIDField);
 		frame.add(dateField);
-		frame.add(timeField);
-		//frame.add(emailTextField);
+		frame.add(timeComboBox);
 		frame.add(lotComboBox);
 		frame.add(EVCheckBox);
-		frame.add(durationField);
+		frame.add(durationComboBox);
 		
 		/* Buttons */
 		
@@ -185,28 +159,22 @@ public class ChangeBookingFrame implements ActionListener{
 
 		if (e.getSource() == updateButton) {
 
-			int id = Integer.parseInt(userIDField.getText());
-			String reg = regField.getText();
-			Long hours = Long.parseLong(durationField.getText());
-			/*String lastName = lastNameField.getText();				
-			String password = passwordField.getText();
-			String status = uniComboBox.getSelectedItem().toString();
-			int electric = electricCheckBoxVal;
-			int accessibility = disabledCheckBoxVal;
-			String dob = dobField.getText();
-			String reg = plate.getText();*/
 			
-			
-			//Reservation res = new Reservation(, null, reg, hours, 0);
-			//Can change to directly Update Where ID = ID etc
-			//Backend.createBooking(res);
 		}	
 			
 		if (e.getSource() == loadButton) {
+			
+			Reservation res = new Reservation();
+			int resID = Integer.parseInt(bookingIDField.getText());
+			res = Backend.loadBooking(resID);
+			
+			
+			
+			
 
 			//These needs backend function to grab data
-			regField.setText("");
-			userIDField.setText("");
+			dateField.setText("");
+			userIDField.setText(Integer.toString(Main.currentUser.getID()));
 			dateField.setText("");
 			timeField.setText("");
 			lotComboBox.setSelectedItem("Lot A");			
