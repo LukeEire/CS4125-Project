@@ -105,9 +105,9 @@ public class Database {
 		try {
 
     		System.out.println("Dissembling Database");
-    		dropTable("transactions");
-    		dropTable("reservations");
-    		dropTable("users");
+    		dropTable("Transactions");
+    		dropTable("Reservations");
+    		dropTable("Users");
 			System.out.println("Database Disassembled Successfully!, Please Re-Build the Database");
 			
     	} catch (Exception e){
@@ -149,7 +149,7 @@ public class Database {
 							" accessibility TINYINT(1), " +
 							" created_on TIMESTAMP, " +
 							" expiry TIMESTAMP, " +
-							" FOREIGN KEY (userID) REFERENCES users(id) " +
+							" FOREIGN KEY (userID) REFERENCES Users(id) " +
 							" ON UPDATE CASCADE " +
 							" ON DELETE CASCADE " +
 							" );";
@@ -161,10 +161,10 @@ public class Database {
 							" lot varchar(255) NOT NULL, " +
 							" amount double NOT NULL, " +
 							" created_on DATE, " +
-							" FOREIGN KEY (userID) REFERENCES users(id)" +
+							" FOREIGN KEY (userID) REFERENCES Users(id)" +
 							" ON UPDATE CASCADE " +
 							" ON DELETE CASCADE, " +
-							" FOREIGN KEY (reservationsID) REFERENCES reservations(id) " +
+							" FOREIGN KEY (reservationsID) REFERENCES Reservations(id) " +
 							" ON UPDATE CASCADE " +
 							" ON DELETE CASCADE " +
 							" );";

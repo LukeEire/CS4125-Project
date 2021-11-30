@@ -87,7 +87,7 @@ INSERT INTO transactions(userID, reservationsID, lot, amount,created_on) VALUES 
 
 -- Paste directely into phpMyAdmin
 
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS Users (
 id int(32) PRIMARY KEY,
 firstName VARCHAR(255) NOT NULL,
 lastName VARCHAR(255) NOT NULL,
@@ -104,7 +104,7 @@ dob DATE,
 reg VARCHAR(255)
 )
 
-CREATE TABLE IF NOT EXISTS reservations (
+CREATE TABLE IF NOT EXISTS Reservations (
 id int(32) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 userID int(32) NOT NULL,
 reg VARCHAR(255) NOT NULL,
@@ -113,22 +113,23 @@ electric TINYINT(1),
 accessibility TINYINT(1),
 created_on TIMESTAMP,
 expiry TIMESTAMP,
-FOREIGN KEY (userID) REFERENCES users(id)
+FOREIGN KEY (userID) REFERENCES Users(id)
 ON UPDATE CASCADE
 ON DELETE CASCADE
 )
 
-CREATE TABLE IF NOT EXISTS transactions (
+
+CREATE TABLE IF NOT EXISTS Transactions (
 id int(32) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 userID int(32) NOT NULL,
 reservationsID int(32) NOT NULL,
 lot varchar(255) NOT NULL,
 amount double NOT NULL,
 created_on DATE,
-FOREIGN KEY (userID) REFERENCES users(id)
+FOREIGN KEY (userID) REFERENCES Users(id)
 ON UPDATE CASCADE
 ON DELETE CASCADE,
-FOREIGN KEY (reservationsID) REFERENCES reservations(id)
+FOREIGN KEY (reservationsID) REFERENCES Reservations(id)
 ON UPDATE CASCADE
 ON DELETE CASCADE
 )
