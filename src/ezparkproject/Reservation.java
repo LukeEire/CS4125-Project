@@ -42,6 +42,10 @@ public class Reservation {
     //     //checkOutDate = checkInDate.plusMinutes(duration);
     // }
 
+    
+    public Reservation() {
+    	
+    }
     // Ayoub - new Reservation constructor
     // Adds reservation to DB if boolean addReservationToDb is set to TRUE
     public Reservation(Users user, String lot, int electricSpace, String reg, long hours) {
