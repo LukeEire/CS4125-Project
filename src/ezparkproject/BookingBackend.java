@@ -62,6 +62,14 @@ public class BookingBackend {
 		
 	}
 	
+	public Reservation loadBooking(int id) {
+		
+		
+		
+		
+		return null;
+	}
+	
 	public void decrementTest() {
 		Main.LotA.setSpaces(Main.LotA.countSpaces()-1);
 	}
