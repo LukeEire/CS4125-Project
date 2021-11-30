@@ -858,7 +858,7 @@ public class Database {
 
 		//Pre-condition: Reservation with id must exist in DB
 		//Post-condition: Reservation object is returned 
-		public Reservation fetchSingleReservation(int id) throws Exception{
+		public Reservation fetchSingleReservation(int id) throws SQLException{
 			try {
 				Reservation res = new Reservation();
 				String query = "select * from " + reservations_db + " where id = " + id;
@@ -877,7 +877,7 @@ public class Database {
 				}
 				return res;
 				
-			} catch (Exception e) {
+			} catch (SQLException e) {
 				
 				System.out.println("Error fetching data: " + e.getMessage());
 				return null;
