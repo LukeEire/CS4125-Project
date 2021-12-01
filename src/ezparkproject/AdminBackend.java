@@ -101,58 +101,8 @@ public class AdminBackend {
 		
 	}
 	
-	public static String fetchUserFunction() {
-		ArrayList<Users> users;
+	public static void fetchUserFunction() {
 		
-		try {
-			
-			Database db = new Database();
-			
-			users = db.fetchData();
-			String output = "";
-			String newlineusingGetProp = System.getProperty("line.separator");
-			
-			
-			for (int i =0 ; i < users.size(); i++){	
-				
-		
-				output = output + "User ID" + users.get(i).getID() +"\r\n"+users.get(i).getFirstName();
-				output = output + "First Name" + users.get(i).getFirstName();
-				output = output + "Last Name" + users.get(i).getLastName();
-				
-				
-				
-			}
-			
-			/*
-			System.out.println("User ID: " + rs.getInt("id"));
-			System.out.println("First name: " + rs.getString("firstName"));
-			System.out.println("Last name: " + rs.getString("lastName"));
-			System.out.println("Status: " + rs.getString("status"));
-			System.out.println("Password: " + rs.getString("password"));
-			System.out.println("Email: " + rs.getString("email_address"));
-			System.out.println("Electric Car? [Y/N]: " + rs.getInt("electric"));
-			System.out.println("Assistance Required? [Y/N]: " + rs.getString("accessibility"));
-			System.out.println("Banned Status: " + rs.getInt("ban_status"));
-			System.out.println("Ban Time: " + rs.getDate("banTime"));
-			System.out.println("Penalty Points: " + rs.getInt("penalties"));
-			System.out.println("Created on: " + rs.getDate("created_on"));
-			System.out.println("D.O.B: " + rs.getDate("dob"));
-			System.out.println("Penalty Points: " + rs.getInt("penalties"));
-			System.out.println("Default Registration Plate: " + rs.getString("reg"));
-
-			System.out.println("-----------------------------END-------------------------------");*/
-			
-			
-			
-			return output;
-			
-		} catch (Exception error) {
-
-			System.out.println("Could not connect to the database " + error.getMessage());
-			return null;
-
-		}
 		
 	}
 

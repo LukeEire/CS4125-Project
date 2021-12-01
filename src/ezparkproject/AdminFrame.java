@@ -3,10 +3,12 @@ package ezparkproject;
 import javax.swing.*; 
 import java.awt.event.*;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.awt.*; 
-import net.proteanit.sql.DbUtils;
+import java.util.Vector;
+import java.awt.*;
 
 /* Author:  Ashutosh Yadav  */
 
@@ -15,7 +17,6 @@ public class AdminFrame implements ActionListener{
 
 	// Declarations 
 	
-	int id;
 	ArrayList<Users> users;
 	AdminBackend Backend = new AdminBackend();
 	//String usersData = Backend.fetchUserFunction();
@@ -27,31 +28,15 @@ public class AdminFrame implements ActionListener{
 	JLabel reservationsPanel = new JLabel("Reservations Panel");
 	JLabel usersPanel = new JLabel("Users Panel");
 	JLabel transactionsPanel = new JLabel("Transactions Panel");
-	
-	/* Scrollable Containers */
-	
-	//JPanel userContainer = new JPanel();
-
-	
-	JScrollPane scrollPane = new JScrollPane();
-	JTable userContainer = new JTable();
-
-	JPanel reservationContainer = new JPanel();
-	JPanel transactionsContainer = new JPanel();
-	
-	//JScrollPane userScrollPane = new JScrollPane(allUserList);
-
-	JScrollPane reservationScrollPane = new JScrollPane(reservationContainer);
-	JScrollPane transactionsScrollPane = new JScrollPane(transactionsContainer);
-	
-	
+	JLabel userBanLabel = new JLabel("Select User ID to ban");
+	JComboBox firstNameBox, userIDBox;
     
 
 	
 	
 	/* Text fields for labels */
 	
-	JTextField adminTextField = new JTextField();
+	JTextField userIDTextField = new JTextField();
 
 	
 	
@@ -62,12 +47,84 @@ public class AdminFrame implements ActionListener{
 	JButton unbanUserButton = new JButton("Un-Ban User");
 	JButton deleteUserButton = new JButton("Delete User");
 	JButton logoutButton = new JButton("Logout");
-	JButton loadUsersButton = new JButton("Load Users");
-	JButton loadReservationsButton = new JButton("Load Reservations");
-	JButton loadTransactionsButton = new JButton("Load Transactions");
+	JButton applyPenaltyButton = new JButton("Apply Penalty");
 	JButton blockforEventButton = new JButton("Block Lot for event");
 	
+	public void createWindow() {
+
+		frame = new JFrame();
+		frame.setTitle("Admin Panel");
+		frame.setBounds(450, 190, 1100, 597);
+		frame.getContentPane().setBackground(Color.white);
+		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.validate();
+	}
 	
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void userBox() {
+		
+		try {
+
+            
+
+        	Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freemysqlhosting.net:3306/sql4450358","sql4450358", "dcCxqbDW1K");
+
+            PreparedStatement ps = con.prepareStatement("select firstName from Users");
+            PreparedStatement ps1 = con.prepareStatement("select id from Users");
+
+            ResultSet resultSet = ps.executeQuery();
+            ResultSet resultSet1 = ps1.executeQuery();
+
+
+			Vector results = new Vector();
+            Vector results_id = new Vector();
+
+            while (resultSet.next()) {
+
+                String firstNameVal = resultSet.getString(1);               
+                results.add(firstNameVal);
+
+            }
+            
+            while (resultSet1.next()) {
+
+                String userID = resultSet1.getString(1);
+                results_id.add(userID);
+
+            }
+            
+            /* Test to see if the methods display */
+            
+            System.out.println("Users"+results);
+            System.out.println("IDs"+results_id);
+            
+            firstNameBox = new JComboBox(results);          
+            firstNameBox.setBounds(350, 110, 40, 70);
+            firstNameBox.setSize(150,25);
+            
+            userIDBox = new JComboBox(results_id);          
+            userIDBox.setBounds(110, 63, 100, 73);
+            userIDBox.setSize(200,25);
+
+            frame.add(firstNameBox);
+            frame.add(userIDBox);
+            
+            firstNameBox.setVisible(true);
+            userIDBox.setVisible(true);
+ 
+
+        } catch (Exception ex) {
+
+            System.out.println(ex);
+
+        }
+		
+	}
+
 
 	AdminFrame() {
 
@@ -75,31 +132,23 @@ public class AdminFrame implements ActionListener{
 		setLocationAndSize();
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		addComponentsToFrame();
-		actionEvent();
+		actionEvent();	
+		userBox();
+		
+		
+        
 	}
 	
 	
 
-	public void createWindow() {
 
-		frame = new JFrame();
-		frame.setTitle("Admin Panel");
-		frame.setBounds(450, 190, 1100, 597);//'
-		frame.getContentPane().setBackground(Color.white);
-		frame.getContentPane().setLayout(null);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-	}
 
 	public void setLocationAndSize() {
 		
 		/* Label Bounds */
 
-		// usersPanel.setBounds(350, 75, 40, 70);
-		// usersPanel.setSize(200,20);
-		scrollPane.setBounds(350, 75, 40, 70);
-		scrollPane.setSize(200,20);
+		usersPanel.setBounds(350, 75, 40, 70);
+		usersPanel.setSize(200,20);
 		
 		reservationsPanel.setBounds(600, 75, 40, 70);
 		reservationsPanel.setSize(200,20);
@@ -107,21 +156,10 @@ public class AdminFrame implements ActionListener{
 		transactionsPanel.setBounds(850, 75, 40, 70);
 		transactionsPanel.setSize(200,20);
 		
-		/* Scroll bounds */
+		userBanLabel.setBounds(110, 23, 100, 73);
+		userBanLabel.setSize(200,20);
 		
-		userScrollPane.setBounds(350, 100, 40, 70);
-		userScrollPane.setSize(200,350);
-		
-		reservationScrollPane.setBounds(600, 100, 40, 70);
-		reservationScrollPane.setSize(200,350);
-		
-		transactionsScrollPane.setBounds(850, 100, 40, 70);
-		transactionsScrollPane.setSize(200,350);
-        
-        /* Text fields and drop downs bounds */
-        
-        //adminTextField.setBounds(800, 63, 165, 23);
-        
+
         
         /* Ban User Button */
         
@@ -143,28 +181,14 @@ public class AdminFrame implements ActionListener{
         
         /* Logout Button */
         
-        logoutButton.setBounds(110, 316, 100, 73);
+        logoutButton.setBounds(110, 380, 100, 73);
         logoutButton.setSize(200,50);
         
+        /* Apple Penalty Button */
         
+        applyPenaltyButton.setBounds(110, 316, 100, 73);
+        applyPenaltyButton.setSize(200,50);
         
-        /* Load Users Button */
-        
-        loadUsersButton.setBounds(350, 460, 100, 73);
-        loadUsersButton.setSize(200,50);
-  
-        
-        
-        
-        /* Load Reservations Button */
-        
-        loadReservationsButton.setBounds(600, 460, 100, 73);
-        loadReservationsButton.setSize(200,50);
-		
-		/* Load Transactions Button */
-        
-        loadTransactionsButton.setBounds(850, 460, 100, 73);
-		loadTransactionsButton.setSize(200,50);
 		
         /* Block for event button */
         
@@ -176,22 +200,18 @@ public class AdminFrame implements ActionListener{
 		
 		/* Labels */
 
-		frame.add(usersPanel);
-		frame.getContentPane().add(scrollPane);
+		frame.add(usersPanel);	
 		frame.add(reservationsPanel);
 		frame.add(transactionsPanel);
-		frame.add(userScrollPane);
-		frame.add(reservationScrollPane);
-		frame.add(transactionsScrollPane);
-		frame.add(transactionsScrollPane);
-
-		
+		frame.add(userBanLabel);
 
 		
 		/* Text fields and drop downs */
 		
-		//frame.add(adminTextField);
 		
+		frame.add(userIDTextField);
+
+
 		
 
 		
@@ -201,12 +221,10 @@ public class AdminFrame implements ActionListener{
 		frame.add(unbanUserButton);
 		frame.add(deleteUserButton);
 		frame.add(logoutButton);
-		frame.add(loadUsersButton);
-		frame.add(loadReservationsButton);
-		frame.add(loadTransactionsButton);
 		frame.add(blockforEventButton);
+		frame.add(applyPenaltyButton);
+		
 	}
-	
 	
 
 	public void actionEvent() {
@@ -215,21 +233,25 @@ public class AdminFrame implements ActionListener{
 		unbanUserButton.addActionListener(this);
 		deleteUserButton.addActionListener(this);
 		logoutButton.addActionListener(this);
-		loadUsersButton.addActionListener(this);
-		loadReservationsButton.addActionListener(this);
-		loadTransactionsButton.addActionListener(this);
 		blockforEventButton.addActionListener(this);
 	}
 	
-
+	
+	/* Create Database before using */
+	
 	public void actionPerformed(ActionEvent e) {
 
-		/* Create Database before using */
+		/* Takes ID as an int from the textField */
+		
+		int id = Integer.parseInt((String)userIDBox.getSelectedItem()); 
+		
+		String firstName = firstNameBox.getSelectedItem().toString();
+		
 
 		if (e.getSource() == banUserButton) {
 			
 			
-
+			
 			AdminBackend.BanUserFunction(id);
 		}	
 			
@@ -252,51 +274,8 @@ public class AdminFrame implements ActionListener{
 			
 		}
 		
-		if (e.getSource() == loadUsersButton) {
-			// ArrayList<Users> temp;
-			// try {
-			// 	temp = AdminBackend.fetchUserFunction();
-				
-			// } catch (Exception e1) {
-			// 	// TODO Auto-generated catch block
-			// 	e1.printStackTrace();
-			// }
-			try {
-				Database db = new Database();
-				String query = "SELECT * FROM Users";
-				Connection con = db.connect();
-				java.sql.PreparedStatement ps = con.prepareStatement(query);
-				ResultSet rs = ps.executeQuery();
-				userContainer.setModel(DbUtils.resultSetToTableModel(rs));
-			}
 
-			catch (Exception e) {
 
-				e.printStackTrace();
-			}
-		}
-		
-		if (e.getSource() == loadReservationsButton) {
-			
-			try {
-				AdminBackend.fetchReservationFunction();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}
-
-		if (e.getSource() == loadTransactionsButton) {
-			
-			try {
-				AdminBackend.fetchTransactionsFunction();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}
 		
 		if (e.getSource() == blockforEventButton) {
 			
