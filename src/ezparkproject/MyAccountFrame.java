@@ -39,7 +39,7 @@ public class MyAccountFrame extends Users implements ActionListener {
 	JLabel accessibilityLabel = new JLabel("Disabled Permit");
 	JLabel plateLabel = new JLabel("Car Reg");
 	JLabel welcomeLabel = new JLabel("Welcome");
-	JLabel wUserLabel = new JLabel ("" + Main.currentUser.getFirstName());
+	JLabel wUserLabel = new JLabel (Main.currentUser.getFirstName() + " " +  Main.currentUser.getLastName());
 	
 	
 	/* Text Fields */
@@ -115,8 +115,8 @@ public class MyAccountFrame extends Users implements ActionListener {
 		
 		/* Label locations */
 		
-		yourDetails.setBounds(700, 20, 100, 70);
-		yourDetails.setFont(new Font("Tahoma", Font.PLAIN, 18));	
+		yourDetails.setBounds(700, 20, 200, 70);
+		yourDetails.setFont(new Font("Tahoma", Font.PLAIN, 28));	
 		
 		universityID.setBounds(600, 70, 40, 70);
         firstNameLabel.setBounds(600, 130, 80, 70);
@@ -126,10 +126,10 @@ public class MyAccountFrame extends Users implements ActionListener {
         dobLabel.setBounds(600, 330, 100, 70);
         plateLabel.setBounds(600, 380, 100, 70);
         
-        welcomeLabel.setBounds(120, 20, 100, 70);
-        welcomeLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        welcomeLabel.setBounds(120, 20, 200, 70);
+        welcomeLabel.setFont(new Font("Tahoma", Font.PLAIN, 32));
         
-        wUserLabel.setBounds(210, 20, 100, 70);
+        wUserLabel.setBounds(120, 60, 100, 70);
         wUserLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
         
      
