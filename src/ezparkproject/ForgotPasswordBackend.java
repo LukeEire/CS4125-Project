@@ -6,6 +6,9 @@ import java.sql.SQLException;
 // Post-Condition - Verifies that email passed into this function is present in the Users Database
 // Returns true if email are exists, false otherwise
 
+
+/* Authors: Ashutosh Yadav and Ayoub Jdair */
+
 public class ForgotPasswordBackend {
 	
 	ForgotPasswordBackend() {
@@ -49,7 +52,3 @@ public class ForgotPasswordBackend {
 
 }
 
-
-/* Database db = new Database();
-boolean result = db.verifyUserEmail(email);
-return result; */
