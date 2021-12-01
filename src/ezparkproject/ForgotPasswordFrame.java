@@ -2,6 +2,7 @@ package ezparkproject;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -160,8 +161,19 @@ public class ForgotPasswordFrame extends Users implements ActionListener {
 		if (e.getSource() == verifyAccountButton) {
 			
 			/* Verify that user exists in DB */
-
-
+			
+			
+			try {
+				if (ForgotPasswordBackend.verifyEmail(email)) {
+					
+					JOptionPane.showMessageDialog(verifyAccountButton, "Your account exists and is valid");
+					
+				} else {						
+					JOptionPane.showMessageDialog(verifyAccountButton, "Your account doesn't exist");
+				}
+			} catch (HeadlessException e1) {
+				e1.printStackTrace();
+			
 			
 		}
 		

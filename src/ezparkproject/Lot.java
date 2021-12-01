@@ -3,6 +3,7 @@ package ezparkproject;
 import java.sql.Date;
 import java.util.ArrayList;
 
+
 public class Lot {
 	
 	private static final int numberOfSlots = 7; // Number of overall (pay as you go) parking spaces. 

@@ -28,7 +28,8 @@ public class MakeBookingFrame implements ActionListener{
 	
 	JComboBox<String> lotComboBox = new JComboBox<String>(parkingLots);
 	JComboBox<String> timeComboBox = new JComboBox<String>(hours);
-	JTextField dateField = new JTextField();
+	//JTextField dateField = new JTextField();
+	JTextField dateField = new TextHint("Example: 2021-01-01");  // adds hint of format
 	JComboBox<String> durationComboBox = new JComboBox<String>(duration);
 	
 	
