@@ -20,16 +20,16 @@ public class Main {
     public static void main(String[] args) throws Exception
     {
     	
-    	// LoginFunction frame = new LoginFunction();
-	    //    frame.setTitle("Login Form");
-	    //    frame.setVisible(true);
-	    //    frame.setBounds(500, 200, 1100, 600);
-	    //    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    //    frame.setResizable(false);
+    	LoginFunction frame = new LoginFunction();
+	       frame.setTitle("Login Form");
+	       frame.setVisible(true);
+	       frame.setBounds(500, 200, 1100, 600);
+	       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	       frame.setResizable(false);
 	       
        //new AdminFrame();
 		
 	   //Testing email
-	   ForgotPasswordBackend.sendVerificationEmail("ayoubjdair00@gmail.com");
+	   //ForgotPasswordBackend.sendVerificationEmail("ayoubjdair00@gmail.com");
     }
 }

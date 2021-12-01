@@ -31,7 +31,7 @@ public class ForgotPasswordFrame extends Users implements ActionListener {
 	/* Labels */
 	
 	
-	JLabel emailLabel = new JLabel("Please Enter Your Email Address");
+	JLabel emailLabel = new JLabel("Please Enter Your University ID");
 
 	/* Text Fields */
 	
@@ -148,6 +148,8 @@ public class ForgotPasswordFrame extends Users implements ActionListener {
 	
 
 	public void actionPerformed(ActionEvent e) {
+		
+		String email = emailField.getText();
 
 		/* Create Database before using */
 
@@ -162,19 +164,20 @@ public class ForgotPasswordFrame extends Users implements ActionListener {
 			
 			/* Verify that user exists in DB */
 			
-			
 			try {
 				if (ForgotPasswordBackend.verifyEmail(email)) {
 					
-					JOptionPane.showMessageDialog(verifyAccountButton, "Your account exists and is valid");
+				
+					JOptionPane.showMessageDialog(verifyAccountButton, "Your account is valid");
 					
 				} else {						
+					
 					JOptionPane.showMessageDialog(verifyAccountButton, "Your account doesn't exist");
+					
 				}
-			} catch (HeadlessException e1) {
+			} catch (SQLException e1) {
 				e1.printStackTrace();
-			
-			
+			}
 		}
 		
 		if (e.getSource() == backButton) {
@@ -193,5 +196,6 @@ public class ForgotPasswordFrame extends Users implements ActionListener {
 				
 
 	}
+	
 	
 }
