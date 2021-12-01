@@ -31,7 +31,7 @@ public class ForgotPasswordFrame extends Users implements ActionListener {
 	/* Labels */
 	
 	
-	JLabel emailLabel = new JLabel("Please Enter Your University eMail Address");
+	JLabel emailLabel = new JLabel("Please Enter Your University Email Address");
 
 	/* Text Fields */
 	
@@ -75,16 +75,16 @@ public class ForgotPasswordFrame extends Users implements ActionListener {
 		
 		/* Label locations */
 		
-		emailLabel.setBounds(540, 80, 100, 70);
-		emailLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));	
+		emailLabel.setBounds(500, 80, 220, 30);
+		emailLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
 		emailLabel.setSize(300,200);
 		
 
         
         /* Text Field Locations */
         
-        emailField.setBounds(500, 225, 165, 23);  
-        emailField.setFont(new Font("Tahoma", Font.PLAIN, 32));
+        emailField.setBounds(500, 225, 190, 23);  
+        emailField.setFont(new Font("Tahoma", Font.PLAIN, 26));
         emailField.setSize(350,50);
         emailField.setEditable(true);
 
