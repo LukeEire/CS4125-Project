@@ -22,7 +22,7 @@ public class ForgotPasswordBackend {
     		
     		if (db.verifyUserEmail(email)) {
     			
-                System.out.print("Your account is valid");
+                System.out.println("Account '" + email + "' found!");
                 
                 
                 
@@ -32,7 +32,7 @@ public class ForgotPasswordBackend {
     		} else {
     			
     			
-    			System.out.print("Your account doesn't exist");
+    			System.out.println("No account with email: '" + email + "' found. Please double check your email address.");
     			
     		}
     		
