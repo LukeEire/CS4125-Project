@@ -31,7 +31,7 @@ public class ForgotPasswordFrame extends Users implements ActionListener {
 	/* Labels */
 	
 	
-	JLabel emailLabel = new JLabel("Please Enter Your University ID");
+	JLabel emailLabel = new JLabel("Please Enter Your University eMail Address");
 
 	/* Text Fields */
 	
@@ -168,11 +168,11 @@ public class ForgotPasswordFrame extends Users implements ActionListener {
 				if (ForgotPasswordBackend.verifyEmail(email)) {
 					
 				
-					JOptionPane.showMessageDialog(verifyAccountButton, "Your account is valid");
+					JOptionPane.showMessageDialog(verifyAccountButton, "Account '" + email + "' found!");
 					
 				} else {						
 					
-					JOptionPane.showMessageDialog(verifyAccountButton, "Your account doesn't exist");
+					JOptionPane.showMessageDialog(verifyAccountButton, "No account with email: '" + email + "' found. Please double check your email address.");
 					
 				}
 			} catch (SQLException e1) {
