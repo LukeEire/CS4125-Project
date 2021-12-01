@@ -627,7 +627,7 @@ public class Database {
 		boolean verified;
 		try {
 			
-			String query = "SELECT * FROM " + users_db + "WHERE email_address = ' " + email +"'";
+			String query = "SELECT * FROM " + users_db + " WHERE email_address = \""+email+"\"";			
 
 			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
