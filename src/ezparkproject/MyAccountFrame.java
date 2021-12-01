@@ -10,7 +10,13 @@ import java.awt.*;
 
 public class MyAccountFrame extends Users implements ActionListener {
 	
-	
+	int id = Main.currentUser.getID();
+	String firstName = Main.currentUser.getFirstName();
+	String lastName = Main.currentUser.getLastName();
+	String password = Main.currentUser.getPassword();
+	String status = Main.currentUser.getStatus();
+	String dob = Main.currentUser.getsDOB();
+	String reg = Main.currentUser.getReg();
 	
 	
 	JFrame frame;
@@ -86,13 +92,7 @@ public class MyAccountFrame extends Users implements ActionListener {
 	
 	public void getUserDetails() {
 		
-		int id = Main.currentUser.getID();
-		String firstName = Main.currentUser.getFirstName();
-		String lastName = Main.currentUser.getLastName();
-		String password;
-		String status = Main.currentUser.getStatus();
-		String dob = Main.currentUser.getsDOB();
-		String reg = Main.currentUser.getReg();
+		
 		
 		// test to see what each string returns
 		
@@ -131,6 +131,7 @@ public class MyAccountFrame extends Users implements ActionListener {
         
         wUserLabel.setBounds(120, 60, 100, 70);
         wUserLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        wUserLabel.setSize(200,100);
         
      
         
@@ -236,6 +237,7 @@ public class MyAccountFrame extends Users implements ActionListener {
 		makeBookingButton.addActionListener(this);
 		changeBookingButton.addActionListener(this);
 		backButton.addActionListener(this);
+		updateDetailsButton.addActionListener(this);
 
 	}
 	
@@ -281,6 +283,9 @@ public class MyAccountFrame extends Users implements ActionListener {
 				Database db = new Database();
 				
 				db.changePassword(id, password);
+				
+				System.out.println(id);
+				System.out.println(password);
 				
 				JOptionPane.showMessageDialog(updateDetailsButton, "You have successfully changed your password");
 				
