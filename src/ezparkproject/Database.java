@@ -627,14 +627,14 @@ public class Database {
 		boolean verified;
 		try {
 			
-			String query = "SELECT * FROM " + users_db + " WHERE email_address = " + email;
+			String query = "SELECT * FROM " + users_db + "WHERE email_address = ' " + email +"'";
 
 			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			
 			if(!rs.isBeforeFirst()) {
 				System.out.println("User eMail Verification Failed!");
-				System.out.println("Entered eMail may be incorrect");
+				System.out.println("Entered eMail may be incorrect or may not exist");
 				System.out.println("Entered eMail: "+ email);
 				verified = false;
 			} else {
