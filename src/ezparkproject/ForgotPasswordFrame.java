@@ -156,6 +156,23 @@ public class ForgotPasswordFrame extends Users implements ActionListener {
 		if (e.getSource() == sendEmailButton) {
 			
 			/* Send password reset email if user's email exists in DB */
+			
+			/* This is a proof of concept and not a fully impemented system due to time constraints */
+			
+			try {
+				if (ForgotPasswordBackend.verifyEmail(email)) {
+					
+				
+					JOptionPane.showMessageDialog(sendEmailButton, "If your email address is in our records, you will receive an email with reset instructions to " + email + "");
+					
+				} else {						
+					
+					JOptionPane.showMessageDialog(sendEmailButton, "No account with email: '" + email + "' found. Please double check your email address.");
+					
+				}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 
 			
 		}	
