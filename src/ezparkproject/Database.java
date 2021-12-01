@@ -618,6 +618,43 @@ public class Database {
 			
 		}
 	}
+
+	// Pre-Condition - Passed value must be of type string
+	// Post-Condition: Verifies that email passed into this function is present in the Users Database
+	// Returns true if email are exists, false otherwise
+	public boolean verifyUserEmail(String email) throws SQLException {
+		
+		boolean verified;
+		try {
+			
+			String query = "SELECT * FROM " + users_db + " WHERE email_address = " + email;
+
+			PreparedStatement p = con.prepareStatement(query);
+			ResultSet rs = p.executeQuery(query);
+			
+			if(!rs.isBeforeFirst()) {
+				System.out.println("User eMail Verification Failed!");
+				System.out.println("Entered eMail may be incorrect");
+				System.out.println("Entered eMail: "+ email);
+				verified = false;
+			} else {
+				while (rs.next()) {
+					String foundEmail = rs.getString("email_address");
+					System.out.println("User eMail Verified!");
+					System.out.println("Found eMail: "+ foundEmail);
+				}
+				verified = true;
+			}
+			return verified;
+			
+		} catch(SQLException e) {
+									
+			System.out.println("Error locating data entered: " + e.getMessage());
+			verified = false;
+			return verified;
+			
+		}
+	}
 	
 	// Pre-Condition - id passed must exist in the DB
 	// Post-Condition - Returns 0 for student, 1 for staff, 2 for guest

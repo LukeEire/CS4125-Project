@@ -1,64 +1,16 @@
 package ezparkproject;
 
-import java.util.Properties;
-import java.util.Session;
-import javax.util.Authenticator;
+import java.sql.SQLException;
 
-import jdk.internal.net.http.websocket.Transport;
-
-import javax.mail.internet.MimeMessage;
-
-// Code adapted from - https://www.genuinecoder.com/send-email-from-java-application-using-java-mail-api/
 public class ForgotPasswordBackend {
-
-    public static void sendVerificationEmail(String recepient){
-
-        //  Used for configuring the mail properties
-        Properties properties = new Properties();
-
-        //Enable authentication
-        properties.put("mail.smtp.auth", "true");
-        //Set TLS encryption enabled
-        properties.put("mail.smtp.starttls.enable", "true");
-        //Set SMTP host
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        //Set smtp port
-        properties.put("mail.smtp.port", "587");
     
-        //EZPark gmail address
-        String myAccountEmail = "ezparkul@gmail.com";
-        //EZPark gmail password
-        String password = "jemQow-figzer-2tesme";
-    
-        //Create a session with account credentials
-        Session session = Session.getInstance(properties, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(myAccountEmail, password);
-            }
-        });
-    
-        //Prepare email message
-        Message message = prepareMessage(session, myAccountEmail, recepient);
-    
-        //Send mail
-        Transport.send(message);
-        System.out.println("Message sent successfully");
-    
+    // Pre-Condition - Passed value must be of type string
+    // Post-Condition - Verifies that email passed into this function is present in the Users Database
+	// Returns true if email are exists, false otherwise
+    public boolean verifyEmail(String email) throws SQLException{
+        Database db = new Database();
+        boolean result = db.verifyUserEmail(email);
+        return result;
     }
 
-    private static Message prepareMessage(Session session, String myAccountEmail, String recepient) {
-        try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(myAccountEmail));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-            message.setSubject("My First Email from Java App");
-            String htmlCode = "<h1> WE LOVE JAVA </h1> <br/> <h2><b>Next Line </b></h2>";
-            message.setContent(htmlCode, "text/html");
-            return message;
-        } catch (Exception ex) {
-            Logger.getLogger(JavaMailUtil.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
 }
