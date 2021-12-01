@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.awt.*;
@@ -14,12 +15,8 @@ import java.awt.*;
 
 public class AdminFrame implements ActionListener{
 	
-
-	// Declarations 
-	
-	ArrayList<Users> users;
 	AdminBackend Backend = new AdminBackend();
-	//String usersData = Backend.fetchUserFunction();
+
 		
 	JFrame frame;
 	
@@ -28,11 +25,8 @@ public class AdminFrame implements ActionListener{
 	JLabel reservationsPanel = new JLabel("Reservations Panel");
 	JLabel usersPanel = new JLabel("Users Panel");
 	JLabel transactionsPanel = new JLabel("Transactions Panel");
-	JLabel userBanLabel = new JLabel("Select User ID to ban");
-	JComboBox firstNameBox, userIDBox;
-    
+	JLabel userBanLabel = new JLabel("Enter User ID");
 
-	
 	
 	/* Text fields for labels */
 	
@@ -47,84 +41,13 @@ public class AdminFrame implements ActionListener{
 	JButton unbanUserButton = new JButton("Un-Ban User");
 	JButton deleteUserButton = new JButton("Delete User");
 	JButton logoutButton = new JButton("Logout");
+	JButton loadUsersButton = new JButton("Load Users");
+	JButton loadReservationsButton = new JButton("Load Reservations");
+	JButton loadTransactionsButton = new JButton("Load Transactions");
 	JButton applyPenaltyButton = new JButton("Apply Penalty");
 	JButton blockforEventButton = new JButton("Block Lot for event");
 	
-	public void createWindow() {
-
-		frame = new JFrame();
-		frame.setTitle("Admin Panel");
-		frame.setBounds(450, 190, 1100, 597);
-		frame.getContentPane().setBackground(Color.white);
-		frame.getContentPane().setLayout(null);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.validate();
-	}
 	
-	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void userBox() {
-		
-		try {
-
-            
-
-        	Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freemysqlhosting.net:3306/sql4450358","sql4450358", "dcCxqbDW1K");
-
-            PreparedStatement ps = con.prepareStatement("select firstName from Users");
-            PreparedStatement ps1 = con.prepareStatement("select id from Users");
-
-            ResultSet resultSet = ps.executeQuery();
-            ResultSet resultSet1 = ps1.executeQuery();
-
-
-			Vector results = new Vector();
-            Vector results_id = new Vector();
-
-            while (resultSet.next()) {
-
-                String firstNameVal = resultSet.getString(1);               
-                results.add(firstNameVal);
-
-            }
-            
-            while (resultSet1.next()) {
-
-                String userID = resultSet1.getString(1);
-                results_id.add(userID);
-
-            }
-            
-            /* Test to see if the methods display */
-            
-            System.out.println("Users"+results);
-            System.out.println("IDs"+results_id);
-            
-            firstNameBox = new JComboBox(results);          
-            firstNameBox.setBounds(350, 110, 40, 70);
-            firstNameBox.setSize(150,25);
-            
-            userIDBox = new JComboBox(results_id);          
-            userIDBox.setBounds(110, 63, 100, 73);
-            userIDBox.setSize(200,25);
-
-            frame.add(firstNameBox);
-            frame.add(userIDBox);
-            
-            firstNameBox.setVisible(true);
-            userIDBox.setVisible(true);
- 
-
-        } catch (Exception ex) {
-
-            System.out.println(ex);
-
-        }
-		
-	}
-
 
 	AdminFrame() {
 
@@ -132,35 +55,38 @@ public class AdminFrame implements ActionListener{
 		setLocationAndSize();
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		addComponentsToFrame();
-		actionEvent();	
-		userBox();
+		actionEvent();		
 		
-		
-        
 	}
 	
 	
 
+	public void createWindow() {
 
+		frame = new JFrame();
+		frame.setTitle("Admin Panel");
+		frame.setBounds(450, 190, 425, 597);//'
+		frame.getContentPane().setBackground(Color.white);
+		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+	}
 
 	public void setLocationAndSize() {
 		
 		/* Label Bounds */
-
-		usersPanel.setBounds(350, 75, 40, 70);
-		usersPanel.setSize(200,20);
 		
-		reservationsPanel.setBounds(600, 75, 40, 70);
-		reservationsPanel.setSize(200,20);
-		
-		transactionsPanel.setBounds(850, 75, 40, 70);
-		transactionsPanel.setSize(200,20);
-		
-		userBanLabel.setBounds(110, 23, 100, 73);
+		userBanLabel.setBounds(170, 23, 100, 73);
 		userBanLabel.setSize(200,20);
 		
-
+    
+        /* Text fields and drop downs bounds */
         
+		userIDTextField.setBounds(110, 63, 100, 73);
+		userIDTextField.setSize(200,20);
+		
+      
         /* Ban User Button */
         
         banUserButton.setBounds(110, 100, 100, 73);
@@ -200,21 +126,14 @@ public class AdminFrame implements ActionListener{
 		
 		/* Labels */
 
-		frame.add(usersPanel);	
-		frame.add(reservationsPanel);
-		frame.add(transactionsPanel);
 		frame.add(userBanLabel);
 
-		
 		/* Text fields and drop downs */
 		
 		
 		frame.add(userIDTextField);
 
-
-		
-
-		
+	
 		/* Buttons */
 		
 		frame.add(banUserButton);
@@ -223,9 +142,9 @@ public class AdminFrame implements ActionListener{
 		frame.add(logoutButton);
 		frame.add(blockforEventButton);
 		frame.add(applyPenaltyButton);
-		
 	}
 	
+
 
 	public void actionEvent() {
 
@@ -233,48 +152,79 @@ public class AdminFrame implements ActionListener{
 		unbanUserButton.addActionListener(this);
 		deleteUserButton.addActionListener(this);
 		logoutButton.addActionListener(this);
+		loadUsersButton.addActionListener(this);
+		loadReservationsButton.addActionListener(this);
+		loadTransactionsButton.addActionListener(this);
 		blockforEventButton.addActionListener(this);
 	}
 	
 	
 	/* Create Database before using */
+	/* Takes ID as an int from the textField */
 	
 	public void actionPerformed(ActionEvent e) {
 
-		/* Takes ID as an int from the textField */
-		
-		int id = Integer.parseInt((String)userIDBox.getSelectedItem()); 
-		
-		String firstName = firstNameBox.getSelectedItem().toString();
-		
 
 		if (e.getSource() == banUserButton) {
 			
+			int id = Integer.parseInt(userIDTextField.getText());
 			
+			try {
+				if (AdminBackend.verifyUserID(id)) {
+					
+					
+					JOptionPane.showMessageDialog(banUserButton, "User " +id + " has been banned successfully");
+					AdminBackend.BanUserFunction(id);
+					
+				} else {						
+					
+					JOptionPane.showMessageDialog(banUserButton, "User " +id + " couldn't be found");
+					
+				}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		
 			
-			AdminBackend.BanUserFunction(id);
 		}	
 			
 		if (e.getSource() == unbanUserButton) {
 			
+			int id = Integer.parseInt(userIDTextField.getText());
 			
+			try {
+				if (AdminBackend.verifyUserID(id)) {
+					
+					
+					JOptionPane.showMessageDialog(unbanUserButton, "User " +id + " has been unbanned");
+					AdminBackend.unBanUserFunction(id);
+					
+				} else {						
+					
+					JOptionPane.showMessageDialog(unbanUserButton, "User " +id + " couldn't be found");
+					
+				}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 
-			AdminBackend.unBanUserFunction(id);
+			
 		}
 
 		if (e.getSource() == deleteUserButton) {
 			
+			int id = Integer.parseInt(userIDTextField.getText());
 			
 			try {
 				AdminBackend.deleteUserFunction(id);
+				JOptionPane.showMessageDialog(deleteUserButton, "User " +id + " has been deleted from the system");
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 			
 		}
 		
-
 
 		
 		if (e.getSource() == blockforEventButton) {

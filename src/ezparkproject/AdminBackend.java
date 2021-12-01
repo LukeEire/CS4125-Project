@@ -64,7 +64,7 @@ public class AdminBackend {
 	}
 		
 		
-	public static void BanUserFunction(int id) {
+	public static boolean BanUserFunction(int id) {
 		
 		try {
 			
@@ -73,13 +73,14 @@ public class AdminBackend {
 			db.banUser(id);
 			
 			
-			
+			return true;
 			
 		} catch (SQLException error) {
 
 			System.out.println("Could not connect to the database " + error.getMessage());
 
 		}
+		return true;
 	}
 		
 		
@@ -101,18 +102,40 @@ public class AdminBackend {
 		
 	}
 	
-	public static void fetchUserFunction() {
+ 
+public static boolean verifyUserID(int id) throws SQLException{
 		
-		
-	}
+    	try {
+    		
+    		Database db = new Database();
+    		
+    		
+    		if (db.verifyUserID(id)) {
+    			
+                System.out.println("Account '" + id + "' found!");
+                
+                
+                
+            return true;   
+                
+    		
+    		} else {
+    			
+    			
+    			System.out.println("No account with user id: '" + id + "' found. Please double check your user id.");
+    			
+    		}
+    		
+    	} catch (SQLException error) {
 
+    		System.out.println("Could not connect to the database " + error.getMessage());
 
-		
-		
-	
-				
-				
-					
+    	}
+
+    	
+    	return false;
+        
+    }
 				
 	
 	

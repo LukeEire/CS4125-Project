@@ -656,6 +656,47 @@ public class Database {
 		}
 	}
 	
+	
+		// Pre-Condition - Passed value must be of type int
+		// Post-Condition: Verifies that user id passed into this function is present in the Users Database
+		// Returns true if user id are exists, false otherwise
+		// Created by Ashutosh Yadav
+	
+	
+	public boolean verifyUserID(int id) throws SQLException {
+		
+		boolean verified;
+		try {
+			
+			String query = "SELECT * FROM " + users_db + " WHERE id = \""+id+"\"";			
+
+			PreparedStatement p = con.prepareStatement(query);
+			ResultSet rs = p.executeQuery(query);
+			
+			if(!rs.isBeforeFirst()) {
+				System.out.println("User ID Verification Failed");
+				System.out.println("Entered User ID may be incorrect or may not exist");
+				System.out.println("Entered User ID: "+ id);
+				verified = false;
+			} else {
+				while (rs.next()) {
+					int foundID = rs.getInt("id");
+					System.out.println("User ID verified");
+					System.out.println("Found User ID: "+ foundID);
+				}
+				verified = true;
+			}
+			return verified;
+			
+		} catch(SQLException e) {
+									
+			System.out.println("Error locating data entered: " + e.getMessage());
+			verified = false;
+			return verified;
+			
+		}
+	}
+	
 	// Pre-Condition - id passed must exist in the DB
 	// Post-Condition - Returns 0 for student, 1 for staff, 2 for guest
 	public int getUserStatus(int id) throws SQLException{
