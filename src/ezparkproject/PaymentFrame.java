@@ -1,113 +1,173 @@
 package ezparkproject;
 
-import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
+public class PaymentFrame extends Users implements ActionListener {
 
-public class PaymentFrame extends JFrame {
-
-	private JPanel contentPane;
+	JFrame frame;
 	
-	private JLabel ccLabel;
-	private JLabel cvvLabel;
-	private JLabel expiryLabel;
+	JLabel ccLabel;
+	JLabel cvvLabel;
+	JLabel expiryLabel;
 	
-	private JTextField ccTextField;
-	private JTextField cvvTextField;
-	private JTextField expiryTextField;
+	JTextField ccField;
+	JTextField cvvField;
+	JTextField expiryField;
 	
-	private JButton payButton;
-	  
+	JButton payButton;
+	JButton backButton;
+	
 	String ccNumber = "";
 	String cvvNumber = "";
 	String expiry = "";
 	
-	ParkingSystem app;
 
-	PaymentFrame paymentFrame = this;
-	
-	double totalFee = 2;
-	
-	public PaymentFrame(ParkingSystem payment) 
-	{
-		this.app = payment;
-	
-		initComponents(); 
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Pay & Exit");
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new GridLayout(8, 2));
+	PaymentFrame() {
 
-		contentPane.add(ccLabel);
-		contentPane.add(ccTextField);
+		createWindow();
+		setLocationAndSize();
+		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
+		addComponentsToFrame();
+		actionEvent();
 		
-		contentPane.add(cvvLabel);
-		contentPane.add(cvvTextField);
 		
-		contentPane.add(expiryLabel);
-		contentPane.add(expiryTextField);
-		
-		contentPane.add(payButton);
-		
-		setContentPane(contentPane);
 	}
 	
-	private void initComponents()
-	{
-		ccLabel = new JLabel("Credit Card Number: ");
-		ccTextField = new JTextField();
+	public void createWindow() {
+
+		frame = new JFrame();
+		frame.setTitle("Pay for Parking!");
+		frame.setBounds(450, 190, 1014, 597);
+		frame.getContentPane().setBackground(Color.white);
+		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+	}
+
+
+	public void setLocationAndSize() {
 		
-		cvvLabel = new JLabel("CVV Number: ");
-		cvvTextField = new JTextField();
+		
+		/* Label locations */
+		
+		ccLabel.setBounds(350, 35, 2, 30);
+		ccLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
+		ccLabel.setSize(500,50);
+	
+        
+		ccField.setBounds(410,75, 90, 23);  
+		ccField.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		ccField.setSize(100,50);
+		ccField.setEditable(true);
+
+
+        /* Find ID Button */
+        
+		payButton.setBounds(310, 150, 100, 73);
+		payButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		payButton.setSize(300,50);
+		
+		backButton.setBounds(310, 150, 100, 73);
+		backButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		backButton.setSize(300,50);
+        
+
+       
+        
+
+	}
+
+	public void addComponentsToFrame() {
+		
+
+		/* Buttons */
+		
+		frame.add(payButton);
+		frame.add(backButton);
+		
+		
+		/* Labels */
 				
-		expiryLabel = new JLabel("Expiry: ");
-		expiryTextField = new JTextField();
+		frame.add(ccLabel);
+		frame.add(ccLabel);
+		frame.add(ccLabel);
+		/* Text fields */
 		
-		ccNumber = ccTextField.getText();
-		cvvNumber = ccTextField.getText();
-		expiry = expiryTextField.getText();
+		frame.add(ccField);
+		frame.add(ccField);
+		frame.add(ccField);
+
+
+	}
+	
+	
+
+	public void actionEvent() {
+
+		payButton.addActionListener(this);
+
+
+	}
+	
+
+	public void actionPerformed(ActionEvent e) {
+
 		
-		app.setPaymentInformation(ccNumber, cvvNumber, expiry);
-		
-		payButton = new JButton("Pay");
-		payButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-				boolean isValid = app.validateCreditCard();
+		if (e.getSource() == payButton) {
+			
+			/* checks for existing ID's in the reservations field */
+			
+			
+			try {
+				if (ParkingSystem.checkID(id)) {
+					
 				
-				if(isValid)
-				{
-					double totalFee = app.getTotalFee();
-					JOptionPane.showMessageDialog(payButton, "Thanks for the payment of: €" + totalFee + "\n" + "See you soon! ");
-										
-					paymentFrame.dispose();
-					ParkingFrame.mainFrame.setVisible(true);
+					JOptionPane.showMessageDialog(payButton, "yee");
+					
+				} else {						
+					
+					JOptionPane.showMessageDialog(payButton, "shit");
+					
 				}
-				else
-				{
-					JOptionPane.showMessageDialog(payButton, "Invalid Credit Card! \nPlease re-enter the details again.");
-					ccTextField.setText("");
-					ccTextField.requestFocus();
-					cvvTextField.setText("");
-					expiryTextField.setText("");
-				}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
 			}
-		});
-	}
-	
-	
-	
 
+			
+		}	
+			
+		
+		
+		if (e.getSource() == backButton) {
+			
+			frame.dispose();
+			Dashboard frame = new Dashboard();
+            frame.setVisible(true);
+	        
+		}
+			        		
+				
+
+	}
+
+	public void setVisible(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
 }
