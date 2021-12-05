@@ -5,8 +5,6 @@ import java.sql.Date;
 
 public class TicketSystem 
 {
-	Database db;
-	Connection con;
 	
 	private int spaceNum;
 	private long startTime;

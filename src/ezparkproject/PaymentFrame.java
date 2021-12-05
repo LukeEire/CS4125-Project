@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class PaymentFrame extends Users implements ActionListener {
+public class PaymentFrame implements ActionListener {
 
 	JFrame frame;
 	
@@ -28,10 +28,6 @@ public class PaymentFrame extends Users implements ActionListener {
 	
 	JButton payButton;
 	JButton backButton;
-	
-	String ccNumber = "";
-	String cvvNumber = "";
-	String expiry = "";
 	
 
 	PaymentFrame() {
@@ -48,7 +44,7 @@ public class PaymentFrame extends Users implements ActionListener {
 	public void createWindow() {
 
 		frame = new JFrame();
-		frame.setTitle("Pay for Parking!");
+		frame.setTitle("Test!");
 		frame.setBounds(450, 190, 1014, 597);
 		frame.getContentPane().setBackground(Color.white);
 		frame.getContentPane().setLayout(null);
@@ -66,12 +62,31 @@ public class PaymentFrame extends Users implements ActionListener {
 		ccLabel.setBounds(350, 35, 2, 30);
 		ccLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
 		ccLabel.setSize(500,50);
+		
+		cvvLabel.setBounds(350, 35, 2, 30);
+		cvvLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
+		cvvLabel.setSize(500,50);
+		
+		expiryLabel.setBounds(350, 35, 2, 30);
+		expiryLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
+		expiryLabel.setSize(500,50);
 	
-        
-		ccField.setBounds(410,75, 90, 23);  
+		/* text fields locations */
+		
+		ccField.setBounds(410, 75, 90, 23);  
 		ccField.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		ccField.setSize(100,50);
 		ccField.setEditable(true);
+
+		cvvField.setBounds(410,75, 90, 23);  
+		cvvField.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		cvvField.setSize(100,50);
+		cvvField.setEditable(true);
+		
+		expiryField.setBounds(410,75, 90, 23);  
+		expiryField.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		expiryField.setSize(100,50);
+		expiryField.setEditable(true);
 
 
         /* Find ID Button */
@@ -130,22 +145,6 @@ public class PaymentFrame extends Users implements ActionListener {
 			
 			/* checks for existing ID's in the reservations field */
 			
-			
-			try {
-				if (ParkingSystem.checkID(id)) {
-					
-				
-					JOptionPane.showMessageDialog(payButton, "yee");
-					
-				} else {						
-					
-					JOptionPane.showMessageDialog(payButton, "shit");
-					
-				}
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-
 			
 		}	
 			

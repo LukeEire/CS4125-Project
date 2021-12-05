@@ -22,7 +22,7 @@ public class ParkingSystem {
 
 			if (db.checkID(id)) {
 
-				System.out.println("Booking Number '" + id + "' found! Taking you to Payment!");
+				System.out.println("Booking Number " + id + " Correct! Taking you to Payment!");
 				 
            		return true;  
 

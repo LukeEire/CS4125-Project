@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class ParkingFrame extends Users implements ActionListener {
+public class ParkingFrame implements ActionListener {
 
 	JFrame frame;
 	
@@ -131,7 +131,7 @@ public class ParkingFrame extends Users implements ActionListener {
 				if (ParkingSystem.checkID(id)) {
 					
 				
-					JOptionPane.showMessageDialog(checkIDButton, "Booking ID : " + id + "found");
+					JOptionPane.showMessageDialog(checkIDButton, "Booking number " + id + " is Valid. Taking you to Payment! ");
 					frame.dispose();
 					PaymentFrame frame = new PaymentFrame();
 		            frame.setVisible(true);

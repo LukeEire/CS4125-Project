@@ -1,7 +1,5 @@
 package ezparkproject;
 
-import java.sql.SQLException;
-
 public class PaymentCheck 
 {
 	String creditCardNumber;
