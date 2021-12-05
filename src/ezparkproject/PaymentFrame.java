@@ -21,10 +21,13 @@ public class PaymentFrame implements ActionListener {
 	JLabel ccLabel = new JLabel("Credit Card Number: ");;
 	JLabel cvvLabel = new JLabel("CVV Number (3-Digits: ");;
 	JLabel expiryLabel = new JLabel("Expiry Date: ");;
+	JLabel lotLabel = new JLabel("Lot Number: ");;
+	
 	
 	JTextField ccField = new JTextField();;
 	JTextField cvvField = new JTextField();;
 	JTextField expiryField = new JTextField();;
+	JTextField lotField = new JTextField();;
 	
 	JButton payButton = new JButton("Pay");;
 	JButton backButton = new JButton("Back");;
@@ -71,6 +74,10 @@ public class PaymentFrame implements ActionListener {
 		expiryLabel.setBounds(50, 300, 2, 30);
 		expiryLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
 		expiryLabel.setSize(500,50);
+		
+		lotLabel.setBounds(50, 400, 20, 30);
+		lotLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
+		lotLabel.setSize(500,50);
 	
 		/* text fields locations */
 		
@@ -88,6 +95,11 @@ public class PaymentFrame implements ActionListener {
 		expiryField.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		expiryField.setSize(300,30);
 		expiryField.setEditable(true);
+		
+		lotField.setBounds(300,410, 90, 23);  
+		lotField.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lotField.setSize(300,30);
+		lotField.setEditable(true);
 
 
         /* Find ID Button */
@@ -129,6 +141,10 @@ public class PaymentFrame implements ActionListener {
 		frame.add(expiryLabel);
 		frame.add(expiryLabel);
 		
+		frame.add(lotLabel);
+		frame.add(lotLabel);
+		frame.add(lotLabel);
+		
 		/* Text fields */
 		
 		frame.add(ccField);
@@ -142,7 +158,10 @@ public class PaymentFrame implements ActionListener {
 		frame.add(expiryField);
 		frame.add(expiryField);
 		frame.add(expiryField);
-
+		
+		frame.add(lotField);
+		frame.add(lotField);
+		frame.add(lotField);
 
 
 	}
@@ -158,17 +177,16 @@ public class PaymentFrame implements ActionListener {
 	
 
 	public void actionPerformed(ActionEvent e) {
-
-		int created_on = Integer.parseInt(ccField.getText());
+		String lot = lotField.getText();
 		
 		if (e.getSource() == payButton) {
 			
 			
 			try {
-				if (PaymentBackend.checkTime(created_on)) {
+				if (PaymentBackend.checkLot(lot)) {
 					
 				
-					JOptionPane.showMessageDialog(payButton, "working ");
+					JOptionPane.showMessageDialog(payButton, "Booking number " + lot + " is Valid. ");
 					
 				} else {						
 					

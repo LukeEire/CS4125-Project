@@ -1172,23 +1172,23 @@ public boolean checkID(int id) throws SQLException { //conall testing
 		}
 	}
 
-public boolean checkTime(int created_on) throws SQLException { //conall time test
+public boolean checkLot(String lot) throws SQLException { //conall time test
 	
 	boolean verified;
 	try {
-		String query = "SELECT * FROM " + reservations_db + " WHERE created_on = " + created_on;		
+		String query = "SELECT * FROM " + reservations_db + " WHERE lot = " + lot;		
 
 		PreparedStatement p = con.prepareStatement(query);
 		ResultSet rs = p.executeQuery(query);
 		
 		if(!rs.isBeforeFirst()) {
-			System.out.println("Time Parked at: "+ created_on);
+			System.out.println("Time Parked at: "+ lot);
 			verified = false;
 		} else {
 			while (rs.next()) {
-				String foundTime = rs.getString("id");
+				String foundLot = rs.getString("lot");
 				System.out.println("Booking Verified!");
-				System.out.println("Found Booking: "+ foundTime );
+				System.out.println("Found Booking: "+ foundLot );
 			}
 			verified = true;
 		}

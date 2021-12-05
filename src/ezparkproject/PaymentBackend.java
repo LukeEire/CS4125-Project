@@ -13,23 +13,23 @@ public class PaymentBackend {
 
 	}
 
-	public static boolean checkTime(int created_on) throws SQLException{
+	public static boolean checkLot(String lot) throws SQLException{
 
 		try {
 
 			Database db = new Database();
 
 
-			if (db.checkTime(created_on)) {
+			if (db.checkLot(lot)) {
 
-				System.out.println("Booking Number " + created_on + " Correct! Taking you to Payment!");
+				System.out.println("Lot ID: " + lot + " Correct! Payment Successful!");
 				 
            		return true;  
 
 			} else {
 
 
-				System.out.println("No booking ID: '" + created_on + "' found. Please double check your booking number please.");
+				System.out.println("Lot ID: '" + lot + "' not found. Please double check your Lot number please.");
 
 			}
 
