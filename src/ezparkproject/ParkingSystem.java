@@ -2,161 +2,62 @@ package ezparkproject;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ParkingSystem {
-	
-	Database db;
-	Connection con;
-	
-	private ArrayList<ParkingSpace> slots = null;
-	ArrayList<TicketSystem> ticketList = null;
-	ParkingSpace slot = null;
-	
-	private long startTime = 0;
-	private long endTime;
-	private String durationParked;
-	private Date date;
-	
-	private static final double fee = 2; // Parking fee 2 euro for every 60 minutes parked 
-	private static final int minimumTime = 60;
-	int timeInMinutes = 0;
-	private double totalFee = 2;
-	PaymentInfo payInfo = null;
-	
+
+
 	public ParkingSystem() 
 	{
-		Lot lot = new Lot();
-		slots = lot.getParkingSlots();
-		
-		ticketList = new ArrayList<>(); // save tickets already made
-	}
-	
-	public TicketSystem park()
-	{
-		ParkingSpace slot = checkAvailability(); // check for available slots
-		
-		if (slot != null)
-		{
-			startTime = System.currentTimeMillis();
-						
-			TicketSystem ticketSystem = new TicketSystem(slot.getSlotNumber(), startTime, date);
-			ticketList.add(ticketSystem); // save the ticket in ticketList
-			
-			slot.setAvailability(false); // this slot is no more available
-			return ticketSystem;
-		}
-		return null;		
-	}
-	
-	
-	public ParkingSpace checkAvailability()
-	{
-		for(int i = 0; i < slots.size(); i++)
-		{
-			slot = slots.get(i);
-			
-			// check availability
-			if(slot.getAvailability() == true)
-			{
-				return slot;
-			}
-		}
-		return null;
-	}
-	
-	public void captureEndTime()
-	{
-		// capture end time
-		endTime = System.currentTimeMillis();
-	}
-	
-	
-	public boolean validateTicketNumber(int ticketNumEntered)
-	{
-		boolean isValid = false;
-		
-		for (int i = 0; i < ticketList.size(); i++)
-		{
-			int slotNumber = ticketList.get(i).getSlotNumber();
-			
-			if (ticketNumEntered == slotNumber)
-			{
-				isValid = true;
-				startTime = ticketList.get(i).getStartTime();
-				break;
-			}
-		}
-		return isValid;
+
 	}
 
+	public static boolean checkID(int id) throws SQLException{
+
+		try {
+
+			Database db = new Database();
 
 
-	public void timeParked()
-	{
-		long durationMilliSeconds = endTime - startTime; // total time the card was parked in the space
-		durationParked = convertTimeFormat(durationMilliSeconds);
-		String [] time = durationParked.split(":");
-		int hours = Integer.parseInt(time[0]);
-		int minutes = Integer.parseInt(time[1]);
-		int seconds = Integer.parseInt(time[2]);
-		timeInMinutes = (hours * 60) + minutes + (seconds / 60);
-	}
-	
-	public double getTotalFee()
-	{
-		if(totalFee == 2)
-		{
-			if (timeInMinutes < 60)
-				totalFee = 2;
-			else
-				totalFee = (timeInMinutes / minimumTime) * fee;
-		}
-		
-		return totalFee;
-	}
-		
-	
-	public void spaceAvailable(int ticketNumber)
-	{
-		for (int i = 0; i < slots.size(); i++)
-		{
-			int slotNumber = slots.get(i).getSlotNumber();
-			
-			if (ticketNumber == slotNumber)
-			{
-				slot = slots.get(i);
-				slot.setAvailability(true);
+			if (db.checkID(id)) {
+
+				System.out.println("Booking Number '" + id + "' found! Taking you to Payment!");
+				 
+           		return true;  
+
+			} else {
+
+
+				System.out.println("No booking ID: '" + id + "' found. Please double check your booking number please.");
+
 			}
+
+		} catch (SQLException error) {
+
+			System.out.println("Could not connect to the database " + error.getMessage());
+
 		}
+
+
+		return false;
+
 	}
-	
-	
-	public void setPaymentInformation(String ccNumber, String cvvNumber, String expiry)
-	{
-		payInfo = new PaymentInfo(ccNumber, cvvNumber, expiry);
+
+	public boolean validateCreditCard() {
+		return false;
 	}
-	
-	
-	public boolean validateCreditCard()
-	{
-		PaymentCheck paymentCheck = new PaymentCheck(payInfo);
-		return paymentCheck.validateCreditCard();
+
+	public double getTotalFee() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
-	public String convertTimeFormat(long milliSeconds)
-	{
-	    long totalSeconds = milliSeconds / 1000;
-	    long Seconds = totalSeconds % 60;
-	    long totalMinutes = totalSeconds / 60;
-		long Minutes = totalMinutes % 60;
-	    long totalHours = totalMinutes / 60;
-	    long Hours = totalHours % 24;
+
+	public void setPaymentInformation(String ccNumber, String cvvNumber, String expiry) {
+		// TODO Auto-generated method stub
 		
-	    return Hours + ":" + Minutes + ":" + Seconds;
-	
 	}
-	
-	
+
 
 }
+
