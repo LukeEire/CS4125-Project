@@ -128,7 +128,7 @@ public class ParkingFrame implements ActionListener {
 			
 			
 			try {
-				if (ParkingSystem.checkID(id)) {
+				if (ParkingBackend.checkID(id)) {
 					
 				
 					JOptionPane.showMessageDialog(checkIDButton, "Booking number " + id + " is Valid. Taking you to Payment! ");

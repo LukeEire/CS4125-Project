@@ -18,18 +18,19 @@ public class PaymentFrame implements ActionListener {
 
 	JFrame frame;
 	
-	JLabel ccLabel;
-	JLabel cvvLabel;
-	JLabel expiryLabel;
+	JLabel ccLabel = new JLabel("Credit Card Number: ");;
+	JLabel cvvLabel = new JLabel("CVV Number (3-Digits: ");;
+	JLabel expiryLabel = new JLabel("Expiry Date: ");;
 	
-	JTextField ccField;
-	JTextField cvvField;
-	JTextField expiryField;
+	JTextField ccField = new JTextField();;
+	JTextField cvvField = new JTextField();;
+	JTextField expiryField = new JTextField();;
 	
-	JButton payButton;
-	JButton backButton;
-	
+	JButton payButton = new JButton("Pay");;
+	JButton backButton = new JButton("Back");;
 
+	double Fee = 2;
+	
 	PaymentFrame() {
 
 		createWindow();
@@ -44,7 +45,7 @@ public class PaymentFrame implements ActionListener {
 	public void createWindow() {
 
 		frame = new JFrame();
-		frame.setTitle("Test!");
+		frame.setTitle("Payment Detail Screen");
 		frame.setBounds(450, 190, 1014, 597);
 		frame.getContentPane().setBackground(Color.white);
 		frame.getContentPane().setLayout(null);
@@ -59,45 +60,45 @@ public class PaymentFrame implements ActionListener {
 		
 		/* Label locations */
 		
-		ccLabel.setBounds(350, 35, 2, 30);
+		ccLabel.setBounds(50, 100, 20, 30);
 		ccLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
 		ccLabel.setSize(500,50);
 		
-		cvvLabel.setBounds(350, 35, 2, 30);
+		cvvLabel.setBounds(50, 200, 200, 30);
 		cvvLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
 		cvvLabel.setSize(500,50);
 		
-		expiryLabel.setBounds(350, 35, 2, 30);
+		expiryLabel.setBounds(50, 300, 2, 30);
 		expiryLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
 		expiryLabel.setSize(500,50);
 	
 		/* text fields locations */
 		
-		ccField.setBounds(410, 75, 90, 23);  
+		ccField.setBounds(300, 110, 250, 100);  
 		ccField.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		ccField.setSize(100,50);
+		ccField.setSize(300,30);
 		ccField.setEditable(true);
 
-		cvvField.setBounds(410,75, 90, 23);  
+		cvvField.setBounds(300,210, 90, 23);  
 		cvvField.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		cvvField.setSize(100,50);
+		cvvField.setSize(300,30);
 		cvvField.setEditable(true);
 		
-		expiryField.setBounds(410,75, 90, 23);  
+		expiryField.setBounds(300,310, 90, 23);  
 		expiryField.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		expiryField.setSize(100,50);
+		expiryField.setSize(300,30);
 		expiryField.setEditable(true);
 
 
         /* Find ID Button */
         
-		payButton.setBounds(310, 150, 100, 73);
+		payButton.setBounds(210, 450, 100, 73);
 		payButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		payButton.setSize(300,50);
+		payButton.setSize(200,50);
 		
-		backButton.setBounds(310, 150, 100, 73);
+		backButton.setBounds(510, 450, 100, 73);
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		backButton.setSize(300,50);
+		backButton.setSize(200,50);
         
 
        
@@ -119,11 +120,29 @@ public class PaymentFrame implements ActionListener {
 		frame.add(ccLabel);
 		frame.add(ccLabel);
 		frame.add(ccLabel);
+		
+		frame.add(cvvLabel);
+		frame.add(cvvLabel);
+		frame.add(cvvLabel);
+		
+		frame.add(expiryLabel);
+		frame.add(expiryLabel);
+		frame.add(expiryLabel);
+		
 		/* Text fields */
 		
 		frame.add(ccField);
 		frame.add(ccField);
 		frame.add(ccField);
+		
+		frame.add(cvvField);
+		frame.add(cvvField);
+		frame.add(cvvField);
+		
+		frame.add(expiryField);
+		frame.add(expiryField);
+		frame.add(expiryField);
+
 
 
 	}
@@ -143,9 +162,12 @@ public class PaymentFrame implements ActionListener {
 		
 		if (e.getSource() == payButton) {
 			
-			/* checks for existing ID's in the reservations field */
+			JOptionPane.showMessageDialog(payButton, "Thank You for the payment of: €" + Fee + "\n" +
+					 "Returning to Dashboard! ");
 			
-			
+			frame.dispose();
+			Dashboard frame = new Dashboard();
+			frame.setVisible(true);
 		}	
 			
 		
@@ -153,7 +175,7 @@ public class PaymentFrame implements ActionListener {
 		if (e.getSource() == backButton) {
 			
 			frame.dispose();
-			Dashboard frame = new Dashboard();
+			ParkingFrame frame = new ParkingFrame();
             frame.setVisible(true);
 	        
 		}
