@@ -1,177 +1,171 @@
 package ezparkproject;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.TimeZone;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
+public class ParkingFrame extends Users implements ActionListener {
 
-public class ParkingFrame extends JFrame {
-
-	private JPanel contentPane;
-	private JButton parkingButton;
-	private JButton parkingButton1;
-	private JButton logoutButton;
-	private JButton backButton;
+	JFrame frame;
 	
+	JButton checkIDButton = new JButton("Pay your Booking");
+	JButton backButton = new JButton("Back");
 	
-	private static ParkingSystem app = new ParkingSystem();
-	static ParkingFrame mainFrame;
+	JLabel idLabel = new JLabel("Enter your booking number please!");
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					mainFrame = new ParkingFrame();
-					mainFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	JTextField idField = new JTextField();
+	
+
+	ParkingFrame() {
+
+		createWindow();
+		setLocationAndSize();
+		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
+		addComponentsToFrame();
+		actionEvent();
+		
+		
+	}
+	
+	public void createWindow() {
+
+		frame = new JFrame();
+		frame.setTitle("Pay for Parking!");
+		frame.setBounds(450, 190, 1014, 597);
+		frame.getContentPane().setBackground(Color.white);
+		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
 	}
 
-	public ParkingFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("PayNow Parking");
-		contentPane = new JPanel();
-	    setContentPane(contentPane);
-	    contentPane.setLayout(null);
-		setBounds(450, 190, 1014, 597);
-        setResizable(false);
+
+	public void setLocationAndSize() {
+		
+		
+		/* Label locations */
+		
+		idLabel.setBounds(350, 35, 2, 30);
+		idLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
+		idLabel.setSize(500,50);
+		
+
         
-        JLabel lblNewLabel = new JLabel("EZPark");
-        lblNewLabel.setForeground(Color.BLACK);
-        lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 46));
-        lblNewLabel.setBounds(423, 13, 273, 93);
-        contentPane.add(lblNewLabel);
-      		
-        parkingButton = new JButton("Non-Pre Booked Parking");
-		parkingButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		parkingButton.setBounds(240, 120, 100, 73);
-		parkingButton.setSize(500,50);
-		parkingButton.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) 
-			{				
-				TicketSystem getNewTicket = app.park();
-				
-				if (getNewTicket == null)
-				{
-					JOptionPane.showMessageDialog(parkingButton, "Parking unavailable");
-				}
-				else
-				{
-					Date date = getNewTicket.getDate();
-					int ticketNumber = getNewTicket.getSlotNumber();
-					long time = getNewTicket.getStartTime();
-					
-					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-					DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-					date = new Date(time);
-					dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-										
-					JOptionPane.showMessageDialog(parkingButton, "Today's Date: " + dateFormat.format(date) + "\n" +
-														   "Your parking ticket number: " + ticketNumber + "\n" +
-														   "Start Time: " + timeFormat.format(date));
-				}
-			}
-		});
+        /* Text Field Locations */
+        
+        idField.setBounds(410,75, 90, 23);  
+        idField.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        idField.setSize(100,50);
+        idField.setEditable(true);
+
+
+        /* Find ID Button */
+        
+        checkIDButton.setBounds(310, 150, 100, 73);
+        checkIDButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        checkIDButton.setSize(300,50);
+        
+
+       
+        /* Back Button Button */
+        
+        backButton.setBounds(310,250, 100, 73);
+        backButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        backButton.setSize(300,50);
+        
+        
+
+	}
+
+	public void addComponentsToFrame() {
 		
-		JButton parkingButton1 = new JButton("Pay Reserved Parking");
-		parkingButton1.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		parkingButton1.setBounds(240, 350, 100, 73);
-		parkingButton1.setSize(500,50);
-		parkingButton1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-			
-				try {
-					
-					
-				} 
-				catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				
-				// mainFrame.setVisible(false); // hides the frame 
-				
-			}
-		});
+
+		/* Buttons */
 		
+		frame.add(checkIDButton);
+		frame.add(backButton);
+		
+		
+		/* Labels */
+				
+		frame.add(idLabel);
+		
+		/* Text fields */
+		
+		frame.add(idField);
+
+
+	}
 	
-		
-		JButton exitButton = new JButton("Pay Non-Booked Parking");
-		exitButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		exitButton.setBounds(240, 235, 100, 73);
-		exitButton.setSize(500,50);
-		exitButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-				app.captureEndTime(); 
-				
-				PaymentMidFrame paymentMidFrame = null;
-				
-				try {
-					paymentMidFrame = new PaymentMidFrame(app); // display new frame for entering ticket number
-					
-				} 
-				catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				
-				// mainFrame.setVisible(false); // hides the frame 
-				paymentMidFrame.setVisible(true);
-			}
-		});
-		
-		
-		backButton = new JButton("Back");
-		backButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		backButton.setBounds(340, 450, 200, 73);
-		backButton.setSize(100,30);
-		backButton.addActionListener(new ActionListener() {
+	
 
-	        	public void actionPerformed(ActionEvent e) {
-	        		
-	        		if (e.getSource() == backButton) {
-	        		 dispose();
-	       			 Dashboard frame = new Dashboard();
-	                 frame.setVisible(true);
-	       	        
-	       		}
-	       		
-	        	}
-	        });
-		
-		logoutButton = new JButton("Quit");
-        logoutButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        logoutButton.setBounds(540, 450, 200, 73);
-        logoutButton.setSize(100,30);
-        logoutButton.addActionListener(new ActionListener() {
+	public void actionEvent() {
 
-        	public void actionPerformed(ActionEvent e) {
-        		System.exit(0);
-            }
-        });
-		
-		contentPane.add(parkingButton);
-		contentPane.add(parkingButton1);
-		contentPane.add(exitButton);
-		contentPane.add(logoutButton);
-		contentPane.add(backButton);
+		checkIDButton.addActionListener(this);
+		backButton.addActionListener(this);
+
+
 	}
 	
 
+	public void actionPerformed(ActionEvent e) {
+	
+		int id = Integer.parseInt(idField.getText());
+		
+		if (e.getSource() == checkIDButton) {
+			
+			/* checks for existing ID's in the reservations field */
+			
+			
+			try {
+				if (ParkingSystem.checkID(id)) {
+					
+				
+					JOptionPane.showMessageDialog(checkIDButton, "Booking ID : " + id + "found");
+					frame.dispose();
+					PaymentFrame frame = new PaymentFrame();
+		            frame.setVisible(true);
+				} else {						
+					
+					JOptionPane.showMessageDialog(checkIDButton, "Booking " + id + " not found. Check correct ID was entered.");
+					
+				}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+
+			
+		}	
+			
+		
+		
+		if (e.getSource() == backButton) {
+			
+			frame.dispose();
+			Dashboard frame = new Dashboard();
+            frame.setVisible(true);
+	        
+		}
+			        		
+				
+
+	}
+
+	public void setVisible(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
 }
