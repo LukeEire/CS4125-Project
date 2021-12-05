@@ -1139,7 +1139,7 @@ public class Database {
 			
 	}
 	
-	
+	//System.out.println("Reservation Date: " + rs.getTimestamp("created_on"));
 public boolean checkID(int id) throws SQLException { //conall testing
 		
 		boolean verified;
@@ -1171,6 +1171,37 @@ public boolean checkID(int id) throws SQLException { //conall testing
 			
 		}
 	}
+
+public boolean checkTime(int created_on) throws SQLException { //conall time test
+	
+	boolean verified;
+	try {
+		String query = "SELECT * FROM " + reservations_db + " WHERE created_on = " + created_on;		
+
+		PreparedStatement p = con.prepareStatement(query);
+		ResultSet rs = p.executeQuery(query);
+		
+		if(!rs.isBeforeFirst()) {
+			System.out.println("Time Parked at: "+ created_on);
+			verified = false;
+		} else {
+			while (rs.next()) {
+				String foundTime = rs.getString("id");
+				System.out.println("Booking Verified!");
+				System.out.println("Found Booking: "+ foundTime );
+			}
+			verified = true;
+		}
+		return verified;
+		
+	} catch(SQLException e) {
+								
+		System.out.println("Error locating data entered: " + e.getMessage());
+		verified = false;
+		return verified;
+		
+	}
+}
 
 //Luke Testing here
 	//Probably need to update reservation object to have ID
