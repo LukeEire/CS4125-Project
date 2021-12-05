@@ -159,14 +159,28 @@ public class PaymentFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 
+		int created_on = Integer.parseInt(ccField.getText());
 		
 		if (e.getSource() == payButton) {
 			
-			JOptionPane.showMessageDialog(payButton, "Thank You for the payment of: €" + Fee + "\n" +
-					 "Returning to Dashboard! ");
+			
+			try {
+				if (PaymentBackend.checkTime(created_on)) {
+					
+				
+					JOptionPane.showMessageDialog(payButton, "working ");
+					
+				} else {						
+					
+					JOptionPane.showMessageDialog(payButton, "not working.");
+					
+				}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			
 			frame.dispose();
-			Dashboard frame = new Dashboard();
+			ParkingFrame frame = new ParkingFrame();
 			frame.setVisible(true);
 		}	
 			
