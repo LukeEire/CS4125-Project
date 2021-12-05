@@ -1142,35 +1142,32 @@ public class Database {
 	
 public boolean checkID(int id) throws SQLException { //conall testing
 		
-		int checkUser = id;
-		boolean result;
-		
+		boolean verified;
 		try {
 			
-			String query = "SELECT * FROM " + reservations_db + " WHERE id = " + id;
+			String query = "SELECT * FROM " + reservations_db + " WHERE id = " + id;		
 
 			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			
 			if(!rs.isBeforeFirst()) {
-				System.out.println("UserID may be incorrect");
-				System.out.println("User: "+ checkUser);
-				result = false;
+				System.out.println("Entered ID: "+ id);
+				verified = false;
 			} else {
 				while (rs.next()) {
-					int foundUser = rs.getInt("id");
-					System.out.println("User Verified!");
-					System.out.println("Found User: "+foundUser);
+					String foundID = rs.getString("id");
+					System.out.println("Booking Verified!");
+					System.out.println("Found Booking: "+ foundID );
 				}
-				result = true;
+				verified = true;
 			}
-			return result;
+			return verified;
 			
 		} catch(SQLException e) {
 									
 			System.out.println("Error locating data entered: " + e.getMessage());
-			result = false;
-			return result;
+			verified = false;
+			return verified;
 			
 		}
 	}
