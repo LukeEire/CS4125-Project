@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Lot {
 	
-	private static final int numberOfSlots = 7; // Number of overall (pay as you go) parking spaces. 
+	private static final int numberOfSlots = 7; 
 	private ArrayList<ParkingSpace> listOfSlots = null;
 	
 	String lotName;
@@ -19,7 +19,7 @@ public class Lot {
 			listOfSlots = new ArrayList<>();
 		}
 
-		public ArrayList<ParkingSpace> getParkingSlots()	//incrementing car park spaces for every ticket created 
+		public ArrayList<ParkingSpace> getParkingSlots()
 		{
 			for (int i = 1; i <= numberOfSlots; i++)
 			{

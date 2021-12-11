@@ -14,25 +14,46 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.TimeZone;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
 public class PaymentFrame implements ActionListener {
 
 	JFrame frame;
+
+    static String created_on;
+    static String expiry;
+    
 	
 	JLabel ccLabel = new JLabel("Credit Card Number: ");;
 	JLabel cvvLabel = new JLabel("CVV Number (3-Digits: ");;
 	JLabel expiryLabel = new JLabel("Expiry Date: ");;
-	JLabel lotLabel = new JLabel("Lot Number: ");;
 	
 	
 	JTextField ccField = new JTextField();;
 	JTextField cvvField = new JTextField();;
 	JTextField expiryField = new JTextField();;
-	JTextField lotField = new JTextField();;
+
 	
 	JButton payButton = new JButton("Pay");;
 	JButton backButton = new JButton("Back");;
 
-	double Fee = 2;
+	
 	
 	PaymentFrame() {
 
@@ -74,11 +95,7 @@ public class PaymentFrame implements ActionListener {
 		expiryLabel.setBounds(50, 300, 2, 30);
 		expiryLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
 		expiryLabel.setSize(500,50);
-		
-		lotLabel.setBounds(50, 400, 20, 30);
-		lotLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
-		lotLabel.setSize(500,50);
-	
+
 		/* text fields locations */
 		
 		ccField.setBounds(300, 110, 250, 100);  
@@ -95,20 +112,15 @@ public class PaymentFrame implements ActionListener {
 		expiryField.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		expiryField.setSize(300,30);
 		expiryField.setEditable(true);
-		
-		lotField.setBounds(300,410, 90, 23);  
-		lotField.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lotField.setSize(300,30);
-		lotField.setEditable(true);
 
 
         /* Find ID Button */
         
-		payButton.setBounds(210, 450, 100, 73);
+		payButton.setBounds(210, 500, 100, 73);
 		payButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		payButton.setSize(200,50);
 		
-		backButton.setBounds(510, 450, 100, 73);
+		backButton.setBounds(510, 500, 100, 73);
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		backButton.setSize(200,50);
         
@@ -140,10 +152,7 @@ public class PaymentFrame implements ActionListener {
 		frame.add(expiryLabel);
 		frame.add(expiryLabel);
 		frame.add(expiryLabel);
-		
-		frame.add(lotLabel);
-		frame.add(lotLabel);
-		frame.add(lotLabel);
+
 		
 		/* Text fields */
 		
@@ -158,10 +167,6 @@ public class PaymentFrame implements ActionListener {
 		frame.add(expiryField);
 		frame.add(expiryField);
 		frame.add(expiryField);
-		
-		frame.add(lotField);
-		frame.add(lotField);
-		frame.add(lotField);
 
 
 	}
@@ -177,29 +182,21 @@ public class PaymentFrame implements ActionListener {
 	
 
 	public void actionPerformed(ActionEvent e) {
-		String lot = lotField.getText();
+
 		
 		if (e.getSource() == payButton) {
-			
-			
+	
 			try {
-				if (PaymentBackend.checkLot(lot)) {
-					
-				
-					JOptionPane.showMessageDialog(payButton, "Booking number " + lot + " is Valid. ");
-					
-				} else {						
-					
-					JOptionPane.showMessageDialog(payButton, "not working.");
-					
-				}
+				PaymentBackend.checkTime(created_on, expiry);
 			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
-			frame.dispose();
-			ParkingFrame frame = new ParkingFrame();
-			frame.setVisible(true);
+			System.out.println("created on:" + created_on);
+			System.out.println("expired on:" + expiry);
+			
+			JOptionPane.showMessageDialog(payButton, "Ye");
 		}	
 			
 		
@@ -221,6 +218,7 @@ public class PaymentFrame implements ActionListener {
 		
 	}
 
+	
 	
 	
 }
