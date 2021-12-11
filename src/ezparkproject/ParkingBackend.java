@@ -8,10 +8,13 @@ import java.util.ArrayList;
 public class ParkingBackend {
 
 
+
+
 	public ParkingBackend() 
 	{
 
 	}
+	
 
 	public static boolean checkID(int id) throws SQLException{
 
@@ -43,6 +46,10 @@ public class ParkingBackend {
 		return false;
 
 	}
+	
+
+
+	
 
 	public boolean validateCreditCard() {
 		return false;

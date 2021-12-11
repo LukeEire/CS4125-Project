@@ -121,7 +121,7 @@ public class ParkingFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 	
 		int id = Integer.parseInt(idField.getText());
-		
+
 		if (e.getSource() == checkIDButton) {
 			
 			/* checks for existing ID's in the reservations field */
