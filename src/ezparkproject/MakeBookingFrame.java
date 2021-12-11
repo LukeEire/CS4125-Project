@@ -5,6 +5,8 @@ import java.awt.event.*;
 import java.awt.*; 
 
 public class MakeBookingFrame implements ActionListener{
+	
+	int i = 1;
 
 	BookingBackend Backend = new BookingBackend();
 	
