@@ -1152,6 +1152,7 @@ public boolean checkID(int id) throws SQLException { //conall testing
 			
 			if(!rs.isBeforeFirst()) {
 				System.out.println("Entered ID: "+ id);
+				
 				verified = false;
 			} else {
 				while (rs.next()) {
@@ -1172,17 +1173,20 @@ public boolean checkID(int id) throws SQLException { //conall testing
 		}
 	}
 
-public boolean checkLot(String lot) throws SQLException { //conall time test
+
+
+public boolean checkTime(String created_on, String expiry ) throws SQLException { //conall time test
 	
 	boolean verified;
 	try {
-		String query = "SELECT * FROM " + reservations_db + " WHERE lot = " + lot;		
+		String query = "SELECT * FROM " + reservations_db + " WHERE created_on = " + created_on + "WHERE expiry = " + expiry;		
 
 		PreparedStatement p = con.prepareStatement(query);
 		ResultSet rs = p.executeQuery(query);
 		
 		if(!rs.isBeforeFirst()) {
-			System.out.println("Time Parked at: "+ lot);
+			System.out.println("Time Parked: " + created_on);
+			System.out.println("Time Expiring: " + expiry);
 			verified = false;
 		} else {
 			while (rs.next()) {
