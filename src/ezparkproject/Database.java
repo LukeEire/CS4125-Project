@@ -1204,8 +1204,31 @@ public boolean checkTime(String created_on, String expiry ) throws SQLException 
 		verified = false;
 		return verified;
 		
+		}
 	}
-}
+
+	public int checkExistingBookings(String lotName) {
+		int count = 0;
+		try {
+			String query = "SELECT COUNT(*) FROM " + reservations_db + " WHERE lot = " + lotName;		
+
+			PreparedStatement p = con.prepareStatement(query);
+			ResultSet rs = p.executeQuery(query);
+			
+				while (rs.next()) {
+					count = rs.getInt(1);
+				}
+				return count;
+				
+			}catch(SQLException e) {
+									
+			System.out.println("Error locating data entered: " + e.getMessage());
+			return 0;
+			}
+		}
+
+
+
 
 //Luke Testing here
 	//Probably need to update reservation object to have ID
