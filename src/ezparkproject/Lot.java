@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class Lot {
 	
+	BookingBackend backend = new BookingBackend();
+	
 	private static final int numberOfSlots = 7; 
 	private ArrayList<ParkingSpace> listOfSlots = null;
 	

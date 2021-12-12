@@ -35,6 +35,7 @@ public class BookingMenuFrame implements ActionListener{
 	JButton changeBookingButton = new JButton("Change Booking");
 	JButton viewBookingButton = new JButton("View My Bookings");
 	JButton backButton = new JButton("Back");
+	JButton checkInOutButton = new JButton("Check in/Check out");
 
 	BookingMenuFrame() {
 
@@ -122,6 +123,11 @@ public class BookingMenuFrame implements ActionListener{
         
         backButton.setBounds(110, 427, 100, 73);
         backButton.setSize(500,50);
+        
+        /* CheckInOut Button */
+        
+        checkInOutButton.setBounds(110, 150, 100, 73);
+        checkInOutButton.setSize(500,50);
 	}
 
 	public void addComponentsToFrame() {
@@ -138,8 +144,6 @@ public class BookingMenuFrame implements ActionListener{
 		/* Text fields and drop downs */
 		
 		frame.add(lotA_CounterField);
-		
-		frame.add(lotA_CounterField);
 		frame.add(lotB_CounterField);
 		frame.add(lotC_CounterField);
 		frame.add(lotD_CounterField);
@@ -151,6 +155,7 @@ public class BookingMenuFrame implements ActionListener{
 		frame.add(changeBookingButton);
 		frame.add(viewBookingButton);
 		frame.add(backButton);
+		frame.add(checkInOutButton);
 	}
 	
 	
@@ -161,6 +166,7 @@ public class BookingMenuFrame implements ActionListener{
 		changeBookingButton.addActionListener(this);
 		viewBookingButton.addActionListener(this);
 		backButton.addActionListener(this);
+		checkInOutButton.addActionListener(this);
 	}
 	
 
@@ -196,6 +202,14 @@ public class BookingMenuFrame implements ActionListener{
 			 frame.dispose();
 			 Dashboard frame = new Dashboard();
              frame.setVisible(true);
+	        
+		}
+		
+		if (e.getSource() == checkInOutButton) {
+			
+			 frame.dispose();
+			 Dashboard frame = new Dashboard();
+			 frame.setVisible(true);
 	        
 		}
 		

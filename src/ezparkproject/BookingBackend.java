@@ -94,6 +94,23 @@ public class BookingBackend {
 		
 	}
 	
+	public void loadDbBookings() {
+try {
+			
+			Database db = new Database();
+			Reservation res = new Reservation();
+			
+			res = db.fetchSingleReservation(id);
+			
+			
+			return res;
+		} catch (SQLException error) {
+
+			System.out.println("Could not connect to the database " + error.getMessage());
+			return null;
+		}
+	}
+	
 	public void decrementTest() {
 		Main.LotA.setSpaces(Main.LotA.countSpaces()-1);
 	}
