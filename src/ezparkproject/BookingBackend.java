@@ -104,6 +104,7 @@ public class BookingBackend {
 			
 			
 			
+			
 		} catch (SQLException error) {
 
 			System.out.println("Could not connect to the database " + error.getMessage());
