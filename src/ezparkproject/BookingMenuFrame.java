@@ -129,7 +129,7 @@ public class BookingMenuFrame implements ActionListener{
         
         /* CheckInOut Button */
         
-        checkInOutButton.setBounds(110, 150, 100, 73);
+        checkInOutButton.setBounds(110, 125, 100, 73);
         checkInOutButton.setSize(500,50);
 	}
 
