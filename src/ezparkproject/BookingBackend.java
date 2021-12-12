@@ -18,6 +18,13 @@ public class BookingBackend {
 	Lot LotC = Main.LotC;
 	Lot LotD = Main.LotD;*/
 	
+	 public static void main(String[] args) throws Exception{
+		 int count = 0;
+		 count = loadDbBookings("Lot A");
+		 System.out.println(count);
+		 
+	 }
+	
 	BookingBackend(){
 		
 	}
@@ -94,7 +101,7 @@ public class BookingBackend {
 		
 	}
 	
-	public int loadDbBookings(String lotName) {
+	public static int loadDbBookings(String lotName) {
 		int count = 0;
 		try {
 			

@@ -1210,13 +1210,13 @@ public boolean checkTime(String created_on, String expiry ) throws SQLException 
 	public int checkExistingBookings(String lotName) {
 		int count = 0;
 		try {
-			String query = "SELECT COUNT(*) FROM " + reservations_db + " WHERE lot = " + lotName;		
+			String query = "SELECT FROM " + reservations_db + " WHERE lot = " + lotName;		
 
 			PreparedStatement p = con.prepareStatement(query);
 			ResultSet rs = p.executeQuery(query);
 			
 				while (rs.next()) {
-					count = rs.getInt(1);
+					count += 1;
 				}
 				return count;
 				
