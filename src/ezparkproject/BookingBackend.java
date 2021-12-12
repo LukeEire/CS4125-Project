@@ -29,10 +29,10 @@ public class BookingBackend {
 	public String returnLot() {
 		String temp;
 		
-		temp = Integer.toString(Main.LotA.countSpaces()) + ",";
-		temp = temp + Integer.toString(Main.LotB.countSpaces()) + ",";
-		temp = temp + Integer.toString(Main.LotC.countSpaces()) + ",";
-		temp = temp + Integer.toString(Main.LotD.countSpaces());
+		temp = Integer.toString(Main.LotA.countSpaces() - loadDbBookings("Lot A")) + ",";
+		temp = temp + Integer.toString(Main.LotB.countSpaces() - loadDbBookings("Lot B")) + ",";
+		temp = temp + Integer.toString(Main.LotC.countSpaces() - loadDbBookings("Lot C")) + ",";
+		temp = temp + Integer.toString(Main.LotD.countSpaces() - loadDbBookings("Lot D"));
 		
 		return temp;
 	}
@@ -54,13 +54,13 @@ public class BookingBackend {
 			
 			db.reserve(ID, reg, lot, electric, accessibility, hours);
 			
-			if (lot == "LotA") {
+			if (lot == "Lot A") {
 				Main.LotA.decrementSpaces(1);
-			}else if (lot == "LotB") {
+			}else if (lot == "Lot B") {
 				Main.LotB.decrementSpaces(1);
-			}else if (lot == "LotC") {
+			}else if (lot == "Lot C") {
 				Main.LotB.decrementSpaces(1);
-			}else if (lot == "LotD") {
+			}else if (lot == "Lot D") {
 				Main.LotB.decrementSpaces(1);
 			}
 			
@@ -94,20 +94,20 @@ public class BookingBackend {
 		
 	}
 	
-	public void loadDbBookings() {
-try {
+	public int loadDbBookings(String lotName) {
+		int count = 0;
+		try {
 			
 			Database db = new Database();
-			Reservation res = new Reservation();
+			count = db.checkExistingBookings(lotName);
+			return count;
 			
-			res = db.fetchSingleReservation(id);
 			
 			
-			return res;
 		} catch (SQLException error) {
 
 			System.out.println("Could not connect to the database " + error.getMessage());
-			return null;
+			return count;
 		}
 	}
 	

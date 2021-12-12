@@ -51,6 +51,8 @@ public class BookingMenuFrame implements ActionListener{
 		String temp = Backend.returnLot();
 		String[] lots = temp.split(","); 
 		
+		
+		
 		return lots;
 		
 	}
