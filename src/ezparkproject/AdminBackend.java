@@ -143,7 +143,14 @@ public class AdminBackend {
 	public void blockForEvent(int duration, String lotName) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now();  
-		//Take todays date and 2 days from now block reservations from midnight till duration of hours it up. 
+		LocalDateTime startBlock = now.plusDays(2);
+		startBlock = startBlock.withHour(9);
+		LocalDateTime endBlock = startBlock.plusHours(duration);
+		
+		
+		
+		
+		//Take todays date and 2 days from now block reservations from 9am till duration of hours it up. 
 		//Create sufficient reservations to fill the lot for that day
 		 
 	}
