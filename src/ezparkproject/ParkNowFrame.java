@@ -14,21 +14,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class ParkingFrame implements ActionListener {
+public class ParkNowFrame implements ActionListener {
 
 	JFrame frame;
 	
-	JButton checkIDButton = new JButton("Pay your Booking");
-	JButton ParkNowButton = new JButton("Quick Park");	
+	JButton checkIDButton = new JButton("Pay");
 	JButton backButton = new JButton("Back");
 	
-	JLabel idLabel = new JLabel("Enter your booking ID please!");
-	JLabel qpLabel = new JLabel("Haven't booked? Click here to park now");
+	JLabel idLabel = new JLabel("Enter your Ticket ID please!");
 
 	JTextField idField = new JTextField();
 	
 
-	ParkingFrame() {
+	ParkNowFrame() {
 
 		createWindow();
 		setLocationAndSize();
@@ -42,8 +40,8 @@ public class ParkingFrame implements ActionListener {
 	public void createWindow() {
 
 		frame = new JFrame();
-		frame.setTitle("Pay for Parking!");
-		frame.setBounds(450, 190, 1014, 597);
+		frame.setTitle("Quick Pay!");
+		frame.setBounds(100, 100, 450, 300);
 		frame.getContentPane().setBackground(Color.white);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
@@ -57,39 +55,31 @@ public class ParkingFrame implements ActionListener {
 		
 		/* Label locations */
 		
-		idLabel.setBounds(350, 35, 2, 30);
+		idLabel.setBounds(120, 25, 20, 30);
 		idLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
-		idLabel.setSize(500,50);
-		
-		qpLabel.setBounds(330, 260, 2, 30);
-		qpLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));	
-		qpLabel.setSize(500,50);
+		idLabel.setSize(200,50);
 		
         
         /* Text Field Locations */
         
-        idField.setBounds(410,75, 90, 23);  
+        idField.setBounds(120,75, 90, 23);  
         idField.setFont(new Font("Tahoma", Font.PLAIN, 26));
-        idField.setSize(100,50);
+        idField.setSize(200,50);
         idField.setEditable(true);
 
 
         /* Find ID Button */
         
-        checkIDButton.setBounds(310, 150, 100, 73);
+        checkIDButton.setBounds(90, 150, 100, 73);
         checkIDButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        checkIDButton.setSize(300,50);
+        checkIDButton.setSize(100,50);
         
 
-        ParkNowButton.setBounds(310,300, 100, 73);
-        ParkNowButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        ParkNowButton.setSize(300,50);
-        
         /* Back Button Button */
         
-        backButton.setBounds(310,450, 100, 73);
+        backButton.setBounds(250, 150, 100, 73);
         backButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        backButton.setSize(300,50);
+        backButton.setSize(100,50);
         
         
 
@@ -102,13 +92,10 @@ public class ParkingFrame implements ActionListener {
 		
 		frame.add(checkIDButton);
 		frame.add(backButton);
-		frame.add(ParkNowButton);
-		
-		
+	
 		/* Labels */
 				
 		frame.add(idLabel);
-		frame.add(qpLabel);
 		
 		
 		/* Text fields */
@@ -124,7 +111,6 @@ public class ParkingFrame implements ActionListener {
 
 		checkIDButton.addActionListener(this);
 		backButton.addActionListener(this);
-		ParkNowButton.addActionListener(this);
 
 
 	}
@@ -158,17 +144,7 @@ public class ParkingFrame implements ActionListener {
 
 			
 		}	
-			
-		
-		if (e.getSource() == ParkNowButton) {
-			
-			frame.dispose();
-			ParkNowFrame frame = new ParkNowFrame();
-            frame.setVisible(true);
-	        
-	        
-		}
-			        		
+			      		
 				
 
 
