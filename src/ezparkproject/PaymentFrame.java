@@ -6,6 +6,7 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -36,9 +37,8 @@ public class PaymentFrame implements ActionListener {
 
 	JFrame frame;
 
-    static String created_on;
-    static String expiry;
-    
+	String created_on;
+	String expiry;
 	
 	JLabel ccLabel = new JLabel("Credit Card Number: ");;
 	JLabel cvvLabel = new JLabel("CVV Number (3-Digits: ");;
