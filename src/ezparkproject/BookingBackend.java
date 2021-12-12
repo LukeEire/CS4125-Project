@@ -54,6 +54,17 @@ public class BookingBackend {
 			
 			db.reserve(ID, reg, lot, electric, accessibility, hours);
 			
+			if (lot == "LotA") {
+				Main.LotA.decrementSpaces(1);
+			}else if (lot == "LotB") {
+				Main.LotB.decrementSpaces(1);
+			}else if (lot == "LotC") {
+				Main.LotB.decrementSpaces(1);
+			}else if (lot == "LotD") {
+				Main.LotB.decrementSpaces(1);
+			}
+			
+			
 		} catch (SQLException error) {
 
 			System.out.println("Could not connect to the database " + error.getMessage());

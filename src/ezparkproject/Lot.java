@@ -59,6 +59,9 @@ public class Lot {
 		this.spaces = newCount;
 	}
 		
+	public void decrementSpaces(int i) {
+		this.spaces = spaces - i;
+	}
 	
 	public Boolean blockForEvent(Date date, int numDays) {
 		Boolean result = false;	
