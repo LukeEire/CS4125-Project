@@ -3,7 +3,7 @@ package ezparkproject;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
-public interface ReservationInterface {
+public interface Reservation {
 	
 	Users getUser();
 	

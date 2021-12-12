@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class BookNowReservation implements ReservationInterface{
+public class BookNowReservation implements Reservation{
 
 	private Users user;
     private String lot;

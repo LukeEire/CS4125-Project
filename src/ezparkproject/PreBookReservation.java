@@ -3,7 +3,7 @@ import java.sql.Date;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class PreBookReservation implements ReservationInterface{
+public class PreBookReservation implements Reservation{
 	/* Code here */
 	
     private Users user;
