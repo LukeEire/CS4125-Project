@@ -2,6 +2,8 @@ package ezparkproject;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;    
 
 import javax.swing.JOptionPane;
 
@@ -103,7 +105,7 @@ public class AdminBackend {
 	}
 	
  
-public static boolean verifyUserID(int id) throws SQLException{
+	public static boolean verifyUserID(int id) throws SQLException{
 		
     	try {
     		
@@ -137,6 +139,14 @@ public static boolean verifyUserID(int id) throws SQLException{
         
     }
 				
+	
+	public void blockForEvent(int duration, String lotName) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();  
+		//Take todays date and 2 days from now block reservations from midnight till duration of hours it up. 
+		//Create sufficient reservations to fill the lot for that day
+		 
+	}
 	
 	
 }
