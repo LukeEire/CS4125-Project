@@ -20,6 +20,10 @@ package ezparkproject;
 	import javax.swing.JTextField;
 	import javax.swing.border.EmptyBorder;
 
+import AccountPackage.MyAccountFrame;
+import BookingPackage.BookingMenuFrame;
+import ParkingPackage.ParkingFrame;
+
 	public class Dashboard extends JFrame {
 		
 	    private static final long serialVersionUID = 1L;

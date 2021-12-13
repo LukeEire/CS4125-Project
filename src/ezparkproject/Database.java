@@ -19,6 +19,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+import BookingPackage.BookNowReservation;
+import BookingPackage.PreBookReservation;
+import BookingPackage.Reservation;
+
 /**
  * @author ayoubjdair
  * For easily accessing the DB and aids in the reduction of duplicate code

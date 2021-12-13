@@ -5,14 +5,14 @@ import java.sql.SQLException;
 
 public class Users {
 	
-	int id;
+	public int id;
 	String firstName;
 	String lastName;
 	String password;
 	String email;
 	String status;
 	int electric;
-	int accessibility; 
+	public int accessibility; 
 	String dob;
 	String reg;
 	Database db;
