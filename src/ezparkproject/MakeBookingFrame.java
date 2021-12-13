@@ -2,6 +2,7 @@ package ezparkproject;
 
 import javax.swing.*; 
 import java.awt.event.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.awt.*; 
@@ -153,6 +154,7 @@ public class MakeBookingFrame implements ActionListener{
 			String startTimeString = timeComboBox.getSelectedItem().toString();
 			int startTime = Integer.parseInt(startTimeString);
 			String dateString = dateField.getText();
+			LocalDate dateStringLD = LocalDate.parse(dateString);
 			dateString = dateString + " 16:00";
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 			LocalDateTime startDateTime = LocalDateTime.parse(dateString, formatter);
@@ -162,9 +164,17 @@ public class MakeBookingFrame implements ActionListener{
 			CheckBox_Booking();
 			
 			
-			Reservation res = new PreBookReservation(Main.currentUser, selectedLot, electricCheckBoxVal, reg, startDateTime, hours);
+			for(int i = 0; i < Main.blockedDates.size(); i++) {
+				if(dateStringLD == Main.blockedDates.get(i) && (selectedLot == Main.blockedLots.get(i))) {
+					System.out.println("This Lot is blocked for given date");
+				}else {
+					Reservation res = new PreBookReservation(Main.currentUser, selectedLot, electricCheckBoxVal, reg, startDateTime, hours);
+					
+					Backend.createBooking(res);
+				}
+			}
 			
-			Backend.createBooking(res);
+			
 			
 		}	
 			

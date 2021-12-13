@@ -2,7 +2,8 @@ package ezparkproject;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.time.format.DateTimeFormatter;  
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;    
 
 import javax.swing.JOptionPane;
@@ -140,18 +141,27 @@ public class AdminBackend {
     }
 				
 	
-	public void blockForEvent(int duration, String lotName) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
-		LocalDateTime now = LocalDateTime.now();  
+	public void blockForEvent(int duration, String lotName) { 
+		//Keeping this here if we want number of hours vs just block for full day
+		/*LocalDateTime now = LocalDateTime.now();  
 		LocalDateTime startBlock = now.plusDays(2);
 		startBlock = startBlock.withHour(9);
 		LocalDateTime endBlock = startBlock.plusHours(duration);
+		LocalDate meth;*/
+		
+		LocalDate now = LocalDate.now();
+		LocalDate startBlock = now.plusDays(2);
+		
+		for (int i = 0; i < duration; i++) {
+			Main.blockedDates.add(startBlock);
+			Main.blockedLots.add(lotName);
+			startBlock.plusDays(1);
+		}
 		
 		
 		
 		
 		//Take todays date and 2 days from now block reservations from 9am till duration of hours it up. 
-		//Create sufficient reservations to fill the lot for that day
 		 
 	}
 	

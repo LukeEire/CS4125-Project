@@ -2,11 +2,13 @@ package ezparkproject;
 
 import java.lang.reflect.Array;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JFrame;
 
 public class Main {
+	
 	
 	static Users currentUser = new Users();
 	
@@ -15,6 +17,9 @@ public class Main {
 	static Lot LotB = new Lot ("LotB", 350, 15, 0);
 	static Lot LotC = new Lot ("LotC", 300, 15, 5);
 	static Lot LotD = new Lot ("LotD", 400, 20, 10);
+	
+	static ArrayList<LocalDate> blockedDates;
+	static ArrayList<String> blockedLots;
 	
 	
     public static void main(String[] args) throws Exception
