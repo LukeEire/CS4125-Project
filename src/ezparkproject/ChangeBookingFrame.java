@@ -168,7 +168,7 @@ public class ChangeBookingFrame implements ActionListener{
 			
 		if (e.getSource() == loadButton) {
 			
-			Reservation res = new Reservation();
+			Reservation res = new PreBookReservation();
 			int resID = Integer.parseInt(bookingIDField.getText());
 			res = Backend.loadBooking(resID);
 			

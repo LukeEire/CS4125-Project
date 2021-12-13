@@ -938,7 +938,7 @@ public class Database {
 		//Post-condition: Reservation object is returned 
 		public Reservation fetchSingleReservation(int id) throws SQLException{
 			try {
-				Reservation res = new Reservation();
+				Reservation res = new PreBookReservation();
 				String query = "select * from " + reservations_db + " where id = " + id;
 				PreparedStatement p = con.prepareStatement(query);
 				ResultSet rs = p.executeQuery(query);
@@ -1011,8 +1011,8 @@ public class Database {
 
 
 				int elecInt = Integer.parseInt(elec);
-				// Creating new reservation obj without adding it to the DB (false)
-				Reservation collectedReservation = new Reservation(user, rs.getString("lot"), elecInt, reg, hours);
+				// Creating new reservation obj
+				Reservation collectedReservation = new BookNowReservation(user, rs.getString("lot"), elecInt, reg, hours);
 				// Storing it in a reservations arraylist
 				reservations.add(collectedReservation);
 			}

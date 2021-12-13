@@ -85,7 +85,7 @@ public class BookingBackend {
 		try {
 			
 			Database db = new Database();
-			Reservation res = new Reservation();
+			Reservation res = new PreBookReservation();
 			
 			res = db.fetchSingleReservation(id);
 			

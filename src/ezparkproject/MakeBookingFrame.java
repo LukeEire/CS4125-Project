@@ -154,19 +154,21 @@ public class MakeBookingFrame implements ActionListener{
 
 			String reg = Main.currentUser.getReg();
 			Long hours = Long.parseLong(durationComboBox.getSelectedItem().toString());
+			//Long startTime = Long.parseLong(timeComboBox.getSelectedItem().toString());
+			//String dateString = dateField.getText();
 			/*String lastName = lastNameField.getText();				
 			String password = passwordField.getText();
 			String status = uniComboBox.getSelectedItem().toString();
 			int electric = electricCheckBoxVal;
 			int accessibility = disabledCheckBoxVal;
-			String dob = dobField.getText();
+			
 			String reg = plate.getText();*/
 			String selectedLot = lotComboBox.getSelectedItem().toString();
 			
 			CheckBox_Booking();
 			
 			
-			Reservation res = new Reservation(Main.currentUser, selectedLot, electricCheckBoxVal, reg, hours);
+			Reservation res = new PreBookReservation(Main.currentUser, selectedLot, electricCheckBoxVal, reg, null, hours);
 			
 			Backend.createBooking(res);
 			
