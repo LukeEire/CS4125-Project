@@ -859,6 +859,7 @@ public class Database {
 			System.out.println("Reservation Created For: " + created_at_LocalDateTime.format(simpleDateFormat));
 			LocalDateTime expiryDateTime = created_at_LocalDateTime;
 
+			
 			// Adding user desired duration to remain parked to expiry variable
 			expiryDateTime = expiryDateTime.plus(Duration.ofHours(hours)); 
 

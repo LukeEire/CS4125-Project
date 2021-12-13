@@ -119,5 +119,6 @@ public class BookNowReservation implements Reservation{
 	public void setReservationtime(LocalDateTime time) {
 		this.reservationTime = time;
 	}
+	
     
 }

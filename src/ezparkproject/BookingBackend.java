@@ -14,10 +14,6 @@ public class BookingBackend {
 	
 	Database db;
 	Connection con;
-	/*static Lot LotA = Main.LotA;
-	Lot LotB = Main.LotB;
-	Lot LotC = Main.LotC;
-	Lot LotD = Main.LotD;*/
 	
 //	 public static void main(String[] args) throws Exception{
 //		 int count = 0;

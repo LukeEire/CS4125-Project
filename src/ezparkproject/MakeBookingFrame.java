@@ -8,8 +8,6 @@ import java.awt.*;
 
 public class MakeBookingFrame implements ActionListener{
 	
-	int i = 1;
-
 	BookingBackend Backend = new BookingBackend();
 	
 	String[] parkingLots = { "Lot A", "Lot B", "Lot C", "Lot D" };
