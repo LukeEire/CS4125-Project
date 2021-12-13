@@ -6,7 +6,7 @@ public class PenaltyTesting{
 		
 		Penalty p = new Penalty();
 		PenaltyBackend pb = new PenaltyBackend();
-		Users u = new Users(true, 1111111, "Penalty", "Testing", "Password123", "N/A", "Student", 1, 0, "2000-12-15", "12D1111");
+		Users u = new Users(1111111, "Penalty", "Testing", "Password123", "N/A", "Student", 1, 0, "2000-12-15", "12D1111");
 
 		System.out.println("Testing Penalty Class...");
 		System.out.println();  
