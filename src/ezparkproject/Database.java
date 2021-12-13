@@ -848,15 +848,15 @@ public class Database {
 	//				   int id, String reg, String lot, int electric, 
 	//				   int accessibility, long hours
 	// Post-Condition - INSERTS new reservation into the reservations DB
-	public void reserve(int id, String reg, String lot, int electric, int accessibility, long hours) throws SQLException {
+	public void reserve(int id, String reg, String lot, int electric, int accessibility, LocalDateTime time, long hours) throws SQLException {
 
 		try {
 			// Creating variables for created at and expiry attributes
 
 			// Formatting
 			DateTimeFormatter simpleDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-			LocalDateTime created_at_LocalDateTime = LocalDateTime.now();
-			System.out.println("Reservation Created At: " + created_at_LocalDateTime.format(simpleDateFormat));
+			LocalDateTime created_at_LocalDateTime = time;
+			System.out.println("Reservation Created For: " + created_at_LocalDateTime.format(simpleDateFormat));
 			LocalDateTime expiryDateTime = created_at_LocalDateTime;
 
 			// Adding user desired duration to remain parked to expiry variable

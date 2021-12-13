@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.time.LocalDateTime;*/
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 
 public class BookingBackend {
@@ -18,12 +19,12 @@ public class BookingBackend {
 	Lot LotC = Main.LotC;
 	Lot LotD = Main.LotD;*/
 	
-	 public static void main(String[] args) throws Exception{
-		 int count = 0;
-		 count = loadDbBookings("Lot A");
-		 System.out.println(count);
-		 
-	 }
+//	 public static void main(String[] args) throws Exception{
+//		 int count = 0;
+//		 count = loadDbBookings("Lot A");
+//		 System.out.println(count);
+//		 
+//	 }
 	
 	BookingBackend(){
 		
@@ -55,11 +56,12 @@ public class BookingBackend {
 			String lot = res.getLot();
 			int electric = res.getChargingCheck();
 			int accessibility = res.getUser().getAcc();
+			LocalDateTime startDate = res.getReservationTime();
 			Long hours = res.getHours();
 			
 			
 			
-			db.reserve(ID, reg, lot, electric, accessibility, hours);
+			db.reserve(ID, reg, lot, electric, accessibility, startDate, hours);
 			
 			if (lot == "Lot A") {
 				Main.LotA.decrementSpaces(1);

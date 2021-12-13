@@ -26,22 +26,6 @@ public class PreBookReservation implements Reservation{
     	
     }
     
-//    public PreBookReservation(Users user, String lot, int electricSpace, String reg, long hours) {
-//
-//        this.user = user;
-//        this.id = user.id;
-//        this.lot = lot;
-//        this.accessibility = user.accessibility;
-//        this.chargingSpace = electricSpace;
-//        this.reg = reg;
-//        this.reservationTime = LocalDateTime.now();
-//        this.duration = reservationTime.plus(Duration.ofHours(hours));
-//        this.hours = hours;
-//
-//        System.out.println("Testing time: Duration = " + duration );
-//        
-//    }
-    
     public PreBookReservation(Users user, String lot, int electricSpace, String reg, LocalDateTime beginTime, long hours) {
 
         this.user = user;
@@ -50,7 +34,7 @@ public class PreBookReservation implements Reservation{
         this.accessibility = user.accessibility;
         this.chargingSpace = electricSpace;
         this.reg = reg;
-        this.reservationTime = LocalDateTime.now();
+        this.reservationTime = beginTime;
         this.duration = reservationTime.plus(Duration.ofHours(hours));
         this.hours = hours;
 
@@ -141,6 +125,15 @@ public class PreBookReservation implements Reservation{
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public LocalDateTime getReservationTime() {
+		return this.reservationTime;
+	}
+	
+	public void setReservationtime(LocalDateTime time) {
+		this.reservationTime = time;
+	}
+	
     
     
     

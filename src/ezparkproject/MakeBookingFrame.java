@@ -1,7 +1,9 @@
 package ezparkproject;
 
 import javax.swing.*; 
-import java.awt.event.*; 
+import java.awt.event.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.awt.*; 
 
 public class MakeBookingFrame implements ActionListener{
@@ -11,7 +13,8 @@ public class MakeBookingFrame implements ActionListener{
 	BookingBackend Backend = new BookingBackend();
 	
 	String[] parkingLots = { "Lot A", "Lot B", "Lot C", "Lot D" };
-	String[] hours = { "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00" };
+	//String[] hours = { "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00" };
+	String[] hours = { "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" };
 	String[] duration = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 	
 	
@@ -30,7 +33,6 @@ public class MakeBookingFrame implements ActionListener{
 	
 	JComboBox<String> lotComboBox = new JComboBox<String>(parkingLots);
 	JComboBox<String> timeComboBox = new JComboBox<String>(hours);
-	//JTextField dateField = new JTextField();
 	JTextField dateField = new TextHint("Example: 2021-01-01");  // adds hint of format
 	JComboBox<String> durationComboBox = new JComboBox<String>(duration);
 	
@@ -71,8 +73,6 @@ public class MakeBookingFrame implements ActionListener{
 		actionEvent();
 	}
 	
-	
-
 	public void createWindow() {
 
 		frame = new JFrame();
@@ -89,7 +89,6 @@ public class MakeBookingFrame implements ActionListener{
 		
 		/* Label Bounds */
 
-        //regLabel.setBounds(20, 70, 80, 70);
         lotLabel.setBounds(20, 70, 80, 70);
         dateLabel.setBounds(20, 130, 140, 70);
         timeLabel.setBounds(20, 180, 100, 70);
@@ -98,7 +97,6 @@ public class MakeBookingFrame implements ActionListener{
         
         /* Text fields and drop downs bounds */
         
-        //regField.setBounds(180, 93, 165, 23);
         lotComboBox.setBounds(180, 93, 165, 23);
         dateField.setBounds(180, 150, 165, 23);
         timeComboBox.setBounds(180, 200, 165, 23);
@@ -154,21 +152,19 @@ public class MakeBookingFrame implements ActionListener{
 
 			String reg = Main.currentUser.getReg();
 			Long hours = Long.parseLong(durationComboBox.getSelectedItem().toString());
-			//Long startTime = Long.parseLong(timeComboBox.getSelectedItem().toString());
-			//String dateString = dateField.getText();
-			/*String lastName = lastNameField.getText();				
-			String password = passwordField.getText();
-			String status = uniComboBox.getSelectedItem().toString();
-			int electric = electricCheckBoxVal;
-			int accessibility = disabledCheckBoxVal;
-			
-			String reg = plate.getText();*/
+			String startTimeString = timeComboBox.getSelectedItem().toString();
+			int startTime = Integer.parseInt(startTimeString);
+			String dateString = dateField.getText();
+			dateString = dateString + " 16:00";
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			LocalDateTime startDateTime = LocalDateTime.parse(dateString, formatter);
+			startDateTime = startDateTime.withHour(startTime);
 			String selectedLot = lotComboBox.getSelectedItem().toString();
 			
 			CheckBox_Booking();
 			
 			
-			Reservation res = new PreBookReservation(Main.currentUser, selectedLot, electricCheckBoxVal, reg, null, hours);
+			Reservation res = new PreBookReservation(Main.currentUser, selectedLot, electricCheckBoxVal, reg, startDateTime, hours);
 			
 			Backend.createBooking(res);
 			

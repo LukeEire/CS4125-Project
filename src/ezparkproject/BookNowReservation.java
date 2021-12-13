@@ -111,5 +111,13 @@ public class BookNowReservation implements Reservation{
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public LocalDateTime getReservationTime() {
+		return this.reservationTime;
+	}
+	
+	public void setReservationtime(LocalDateTime time) {
+		this.reservationTime = time;
+	}
     
 }

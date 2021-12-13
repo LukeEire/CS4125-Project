@@ -39,4 +39,8 @@ public interface Reservation {
 
 	void setId(int id);
 	
+	public LocalDateTime getReservationTime();
+	
+	public void setReservationtime(LocalDateTime time);
+	
 }
