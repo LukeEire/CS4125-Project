@@ -390,7 +390,7 @@ public class Database {
 				// dob
 				// reg
 
-				String query = "INSERT INTO " + users_db + "(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob, reg ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
+				String query = "INSERT INTO " + users_db + "(id, firstName, LastName, password, email_address, status, electric, penalties, ban_status, accessibility, created_on, dob, reg ) VALUES (?, ?, ?, MD5(?), ?, ?, ?, ?, ? ,?, ?, ?, ?)";
 				
 				PreparedStatement p = con.prepareStatement(query);
 				p.setInt(1, user1.getID());
