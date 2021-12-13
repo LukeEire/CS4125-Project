@@ -229,7 +229,7 @@ public class Database {
 				
 				userIDs.add(rs.getString(1));
 
-				Users collectedUser = new Users(false,
+				Users collectedUser = new Users(
 									   rs.getInt("id"),
 									   rs.getString("firstName"),
 									   rs.getString("lastName"),

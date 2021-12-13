@@ -13,7 +13,7 @@ public class RegBackend {
 	public boolean addUser(int id, String firstName, String lastName, String password, String status, int electric, int accessibility, String dob, String reg) {
 		
 		//Remove email attribute from user object?
-		Users User1 = new Users(true, id, firstName, lastName, password, "temp", status, electric, accessibility, dob, reg);
+		Users User1 = new Users(id, firstName, lastName, password, "temp", status, electric, accessibility, dob, reg);
 		
 		try {
 			
