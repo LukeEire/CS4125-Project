@@ -1,14 +1,14 @@
 package ezparkproject;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import java.util.random.RandomGenerator;
-import static org.junit.jupiter.api.Assertions.*;
+// import org.junit.jupiter.api.AfterEach;
+// import org.junit.jupiter.api.BeforeEach;
+// import java.util.random.RandomGenerator;
+// import static org.junit.jupiter.api.Assertions.*;
+// import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
-import org.junit.jupiter.api.Test;
 
 /**
  * The test class DatabaseTest.
@@ -21,7 +21,7 @@ public class DatabaseTesting
 	public static void main(String[] args) throws Exception{
 		System.out.println("Testing Database");
 		Database db = new Database();
-		Users testingUser = new Users(true, 22222222, "Jack", "H", "123456789", null, "Student", 1, 0, "1999-12-15", "PENN");
+		Users testingUser = new Users(22222222, "Jack", "H", "123456789", null, "Student", 1, 0, "1999-12-15", "PENN");
 		
 		// HOW TO GET A CON OBJECT (ALTHOUGH YOU DONT REALLY NEED TO)
 		System.out.println();
@@ -97,7 +97,7 @@ public class DatabaseTesting
 		System.out.println("Test 11");
 		System.out.println();
 		db.fetchReservationData();
-		db.reserve(testingUser.id, testingUser.getDefultPlate(), "LOT A", 1, 0, 2);
+		db.reserve(testingUser.id, testingUser.getReg(), "LOT A", 1, 0, 2);
 		db.fetchUserReservation(testingUser);
 		
 		//Transaction
@@ -123,18 +123,18 @@ public class DatabaseTesting
 			lots.add("Lot C");
 			lots.add("Lot D");
 			
-//		for(int i = 0; i<users.size(); i++){
-//			int random_int = (int)Math.floor(Math.random()*(3-0+1)+0);
-//			// Reservation reservation = new Reservation(true, users.get(i), lots.get(random_int), random_int, 30);
-//			Reservation reservation = new Reservation(true, users.get(i), lots.get(random_int), users.get(i).electric, users.get(i).getDefultPlate(), 2);
-//			db.addTransaction(users.get(i).id, i, lots.get(i), random_int+.35);
-//		}
+		// for(int i = 0; i<users.size(); i++){
+		// 	int random_int = (int)Math.floor(Math.random()*(3-0+1)+0);
+		// 	Reservation reservation = new Reservation(true, users.get(i), lots.get(random_int), random_int, 30);
+		// 	Reservation reservation = new Reservation(true, users.get(i), lots.get(random_int), users.get(i).electric, users.get(i).getDefultPlate(), 2);
+		// 	db.addTransaction(users.get(i).id, i, lots.get(i), random_int+.35);
+		// }
 
 		System.out.println();  
 		System.out.println("Test 15");
 		System.out.println();
 		LocalDateTime bookingTime = LocalDateTime.of(2021, Month.DECEMBER, 10, 13, 30, 40);
-		db.preBook(testingUser.id, testingUser.getDefultPlate(), lots.get(0), testingUser.electric, testingUser.accessibility, bookingTime, 2);
+		db.preBook(testingUser.id, testingUser.getReg(), lots.get(0), testingUser.electric, testingUser.accessibility, bookingTime, 2);
 		System.out.println();
 		
 		// HOW TO SET PENALTY POINTS AND GET PENALTY POINTS FOR USERS
