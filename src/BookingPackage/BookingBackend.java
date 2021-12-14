@@ -146,5 +146,23 @@ public class BookingBackend {
 		}
 	}
 	
-	
+	// Pre-Condition - BookingID is a valid ID in the Database
+	// 				 - Current timestamp must be after created_at && before expiry
+	// Post-Condition - Reservation will be checkedIN/OUT i.e status is changed to 0/1
+	// id userID, reg, lot, electric, accessibility, created_on, expiry, status
+	public void clockBooking(int bookingId, int status) {
+		try {
+			
+			Database db = new Database();
+			Reservation res = db.fetchSingleReservation(bookingId);
+
+			res.setStatus(status);
+			db.clockBooking(res);
+
+		} catch (Exception e) {
+
+			System.out.println("Booking Backend SQL Error Checking In/Out of Reservation: " + e.getMessage());
+
+		}
+	}
 }

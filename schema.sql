@@ -56,13 +56,14 @@ electric TINYINT(1),
 accessibility TINYINT(1),
 created_on DATE,
 expiry DATE,
+status TINYINT(1),
 FOREIGN KEY (userID) REFERENCES users(id)
 ON UPDATE CASCADE
 ON DELETE CASCADE
 );
 
 -- Testing SQL statments
-INSERT INTO reservations(userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (18266401, '10LH1445', 'LOT A', 1, 0, DATE '2015-12-17', DATE '2015-12-17');
+INSERT INTO reservations(userID, reg, lot, electric, accessibility, created_on, expiry, status) VALUES (18266401, '10LH1445', 'LOT A', 1, 0, DATE '2015-12-17', DATE '2015-12-17', 1);
 
 --Ayoub - new transactions table
 -- id | userID | ReservationID | lot | amount | created_on

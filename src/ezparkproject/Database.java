@@ -972,6 +972,35 @@ public class Database {
 			}
 				
 		}
+
+		//Pre-condition: Reservation id must exist in DB
+		//Post-condition: Reservation status will be updated
+		public void clockBooking(Reservation res) throws SQLException{
+			
+			try {
+    		
+				String query = "UPDATE " + reservations_db + " SET status = " + res.getStatus() + " WHERE id  = \""+res.getId()+"\"";
+				PreparedStatement p = con.prepareStatement(query);
+				int clock = p.executeUpdate(query);
+		
+				if(clock == 1){
+					
+					if(res.getStatus() >= 1) {
+						System.out.println("Checked Out Of Reservation " + res.getId() + " Successfully.");
+					} else if (res.getStatus() <= 0){
+						System.out.println("Checked Into Reservation " + res.getId() + " Successfully.");
+					}
+				}
+				else{
+					System.out.println("FAIL: Reservation check IN/OUT failed");
+				}
+				
+			} catch (SQLException e){
+	
+				System.out.println("SQL Error Checking In/Out of Reservation: " + e.getMessage());
+	
+			}
+		}
 	
 	// Pre-Condition - User passed must exist in DB
 	// Post-Condition - Returns ArrayList of type Reservations with reservation collected from the DB

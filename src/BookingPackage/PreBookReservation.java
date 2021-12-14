@@ -11,6 +11,8 @@ public class PreBookReservation implements Reservation{
 	
     private Users user;
     private String lot;
+    private int status;
+
     Date checkInDate;
     Date checkOutDate;
     
@@ -137,8 +139,12 @@ public class PreBookReservation implements Reservation{
 		this.reservationTime = time;
 	}
 	
-	
+	public void setStatus(int status) {
+		this.status = status;
+	}
     
-    
-    
+    public int getStatus() {
+		return status;
+	}
+
 }

@@ -11,6 +11,8 @@ public class BookNowReservation implements Reservation{
 
 	private Users user;
     private String lot;
+    private int status;
+
     Date checkOutDate;
     
     Database db;
@@ -123,5 +125,11 @@ public class BookNowReservation implements Reservation{
 		this.reservationTime = time;
 	}
 	
+    public void setStatus(int status) {
+		this.status = status;
+	}
     
+    public int getStatus() {
+		return status;
+	}
 }

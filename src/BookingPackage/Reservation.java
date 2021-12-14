@@ -45,5 +45,7 @@ public interface Reservation {
 	
 	public void setReservationtime(LocalDateTime time);
 	
-	
+    public void setStatus(int status);
+    
+    public int getStatus();
 }
