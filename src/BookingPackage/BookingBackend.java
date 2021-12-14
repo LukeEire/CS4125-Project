@@ -9,9 +9,11 @@ import java.time.LocalDateTime;*/
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import PenaltyPackage.Penalty;
 import ezparkproject.Database;
 //import ezparkproject.Main;
 
@@ -151,13 +153,44 @@ public class BookingBackend {
 	// Post-Condition - Reservation will be checkedIN/OUT i.e status is changed to 0/1
 	// id userID, reg, lot, electric, accessibility, created_on, expiry, status
 	public void clockBooking(int bookingId, int status) {
+
+		LocalDateTime clockDate;
+		LocalDateTime reservationTime;
+		LocalDateTime checkOutTime;
+		Reservation res;
+		long hours;
+		int userID;
+
 		try {
 			
 			Database db = new Database();
-			Reservation res = db.fetchSingleReservation(bookingId);
+			res = db.fetchSingleReservation(bookingId);
 
 			res.setStatus(status);
 			db.clockBooking(res);
+
+			// Create a date of user checkIn
+			clockDate = LocalDateTime.now();
+
+			// Pull reservation time (created_at) & hours
+			reservationTime = res.getReservationTime();
+			hours = res.getHours();
+
+			// Create checkoutTime (Expiry)
+			checkOutTime = reservationTime.plus(Duration.ofHours(hours));
+
+			if (status == 1) {
+				// If user clocks IN before reservation time
+				
+			} else if(status == 0) {
+				// If user checks OUT after expiry - add Infraction
+				if(clockDate.isAfter(checkOutTime)){
+					userID = Main.currentUser.getID();
+					Penalty p = new Penalty();
+					p.addInfraction(userID);
+				}
+			}
+			
 
 		} catch (Exception e) {
 
