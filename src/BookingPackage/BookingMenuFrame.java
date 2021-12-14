@@ -176,7 +176,6 @@ public class BookingMenuFrame implements ActionListener{
 		backButton.addActionListener(this);
 		checkInOutButton.addActionListener(this);
 	}
-	
 
 	public void actionPerformed(ActionEvent e) {
 
@@ -220,9 +219,19 @@ public class BookingMenuFrame implements ActionListener{
 		
 		if (e.getSource() == checkInOutButton) {
 			
-			 frame.dispose();
-			 Dashboard frame = new Dashboard();
-			 frame.setVisible(true);
+			
+			
+			String s = (String)JOptionPane.showInputDialog(frame, "Enter reservation ID:\n", "Customized Dialog", JOptionPane.PLAIN_MESSAGE);
+
+			//If a string was returned, say so.
+			if (((s != null) && (s.length() > 0)) && (s.matches("[0-9]+"))) {
+				
+			} else {
+				JOptionPane.showMessageDialog(frame, "Please only enter numberic values");
+				
+			}
+
+			
 	        
 		}
 		
