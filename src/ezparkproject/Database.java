@@ -155,6 +155,7 @@ public class Database {
 							" accessibility TINYINT(1), " +
 							" created_on TIMESTAMP, " +
 							" expiry TIMESTAMP, " +
+							" status TINYINT(1), " +
 							" FOREIGN KEY (userID) REFERENCES Users(id) " +
 							" ON UPDATE CASCADE " +
 							" ON DELETE CASCADE " +
