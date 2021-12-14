@@ -87,17 +87,19 @@ public class DatabaseTesting
 		//How to reserve a space using DB class, can also be done using Registration class
 		System.out.println("Test 10");
 		System.out.println();
-		db.reserve(18266401, "CALIFORNIA", "Lot A", 1, 0, 1);
-		db.reserve(18266401, "NEWYORK", "Lot B", 1, 0, 2);
-		db.reserve(18266401, "CHICAGO", "Lot A", 1, 0, 2);
-		db.reserve(18266401, "WASHINGTON", "Lot A", 1, 0, 1);
+		LocalDateTime testingTime = LocalDateTime.now();
+		db.reserve(18266401, "CALIFORNIA", "Lot A", 1, 0, testingTime, 1);
+		db.reserve(18266401, "CALIFORNIA", "Lot A", 1, 0, testingTime, 1);
+		db.reserve(18266401, "NEWYORK", "Lot B", 1, 0, testingTime, 2);
+		db.reserve(18266401, "CHICAGO", "Lot A", 1, 0, testingTime, 3);
+		db.reserve(18266401, "WASHINGTON", "Lot A", 1, 0, testingTime, 4);
 		System.out.println();  
 
 		//How to get reservation details
 		System.out.println("Test 11");
 		System.out.println();
 		db.fetchReservationData();
-		db.reserve(testingUser.id, testingUser.getReg(), "LOT A", 1, 0, 2);
+		db.reserve(testingUser.id, testingUser.getReg(), "LOT A", 1, 0, testingTime, 2);
 		db.fetchUserReservation(testingUser);
 		
 		//Transaction
