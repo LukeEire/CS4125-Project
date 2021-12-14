@@ -7,8 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,6 +17,8 @@ import java.util.ArrayList;
 import BookingPackage.BookNowReservation;
 import BookingPackage.PreBookReservation;
 import BookingPackage.Reservation;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * @author ayoubjdair
@@ -942,67 +942,67 @@ public class Database {
 			
 	}
 
-		//Pre-condition: Reservation with id must exist in DB
-		//Post-condition: Reservation object is returned 
-		public Reservation fetchSingleReservation(int id) throws SQLException{
-			try {
-				Reservation res = new PreBookReservation();
-				String query = "select * from " + reservations_db + " where id = " + id;
-				PreparedStatement p = con.prepareStatement(query);
-				ResultSet rs = p.executeQuery(query);
-				
-				
-				while(rs.next()){
-					res.setId(id);
-					res.setUser(Main.currentUser);
-					res.setLot(rs.getString("lot"));
-					res.setStatus(rs.getInt("status"));
-					res.setCharging( Integer.valueOf(rs.getString("electric")));
-					res.setReg(rs.getString("reg"));
-					Timestamp checkInTime = rs.getTimestamp("created_on");
-					res.setReservationtime(checkInTime.toLocalDateTime());
-					Long diff = (rs.getTimestamp("created_on").getTime()) - (rs.getTimestamp("expiry").getTime());
-					res.setHours(diff / (60 * 60 * 1000));
-					//res.checkInDate = 
-				}
-				return res;
-				
-			} catch (SQLException e) {
-				
-				System.out.println("Error fetching data: " + e.getMessage());
-				return null;
-			}
-				
-		}
-
-		//Pre-condition: Reservation id must exist in DB
-		//Post-condition: Reservation status will be updated
-		public void clockBooking(Reservation res) throws SQLException{
+	//Pre-condition: Reservation with id must exist in DB
+	//Post-condition: Reservation object is returned 
+	public Reservation fetchSingleReservation(int id) throws SQLException{
+		try {
+			Reservation res = new PreBookReservation();
+			String query = "select * from " + reservations_db + " where id = " + id;
+			PreparedStatement p = con.prepareStatement(query);
+			ResultSet rs = p.executeQuery(query);
 			
-			try {
-    		
-				String query = "UPDATE " + reservations_db + " SET status = " + res.getStatus() + " WHERE id  = " + res.getId();
-				PreparedStatement p = con.prepareStatement(query);
-				int clock = p.executeUpdate(query);
-		
-				if(clock == 1){
-					
-					if(res.getStatus() == 0) {
-						System.out.println("Checked Out Of Reservation " + res.getId() + " Successfully.");
-					} else if (res.getStatus() == 1){
-						System.out.println("Checked Into Reservation " + res.getId() + " Successfully.");
-					}
-				}
-				else{
-					System.out.println("FAIL: Reservation check IN/OUT failed. \n updateResultInt = " + clock+ "Res ID = " + res.getId() + "\nRes Status = "+ res.getStatus());
-				}
-				
-			} catch (SQLException e){
-	
-				System.out.println("SQL Error Checking In/Out of Reservation: " + e.getMessage());
-	
+			
+			while(rs.next()){
+				res.setId(id);
+				res.setUser(Main.currentUser);
+				res.setLot(rs.getString("lot"));
+				res.setStatus(rs.getInt("status"));
+				res.setCharging( Integer.valueOf(rs.getString("electric")));
+				res.setReg(rs.getString("reg"));
+				Timestamp checkInTime = rs.getTimestamp("created_on");
+				res.setReservationtime(checkInTime.toLocalDateTime());
+				Long diff = (rs.getTimestamp("created_on").getTime()) - (rs.getTimestamp("expiry").getTime());
+				res.setHours(diff / (60 * 60 * 1000));
+				//res.checkInDate = 
 			}
+			return res;
+			
+		} catch (SQLException e) {
+			
+			System.out.println("Error fetching data: " + e.getMessage());
+			return null;
 		}
+			
+	}
+
+	//Pre-condition: Reservation id must exist in DB
+	//Post-condition: Reservation status will be updated
+	public void clockBooking(Reservation res) throws SQLException{
+		
+		try {
+		
+			String query = "UPDATE " + reservations_db + " SET status = " + res.getStatus() + " WHERE id  = " + res.getId();
+			PreparedStatement p = con.prepareStatement(query);
+			int clock = p.executeUpdate(query);
+	
+			if(clock == 1){
+				
+				if(res.getStatus() == 0) {
+					System.out.println("Checked Out Of Reservation " + res.getId() + " Successfully.");
+				} else if (res.getStatus() == 1){
+					System.out.println("Checked Into Reservation " + res.getId() + " Successfully.");
+				}
+			}
+			else{
+				System.out.println("FAIL: Reservation check IN/OUT failed. \n updateResultInt = " + clock+ "Res ID = " + res.getId() + "\nRes Status = "+ res.getStatus());
+			}
+			
+		} catch (SQLException e){
+
+			System.out.println("SQL Error Checking In/Out of Reservation: " + e.getMessage());
+
+		}
+	}
 	
 	// Pre-Condition - User passed must exist in DB
 	// Post-Condition - Returns ArrayList of type Reservations with reservation collected from the DB
@@ -1179,8 +1179,10 @@ public class Database {
 			
 	}
 	
+	//Conall testing code
+	// All code below authored by Conall
 	//System.out.println("Reservation Date: " + rs.getTimestamp("created_on"));
-public boolean checkID(int id) throws SQLException { //conall testing
+	public boolean checkID(int id) throws SQLException { 
 		
 		boolean verified;
 		try {
@@ -1213,9 +1215,7 @@ public boolean checkID(int id) throws SQLException { //conall testing
 		}
 	}
 
-
-
-public boolean checkTime(String created_on, String expiry ) throws SQLException { //conall time test
+	public boolean checkTime(String created_on, String expiry ) throws SQLException { //conall time test
 	
 	boolean verified;
 	try {
