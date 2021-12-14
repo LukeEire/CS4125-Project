@@ -28,7 +28,7 @@ public class LoginBackend {
 			
 			Dashboard frame = new Dashboard();
             frame.setVisible(true);
-            System.out.print("You have successfully logged in");
+            System.out.print("You have successfully logged in \n");
             
             try {
 				Main.currentUser = db.getUser(id);
