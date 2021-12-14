@@ -46,7 +46,7 @@ public class BookingBackend {
 			
 			
 			
-			db.reserve(ID, reg, lot, electric, accessibility, startDate, hours);
+			db.preBook(ID, reg, lot, electric, accessibility, startDate, hours);
 			
 			if (lot == "Lot A") {
 				Main.LotA.decrementSpaces(1);
@@ -146,16 +146,14 @@ public class BookingBackend {
 		LocalDateTime clockDate;
 		LocalDateTime reservationTime;
 		LocalDateTime checkOutTime;
-		PreBookReservation res;
+		Reservation res;
 		long hours;
 		int userID;
 
 		try {
 			
 			Database db = new Database();
-			res = (PreBookReservation) db.fetchSingleReservation(bookingId);
-
-			
+			res = db.fetchSingleReservation(bookingId);
 
 			// Create a date of user checkIn
 			clockDate = LocalDateTime.now();
@@ -165,7 +163,7 @@ public class BookingBackend {
 			hours = res.getHours();
 
 			// Create checkoutTime (Expiry)
-			checkOutTime = reservationTime.plus(Duration.ofHours(hours));
+			checkOutTime = reservationTime.plusHours(hours);
 
 			if (status == 1) {
 				// If user clocks IN before reservation time it wont let them clock in

@@ -171,6 +171,7 @@ public class MakeBookingFrame implements ActionListener{
 			
 			CheckBox_Booking();
 			
+			System.out.println(Main.blockedDates.size());
 			
 			Boolean validFlag = false;
 			for(int i = 0; i < Main.blockedDates.size(); i++) {
@@ -184,7 +185,6 @@ public class MakeBookingFrame implements ActionListener{
 				}else if(dateStringLD != LocalDate.parse("2000-01-01")){
 					validFlag = true;
 					flag = "Reservation Made";
-					System.out.println(flag);
 				}
 				
 			}
