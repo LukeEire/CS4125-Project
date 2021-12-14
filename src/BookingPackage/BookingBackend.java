@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.time.LocalDateTime;*/
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -106,11 +108,15 @@ public class BookingBackend {
 			System.out.println("Could not connect to the database " + error.getMessage());
 		}
 		
-		if (bookingIDs.size() <= 1) {
+		if (bookingIDs.size() >= 1) {
 			for (int i = 0; i < bookingIDs.size(); i++) {
-				String value = (bookingIDs.get(i)).toString();
+				String value = "ID: " + (bookingIDs.get(i)).toString() + " Date: ";
 				try {
-					value = value + " " + db.fetchSingleReservation(bookingIDs.get(i)).getReservationTime();
+					Database db = new Database();
+					LocalDateTime dateLD = db.fetchSingleReservation(bookingIDs.get(i)).getReservationTime();
+					Timestamp date = Timestamp.valueOf(dateLD);
+					value = value + date + "\n";
+					db.disconnect();
 				}catch (SQLException error) {
 					System.out.println("Could not connect to the database " + error.getMessage());
 				}

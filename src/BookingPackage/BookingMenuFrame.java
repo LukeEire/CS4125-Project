@@ -200,7 +200,7 @@ public class BookingMenuFrame implements ActionListener{
 
 		if (e.getSource() == viewBookingButton) {
 			ArrayList<String> bookingData = Backend.loadBookingIDs(Main.currentUser.getID());
-			String data = "Bookings: ";
+			String data = "Bookings: \n";
 			for (int i = 0; i < bookingData.size(); i++) {
 				data = data + bookingData.get(i) + " ";
 			}

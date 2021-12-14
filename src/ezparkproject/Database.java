@@ -65,6 +65,10 @@ public class Database {
 		System.out.println("Connection obj: " + con);
 		return con;
 	}
+	
+	public void disconnect() throws SQLException {
+		this.con.close();
+	}
 
 	// Admin function
 	// Pre-Condition - tableName must exist in the DB
@@ -953,7 +957,8 @@ public class Database {
 					res.setLot(rs.getString("lot"));
 					res.setCharging( Integer.valueOf(rs.getString("electric")));
 					res.setReg(rs.getString("reg"));
-					//Date checkInTime = rs.getTimestamp("created_on");
+					Timestamp checkInTime = rs.getTimestamp("created_on");
+					res.setReservationtime(checkInTime.toLocalDateTime());
 					Long diff = (rs.getTimestamp("created_on").getTime()) - (rs.getTimestamp("expiry").getTime());
 					res.setHours(diff / (60 * 60 * 1000));
 					//res.checkInDate = 
@@ -1243,7 +1248,7 @@ public boolean checkTime(String created_on, String expiry ) throws SQLException 
 			ResultSet rs = p.executeQuery(query);
 			
 			while (rs.next()) {
-				bookingIDs.add(rs.getInt("userID"));
+				bookingIDs.add(rs.getInt("id"));
 			}
 			
 		} catch(SQLException e) {
