@@ -146,14 +146,14 @@ public class BookingBackend {
 		LocalDateTime clockDate;
 		LocalDateTime reservationTime;
 		LocalDateTime checkOutTime;
-		Reservation res;
+		PreBookReservation res;
 		long hours;
 		int userID;
 
 		try {
 			
 			Database db = new Database();
-			res = db.fetchSingleReservation(bookingId);
+			res = (PreBookReservation) db.fetchSingleReservation(bookingId);
 
 			
 
