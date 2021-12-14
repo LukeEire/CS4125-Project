@@ -155,8 +155,7 @@ public class BookingBackend {
 			Database db = new Database();
 			res = db.fetchSingleReservation(bookingId);
 
-			res.setStatus(status);
-			db.clockBooking(res);
+			
 
 			// Create a date of user checkIn
 			clockDate = LocalDateTime.now();
@@ -169,14 +168,25 @@ public class BookingBackend {
 			checkOutTime = reservationTime.plus(Duration.ofHours(hours));
 
 			if (status == 1) {
-				// If user clocks IN before reservation time
+				// If user clocks IN before reservation time it wont let them clock in
+				if(clockDate.isBefore(reservationTime)) {
+					System.out.println("You're too early");
+				}else {
+					res.setStatus(status);
+					db.clockBooking(res);
+				}
 				
 			} else if(status == 0) {
 				// If user checks OUT after expiry - add Infraction
 				if(clockDate.isAfter(checkOutTime)){
+					System.out.println("You've exceeded your time");
 					userID = Main.currentUser.getID();
 					Penalty p = new Penalty();
 					p.addInfraction(userID);
+				}else {
+					System.out.println("Expiary is " + checkOutTime + "\nValid time is: " + reservationTime + "\nClock Date = " + clockDate);
+					res.setStatus(status);
+					db.clockBooking(res);
 				}
 			}
 			

@@ -40,7 +40,8 @@ public class BookingMenuFrame implements ActionListener{
 	JButton changeBookingButton = new JButton("Change Booking");
 	JButton viewBookingButton = new JButton("View My Bookings");
 	JButton backButton = new JButton("Back");
-	JButton checkInOutButton = new JButton("Check in/Check out");
+	JButton checkInButton = new JButton("Check in");
+	JButton checkOutButton = new JButton("Check out");
 
 	public BookingMenuFrame() {
 
@@ -134,8 +135,11 @@ public class BookingMenuFrame implements ActionListener{
         
         /* CheckInOut Button */
         
-        checkInOutButton.setBounds(110, 125, 100, 73);
-        checkInOutButton.setSize(500,50);
+        checkInButton.setBounds(110, 75, 100, 73);
+        checkInButton.setSize(500,50);
+        
+        checkOutButton.setBounds(110, 125, 100, 73);
+        checkOutButton.setSize(500,50);
 	}
 
 	public void addComponentsToFrame() {
@@ -163,7 +167,8 @@ public class BookingMenuFrame implements ActionListener{
 		frame.add(changeBookingButton);
 		frame.add(viewBookingButton);
 		frame.add(backButton);
-		frame.add(checkInOutButton);
+		frame.add(checkInButton);
+		frame.add(checkOutButton);
 	}
 	
 	
@@ -174,7 +179,8 @@ public class BookingMenuFrame implements ActionListener{
 		changeBookingButton.addActionListener(this);
 		viewBookingButton.addActionListener(this);
 		backButton.addActionListener(this);
-		checkInOutButton.addActionListener(this);
+		checkInButton.addActionListener(this);
+		checkOutButton.addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -217,26 +223,30 @@ public class BookingMenuFrame implements ActionListener{
 	        
 		}
 		
-		if (e.getSource() == checkInOutButton) {
-			
-			
+		if (e.getSource() == checkInButton) {
 			
 			String s = (String)JOptionPane.showInputDialog(frame, "Enter reservation ID:\n", "Customized Dialog", JOptionPane.PLAIN_MESSAGE);
 
-			//If a string was returned, say so.
 			if (((s != null) && (s.length() > 0)) && (s.matches("[0-9]+"))) {
 				Backend.clockBooking(Integer.parseInt(s), 1);
 			} else {
 				JOptionPane.showMessageDialog(frame, "Please only enter numberic values");
 				
 			}
-
-			
-	        
 		}
 		
-		
+		if (e.getSource() == checkOutButton) {
+			
+			String s = (String)JOptionPane.showInputDialog(frame, "Enter reservation ID:\n", "Customized Dialog", JOptionPane.PLAIN_MESSAGE);
 
+			if (((s != null) && (s.length() > 0)) && (s.matches("[0-9]+"))) {
+				Backend.clockBooking(Integer.parseInt(s), 0);
+			} else {
+				JOptionPane.showMessageDialog(frame, "Please only enter numberic values");
+				
+			}
+		}
+		
 	}
 	
 }

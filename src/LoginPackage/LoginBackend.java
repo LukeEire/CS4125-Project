@@ -2,8 +2,6 @@ package LoginPackage;
 
 import java.sql.SQLException;
 
-import javax.swing.JOptionPane;
-
 import ezparkproject.Dashboard;
 import ezparkproject.Database;
 import ezparkproject.Main;
