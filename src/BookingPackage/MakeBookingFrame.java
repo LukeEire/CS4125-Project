@@ -172,7 +172,7 @@ public class MakeBookingFrame implements ActionListener{
 				System.out.println(i);
 				System.out.println(Main.blockedDates.size());
 				
-				if((dateStringLD == Main.blockedDates.get(i)) && (selectedLot == Main.blockedLots.get(i))) {
+				if((Main.blockedDates.get(i).equals(dateStringLD)) && (selectedLot == Main.blockedLots.get(i))) {
 					System.out.println("This Lot is blocked for given date");
 				}else if((startTime >= 9 && startTime <= 17) && (selectedLot == "Lot D")){
 					System.out.println("This Lot is reserved for staff until 5pm");
@@ -184,18 +184,18 @@ public class MakeBookingFrame implements ActionListener{
 				}
 			}
 			
-			for(int i = 0; i < Main.blockedDates.size(); i++) {
-				System.out.println(Main.blockedDates.get(i) + " " + dateStringLD);
-				System.out.println(Main.blockedLots.get(i) + " " + selectedLot);
-			}
-			
-			if (dateStringLD.toString() == Main.blockedDates.get(0).toString()) {
-				System.out.println("wtf 1");
-			}
-			
-			if (selectedLot == Main.blockedLots.get(0)) {
-				System.out.println("wtf 2");
-			}
+//			for(int i = 0; i < Main.blockedDates.size(); i++) {
+//				System.out.println(Main.blockedDates.get(i).equals(dateStringLD));
+//				System.out.println(Main.blockedLots.get(i) + " " + selectedLot);
+//			}
+////			LocalDate temp2 = Main.blockedDates.get(0);
+////			if (temp2.compareTo(dateStringLD)) {
+////				System.out.println("wtf 1");
+////			}
+////			
+//			if (selectedLot == Main.blockedLots.get(0)) {
+//				System.out.println("wtf 2");
+//			}
 			
 			
 		}	
