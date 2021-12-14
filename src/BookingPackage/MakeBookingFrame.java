@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.awt.*; 
 
 public class MakeBookingFrame implements ActionListener{
@@ -166,18 +167,35 @@ public class MakeBookingFrame implements ActionListener{
 			CheckBox_Booking();
 			
 			
+			
 			for(int i = 0; i < Main.blockedDates.size(); i++) {
-				if(dateStringLD == Main.blockedDates.get(i) && (selectedLot == Main.blockedLots.get(i))) {
+				System.out.println(i);
+				System.out.println(Main.blockedDates.size());
+				
+				if((dateStringLD == Main.blockedDates.get(i)) && (selectedLot == Main.blockedLots.get(i))) {
 					System.out.println("This Lot is blocked for given date");
 				}else if((startTime >= 9 && startTime <= 17) && (selectedLot == "Lot D")){
-					System.out.println("This Lot is reserved for staff till 5pm");
+					System.out.println("This Lot is reserved for staff until 5pm");
 				}else {
-					Reservation res = new PreBookReservation(Main.currentUser, selectedLot, electricCheckBoxVal, reg, startDateTime, hours);
-					
-					Backend.createBooking(res);
+//					Reservation res = new PreBookReservation(Main.currentUser, selectedLot, electricCheckBoxVal, reg, startDateTime, hours);
+//					
+//					Backend.createBooking(res);
+					System.out.println("Reservation Made");
 				}
 			}
 			
+			for(int i = 0; i < Main.blockedDates.size(); i++) {
+				System.out.println(Main.blockedDates.get(i) + " " + dateStringLD);
+				System.out.println(Main.blockedLots.get(i) + " " + selectedLot);
+			}
+			
+			if (dateStringLD.toString() == Main.blockedDates.get(0).toString()) {
+				System.out.println("wtf 1");
+			}
+			
+			if (selectedLot == Main.blockedLots.get(0)) {
+				System.out.println("wtf 2");
+			}
 			
 			
 		}	

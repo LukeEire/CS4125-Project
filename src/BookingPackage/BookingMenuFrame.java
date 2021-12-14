@@ -44,7 +44,7 @@ public class BookingMenuFrame implements ActionListener{
 
 		createWindow();
 		setLocationAndSize();
-		frame.getContentPane().setBackground(Color.CYAN);
+		frame.getContentPane().setBackground(Color.lightGray);
 		addComponentsToFrame();
 		actionEvent();
 		loadCounters();

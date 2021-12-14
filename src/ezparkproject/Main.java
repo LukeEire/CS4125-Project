@@ -1,8 +1,8 @@
 package ezparkproject;
+
 import AdminPackage.AdminFrame;
 import BookingPackage.Lot;
 import LoginPackage.LoginFunction;
-
 import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -21,8 +21,14 @@ public class Main {
 	public static Lot LotC = new Lot ("LotC", 300, 15, 5);
 	public static Lot LotD = new Lot ("LotD", 400, 20, 10);
 	
-	public static ArrayList<LocalDate> blockedDates;
-	public static ArrayList<String> blockedLots;
+	public static ArrayList<LocalDate> blockedDates = new ArrayList<LocalDate>();
+	public static ArrayList<String> blockedLots = new ArrayList<String>();
+	
+	public static void initialiseArrays() {
+		LocalDate tempDate = LocalDate.parse("2021-01-01");
+		blockedLots.add("Lot A");
+		blockedDates.add(tempDate);
+	}
 	
 	
     public static void main(String[] args) throws Exception {
@@ -33,6 +39,7 @@ public class Main {
 	    frame.setBounds(500, 200, 1100, 600);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.setResizable(false);
+	    initialiseArrays();
 	       
        //new AdminFrame();
 		
