@@ -225,7 +225,7 @@ public class BookingMenuFrame implements ActionListener{
 
 			//If a string was returned, say so.
 			if (((s != null) && (s.length() > 0)) && (s.matches("[0-9]+"))) {
-				
+				Backend.clockBooking(Integer.parseInt(s), 1);
 			} else {
 				JOptionPane.showMessageDialog(frame, "Please only enter numberic values");
 				

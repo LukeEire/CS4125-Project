@@ -1,21 +1,14 @@
 package BookingPackage;
-import ezparkproject.Main;
 
+import ezparkproject.Main;
 import java.sql.Connection;
-/*import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.time.LocalDateTime;*/
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
 import PenaltyPackage.Penalty;
 import ezparkproject.Database;
-//import ezparkproject.Main;
 
 
 public class BookingBackend {
@@ -25,10 +18,6 @@ public class BookingBackend {
 	BookingBackend(){
 		
 	}
-	
-//	public void decrementLotSpaces() {
-//		
-//	}
 	
 	public String returnLot() {
 		String temp;

@@ -1,8 +1,6 @@
 package BookingPackage;
 import ezparkproject.Database;
 import ezparkproject.Users;
-
-import java.sql.Date;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -12,8 +10,6 @@ public class BookNowReservation implements Reservation{
 	private Users user;
     private String lot;
     private int status;
-
-    Date checkOutDate;
     
     Database db;
 
@@ -33,6 +29,7 @@ public class BookNowReservation implements Reservation{
         this.accessibility = user.accessibility;
         this.chargingSpace = electricSpace;
         this.reg = reg;
+        this.status = 0;
         this.reservationTime = LocalDateTime.now();
         this.setDuration(reservationTime.plus(Duration.ofHours(hours)));
         this.hours = hours;
@@ -46,14 +43,6 @@ public class BookNowReservation implements Reservation{
 
     public void setUser(Users user) {
         this.user = user;
-    }
-    
-    public Date getcheckOutDate() {
-        return checkOutDate;
-    }
-
-    public void setcheckOutDate(Date checkOutDate) {
-        this.checkOutDate = checkOutDate;
     }
 
     public String getLot() {
@@ -94,11 +83,6 @@ public class BookNowReservation implements Reservation{
     
     public void setAccessibility(int access) {
     	this.accessibility = access;
-    }
-    
-    public void checkOut(Date checkOut) {
-    		this.setcheckOutDate(checkOutDate);
-    		System.out.println("See you next time!");
     }
 
 	public LocalDateTime getDuration() {

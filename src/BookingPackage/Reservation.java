@@ -1,8 +1,6 @@
 package BookingPackage;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
-
 import ezparkproject.Users;
 
 public interface Reservation {
@@ -10,10 +8,6 @@ public interface Reservation {
 	Users getUser();
 	
 	void setUser(Users user);
-    
-    Date getcheckOutDate();
-
-    void setcheckOutDate(Date checkOutDate);
 
     String getLot();
     
@@ -30,8 +24,6 @@ public interface Reservation {
     int getChargingCheck();
     
     void setCharging(int elec);
-
-    void checkOut(Date checkOut);
     
     LocalDateTime getDuration();
 

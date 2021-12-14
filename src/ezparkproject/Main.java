@@ -1,13 +1,9 @@
 package ezparkproject;
 
-import AdminPackage.AdminFrame;
 import BookingPackage.Lot;
 import LoginPackage.LoginFunction;
-import java.lang.reflect.Array;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Random;
 import javax.swing.JFrame;
 
 public class Main {

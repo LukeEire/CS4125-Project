@@ -12,12 +12,10 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-
 import BookingPackage.BookNowReservation;
 import BookingPackage.PreBookReservation;
 import BookingPackage.Reservation;
@@ -821,7 +819,7 @@ public class Database {
 			// INSERTING data to DB
 			if(id > 0 && reg!=null && lot!=null && created_on!=null && expiry!=null){
 				
-				String query = "INSERT INTO " + reservations_db + "(userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				String query = "INSERT INTO " + reservations_db + "(userID, reg, lot, electric, accessibility, created_on, expiry, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 				
 				PreparedStatement p = con.prepareStatement(query);
 				p.setInt(1, id);
@@ -831,6 +829,7 @@ public class Database {
 				p.setInt(5, accessibility);
 				p.setTimestamp(6, created_on);
 				p.setTimestamp(7, expiry);
+				p.setInt(8, 0);
 				
 	            int insert = p.executeUpdate();
 	            if(insert == 1)
@@ -879,7 +878,7 @@ public class Database {
 			// INSERTING data to DB
 			if(id > 0 && reg!=null && lot!=null && created_on!=null && expiry!=null){
 				
-				String query = "INSERT INTO " + reservations_db + "(userID, reg, lot, electric, accessibility, created_on, expiry) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				String query = "INSERT INTO " + reservations_db + "(userID, reg, lot, electric, accessibility, created_on, expiry, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 				
 				PreparedStatement p = con.prepareStatement(query);
 				p.setInt(1, id);
@@ -889,6 +888,7 @@ public class Database {
 				p.setInt(5, accessibility);
 				p.setTimestamp(6, created_on);
 				p.setTimestamp(7, expiry);
+				p.setInt(8, 1);
 				
 	            int insert = p.executeUpdate();
 	            if(insert == 1)
@@ -953,8 +953,10 @@ public class Database {
 				
 				
 				while(rs.next()){
+					res.setId(id);
 					res.setUser(Main.currentUser);
 					res.setLot(rs.getString("lot"));
+					res.setStatus(rs.getInt("status"));
 					res.setCharging( Integer.valueOf(rs.getString("electric")));
 					res.setReg(rs.getString("reg"));
 					Timestamp checkInTime = rs.getTimestamp("created_on");
@@ -979,20 +981,20 @@ public class Database {
 			
 			try {
     		
-				String query = "UPDATE " + reservations_db + " SET status = " + res.getStatus() + " WHERE id  = \""+res.getId()+"\"";
+				String query = "UPDATE " + reservations_db + " SET status = " + res.getStatus() + " WHERE id  = " + res.getId();
 				PreparedStatement p = con.prepareStatement(query);
 				int clock = p.executeUpdate(query);
 		
 				if(clock == 1){
 					
-					if(res.getStatus() >= 1) {
+					if(res.getStatus() == 0) {
 						System.out.println("Checked Out Of Reservation " + res.getId() + " Successfully.");
-					} else if (res.getStatus() <= 0){
+					} else if (res.getStatus() == 1){
 						System.out.println("Checked Into Reservation " + res.getId() + " Successfully.");
 					}
 				}
 				else{
-					System.out.println("FAIL: Reservation check IN/OUT failed");
+					System.out.println("FAIL: Reservation check IN/OUT failed. \n updateResultInt = " + clock+ "Res ID = " + res.getId() + "\nRes Status = "+ res.getStatus());
 				}
 				
 			} catch (SQLException e){

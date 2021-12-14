@@ -1,5 +1,4 @@
 package BookingPackage;
-import java.sql.Date;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -12,9 +11,6 @@ public class PreBookReservation implements Reservation{
     private Users user;
     private String lot;
     private int status;
-
-    Date checkInDate;
-    Date checkOutDate;
     
     Database db;
 
@@ -39,6 +35,7 @@ public class PreBookReservation implements Reservation{
         this.accessibility = user.accessibility;
         this.chargingSpace = electricSpace;
         this.reg = reg;
+        this.status = 0;
         this.reservationTime = beginTime;
         this.duration = reservationTime.plus(Duration.ofHours(hours));
         this.hours = hours;
@@ -52,22 +49,6 @@ public class PreBookReservation implements Reservation{
 
     public void setUser(Users user) {
         this.user = user;
-    }
-
-    public Date getcheckInDate() {
-        return checkInDate;
-    }
-
-    public void setcheckInDate(Date checkInDate) {
-        this.checkInDate = checkInDate;
-    }
-    
-    public Date getcheckOutDate() {
-        return checkOutDate;
-    }
-
-    public void setcheckOutDate(Date checkOutDate) {
-        this.checkOutDate = checkOutDate;
     }
 
     public String getLot() {
@@ -108,11 +89,6 @@ public class PreBookReservation implements Reservation{
     
     public void setCharging(int elec) {
     	this.chargingSpace = elec;
-    }
-    
-    public void checkOut(Date checkOut) {
-    		this.setcheckOutDate(checkOutDate);
-    		System.out.println("See you next time!");
     }
     
     public LocalDateTime getDuration() {
