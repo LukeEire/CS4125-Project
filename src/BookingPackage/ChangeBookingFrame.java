@@ -158,7 +158,6 @@ public class ChangeBookingFrame implements ActionListener{
 	}
 	
 
-	@SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == updateButton) {
@@ -180,10 +179,7 @@ public class ChangeBookingFrame implements ActionListener{
 			
 			
 
-			//These needs backend function to grab data
 			lotComboBox.setSelectedItem(res.getLot());
-			//dateField.setText(date);
-			//userIDField.setText(Integer.toString(Main.currentUser.getID()));
 			timeComboBox.setSelectedItem("09:00");
 			durationComboBox.setSelectedItem("1");
 			
@@ -196,7 +192,6 @@ public class ChangeBookingFrame implements ActionListener{
 
 		if (e.getSource() == cancelButton) {
 
-			//Need to add message that says booked and return to Booking Menu
 	        frame.dispose();
 	        new BookingMenuFrame();
 	        

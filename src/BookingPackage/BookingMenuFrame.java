@@ -1,9 +1,11 @@
 package BookingPackage;
 import ezparkproject.Dashboard;
+//import ezparkproject.Main;
 import ezparkproject.Main;
 
 import javax.swing.*; 
-import java.awt.event.*; 
+import java.awt.event.*;
+import java.util.ArrayList;
 import java.awt.*; 
 
 /* Author:  Ashutosh Yadav & Luke Kellet Murray */
@@ -197,10 +199,15 @@ public class BookingMenuFrame implements ActionListener{
 		}
 
 		if (e.getSource() == viewBookingButton) {
+			ArrayList<String> bookingData = Backend.loadBookingIDs(Main.currentUser.getID());
+			String data = "Bookings: ";
+			for (int i = 0; i < bookingData.size(); i++) {
+				data = data + bookingData.get(i) + " ";
+			}
 			
-			//frame.dispose();
-			Backend.decrementTest();
 			
+			
+			JOptionPane.showMessageDialog(frame, data);
 		}
 
 		if (e.getSource() == backButton) {

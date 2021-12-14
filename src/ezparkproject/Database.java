@@ -1,7 +1,6 @@
 package ezparkproject;
 
 import java.sql.DriverManager;
-import java.awt.Component;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -1232,6 +1231,30 @@ public boolean checkTime(String created_on, String expiry ) throws SQLException 
 			}
 		
 		}
+	
+	public ArrayList<Integer> loadUsersBookings(int id) {
+		ArrayList<Integer> bookingIDs = new ArrayList<Integer>();
+		
+		try {
+			
+			String query = "SELECT * FROM " + reservations_db + " WHERE userID = " + id;		
+
+			PreparedStatement p = con.prepareStatement(query);
+			ResultSet rs = p.executeQuery(query);
+			
+			while (rs.next()) {
+				bookingIDs.add(rs.getInt("userID"));
+			}
+			
+		} catch(SQLException e) {
+									
+			System.out.println("Error locating data entered: " + e.getMessage());
+			
+		}
+		
+		return bookingIDs;
+		
+	}
 
 
 

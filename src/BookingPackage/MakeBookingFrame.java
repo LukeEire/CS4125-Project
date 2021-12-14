@@ -9,7 +9,6 @@ import java.awt.event.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.awt.*; 
 
 public class MakeBookingFrame implements ActionListener{
@@ -19,7 +18,6 @@ public class MakeBookingFrame implements ActionListener{
 	String[] parkingLots = { "Lot A", "Lot B", "Lot C", "Lot D" };
 	String[] hours = { "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" };
 	String[] duration = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-	
 	
 	JFrame frame;
 	
@@ -45,20 +43,14 @@ public class MakeBookingFrame implements ActionListener{
 	JCheckBox EVCheckBox = new JCheckBox("Required?");
 	int electricCheckBoxVal;
 	
-	
 	public void CheckBox_Booking()
 	{
-		
 		if(EVCheckBox.isSelected()) {
 			electricCheckBoxVal=1;
 		}else {
 			electricCheckBoxVal=0;
 		}
 	}
-	
-
-	/* End of CheckBox function */
-	
 	
 	/* Buttons */
 	
@@ -137,8 +129,10 @@ public class MakeBookingFrame implements ActionListener{
 		frame.add(cancelButton);
 	}
 	
+	public void popupWindow(String flag) {
+		JOptionPane.showMessageDialog(frame, flag);
+	}
 	
-
 	public void actionEvent() {
 
 		reserveButton.addActionListener(this);
@@ -149,6 +143,7 @@ public class MakeBookingFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		/* Create Database before using */
+		String flag = "";
 
 		if (e.getSource() == reserveButton) {
 
@@ -156,8 +151,18 @@ public class MakeBookingFrame implements ActionListener{
 			Long hours = Long.parseLong(durationComboBox.getSelectedItem().toString());
 			String startTimeString = timeComboBox.getSelectedItem().toString();
 			int startTime = Integer.parseInt(startTimeString);
-			String dateString = dateField.getText();
+			String dateString = "2000-01-01";
 			LocalDate dateStringLD = LocalDate.parse(dateString);
+			
+			try {
+			dateString = dateField.getText();
+			dateStringLD = LocalDate.parse(dateString);
+			}catch(Exception f){
+				flag = "Error with date format";
+				System.out.println(flag);
+			}
+			
+			
 			dateString = dateString + " 16:00";
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 			LocalDateTime startDateTime = LocalDateTime.parse(dateString, formatter);
@@ -167,41 +172,32 @@ public class MakeBookingFrame implements ActionListener{
 			CheckBox_Booking();
 			
 			
-			
+			Boolean validFlag = false;
 			for(int i = 0; i < Main.blockedDates.size(); i++) {
-				System.out.println(i);
-				System.out.println(Main.blockedDates.size());
 				
 				if((Main.blockedDates.get(i).equals(dateStringLD)) && (selectedLot == Main.blockedLots.get(i))) {
-					System.out.println("This Lot is blocked for given date");
+					flag = "This Lot is blocked for given date";
+					System.out.println(flag);
 				}else if((startTime >= 9 && startTime <= 17) && (selectedLot == "Lot D")){
-					System.out.println("This Lot is reserved for staff until 5pm");
-				}else {
-//					Reservation res = new PreBookReservation(Main.currentUser, selectedLot, electricCheckBoxVal, reg, startDateTime, hours);
-//					
-//					Backend.createBooking(res);
-					System.out.println("Reservation Made");
+					flag = "This Lot is reserved for staff until 5pm";
+					System.out.println(flag);
+				}else if(dateStringLD != LocalDate.parse("2000-01-01")){
+					validFlag = true;
+					flag = "Reservation Made";
+					System.out.println(flag);
 				}
+				
 			}
-			
-//			for(int i = 0; i < Main.blockedDates.size(); i++) {
-//				System.out.println(Main.blockedDates.get(i).equals(dateStringLD));
-//				System.out.println(Main.blockedLots.get(i) + " " + selectedLot);
-//			}
-////			LocalDate temp2 = Main.blockedDates.get(0);
-////			if (temp2.compareTo(dateStringLD)) {
-////				System.out.println("wtf 1");
-////			}
-////			
-//			if (selectedLot == Main.blockedLots.get(0)) {
-//				System.out.println("wtf 2");
-//			}
-			
-			
+			if (validFlag) {
+				Reservation res = new PreBookReservation(Main.currentUser, selectedLot, electricCheckBoxVal, reg, startDateTime, hours);
+				Backend.createBooking(res);
+				frame.dispose();
+		        new BookingMenuFrame();
+			}
+			popupWindow(flag);
 		}	
 			
 		if (e.getSource() == resetButton) {
-
 			dateField.setText("");
 			timeComboBox.setSelectedItem("09:00");	
 			lotComboBox.setSelectedItem("Lot A");			
@@ -209,11 +205,8 @@ public class MakeBookingFrame implements ActionListener{
 		}
 
 		if (e.getSource() == cancelButton) {
-
-			//Need to add message that says booked and return to Booking Menu
 	        frame.dispose();
 	        new BookingMenuFrame();
-	        
 		}
 		
 		

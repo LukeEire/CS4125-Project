@@ -8,31 +8,23 @@ import java.sql.PreparedStatement;
 import java.time.LocalDateTime;*/
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import ezparkproject.Database;
-import ezparkproject.Main;
+//import ezparkproject.Main;
 
 
 public class BookingBackend {
-	//Get this to handle changes to bookings
-	
 	Database db;
 	Connection con;
-	
-//	 public static void main(String[] args) throws Exception{
-//		 int count = 0;
-//		 count = loadDbBookings("Lot A");
-//		 System.out.println(count);
-//		 
-//	 }
 	
 	BookingBackend(){
 		
 	}
 	
-	public void decrementLotSpaces() {
-		
-	}
+//	public void decrementLotSpaces() {
+//		
+//	}
 	
 	public String returnLot() {
 		String temp;
@@ -99,8 +91,33 @@ public class BookingBackend {
 			return null;
 		}
 		
+	}
+	
+	public ArrayList<String> loadBookingIDs(int userID) {
+		ArrayList<Integer> bookingIDs = new ArrayList<Integer>();
+		ArrayList<String> bookingData = new ArrayList<String>();
 		
+		try {
+			
+			Database db = new Database();
+			bookingIDs = db.loadUsersBookings(userID);
+			
+		} catch (SQLException error) {
+			System.out.println("Could not connect to the database " + error.getMessage());
+		}
 		
+		if (bookingIDs.size() <= 1) {
+			for (int i = 0; i < bookingIDs.size(); i++) {
+				String value = (bookingIDs.get(i)).toString();
+				try {
+					value = value + " " + db.fetchSingleReservation(bookingIDs.get(i)).getReservationTime();
+				}catch (SQLException error) {
+					System.out.println("Could not connect to the database " + error.getMessage());
+				}
+				bookingData.add(value);
+			}
+		}
+		return bookingData;
 	}
 	
 	public static int loadDbBookings(String lotName) {
@@ -120,78 +137,6 @@ public class BookingBackend {
 			return count;
 		}
 	}
-	
-	public void decrementTest() {
-		Main.LotA.setSpaces(Main.LotA.countSpaces()-1);
-	}
-	/*public void newDateForBooking(Date date,  ) {
-		
-	}*/
-	
-	/*public void connectToDB() {
-		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://sql4.freemysqlhosting.net:3306/sql4448569","sql4448569", "rs5fNh4D5f");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}*/
-	
-	/*public void makeBooking(Reservation res) {
-		//LocalDateTime date = res.checkInDate;
-		Users owner = res.getUser();
-		int stayLength = res.duration;
-		String lotOwner;
-		
-		//LocalDateTime expCheckout = date.plusHours(stayLength);
-		
-		//Do we need a section where they select the Lot or is it randomly assigned
-		int tempS = 0;
-		if (LotA.spaces < LotB.spaces) {
-			tempS = LotB.spaces;
-		}
-		if (tempS < LotC.spaces) {
-			tempS = LotC.spaces;
-		}
-		if (tempS < LotD.spaces) {
-			tempS = LotD.spaces;
-		}
-		
-		//Connect to DB here
-		Database db = new Database();
-
-		try{
-
-            con = db.connect();
-
-        } catch(ClassNotFoundException e){
-
-            System.out.println("Could not find the database driver " + e.getMessage());
-
-        } catch(SQLException e1){
-
-            System.out.println("Could not connect to the database " + e1.getMessage());
-
-		}
-
-		try {
-			String query = "INSERT INTO reservations(id, duration, checkInDate, checkOutDate, disability, electric ) VALUES (?, ?, ?, ?, ?, ?)";
-			
-			PreparedStatement p = con.prepareStatement(query);
-			p.setInt(1, (res.getUser()).id);
-			p.setInt(2, res.duration);
-			p.setDate(3, res.checkInDate);
-			p.setDate(4, res.checkOutDate);
-			p.setInt(5, res.getUser().accessibility);
-			p.setInt(6, res.getUser().electric);
-			  
-			  } catch (SQLException e) {
-			  
-			  e.printStackTrace();
-			  
-			  }
-	}*/
 	
 	
 }
