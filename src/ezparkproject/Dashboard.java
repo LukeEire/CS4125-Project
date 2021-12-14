@@ -5,31 +5,22 @@ package ezparkproject;
 	import java.awt.Font;
 	import java.awt.event.ActionEvent;
 	import java.awt.event.ActionListener;
-	import java.sql.Connection;
-	import java.sql.DriverManager;
-	import java.sql.PreparedStatement;
-	import java.sql.ResultSet;
-	import java.sql.SQLException;
-
 	import javax.swing.JButton;
 	import javax.swing.JFrame;
 	import javax.swing.JLabel;
-	import javax.swing.JOptionPane;
 	import javax.swing.JPanel;
-	import javax.swing.JPasswordField;
-	import javax.swing.JTextField;
 	import javax.swing.border.EmptyBorder;
+	import AccountPackage.MyAccountFrame;
+	import BookingPackage.BookingMenuFrame;
+	import BookingPackage.MakeBookingFrame;
+	import ParkingPackage.ParkingFrame;
 
-import AccountPackage.MyAccountFrame;
-import BookingPackage.BookingMenuFrame;
-import ParkingPackage.ParkingFrame;
 
 	public class Dashboard extends JFrame {
 		
 	    private static final long serialVersionUID = 1L;
 	    private JButton bookingsButton;
 	    private JButton reserveButton;
-	    private JButton paymentButton;
 	    private JButton lotsButton;
 	    private JButton logoutButton;
 	    private JButton myAccountButton;
@@ -69,10 +60,10 @@ import ParkingPackage.ParkingFrame;
 	        lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 46));
 	        lblNewLabel.setBounds(423, 13, 273, 93);
 	        contentPane.add(lblNewLabel);
-
+	        
 	        bookingsButton = new JButton("Bookings");
 	        bookingsButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
-	        bookingsButton.setBounds(240, 122, 100, 73);
+	        bookingsButton.setBounds(240, 200, 100, 73);
 	        bookingsButton.setSize(500,50);
 	        bookingsButton.addActionListener(new ActionListener() {
 
@@ -82,10 +73,10 @@ import ParkingPackage.ParkingFrame;
 	            }
 	        });
 	        
-	        	        
+	       	        
 	        lotsButton = new JButton("Payment");
 	        lotsButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
-	        lotsButton.setBounds(240, 200, 100, 73);
+	        lotsButton.setBounds (240, 272, 100, 73);
 	        lotsButton.setSize(500,50);
 	        lotsButton.addActionListener(new ActionListener() {
 	        
@@ -101,27 +92,28 @@ import ParkingPackage.ParkingFrame;
 	        
 	        reserveButton = new JButton("Reserve");
 	        reserveButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
-	        reserveButton.setBounds(240, 272, 100, 73);
+	        reserveButton.setBounds(240, 342, 100, 73);
 	        reserveButton.setSize(500,50);
 	        reserveButton.addActionListener(new ActionListener() {
 
 	        	public void actionPerformed(ActionEvent e) {
-	                //listener goes here
+	        		dispose();
+	           		new MakeBookingFrame();
 	            }
 	        });
 	        
 	        
 	        
-	        paymentButton = new JButton("Available Lots");
-	        paymentButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
-	        paymentButton.setBounds(240, 342, 100, 73);
-	        paymentButton.setSize(500,50);
-	        paymentButton.addActionListener(new ActionListener() {
-
-	        	public void actionPerformed(ActionEvent e) {
-	                //listener goes here
-	            }
-	        });
+//	        paymentButton = new JButton("Available Lots");
+//	        paymentButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
+//	        paymentButton.setBounds(240, 342, 100, 73);
+//	        paymentButton.setSize(500,50);
+//	        paymentButton.addActionListener(new ActionListener() {
+//
+//	        	public void actionPerformed(ActionEvent e) {
+//	                //listener goes here
+//	            }
+//	        });
 	        
 	        myAccountButton = new JButton("My Account");
 	        myAccountButton.setFont(new Font("Tahoma", Font.PLAIN, 21));
@@ -147,7 +139,6 @@ import ParkingPackage.ParkingFrame;
 	        });
 
 	        contentPane.add(bookingsButton);
-	        contentPane.add(paymentButton);
 	        contentPane.add(lotsButton);
 	        contentPane.add(reserveButton);
 	        contentPane.add(logoutButton);
